@@ -75,6 +75,7 @@ h1 {
     padding: 15px 24px 15px 24px;
     gap: 35px;
     border-radius: 16px;
+    cursor: pointer;
 }
 
 .contact-icon {
@@ -123,28 +124,27 @@ h1 {
     right: 0;
     z-index: 999;
     animation: fly-in 0.1s forwards;
-  }
+}
 
-  @keyframes fly-in {
+@keyframes fly-in {
     from {
         right: -3000px; /* Startposition außerhalb des Bildschirms */
     }
     to {
         right: 0; /* Endposition innerhalb des Bildschirms */
-
     }
 }
+
 @keyframes fly-out {
     from {
         right: 0px; /* Startposition innerhalb des Bildschirms */
-
     }
     to {
         right: -3000px; /* Endposition außerhalb des Bildschirms */
     }
 }
 
-  .overlay {
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -162,6 +162,7 @@ h1 {
         background-color: rgba(0, 0, 0, 0.5);
     }
 }
+
 @keyframes fade-out {
     from {
         background-color: rgba(0, 0, 0, 0.5);
@@ -169,4 +170,113 @@ h1 {
     to {
         background-color: rgba(0, 0, 0, 0);
     }
+}
+
+.contact-detail-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px; 
+    flex: 1;
+}
+
+#contactDetail {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+    padding: 20px;
+}
+
+.emblem-info {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 400;
+    font-size: 57px;
+    text-align: center;
+    justify-items: center;
+    align-content: center;
+    margin-left: 10px;
+}
+
+.name-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    font-size: 47px;
+}
+
+.headline-contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 21px;
+    height: 120px;
+}
+
+.contact-name-btn {
+    display: flex;
+    align-items: center;
+}
+
+.contact-a-name {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400px;
+    gap: 13px;
+}
+
+.info {
+    height: 74px;
+    font-size: 20px;
+    font-weight: 400px;
+    line-height: 24px;
+    align-content: center;
+}
+
+.contact-information {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-family: 400px;
+    gap: 15px;
+}
+
+.contact-information a {
+    text-decoration: none;
+}
+
+.contact-name-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.contact-name-btn:hover {
+    filter: invert(46%) sepia(72%) saturate(2393%) hue-rotate(171deg) brightness(97%) contrast(102%);
+}
+
+.img-btn {
+    margin-right: 8px;
+}
+
+.name-contact {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-a-name {
+    display: flex;
+    gap: 10px;
+}
+
+.contact a {
+    text-decoration: none;
 }
