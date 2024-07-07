@@ -22,7 +22,7 @@ function setPriority(priority) {
 
   for (let key in priorities) {
     priorities[key].style.backgroundColor =
-    key === priority ? getColor(priority) : "";
+      key === priority ? getColor(priority) : "";
     priorities[key].style.color = key === priority ? "#FFFFFF" : "";
   }
 
@@ -307,20 +307,20 @@ let currentPriority = "";
 const BASE_URL =
   "https://join-248-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let tasks = [];
-
-async function loadUrl(path = "/tasks") {
+let firebaseData = [];
+/*This function fetches the url with the apropriate path given
+    and pushes them in to the array with the name 'firebaseData' 
+    then everyone can make a function that takes the data from the data array*/
+async function loadUrl(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
-  let tasksKeyArray = Object.keys(responseToJson);
-  for (let i = 0; i < tasksKeyArray.length; i++) {
-    tasks.push({
-      id: tasksKeyArray[i],
-      task: responseToJson[tasksKeyArray[i]],
+  let dataKeyArray = Object.keys(responseToJson);
+  for (let i = 0; i < dataKeyArray.length; i++) {
+    firebaseData.push({
+      id: dataKeyArray[i],
+      dataExtracted: responseToJson[dataKeyArray[i]],
     });
   }
-
-  console.log(tasksKeyArray);
 }
 
 async function postData(path = "", data) {
@@ -334,7 +334,7 @@ async function postData(path = "", data) {
   return await response.json();
 }
 
-async function postTask(priority) {
+async function postTask() {
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
   let assigned = document.getElementById("assigned").value;
@@ -350,10 +350,38 @@ async function postTask(priority) {
     date: date,
     category: category,
     subtask: subtask,
-    prio : prio,
+    prio: prio,
   };
 
   await postData("/tasks", extractedData);
+}
 
-  console.log("Form submitted", extractedData);
+async function addNewContact() {
+  let name = document.getElementById("contactNewName").value;
+  let email = document.getElementById("contactNewMail").value;
+  let phone = document.getElementById("contactNewPhone").value;
+
+  let extractedData = {
+    name: name,
+    email: email,
+    phone: phone,
+  };
+
+  await postData("/contacts", extractedData);
+}
+
+async function addNewUser() {
+  let username = document.getElementById("signUpName").value;
+  let email = document.getElementById("signUpEmail").value;
+  let password = document.getElementById("signUpPassword").value;
+  let passwordCheck = document.getElementById("signUpPasswordCheck").value;
+
+  let extractedData = {
+    username: username,
+    email: email,
+    password: password,
+    passwordCheck: passwordCheck,
+  };
+
+  await postData("/users", extractedData);
 }

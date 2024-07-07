@@ -13,7 +13,7 @@
 
 <body>
     <div class="contact-card-placement flex-center">
-        <form class="new-contact-card">
+        <form onsubmit="addNewContact()" class="new-contact-card">
             <section class="text-logo-area flex-center">
                 <div class="logo-div">
                     <img class="logo" src="/img/Join_Logo.png">
@@ -36,16 +36,16 @@
 
             <div class="contact-input-field">
                 <div class="contact-input ">
-                    <input type="text" class="input font-fourhundrdred-twentyfour" placeholder="Name" required></input>
+                    <input id="contactNewName" type="text" class="input font-fourhundrdred-twentyfour" placeholder="Name" required></input>
                     <img class="input-img" src="/img/addContact-profile-gray.png">
                 </div>
                 <div class="contact-input">
-                    <input type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email"
+                    <input id="contactNewMail" type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email"
                         required></input>
                     <img class="input-img" src="/img/addContact-email.png">
                 </div>
                 <div class="contact-input">
-                    <input type="number" class="input font-fourhundrdred-twentyfour" placeholder="Phone"
+                    <input id="contactNewPhone" type="number" class="input font-fourhundrdred-twentyfour" placeholder="Phone"
                         required></input>
                     <img class="input-img" src="/img/addContact-phone.png">
                 </div>

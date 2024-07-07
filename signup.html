@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="/img/Join_Logo.png">
     <link rel="stylesheet" href="./css/signup.css">
     <link rel="stylesheet" href="./css/fonts.css">
-
     <!-- <script type="module" src="firebase.js"></script> -->
 </head>
 
@@ -35,7 +34,7 @@
             <div class="underline-login">
                 <img src="./img/underline_login.png" alt="">
             </div>
-            <form id="regestrationForm">
+            <form id="regestrationForm" onsubmit="addNewUser()">
                 <div class="input-login-field">
                     <input id="signUpName" type="text" required class="name" placeholder="Name">
                     <div class="input-login-field">
