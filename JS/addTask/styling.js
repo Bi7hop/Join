@@ -12,6 +12,7 @@ function showPersons() {
     dropDown.classList.add("hide");
   }
 }
+
 function setPriority(priority) {
   let priorities = {
     urgent: document.getElementById("urgent"),
@@ -21,9 +22,11 @@ function setPriority(priority) {
 
   for (let key in priorities) {
     priorities[key].style.backgroundColor =
-      key === priority ? getColor(priority) : "";
-      priorities[key].style.color = key === priority ? "#FFFFFF" : "";
+    key === priority ? getColor(priority) : "";
+    priorities[key].style.color = key === priority ? "#FFFFFF" : "";
   }
+
+  currentPriority = priority;
 }
 
 function getColor(priority) {
@@ -225,7 +228,7 @@ function addContact() {
   let card = document.querySelector(".add-contact-popup");
   let overlay = document.getElementById("overlay");
 
-  document.getElementById('contactsBody').style.overflow = "hidden";
+  document.getElementById("contactsBody").style.overflow = "hidden";
   card.style.display = "block";
   overlay.classList.add("overlay");
 }
@@ -241,7 +244,7 @@ function closeAddContact() {
     overlay.style.animation = ``;
     overlay.classList.remove("overlay");
     card.style.display = "none";
-    document.getElementById('contactsBody').style.overflow = ``;
+    document.getElementById("contactsBody").style.overflow = ``;
   }, 200);
 }
 
@@ -264,7 +267,7 @@ function swapToPopup() {
   document.getElementById("close-popup").classList.remove("hide");
 }
 
-function hideOverflow(){
+function hideOverflow() {
   let boardBodyContainer = document.querySelector(".boardBodyContainer");
   boardBodyContainer.style.overflow = "hidden";
 }
@@ -293,64 +296,64 @@ function closeAddTaskPopup() {
   }, 200);
 }
 
-function showOverflow(){
-  let boardBodyContainer = document.querySelector('.boardBodyContainer');
+function showOverflow() {
+  let boardBodyContainer = document.querySelector(".boardBodyContainer");
   boardBodyContainer.style.overflow = "";
 }
 
 /*Firebase functions*/
+let currentPriority = "";
 
-const BASE_URL = "https://join-248-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL =
+  "https://join-248-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let tasks = [];
 
-async function loadUrl(path="/tasks"){
-    let response = await fetch(BASE_URL + path + ".json");
-    let responseToJson = await response.json();
-    let tasksKeyArray = Object.keys(responseToJson);
-    for (let i = 0; i < tasksKeyArray.length; i++) {
-      tasks.push(
-        {
-            id :  tasksKeyArray[i],
-            task : responseToJson[tasksKeyArray[i]],
-        }
+async function loadUrl(path = "/tasks") {
+  let response = await fetch(BASE_URL + path + ".json");
+  let responseToJson = await response.json();
+  let tasksKeyArray = Object.keys(responseToJson);
+  for (let i = 0; i < tasksKeyArray.length; i++) {
+    tasks.push({
+      id: tasksKeyArray[i],
+      task: responseToJson[tasksKeyArray[i]],
+    });
+  }
 
-      )
-      
-    }
-
-    console.log(tasksKeyArray);
+  console.log(tasksKeyArray);
 }
 
 async function postData(path = "", data) {
   let response = await fetch(BASE_URL + path + ".json", {
-      method: "POST",
-      header: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
   return await response.json();
 }
 
-async function postTask() {
-  let title = document.getElementById('title').value;
-  let description = document.getElementById('description').value;
-  let assigned = document.getElementById('assigned').value;
-  let date = document.getElementById('date').value;
-  let category = document.getElementById('category').value;
-  let subtask = document.getElementById('subtask').value;
+async function postTask(priority) {
+  let title = document.getElementById("title").value;
+  let description = document.getElementById("description").value;
+  let assigned = document.getElementById("assigned").value;
+  let date = document.getElementById("date").value;
+  let category = document.getElementById("category").value;
+  let subtask = document.getElementById("subtask").value;
+  let prio = currentPriority;
 
   let extractedData = {
-      'title': title,
-      'description': description,
-      'assigned': assigned,
-      'date': date,
-      'category': category,
-      'subtask': subtask
+    title: title,
+    description: description,
+    assigned: assigned,
+    date: date,
+    category: category,
+    subtask: subtask,
+    prio : prio,
   };
 
   await postData("/tasks", extractedData);
 
-  console.log('Form submitted', extractedData);
+  console.log("Form submitted", extractedData);
 }

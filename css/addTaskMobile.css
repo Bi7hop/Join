@@ -1,4 +1,4 @@
-@media(max-width:1360px) {
+@media(max-width:1300px) {
     .add-task-main-position {
         position: absolute;
         width: 428px;
@@ -159,6 +159,13 @@
     .add-task-list{
         padding: 0 0 0 10px;
     }
+
+    .dropdown-list{
+        width: 358px;
+        top: 531px;
+        height: 100px;
+        left: 16px;
+    }
 }
 
 @media(max-width:1050px){
@@ -309,5 +316,12 @@
     .create-btn {
         width: 183px;
         height: 56px;
+    }
+
+    .dropdown-list{
+        width: 216px;
+        top: 500px;
+        height: 100px;
+        left: 20px;
     }
 }
