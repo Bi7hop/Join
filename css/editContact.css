@@ -321,10 +321,8 @@ h2 {
         top: 629px;
         left: 97px;
         display: block;
-    }
-
-    .cancel-btn {
-        display: none;
+        display: flex;
+        justify-content: center;
     }
 
     .create-contact-btn {
@@ -412,7 +410,4 @@ h2 {
         padding: 10px 8px;
     }
 
-    .check {
-        display: none;
-    }
 }
