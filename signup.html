@@ -8,6 +8,8 @@
     <link rel="icon" type="image/x-icon" href="/img/Join_Logo.png">
     <link rel="stylesheet" href="./css/signup.css">
     <link rel="stylesheet" href="./css/fonts.css">
+
+    <!-- <script type="module" src="firebase.js"></script> -->
 </head>
 
 <body>
@@ -35,29 +37,29 @@
             </div>
             <form id="regestrationForm">
                 <div class="input-login-field">
-                    <input type="text" required class="name" placeholder="Name">
+                    <input id="signUpName" type="text" required class="name" placeholder="Name">
                     <div class="input-login-field">
                         <div class="input-field-mail">
-                            <input id="loginEmail" type="email" required placeholder="Email">
+                            <input id="signUpEmail" type="email" required placeholder="Email">
                             <img src="./img/mail.png" alt="">
                         </div>
                         <div class="input-field-password">
-                            <input id="loginPassword" type="password" required placeholder="Password"
+                            <input id="signUpPassword" type="password" required placeholder="Password"
                                 class="password-field">
                             <img src="./img/lock.png" alt="">
                         </div>
                         <div class="input-field-password">
-                            <input class="password-field" type="password" required placeholder="Confirm Password">
+                            <input id="signUpPasswordCheck" class="password-field" type="password" required placeholder="Confirm Password">
                             <img src="./img/lock.png" alt="">
                         </div>
                     </div>
                     <div class="accept-privacy-policy">
-                        <input type="checkbox">
+                        <input required type="checkbox">
                         <p>I accept the <a href="privacyPolicy.html">Privacy policy</a></p>
                     </div>
                     <div class="sign-up-container">
                         <div class="sign-up">
-                            <button class="btn">Sign up</button>
+                            <button id="signUpButton" class="btn">Sign up</button>
                         </div>
                     </div>
                 </div>

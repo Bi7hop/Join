@@ -5,7 +5,8 @@ function openUserStory() {
     boardBodyContainer.style.overflow = "hidden";
 
     userStoryContainer.innerHTML = userStoryHtmlTemplate();
-    overlay.classList.add("overlay")
+    overlay.classList.add("overlay");
+    
 }
 
 function closeUserStory() {
@@ -27,7 +28,6 @@ function closeUserStory() {
 function openUserStoryEdit() {
     let userStoryContainer = document.getElementById('userStoryWindow');
     userStoryContainer.innerHTML = userStoryEditHtmlTemplate();
-    loadUserStoryEditStyleFile();
 }
 
 function closeUserStoryEdit() {
@@ -53,12 +53,4 @@ function loadUserStoryEditStyleFile() {
     document.head.appendChild(script);
 }
 
-// function unloadUserStoryEditStyleFile() {
-//     var script = document.getElementById('externalScript');
-//     if (script) {
-//         script.parentNode.removeChild(script);
-//         console.log('Script entladen');
-//     } else {
-//         console.log('Script nicht gefunden');
-//     }
-// }
+loadUserStoryEditStyleFile()
