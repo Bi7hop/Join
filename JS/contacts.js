@@ -38,10 +38,7 @@ function renderListContact() {
     sortContacts();
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        if (
-            i == 0 ||
-            contact.name.charAt(0) != contacts[i - 1].name.charAt(0)
-        ) {
+        if (i == 0 || contact.name.charAt(0) != contacts[i - 1].name.charAt(0)) {
             contentList.innerHTML += `<span class="register-letter">${contact.name.charAt(0).toUpperCase()}</span>`;
         }
         contentList.innerHTML += `
@@ -73,7 +70,7 @@ function showDetailContact(index) {
                 <div class="name-contact">
                     ${contact.name}
                     <div class="contact-a-name" id="nameContact">
-                        <a class="contact-name-btn" onclick="editContact()" onclick="openDialog(false, ${index})"><img class="img-btn" src="./img/contacts/edit.png"> Edit</a>
+                        <a class="contact-name-btn" onclick="openEditContact(${index})"><img class="img-btn" src="./img/contacts/edit.png"> Edit</a>
                         <a class="contact-name-btn" onclick="deleteContact(${index})"><img class="img-btn" src="./img/contacts/delete.png"> Delete</a>
                     </div>
                 </div>
@@ -98,27 +95,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
     renderListContact();
 });
 
-
-function editContact() {
+function openEditContact(index) {
     let card = document.querySelector(".edit-contact-popup");
     let overlay = document.getElementById("overlay");
-  
+    let contact = contacts[index];
+
+    document.querySelector(".edit-contact-popup input[placeholder='Name']").value = contact.name;
+    document.querySelector(".edit-contact-popup input[placeholder='Email']").value = contact.email;
+    document.querySelector(".edit-contact-popup input[placeholder='Phone']").value = contact.phone;
+
     document.getElementById("contactsBody").style.overflow = "hidden";
     card.style.display = "block";
     overlay.classList.add("overlay");
-  }
-  
-  function closeEditContact() {
+}
+
+function closeEditContact() {
     let card = document.querySelector(".edit-contact-popup");
     let overlay = document.getElementById("overlay");
-  
+
     card.style.animation = "fly-out 0.1s forwards";
     overlay.style.animation = "fade-out 0.2s forwards";
     setTimeout(() => {
-      card.style.animation = ``;
-      overlay.style.animation = ``;
-      overlay.classList.remove("overlay");
-      card.style.display = "none";
-      document.getElementById("contactsBody").style.overflow = ``;
+        card.style.animation = ``;
+        overlay.style.animation = ``;
+        overlay.classList.remove("overlay");
+        card.style.display = "none";
+        document.getElementById("contactsBody").style.overflow = ``;
     }, 200);
-  }
+}
