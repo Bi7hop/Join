@@ -237,6 +237,12 @@ h2 {
     background-color: #29abe2;
 }
 
+.emblem-text {
+    font-size: 57px;
+    font-weight: 400;
+    color: white;
+}
+
 @media (max-width: 1339px) {
     .new-contact-card {
         width: 396px;
@@ -295,9 +301,6 @@ h2 {
         top: 292px;
         left: 138px;
         background-color: rgb(255, 87, 51);
-        font-size: 57px;
-        font-weight: 400;
-        color: white;
     }
 
     .contact-input-field {
@@ -411,6 +414,12 @@ h2 {
         height: 50px;
         width: 180px;
         padding: 10px 8px;
+    }
+
+    .emblem-text {
+        font-size: 38px;
+        font-weight: 300;
+        color: white;
     }
 
 }
