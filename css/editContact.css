@@ -183,7 +183,7 @@ h2 {
     gap: 24px;
 }
 
-.cancel-btn {
+.cancel-edit-btn {
     width: 126px;
     height: 56px;
     border-radius: 10px;
@@ -194,7 +194,7 @@ h2 {
     transition: 100ms ease-in-out;
 }
 
-.cancel-btn:hover {
+.cancel-edit-btn:hover {
     cursor: pointer;
     transform: scale(1.1);
     border-color: #29abe2;
@@ -206,7 +206,7 @@ h2 {
     height: 24px;
 }
 
-.create-contact-btn {
+.create-edit-contact-btn {
     width: 241px;
     height: 57px;
     border-radius: 10px;
@@ -231,7 +231,7 @@ h2 {
     height: 11.22px;
 }
 
-.create-contact-btn:hover {
+.create-edit-contact-btn:hover {
     cursor: pointer;
     transform: scale(1.1);
     background-color: #29abe2;
