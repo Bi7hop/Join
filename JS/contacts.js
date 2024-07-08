@@ -100,9 +100,15 @@ function openEditContact(index) {
     let overlay = document.getElementById("overlay");
     let contact = contacts[index];
 
+    // Fülle die Eingabefelder mit den Daten des Kontakts
     document.querySelector(".edit-contact-popup input[placeholder='Name']").value = contact.name;
     document.querySelector(".edit-contact-popup input[placeholder='Email']").value = contact.email;
     document.querySelector(".edit-contact-popup input[placeholder='Phone']").value = contact.phone;
+
+    // Setze das Emblem und die Hintergrundfarbe
+    let emblemElement = document.querySelector(".edit-contact-popup .profile-img");
+    emblemElement.style.backgroundColor = contact.color;
+    emblemElement.innerHTML = `<span class="emblem-text">${renderEmblem(contact.name)}</span>`;
 
     document.getElementById("contactsBody").style.overflow = "hidden";
     card.style.display = "block";

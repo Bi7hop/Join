@@ -294,7 +294,10 @@ h2 {
     .profile-img {
         top: 292px;
         left: 138px;
-        background-color: #D1D1D1;
+        background-color: rgb(255, 87, 51);
+        font-size: 57px;
+        font-weight: 400;
+        color: white;
     }
 
     .contact-input-field {
