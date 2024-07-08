@@ -280,3 +280,12 @@ h1 {
 .contact a {
     text-decoration: none;
 }
+
+.edit-contact-popup {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    animation: fly-in 0.1s forwards;
+}

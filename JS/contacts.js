@@ -73,7 +73,7 @@ function showDetailContact(index) {
                 <div class="name-contact">
                     ${contact.name}
                     <div class="contact-a-name" id="nameContact">
-                        <a class="contact-name-btn" onclick="openDialog(false, ${index})"><img class="img-btn" src="./img/contacts/edit.png"> Edit</a>
+                        <a class="contact-name-btn" onclick="editContact()" onclick="openDialog(false, ${index})"><img class="img-btn" src="./img/contacts/edit.png"> Edit</a>
                         <a class="contact-name-btn" onclick="deleteContact(${index})"><img class="img-btn" src="./img/contacts/delete.png"> Delete</a>
                     </div>
                 </div>
@@ -97,3 +97,28 @@ function showDetailContact(index) {
 document.addEventListener('DOMContentLoaded', (event) => {
     renderListContact();
 });
+
+
+function editContact() {
+    let card = document.querySelector(".edit-contact-popup");
+    let overlay = document.getElementById("overlay");
+  
+    document.getElementById("contactsBody").style.overflow = "hidden";
+    card.style.display = "block";
+    overlay.classList.add("overlay");
+  }
+  
+  function closeEditContact() {
+    let card = document.querySelector(".edit-contact-popup");
+    let overlay = document.getElementById("overlay");
+  
+    card.style.animation = "fly-out 0.1s forwards";
+    overlay.style.animation = "fade-out 0.2s forwards";
+    setTimeout(() => {
+      card.style.animation = ``;
+      overlay.style.animation = ``;
+      overlay.classList.remove("overlay");
+      card.style.display = "none";
+      document.getElementById("contactsBody").style.overflow = ``;
+    }, 200);
+  }
