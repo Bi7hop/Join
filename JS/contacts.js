@@ -127,3 +127,28 @@ function closeEditContact() {
         document.getElementById("contactsBody").style.overflow = ``;
     }, 200);
 }
+
+
+function addContact() {
+    let card = document.querySelector(".add-contact-popup");
+    let overlay = document.getElementById("overlay");
+  
+    document.getElementById("contactsBody").style.overflow = "hidden";
+    card.style.display = "block";
+    overlay.classList.add("overlay");
+  }
+  
+  function closeAddContact() {
+    let card = document.querySelector(".add-contact-popup");
+    let overlay = document.getElementById("overlay");
+  
+    card.style.animation = "fly-out 0.1s forwards";
+    overlay.style.animation = "fade-out 0.2s forwards";
+    setTimeout(() => {
+      card.style.animation = ``;
+      overlay.style.animation = ``;
+      overlay.classList.remove("overlay");
+      card.style.display = "none";
+      document.getElementById("contactsBody").style.overflow = ``;
+    }, 200);
+  }

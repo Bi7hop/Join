@@ -16,6 +16,24 @@
         margin-left: 10px;
         margin-right: 10px;
     }
+
+    @keyframes fly-in {
+        from {
+           top: 3000px;
+        }
+        to {
+            top: 0;
+        }
+    }
+    
+    @keyframes fly-out {
+        from {
+            top: 0px; 
+        }
+        to {
+            top: 3000px; 
+        }
+    }
 }
 
 @media(max-width: 1050px) {
