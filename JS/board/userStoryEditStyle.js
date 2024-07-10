@@ -16,9 +16,9 @@ function subTasksHoverEffect() {
 
 function setPriority(priority) {
   let priorities = {
-    urgent: document.getElementById("urgent"),
-    medium: document.getElementById("medium"),
-    low: document.getElementById("low"),
+    urgent: document.getElementById("editUrgent"),
+    medium: document.getElementById("editMedium"),
+    low: document.getElementById("editLow"),
   };
 
   for (let key in priorities) {
@@ -43,9 +43,9 @@ function getColor(priority) {
 
 function setBgImg(priority) {
   let images = {
-    urgent: document.getElementById("activeUrg"),
-    medium: document.getElementById("activeMed"),
-    low: document.getElementById("activeLow"),
+    urgent: document.getElementById("editActiveUrg"),
+    medium: document.getElementById("editActiveMed"),
+    low: document.getElementById("editActiveLow"),
   };
 
   for (let key in images) {
@@ -93,4 +93,17 @@ function addMedium() {
 function addLow() {
   setPriority("low");
   setBgImg("low");
+}
+
+function editShowPersons() {
+  let rotate = document.getElementById("editRotate");
+  let dropDown = document.getElementById("editDropDownList");
+
+  if (dropDown.classList.contains("editHide")) {
+    rotate.classList.add("editRotated");
+    dropDown.classList.remove("editHide");
+  } else {
+    rotate.classList.remove("editRotated");
+    dropDown.classList.add("editHide");
+  }
 }

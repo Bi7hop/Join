@@ -216,7 +216,6 @@
     background-color: #ccc;
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked~.checkmark {
     background-color: #ffffff;
 }

@@ -68,10 +68,10 @@ function renderTicketsToDo() {
     for (let i = 0; i < tickets.length; i++) {
         const ticket = tickets[i];
         const formattedContacts = formatContacts(ticket.taskContacts);
-        if (ticket.taskStatus === 'toDo') {
+         if (ticket.taskStatus === 'toDo') {
             userTicketColumnToDo.innerHTML +=
                 ticketTemplate(ticket, formattedContacts);
-        }
+         }
     }
 }
 
