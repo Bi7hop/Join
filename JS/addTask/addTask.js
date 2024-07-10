@@ -1,4 +1,5 @@
 let subtasks = [];
+let assignedPersons = [];
 
 function showPersons() {
   let rotate = document.getElementById("rotate");
@@ -7,10 +8,70 @@ function showPersons() {
   if (dropDown.classList.contains("hide")) {
     rotate.classList.add("rotated");
     dropDown.classList.remove("hide");
+    renderAssignedList();
   } else {
     rotate.classList.remove("rotated");
     dropDown.classList.add("hide");
   }
+}  
+
+function sortContacts() {
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function renderEmblem(name) {
+  const initials = name.split(' ').map(word => word[0]).join('');
+  return initials;
+}
+
+function addAssignedPerson(i){
+  personAdded(i);
+  checkIfCheckd(i);
+  postPersons();
+}
+
+function personAdded(i){
+  let container = document.getElementById(`persons-assignemend${i}`);
+  let checkbox = document.getElementById(`checkbox${i}`);
+  let assignedName = document.getElementById(`assigned-name${i}`);
+
+  if (!container.classList.contains('persons-assignemend-checkt')) {
+    container.classList.add('persons-assignemend-checkt');
+    checkbox.src = './img/checkbox_checkt.png';
+    assignedName.classList.add("assigned-color");
+  }else{
+    container.classList.remove('persons-assignemend-checkt');
+    checkbox.src = './img/checkbox_uncheckt.png';
+    assignedName.classList.remove("assigned-color");
+  }
+}
+
+function checkIfCheckd(i) {
+  let container = document.getElementById(`persons-assignemend${i}`);
+
+  if (container.classList.contains('persons-assignemend-checkt')) {
+    if (!assignedPersons.includes(contacts[i])) {
+      assignedPersons.push(contacts[i]);
+    }
+  } else {
+    let index = assignedPersons.indexOf(contacts[i]);
+    if (index > -1) {
+      assignedPersons.splice(index, 1);
+    }
+  }
+  console.log(assignedPersons)
+}
+
+function postPersons(){
+  let assignedPersonsResults = document.getElementById('assigned-persons');
+ 
+  assignedPersonsResults.innerHTML = '';
+  assignedPersonsResults.innerHTML += assignedResults();
+}
+
+function renderAssignedList(){
+  let dropDownList = document.getElementById('dropdown-list');
+  dropDownList.innerHTML += dropDownListSample();
 }
 
 function setPriority(priority) {
@@ -131,32 +192,6 @@ function postSubtask() {
 
   subtaskDisplay.innerHTML = "";
   subtaskDisplay.innerHTML += subtaskSample();
-}
-
-function subtaskSample() {
-  let list = '<ul class="add-task-list">';
-  for (let i = 0; i < subtasks.length; i++) {
-    const subtask = subtasks[i];
-    list += `<li class="listItem flex-row">
-      <span class="subtask-text" id="subtaskNr${i}">${subtask}</span>
-      <div class="close-approve-container" id="editContainer${i}">
-        <div class="small-icon-div" onclick="editSubtask(this)">
-          <img class="smaller-icon" src="/img/edit-dark.png">
-        </div>
-        <span class="small-input-vertical-vector"></span>
-        <div class="small-icon-div" onclick="deleteSubtask(this)">
-          <img class="smaller-icon" src="/img/delete.png">
-        </div>
-      </div>
-      <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
-        <div class="small-icon-div" onclick="approveEdit(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
-        <span class="small-input-vertical-vector"></span>
-        <div class="small-icon-div" onclick="cancelEdit(this)"><img class="small-icon" src="/img/Close.png"></div>
-      </div>
-    </li>`;
-  }
-  list += "</ul>";
-  return list;
 }
 
 function editSubtask(element) {
@@ -324,7 +359,7 @@ async function postTask() {
   let assigned = document.getElementById("assigned").value;
   let date = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  let subtask = document.getElementById("subtask").value;
+  let subtask = subtasks;
   let prio = currentPriority;
 
   let extractedData = {

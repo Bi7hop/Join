@@ -42,6 +42,7 @@
         position: initial;
         width: 396px;
         gap: 8px;
+        margin-bottom: 50px;
     }
 
     .input-title-container {
@@ -161,9 +162,16 @@
     }
 
     .dropdown-list{
-        width: 358px;
+        width: 398px;
         top: 531px;
         height: 100px;
+        left: 16px;
+    }
+
+    .assigned-persons{
+        width: 398px;
+        height: 50px;
+        top: 541px;
         left: 16px;
     }
 }
@@ -319,9 +327,15 @@
     }
 
     .dropdown-list{
-        width: 216px;
+        width: 256px;
         top: 500px;
         height: 100px;
+        left: 20px;
+    }
+
+    .assigned-persons{
+        width: 256px;
+        top: 510px;
         left: 20px;
     }
 }

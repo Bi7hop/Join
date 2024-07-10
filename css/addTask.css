@@ -5,8 +5,7 @@
 
 body {
     font-family: Inter;
-    height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .hide {
@@ -209,13 +208,65 @@ body {
 
 .dropdown-list {
     background-color: white;
-    width: 400px;
+    width: 440px;
     height: 180px;
     position: absolute;
     top: 545px;
     left: 75px;
-    padding: 10px 20px;
+    padding: 10px 0;
     overflow-y: scroll;
+}
+
+.assigned-persons{
+    width: 440px;
+    height: 50px;
+    position: absolute;
+    top: 555px;
+    left: 75px;
+}
+
+.persons-assignemend{
+    padding: 7px 16px;
+    border-radius: 10px;
+    width: 92%;
+    height: 52px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 2px 0;
+}
+
+.persons-assignemend:hover{
+    background-color: rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+}
+
+.persons-assignemend-checkt{
+    background-color: #2A3647;
+}
+
+.persons-assignemend-checkt:hover{
+    background-color: #091931;
+}
+
+.assigned-color{
+    color: white;
+}
+
+.name-container{
+    width: 60%;
+    gap: 10px;
+    align-items: center;
+}
+
+.assigned-emblem{
+    border: 1px solid white;
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 5px 0 0;
 }
 
 .vertical-vector {

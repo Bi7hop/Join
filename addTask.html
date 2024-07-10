@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
-    <link rel="icon" type="image/x-icon" href="/img/Join_Logo.png">
-    <link rel="stylesheet" href="/css/addTask.css">
-    <link rel="stylesheet" href="/css/addTaskMobile.css">
-    <link rel="stylesheet" href="/css/fonts.css">
-    <script src="/JS/addTask/styling.js"></script>
-    <script src="/JS/includehtml.js"></script>
+    <link rel="icon" type="image/x-icon" href="./img/Join_Logo.png">
+    <link rel="stylesheet" href="./css/addTask.css">
+    <link rel="stylesheet" href="./css/addTaskMobile.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./JS/addTask/addTask.js"></script>
+    <script src="./JS/includehtml.js"></script>
+    <script src="./JS/addTask/add_Task_Templates.js"></script>
 </head>
 
-<body onload="includeHTML(); loadUrl('/tasks')">
+<body onload="includeHTML(); loadUrl()">
     <div class="sidebar-header show-on-top" w3-include-html="./templates/sidebarHeaderTemplate.html"></div>
     <div class="mobile-header  show-on-top" w3-include-html="./templates/mobileHeader.html"></div>
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
@@ -24,7 +25,7 @@
                 <h1 class="h1">Add Task</h1>
             </div>
             <div id="close-popup" onclick="closeAddTask()" class="close-btn small-icon-div hide"> <!--Must give the hide tag in full screen-->
-                <img class="small-icon" src="/img/Close.png">
+                <img class="small-icon" src="./img/Close.png">
             </div>
             <div class="three-input-container flex-column">
                 <div class="input-title-container flex-column">
@@ -42,13 +43,14 @@
                 <div class="assigned-container flex-column">
                     <span class="medium-font medium-font-color">Assigned to</span>
                     <div class="foul-input">
-                        <input  id="assigned" type="text" class="half-input medium-font" placeholder="Select contacts to assign">
+                        <input id="assigned" type="text" class="half-input medium-font" placeholder="Select contacts to assign">
                         <div class="rotating" id="rotate" onclick="showPersons()">
-                            <img class="rotating-img " src="/img/drop-down-arrow.png">
+                            <img class="rotating-img " src="./img/drop-down-arrow.png">
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="assigned-persons" class="flex-row assigned-persons"></div>
             <div class="dropdown-list flex-column hide" id="dropdown-list"><!--Here must be the dropdown site implemented with js--></div>
             <div class="vertical-vector"></div>
             <div class="three-input-prio-container flex-column">
@@ -63,9 +65,9 @@
                 <div class="prio-container flex-column">
                     <span class="medium-font medium-font-color">Prio</span>
                     <div class="prio-btn-position"> <!--Images andbg-color must be changed with javascript-->
-                        <div class="prio-btn medium-font urgent" id="urgent"onclick="addUrgent()">Urgent <img id="activeUrg" src="/img/urgent-prio-icon-inactive.png"></div>
-                        <div class="prio-btn medium-font medium" id="medium" onclick="addMedium()">Medium <img id="activeMed" src="/img/medium-prio-icon-inactive.png"></div>
-                        <div class="prio-btn medium-font low" id="low" onclick="addLow()">Low <img id="activeLow" src="/img/low-prio-icon-inactive.png"></div>
+                        <div class="prio-btn medium-font urgent" id="urgent"onclick="addUrgent()">Urgent <img id="activeUrg" src="./img/urgent-prio-icon-inactive.png"></div>
+                        <div class="prio-btn medium-font medium" id="medium" onclick="addMedium()">Medium <img id="activeMed" src="./img/medium-prio-icon-inactive.png"></div>
+                        <div class="prio-btn medium-font low" id="low" onclick="addLow()">Low <img id="activeLow" src="./img/low-prio-icon-inactive.png"></div>
                     </div>
                 </div>
                 <div class="assigned-container flex-column">
@@ -81,12 +83,12 @@
                     <div class="foul-input">
                         <input id="subtask" type="text" class="subtask-input medium-font" id="subtask" placeholder="Add new subtask">
                         <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">
-                            <img class="smaller-icon" src="/img/add-plus-icon.png">
+                            <img class="smaller-icon" src="./img/add-plus-icon.png">
                         </div>
                         <div class="close-approve-container hide" id="addRemoveContainer">
-                            <div class="small-icon-div" onclick="closeSubtask()"><img class="small-icon" src="/img/Close.png"></div>
+                            <div class="small-icon-div" onclick="closeSubtask()"><img class="small-icon" src="./img/Close.png"></div>
                             <span class="small-input-vertical-vector"></span>
-                            <div class="small-icon-div" onclick="aproveSubtask()"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
+                            <div class="small-icon-div" onclick="aproveSubtask()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
                         </div>
                     </div>
                     <div id="subtaskDisplay" class="subtask-display flex-column"></div>
@@ -98,15 +100,15 @@
                 </div>
                 <div class="two-buttons-position flex-row">
                     <button onclick="closeAddTask()" class="cancel-btn flex-row gap-four btn-styling medium-font">Cancel<img
-                            src="/img/Close.png"></button>
+                            src="./img/Close.png"></button>
                     <button class="create-btn flex-row gap-four btn-styling medium-font">Create Task<img
-                            src="/img/check.png"></button>
+                            src="./img/check.png"></button>
                 </div>
             </div>
         </form>
         <div class="added-confirmation hide"> <!--Popup that confirms the new addition remove hiden add flex-row-->
             <span class="medium-font">Task added to board</span>
-            <img class="confirmation-img" src="/img/add-confiramtion-icon.png">
+            <img class="confirmation-img" src="./img/add-confiramtion-icon.png">
         </div>
     </div>
 </body>
