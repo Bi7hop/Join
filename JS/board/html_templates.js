@@ -78,7 +78,7 @@ function userStoryHtmlTemplate() {
                     </div>
                     <div class="userStoryCutLine"></div>
                     <div class="userStoryEditTextContainer userStoryBackgroundImageEdit">
-                        <div onclick="openUserStoryEdit()" class="userStoryEditTextTextContainer">Edit</div>
+                        <div onclick="openUserStoryEdit(), subTasksHoverEffect()" class="userStoryEditTextTextContainer">Edit</div>
                     </div>
                 </div>
             </div>
@@ -126,22 +126,22 @@ function userStoryEditHtmlTemplate() {
                         <label class="editPriorityHeadline" for="priority">Priority</label>
                     </div>
                     <div class="editPriorityAllButtonsContainer">
-                        <div onclick="addUrgent()" id="urgent" class="editPriorityButtonContainer">
+                        <div onclick="addUrgent()" id="editUrgent" class="editPriorityButtonContainer">
                             <div>Urgent</div>
                             <div>
-                                <img id="activeUrg" src="./img/userStoryEdit/urgent-prio-icon-inactive.svg" alt="High priority">
+                                <img id="editActiveUrg" src="./img/userStoryEdit/urgent-prio-icon-inactive.svg" alt="High priority">
                             </div>
                         </div>
-                        <div onclick="addMedium()" id="medium" class="editPriorityButtonContainer">
+                        <div onclick="addMedium()" id="editMedium" class="editPriorityButtonContainer">
                             <div>Medium</div>
                             <div>
-                                <img id="activeMed" src="./img/userStoryEdit/prio_medium_inactive.svg" alt="Medium priority">
+                                <img id="editActiveMed" src="./img/userStoryEdit/prio_medium_inactive.svg" alt="Medium priority">
                             </div>
                         </div>
-                        <div onclick="addLow()" id="low" class="editPriorityButtonContainer">
+                        <div onclick="addLow()" id="editLow" class="editPriorityButtonContainer">
                             <div>Low</div>
                             <div>
-                                <img id="activeLow" src="./img/userStoryEdit/low-prio-icon-inactive.png" alt="Low priority">
+                                <img id="editActiveLow" src="./img/userStoryEdit/low-prio-icon-inactive.png" alt="Low priority">
                             </div>
                         </div>
                     </div>
@@ -151,8 +151,39 @@ function userStoryEditHtmlTemplate() {
                 </div>
                 <div class="userStoryAssignedToInputAndImageContainer mTop8">
                     <input type="text" placeholder="Select contacts to assign">
-                    <div class="userStoryAssignedToDropdownMenuImageContainer">
+                    <div id="editRotate" onclick="editShowPersons()" class="userStoryAssignedToDropdownMenuImageContainer">
                         <img src="./img/userStoryEdit/drop-down-arrow.png" alt="dropdownmenu">
+                    </div>
+                    
+                </div>
+                <div id="editDropDownList" class="editDropDownList editHide">
+                    <div class="editDropDownListContactsMenuContainer">
+                        <div class="editDropDownSmallNameAndFullNameContainer">
+                            <div class="editUserStoryContacts">as</div>
+                            <div class="editUserStoryContactFullNameContainer">Anja Schulz (You)</div>
+                        </div>
+                        <div>
+                            <div class="editSubtaskCheckboxHoverEffect">
+                                <label class="editContainer">
+                                    <input type="checkbox" checked="checked">
+                                    <span class="editCheckmark"></span>
+                                </label>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editDropDownListContactsMenuContainer">
+                        <div class="editDropDownSmallNameAndFullNameContainer">
+                            <div class="editUserStoryContacts">de</div>
+                            <div class="editUserStoryContactFullNameContainer">David Eisenberg</div>
+                        </div>
+                        <div>
+                            <div class="editSubtaskCheckboxHoverEffect">
+                                <label class="editContainer">
+                                    <input type="checkbox" checked="checked">
+                                    <span class="editCheckmark"></span>
+                                </label>  
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="userStoryContactsContainer mTop8">
@@ -188,7 +219,7 @@ function userStoryEditHtmlTemplate() {
                     </table>
                 </div>
                 <div class="userStoryEditOkButtonContainer">
-                    <button class="userStoryEditOkButton" onclick="openAddTask()">Ok <img src="./img/userStoryEdit/ok.png" alt="Add"></button>
+                    <button class="userStoryEditOkButton" onclick="">Ok <img src="./img/userStoryEdit/ok.png" alt="Add"></button>
                 </div>
             </form>
         </div>

@@ -46,11 +46,10 @@ function closeUserStoryEdit() {
     }, 200);
 }
 
-function loadUserStoryEditStyleFile() {
-    var script = document.createElement('script');
-    script.src = '/JS/board/userStoryEditStyle.js'; // Pfad zu deiner JavaScript-Datei
-    script.type = 'text/javascript';
-    document.head.appendChild(script);
-}
+// function loadUserStoryEditStyleFile() {
+//     var script = document.createElement('script');
+//     script.src = '/JS/board/userStoryEditStyle.js'; // Pfad zu deiner JavaScript-Datei
+//     script.type = 'text/javascript';
+//     document.head.appendChild(script);
+// }
 
-loadUserStoryEditStyleFile()

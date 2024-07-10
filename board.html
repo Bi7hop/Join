@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/userStory.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/userStory_edit.css">
+    <link rel="stylesheet" href="./css/scrollbar.css">
 
     <script src="/js/includehtml.js"></script>
 
@@ -17,9 +18,10 @@
     <script src="/JS/board/userStory.js"></script>
     <script src="/JS/board/html_templates.js"></script>
     <script src="/JS/addTask/styling.js"></script>
+    <script src="./JS/board/userStoryEditStyle.js"></script>
 </head>
 
-<body id="boardBodyContainer" class="boardBodyContainer" onload="includeHTML(), loadTickets()">
+<body id="boardBodyContainer" class="boardBodyContainer" onload="includeHTML(), loadTickets(), loadUrl()">
     <div class="sidebar-header" w3-include-html="./templates/sidebarHeaderTemplate.html"></div>
     <div class="mobile-header" w3-include-html="./templates/mobileHeader.html"></div>
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
