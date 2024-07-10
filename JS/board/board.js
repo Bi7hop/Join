@@ -62,63 +62,22 @@ function formatContacts(contacts) {
     }).join('');
 }
 
-function renderTicketsToDo() {
-    let userTicketColumnToDo = document.getElementById('toDo');
-    userTicketColumnToDo.innerHTML = ``;
-    for (let i = 0; i < tickets.length; i++) {
-        const ticket = tickets[i];
-        const formattedContacts = formatContacts(ticket.taskContacts);
-         if (ticket.taskStatus === 'toDo') {
-            userTicketColumnToDo.innerHTML +=
-                ticketTemplate(ticket, formattedContacts);
-         }
-    }
-}
-
-function renderTicketsInProgress() {
-    let userTicketColumnInProgress = document.getElementById('inProgress');
-    userTicketColumnInProgress.innerHTML = ``;
-    for (let i = 0; i < tickets.length; i++) {
-        const ticket = tickets[i];
-        const formattedContacts = formatContacts(ticket.taskContacts);
-        if (ticket.taskStatus === 'inProgress') {
-            userTicketColumnInProgress.innerHTML +=
-                ticketTemplate(ticket, formattedContacts);
+function renderTickets(columnId, status) {
+    let columnElement = document.getElementById(columnId);
+    columnElement.innerHTML = ``;
+    tickets.forEach(ticket => {
+        if (ticket.taskStatus === status) {
+            const formattedContacts = formatContacts(ticket.taskContacts);
+            columnElement.innerHTML += ticketTemplate(ticket, formattedContacts);
         }
-    }
-}
-
-function renderTicketsAwaitFeedback() {
-    let userTicketColumnAwaitFeedback = document.getElementById('awaitFeedback');
-    userTicketColumnAwaitFeedback.innerHTML = ``;
-    for (let i = 0; i < tickets.length; i++) {
-        const ticket = tickets[i];
-        const formattedContacts = formatContacts(ticket.taskContacts);
-        if (ticket.taskStatus === 'awaitFeedback') {
-            userTicketColumnAwaitFeedback.innerHTML +=
-                ticketTemplate(ticket, formattedContacts);
-        }
-    }
-}
-
-function renderTicketsDone() {
-    let userTicketColumnDone = document.getElementById('done');
-    userTicketColumnDone.innerHTML = ``;
-    for (let i = 0; i < tickets.length; i++) {
-        const ticket = tickets[i];
-        const formattedContacts = formatContacts(ticket.taskContacts);
-        if (ticket.taskStatus === 'done') {
-            userTicketColumnDone.innerHTML +=
-                ticketTemplate(ticket, formattedContacts);
-        }
-    }
+    });
 }
 
 function loadTickets() {
-    renderTicketsToDo();
-    renderTicketsInProgress();
-    renderTicketsAwaitFeedback();
-    renderTicketsDone();
+    renderTickets('toDo', 'toDo');
+    renderTickets('inProgress', 'inProgress');
+    renderTickets('awaitFeedback', 'awaitFeedback');
+    renderTickets('done', 'done');
 }
 
 // DRAG AND DROP

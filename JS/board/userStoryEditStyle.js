@@ -1,18 +1,19 @@
 // Subtasks Listed Item Hover and show Edit/Delete Icon effect
 function subTasksHoverEffect() {
-    for (let i = 0; i < 2; i++) {
-        const hoverListedItem = document.querySelector(`.subtaskListedItem${i}`)
-        const hoverListedItemImage = document.querySelector(`.subtaskListedImage${i}`)
-        hoverListedItemImage.style.display = "none";
+  for (let i = 0; i < 2; i++) {
+    const hoverListedItem = document.querySelector(`.subtaskListedItem${i}`)
+    const hoverListedItemImage = document.querySelector(`.subtaskListedImage${i}`)
+    hoverListedItemImage.style.display = "none";
     hoverListedItem.addEventListener("mouseenter", function () {
-        hoverListedItem.style.backgroundColor = "#2c2c2c17"; // gray
-        hoverListedItemImage.style.display = "block";
+      hoverListedItem.style.backgroundColor = "#2c2c2c17"; // gray
+      hoverListedItemImage.style.display = "block";
     });
     hoverListedItem.addEventListener("mouseleave", function () {
-        hoverListedItem.style.backgroundColor = "#FFFFFF"; // Change back to original color
-        hoverListedItemImage.style.display = "none";
+      hoverListedItem.style.backgroundColor = "#FFFFFF"; // Change back to original color
+      hoverListedItemImage.style.display = "none";
     })
-};};
+  };
+};
 
 function setPriority(priority) {
   let priorities = {
@@ -105,5 +106,18 @@ function editShowPersons() {
   } else {
     rotate.classList.remove("editRotated");
     dropDown.classList.add("editHide");
+  }
+}
+
+function editCheckbox(checkboxId) {
+  let checkedBackgroundColor = document.getElementById('editContactContainer0');
+  let checkbox = document.getElementById(checkboxId);
+  checkbox.checked = !checkbox.checked;
+  if (checkbox.checked) {
+    checkedBackgroundColor.style.backgroundColor = "#2A3647";
+    checkedBackgroundColor.style.color = "#white";
+  }else {
+    checkedBackgroundColor.style.backgroundColor = "white";
+    checkedBackgroundColor.style.color = "#black";
   }
 }

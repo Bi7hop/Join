@@ -6,7 +6,7 @@ function openUserStory() {
 
     userStoryContainer.innerHTML = userStoryHtmlTemplate();
     overlay.classList.add("overlay");
-    
+
 }
 
 function closeUserStory() {
@@ -27,7 +27,9 @@ function closeUserStory() {
 
 function openUserStoryEdit() {
     let userStoryContainer = document.getElementById('userStoryWindow');
-    userStoryContainer.innerHTML = userStoryEditHtmlTemplate();
+    if (firebaseData.length > 0) {
+        userStoryContainer.innerHTML = userStoryEditHtmlTemplate(firebaseData);
+    }
 }
 
 function closeUserStoryEdit() {
@@ -45,11 +47,4 @@ function closeUserStoryEdit() {
         overlay.classList.remove("overlay");
     }, 200);
 }
-
-// function loadUserStoryEditStyleFile() {
-//     var script = document.createElement('script');
-//     script.src = '/JS/board/userStoryEditStyle.js'; // Pfad zu deiner JavaScript-Datei
-//     script.type = 'text/javascript';
-//     document.head.appendChild(script);
-// }
 

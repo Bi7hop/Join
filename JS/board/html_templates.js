@@ -87,7 +87,12 @@ function userStoryHtmlTemplate() {
     `
 }
 
-function userStoryEditHtmlTemplate() {
+/**
+ * Generates the HTML template for user story editing.
+ * @param {Array} contactDataArray - Array of contact data.
+ * @returns {string} - HTML string.
+ */
+function userStoryEditHtmlTemplate(contactDataArray) {
     return `
     <div class="userStoryBodyContainer">
     <div class="userStoryEditContainer">
@@ -154,42 +159,12 @@ function userStoryEditHtmlTemplate() {
                     <div id="editRotate" onclick="editShowPersons()" class="userStoryAssignedToDropdownMenuImageContainer">
                         <img src="./img/userStoryEdit/drop-down-arrow.png" alt="dropdownmenu">
                     </div>
-                    
                 </div>
                 <div id="editDropDownList" class="editDropDownList editHide">
-                    <div class="editDropDownListContactsMenuContainer">
-                        <div class="editDropDownSmallNameAndFullNameContainer">
-                            <div class="editUserStoryContacts">as</div>
-                            <div class="editUserStoryContactFullNameContainer">Anja Schulz (You)</div>
-                        </div>
-                        <div>
-                            <div class="editSubtaskCheckboxHoverEffect">
-                                <label class="editContainer">
-                                    <input type="checkbox" checked="checked">
-                                    <span class="editCheckmark"></span>
-                                </label>  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="editDropDownListContactsMenuContainer">
-                        <div class="editDropDownSmallNameAndFullNameContainer">
-                            <div class="editUserStoryContacts">de</div>
-                            <div class="editUserStoryContactFullNameContainer">David Eisenberg</div>
-                        </div>
-                        <div>
-                            <div class="editSubtaskCheckboxHoverEffect">
-                                <label class="editContainer">
-                                    <input type="checkbox" checked="checked">
-                                    <span class="editCheckmark"></span>
-                                </label>  
-                            </div>
-                        </div>
-                    </div>
+                    ${generateContactList(contactDataArray)}
                 </div>
                 <div class="userStoryContactsContainer mTop8">
-                    <div class="userStoryContacts">as</div>
-                    <div class="userStoryContacts">de</div>
-                    <div class="userStoryContacts">ef</div>
+                    ${generateSelectedContacts(contactDataArray)}
                 </div>
                 <div class="userStorySubtaskHeadlineContainer mTop16">
                     <label class="userStorySubtaskHeadline" for="subtasks">Subtasks</label>
@@ -219,13 +194,43 @@ function userStoryEditHtmlTemplate() {
                     </table>
                 </div>
                 <div class="userStoryEditOkButtonContainer">
-                    <button class="userStoryEditOkButton" onclick="">Ok <img src="./img/userStoryEdit/ok.png" alt="Add"></button>
+                    <button class="userStoryEditOkButton" type="button" onclick="closeUserStoryEdit()">Ok <img src="./img/userStoryEdit/ok.png" alt="Add"></button>
                 </div>
             </form>
         </div>
     </div>
     </div>
-    `
+    `;
+}
+
+/**
+ * Generates the contact list HTML.
+ * @param {Array} contactDataArray - Array of contact data.
+ * @returns {string} - HTML string for contact list.
+ */
+function generateContactList(contactDataArray) {
+    return contactDataArray.map((contactData, index) => `
+        <div id="editContactContainer${index}" onclick="editCheckbox('editCheckbox${index}')" class="editDropDownListContactsMenuContainer">
+            <div class="editDropDownSmallNameAndFullNameContainer">
+                <div class="editUserStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
+                <div class="editUserStoryContactFullNameContainer">${contactData.dataExtracted.name}</div>
+            </div>
+            <div>
+                <div class="editSubtaskCheckboxHoverEffect">
+                    <label class="editContainer">
+                        <input id="editCheckbox${index}" type="checkbox" checked="">
+                        <span class="editCheckmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function generateSelectedContacts(contactDataArray) {
+    return contactDataArray.map((contactData) => `
+            <div class="userStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
+    `).join('');
 }
 
 function ticketTemplate(ticket, formattedContacts) {
@@ -253,3 +258,4 @@ function ticketTemplate(ticket, formattedContacts) {
                 </div>
     `
 }
+
