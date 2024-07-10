@@ -3,12 +3,12 @@
         padding-left: 25px;
     }
 
-     .headline-close h1 {
-        font-size: 35px !important;
+    .headline-close h1 {
+        font-size: 35px ;
     }
 
     h2 {
-        font-size: 15px !important;
+        font-size: 15px ;
     }
 
     .parting-line {
@@ -39,18 +39,38 @@
 @media(max-width: 1050px) {
     .display-flex {
         margin-left: 0;
+        flex-direction: column;
     }
 
-    .right-content {
+   /* .right-content {
+        display: none;
+    }
+*/
+    .contact-container {
+        box-shadow: none;
+        width: 100%;
+    }
+
+    .contact-container.show-right-content {
         display: none;
     }
 
-    .contact-container {
-        box-shadow: none;
+    .right-content.show {
+        display: block;
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        z-index: 10;
+    }
+
+    .contact-detail-container {
+        overflow: visible;
     }
 
     .backBtn {
-        display: block !important;
+        display: none;
     }
 }
 
@@ -65,5 +85,66 @@
     .new-contact {
         width: 256px;
         margin: 22px 52px 21px 40px;
+    }
+}
+
+@media(max-width: 800px) {
+    .contacts-headline {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 48px 16px 30px 16px;
+        height: 75px;
+        gap: 16px;
+        padding-top: 28px;
+    }
+
+    .headline-close h1 {
+        font-size: 47px;
+    }
+
+    .parting-line {
+        display: flex;
+        width: 90px;
+        border: 1.5px solid #29ABE2;
+        border-radius: 4px;
+    }
+
+    .emblem-info {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+        font-weight: 400;
+    }
+
+    .name-contact {
+        font-size: clamp(26px, 7vw, 36px);
+        font-weight: 700;
+    }
+
+    .contact-a-name {
+        display: none;
+    }
+
+    .backBtn {
+        display: block;
+    }
+}
+
+@media(max-width: 430px) {
+    .emblem-info {
+        width: 70px;
+        height: 70px;
+        font-size: 36px;
+        font-weight: 400;
+    }
+
+    .headline-contact {
+        gap: 10px;
+    }
+
+    #contactDetail {
+        padding: 8px;
+        width: 100%;
     }
 }

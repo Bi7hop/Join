@@ -58,6 +58,9 @@ function renderListContact() {
 function showDetailContact(index) {
     let contact = contacts[index];
     let contactDetail = document.getElementById('contactDetail');
+    let contactContainer = document.getElementById('contact-container');
+    let rightContent = document.querySelector('.right-content');
+    let contactDetailContainer = document.querySelector('.contact-detail-container');
 
     contactDetail.style.transition = 'none';
     contactDetail.style.transform = 'translateX(100%)';
@@ -81,15 +84,69 @@ function showDetailContact(index) {
                 <a href="mailto:${contact.email}" id="email_contact">${contact.email}</a>
                 <div><b>Phone</b></div>
                 <div id="phone_contact">${contact.phone}</div>
-                <div class="mobile-contact" onclick="openMobileDialog()">
-                </div>
+                <div class="mobile-contact" onclick="openMobileDialog()"></div>
             </div>
+            <div id="more-vert-button" class="more-vert-button" onclick="openContactOptions()"><img
+                    src="./img/contacts/mobileMenu.png" alt=""></div>
         `;
         requestAnimationFrame(() => {
             contactDetail.style.transform = 'translateX(0)';
         });
     });
+
+    if (window.innerWidth <= 1050) {
+        contactContainer.classList.add('show-right-content');
+        rightContent.classList.add('show');
+        contactDetailContainer.style.overflow = 'visible';
+    }
 }
+
+function closeContactWindow() {
+    let contactContainer = document.getElementById('contact-container');
+    let rightContent = document.querySelector('.right-content');
+    let contactDetailContainer = document.querySelector('.contact-detail-container');
+    let overlay = document.getElementById('overlay');
+
+    contactContainer.classList.remove('show-right-content');
+    rightContent.classList.remove('show');
+    contactDetailContainer.style.overflow = 'hidden';
+
+    let editContactPopup = document.querySelector(".edit-contact-popup");
+    let addContactPopup = document.querySelector(".add-contact-popup");
+    
+    if (editContactPopup.style.display === 'block') {
+        editContactPopup.style.animation = "fly-out 0.1s forwards";
+    }
+    if (addContactPopup.style.display === 'block') {
+        addContactPopup.style.animation = "fly-out 0.1s forwards";
+    }
+
+    setTimeout(() => {
+        editContactPopup.style.animation = '';
+        addContactPopup.style.animation = '';
+        overlay.classList.remove("overlay");
+        editContactPopup.style.display = 'none';
+        addContactPopup.style.display = 'none';
+        document.getElementById("contactsBody").style.overflow = '';
+    }, 200);
+}
+
+window.addEventListener('resize', () => {
+    let contactContainer = document.getElementById('contact-container');
+    let rightContent = document.querySelector('.right-content');
+    let contactDetailContainer = document.querySelector('.contact-detail-container');
+    
+    if (window.innerWidth > 1050) {
+        contactContainer.classList.remove('show-right-content');
+        rightContent.classList.remove('show');
+        rightContent.style.display = '';
+        rightContent.style.backgroundColor = '';
+        contactDetailContainer.style.overflow = 'hidden';
+    } else {
+        rightContent.style.display = '';
+        contactDetailContainer.style.overflow = 'visible';
+    }
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
     renderListContact();
@@ -120,14 +177,13 @@ function closeEditContact() {
     card.style.animation = "fly-out 0.1s forwards";
     overlay.style.animation = "fade-out 0.2s forwards";
     setTimeout(() => {
-        card.style.animation = ``;
-        overlay.style.animation = ``;
+        card.style.animation = '';
+        overlay.style.animation = '';
         overlay.classList.remove("overlay");
         card.style.display = "none";
-        document.getElementById("contactsBody").style.overflow = ``;
+        document.getElementById("contactsBody").style.overflow = '';
     }, 200);
 }
-
 
 function addContact() {
     let card = document.querySelector(".add-contact-popup");
@@ -136,19 +192,19 @@ function addContact() {
     document.getElementById("contactsBody").style.overflow = "hidden";
     card.style.display = "block";
     overlay.classList.add("overlay");
-  }
+}
   
-  function closeAddContact() {
+function closeAddContact() {
     let card = document.querySelector(".add-contact-popup");
     let overlay = document.getElementById("overlay");
   
     card.style.animation = "fly-out 0.1s forwards";
     overlay.style.animation = "fade-out 0.2s forwards";
     setTimeout(() => {
-      card.style.animation = ``;
-      overlay.style.animation = ``;
+      card.style.animation = '';
+      overlay.style.animation = '';
       overlay.classList.remove("overlay");
       card.style.display = "none";
-      document.getElementById("contactsBody").style.overflow = ``;
+      document.getElementById("contactsBody").style.overflow = '';
     }, 200);
-  }
+}
