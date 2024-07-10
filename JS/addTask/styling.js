@@ -138,7 +138,7 @@ function subtaskSample() {
   for (let i = 0; i < subtasks.length; i++) {
     const subtask = subtasks[i];
     list += `<li class="listItem flex-row">
-      <span class="subtask-text">${subtask}</span>
+      <span class="subtask-text" id="subtaskNr${i}">${subtask}</span>
       <div class="close-approve-container" id="editContainer${i}">
         <div class="small-icon-div" onclick="editSubtask(this)">
           <img class="smaller-icon" src="/img/edit-dark.png">
@@ -282,6 +282,9 @@ const BASE_URL =
   "https://join-248-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let firebaseData = [];
+let firebaseContacts = [];
+let firebaseTasks = [];
+let firebaseUsers = [];
 /*This function fetches the url with the apropriate path given
     and pushes them in to the array with the name 'firebaseData' 
     then everyone can make a function that takes the data from the data array*/
@@ -295,6 +298,13 @@ async function loadUrl(path = "") {
       dataExtracted: responseToJson[dataKeyArray[i]],
     });
   }
+  arrayDistributor();
+}
+
+function arrayDistributor(){
+  firebaseContacts.push(firebaseData[0]);
+  firebaseTasks.push(firebaseData[1]);
+  firebaseUsers.push(firebaseData[2]);
 }
 
 async function postData(path = "", data) {
