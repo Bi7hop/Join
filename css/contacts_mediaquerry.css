@@ -48,6 +48,10 @@
     .contact-container {
         box-shadow: none;
     }
+
+    .backBtn {
+        display: block !important;
+    }
 }
 
 @media(max-width: 420px) {

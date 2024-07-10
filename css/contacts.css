@@ -289,3 +289,12 @@ h1 {
     z-index: 999;
     animation: fly-in 0.1s forwards;
 }
+
+.backBtn {
+    width: 42px;
+    display: block;
+    position: fixed;
+    top: 138px;
+    right: 20px;
+    cursor: pointer;
+}
