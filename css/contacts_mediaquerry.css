@@ -1,39 +1,5 @@
-@media(max-width: 1200px) {
-    .contacts-headline {
-        padding-left: 25px;
-    }
-
-    .headline-close h1 {
-        font-size: 35px ;
-    }
-
-    h2 {
-        font-size: 15px ;
-    }
-
-    .parting-line {
-        height: 40px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    @keyframes fly-in {
-        from {
-           top: 3000px;
-        }
-        to {
-            top: 0;
-        }
-    }
-    
-    @keyframes fly-out {
-        from {
-            top: 0px; 
-        }
-        to {
-            top: 3000px; 
-        }
-    }
+.backBtn {
+    display: none;
 }
 
 @media(max-width: 1050px) {
@@ -42,10 +8,6 @@
         flex-direction: column;
     }
 
-   /* .right-content {
-        display: none;
-    }
-*/
     .contact-container {
         box-shadow: none;
         width: 100%;
@@ -70,21 +32,72 @@
     }
 
     .backBtn {
+        display: block;
+    }
+
+    .right-content {
         display: none;
     }
-}
 
-@media(max-width: 420px) {
-    .new-contact {
-        width: 290px;
-        margin: 22px 52px 21px 40px;
+    .more-vert-button {
+        display: flex; 
     }
 }
 
-@media(max-width: 350px) {
-    .new-contact {
-        width: 256px;
-        margin: 22px 52px 21px 40px;
+@media(max-width: 1200px) {
+    .contacts-headline {
+        padding-left: 25px;
+    }
+
+    .headline-close h1 {
+        font-size: 35px ;
+    }
+
+    h2 {
+        font-size: 15px ;
+    }
+
+    .parting-line {
+        height: 40px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .name-contact {
+        font-size: 32px;
+    }
+
+    .headline-contact {
+        gap: 12px;
+    }
+
+    .emblem-info {
+        width: 80px;
+        height: 80px;
+        font-size: 48px;
+        margin-left: 0;
+    }
+
+    .contacts-headline {
+        padding-left: 8px;
+    }
+
+    @keyframes fly-in {
+        from {
+           top: 3000px;
+        }
+        to {
+            top: 0;
+        }
+    }
+    
+    @keyframes fly-out {
+        from {
+            top: 0px; 
+        }
+        to {
+            top: 3000px; 
+        }
     }
 }
 
@@ -146,5 +159,27 @@
     #contactDetail {
         padding: 8px;
         width: 100%;
+    }
+
+    .right-content.show {
+        padding-bottom: 100px;
+    }
+
+    header {
+        z-index: 20;
+    }
+}
+
+@media(max-width: 420px) {
+    .new-contact {
+        width: 290px;
+        margin: 22px 52px 21px 40px;
+    }
+}
+
+@media(max-width: 350px) {
+    .new-contact {
+        width: 256px;
+        margin: 22px 52px 21px 40px;
     }
 }

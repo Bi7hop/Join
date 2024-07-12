@@ -67,6 +67,7 @@ h1 {
     display: flex;
     flex-direction: column;
     width: calc(100% - 456px);
+    overflow: hidden;
 }
 
 .contact-card {
@@ -117,7 +118,7 @@ h1 {
     margin-top: 96px;
 }
 
-.add-contact-popup{
+.add-contact-popup {
     display: none;
     position: absolute;
     top: 0;
@@ -181,7 +182,6 @@ h1 {
 }
 
 #contactDetail {
-    position: absolute;
     top: 0;
     width: 100%;
     transform: translateX(100%);
@@ -208,6 +208,7 @@ h1 {
     flex-direction: column;
     gap: 13px;
     font-size: 47px;
+    font-weight: 500;
 }
 
 .headline-contact {
@@ -227,7 +228,7 @@ h1 {
     display: flex;
     align-items: center;
     font-size: 16px;
-    font-weight: 400px;
+    font-weight: 400;
     gap: 13px;
 }
 
@@ -299,3 +300,85 @@ h1 {
     cursor: pointer;
 }
 
+.btnBox {
+    display: flex;
+    justify-content: end;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+.more-vert-button {
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+    cursor: pointer;
+    position: relative;
+    background-color: #2a3647;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.more-vert-button.active {
+    background-color: #29ABE2;
+}
+
+.contact-options {
+    display: none;
+    width: 116px;
+    height: 100px;
+    padding: 10px 0px 0px 0px;
+    gap: 0px;
+    border-radius: 20px 20px 0px 20px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    position: fixed;
+    right: 50px;
+    bottom: 78px;
+    background-color: #ffffff;
+    z-index: 100;
+    opacity: 0;
+    animation: slide-up 0.3s forwards;
+}
+
+.contact-options.active {
+    display: flex;
+    flex-direction: column;
+    animation: slide-down 0.3s forwards;
+}
+
+.edit-button, .delete-button {
+    display: flex;
+    padding: 8px 16px 8px 16px;
+}
+
+.edit-button, .delete-button {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    color: #2A3647;
+    gap: 8px;
+    cursor: pointer;
+}

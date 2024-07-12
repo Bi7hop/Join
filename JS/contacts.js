@@ -86,8 +86,19 @@ function showDetailContact(index) {
                 <div id="phone_contact">${contact.phone}</div>
                 <div class="mobile-contact" onclick="openMobileDialog()"></div>
             </div>
-            <div id="more-vert-button" class="more-vert-button" onclick="openContactOptions()"><img
-                    src="./img/contacts/mobileMenu.png" alt=""></div>
+            <div class="btnBox">
+                <div id="more-vert-button" class="more-vert-button" onclick="toggleContactOptions()">
+                    <img src="./img/contacts/mobileMenu.png" alt="">
+                </div>
+                <div id="contact-options" class="contact-options">
+                    <div class="edit-button" onclick="openEditContact(${index})">
+                        <img src="./img/contacts/editMobile.png" alt="edit">edit
+                    </div>
+                    <div class="delete-button" onclick="deleteContact(${index})">
+                        <img src="./img/contacts/deleteMobile.png" alt="delete">delete
+                    </div>
+                </div>
+            </div>
         `;
         requestAnimationFrame(() => {
             contactDetail.style.transform = 'translateX(0)';
@@ -113,12 +124,16 @@ function closeContactWindow() {
 
     let editContactPopup = document.querySelector(".edit-contact-popup");
     let addContactPopup = document.querySelector(".add-contact-popup");
+    let contactOptions = document.getElementById('contact-options');
     
     if (editContactPopup.style.display === 'block') {
         editContactPopup.style.animation = "fly-out 0.1s forwards";
     }
     if (addContactPopup.style.display === 'block') {
         addContactPopup.style.animation = "fly-out 0.1s forwards";
+    }
+    if (contactOptions.classList.contains('active')) {
+        contactOptions.classList.remove('active');
     }
 
     setTimeout(() => {
@@ -129,6 +144,13 @@ function closeContactWindow() {
         addContactPopup.style.display = 'none';
         document.getElementById("contactsBody").style.overflow = '';
     }, 200);
+}
+
+function toggleContactOptions() {
+    const contactOptions = document.getElementById('contact-options');
+    const moreVertButton = document.getElementById('more-vert-button');
+    contactOptions.classList.toggle('active');
+    moreVertButton.classList.toggle('active');
 }
 
 window.addEventListener('resize', () => {
