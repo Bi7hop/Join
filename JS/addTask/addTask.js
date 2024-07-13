@@ -59,7 +59,6 @@ function checkIfCheckd(i) {
       assignedPersons.splice(index, 1);
     }
   }
-  console.log(assignedPersons)
 }
 
 function postPersons(){
@@ -69,10 +68,50 @@ function postPersons(){
   assignedPersonsResults.innerHTML += assignedResults();
 }
 
-function renderAssignedList(){
+function renderAssignedList(foundPersons){
   let dropDownList = document.getElementById('dropdown-list');
-  dropDownList.innerHTML += dropDownListSample();
+  if (foundPersons && foundPersons.length > 0) {
+    dropDownList.innerHTML = personsFoundPost(foundPersons);
+  } else {
+    dropDownList.innerHTML = dropDownListSample();
+  }
 }
+
+function searchPerson(){
+  let input = document.getElementById('assigned').value.trim().toLowerCase();
+  let foundPersons = [];
+
+  if (input.length < 2) {
+    openList(input);
+  } else {
+    personsControl(input, foundPersons);
+    renderAssignedList(foundPersons); 
+  }
+}
+
+function personsControl(input, foundPersons){
+  for (let i = 0; i < contacts.length; i++) {
+    const person = contacts[i];
+    if (person.name.toLowerCase().includes(input)) {
+      foundPersons.push(person);
+    }
+  }
+}
+
+function openList(input){
+  let rotate = document.getElementById("rotate");
+  let dropDown = document.getElementById("dropdown-list");
+
+  if (input.length == 0) {
+    rotate.classList.remove("rotated");
+    dropDown.classList.add("hide");
+  } else {
+    rotate.classList.add("rotated");
+    dropDown.classList.remove("hide");
+    renderAssignedList();
+  }
+}
+
 
 function setPriority(priority) {
   let priorities = {
@@ -353,21 +392,21 @@ async function postData(path = "", data) {
   return await response.json();
 }
 
+function getValue(id){
+  return document.getElementById(id).value;
+}
+
 async function postTask() {
-  let title = document.getElementById("title").value;
-  let description = document.getElementById("description").value;
   let assigned = document.getElementById("assigned").value;
-  let date = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
   let subtask = subtasks;
   let prio = currentPriority;
 
   let extractedData = {
-    title: title,
-    description: description,
+    title:  getValue("title"),
+    description: getValue("assigned"),
     assigned: assigned,
-    date: date,
-    category: category,
+    date: getValue("date"),
+    category: getValue("category"),
     subtask: subtask,
     prio: prio,
   };
@@ -376,30 +415,21 @@ async function postTask() {
 }
 
 async function addNewContact() {
-  let name = document.getElementById("contactNewName").value;
-  let email = document.getElementById("contactNewMail").value;
-  let phone = document.getElementById("contactNewPhone").value;
-
   let extractedData = {
-    name: name,
-    email: email,
-    phone: phone,
+    name: getValue("contactNewName"),
+    email: getValue("contactNewMail"),
+    phone: getValue("contactNewPhone"),
   };
 
   await postData("/contacts", extractedData);
 }
 
 async function addNewUser() {
-  let username = document.getElementById("signUpName").value;
-  let email = document.getElementById("signUpEmail").value;
-  let password = document.getElementById("signUpPassword").value;
-  let passwordCheck = document.getElementById("signUpPasswordCheck").value;
-
   let extractedData = {
-    username: username,
-    email: email,
-    password: password,
-    passwordCheck: passwordCheck,
+    username: getValue("signUpName"),
+    email: getValue("signUpEmail"),
+    password: getValue("signUpPassword"),
+    passwordCheck: getValue("signUpPasswordCheck"),
   };
 
   await postData("/users", extractedData);

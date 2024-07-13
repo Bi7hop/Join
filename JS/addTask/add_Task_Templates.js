@@ -211,3 +211,23 @@ function assignedResults(){
   }
   return list;
 }
+
+function personsFoundPost(foundPersons){
+  let list = '';
+  sortContacts();
+  for (let i = 0; i < foundPersons.length; i++) {
+    let person = foundPersons[i];
+    list += `
+    <div onclick="addAssignedPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
+      <div class="flex-row name-container">
+        <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
+        <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
+      </div>
+      <div class="assigned-img-box">
+        <img id="checkbox${i}" src="./img/checkbox_uncheckt.png">
+      </div>
+    </div>
+    `
+  }
+  return list;
+}

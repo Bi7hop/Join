@@ -43,7 +43,7 @@
                 <div class="assigned-container flex-column">
                     <span class="medium-font medium-font-color">Assigned to</span>
                     <div class="foul-input">
-                        <input id="assigned" type="text" class="half-input medium-font" placeholder="Select contacts to assign">
+                        <input oninput="searchPerson()" id="assigned" type="text" class="half-input medium-font" placeholder="Select contacts to assign">
                         <div class="rotating" id="rotate" onclick="showPersons()">
                             <img class="rotating-img " src="./img/drop-down-arrow.png">
                         </div>
