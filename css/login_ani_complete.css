@@ -54,24 +54,28 @@ body, html {
 }
 
 .logo-image img {
-    height: 80px;
+    height: 130px;
     object-fit: cover;
     z-index: 12;
+    padding: 5px;
 }
 
-.sign-up {
+.sign-up,
+.sign-up-bottom {
     display: flex;
     align-items: center;
     gap: 35px;
     padding: 48px 48px 0 0;
 }
 
-.sign-up p {
+.sign-up p,
+.sign-up-bottom p {
     margin: 0;
     font-size: 16px;
 }
 
-.sign-up a {
+.sign-up a,
+.sign-up-bottom a {
     text-decoration: none;
     letter-spacing: 0.5px;
 }
@@ -135,6 +139,10 @@ body, html {
     padding: 30px 60px;
     border-radius: 20px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.main-login-content h1 {
+    font-size: clamp(38px, 5vw, 61px);
 }
 
 .underline-login {

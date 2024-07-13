@@ -1,0 +1,17 @@
+.sign-up-bottom {
+    display: none;
+}
+
+@media(max-width: 950px) {
+    .sign-up {
+        display: none;
+    }
+
+    .sign-up-bottom {
+        display: flex;
+    }
+
+    .login-buttons {
+        flex-direction: column;
+    }
+}
