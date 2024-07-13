@@ -92,7 +92,7 @@ function userStoryHtmlTemplate() {
  * @param {Array} contactDataArray - Array of contact data.
  * @returns {string} - HTML string.
  */
-function userStoryEditHtmlTemplate(contactDataArray) {
+function userStoryEditHtmlTemplate() {
     return `
     <div class="userStoryBodyContainer">
     <div class="userStoryEditContainer">
@@ -161,10 +161,10 @@ function userStoryEditHtmlTemplate(contactDataArray) {
                     </div>
                 </div>
                 <div id="editDropDownList" class="editDropDownList editHide">
-                    ${generateContactList(contactDataArray)}
+                    
                 </div>
                 <div class="userStoryContactsContainer mTop8">
-                    ${generateSelectedContacts(contactDataArray)}
+                    
                 </div>
                 <div class="userStorySubtaskHeadlineContainer mTop16">
                     <label class="userStorySubtaskHeadline" for="subtasks">Subtasks</label>
@@ -208,30 +208,31 @@ function userStoryEditHtmlTemplate(contactDataArray) {
  * @param {Array} contactDataArray - Array of contact data.
  * @returns {string} - HTML string for contact list.
  */
-function generateContactList(contactDataArray) {
-    return contactDataArray.map((contactData, index) => `
-        <div id="editContactContainer${index}" onclick="editCheckbox('editCheckbox${index}')" class="editDropDownListContactsMenuContainer">
-            <div class="editDropDownSmallNameAndFullNameContainer">
-                <div class="editUserStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
-                <div class="editUserStoryContactFullNameContainer">${contactData.dataExtracted.name}</div>
-            </div>
-            <div>
-                <div class="editSubtaskCheckboxHoverEffect">
-                    <label class="editContainer">
-                        <input id="editCheckbox${index}" type="checkbox" checked="">
-                        <span class="editCheckmark"></span>
-                    </label>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
+// function generateContactList(contactDataArray) {
+//     return contactDataArray.map((contactData, index) => `
+//         <div id="editContactContainer${index}" onclick="editCheckbox('editCheckbox${index}')" class="editDropDownListContactsMenuContainer">
+//             <div class="editDropDownSmallNameAndFullNameContainer">
+//                 <div class="editUserStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
+//                 <div class="editUserStoryContactFullNameContainer">${contactData.dataExtracted.name}</div>
+//             </div>
+//             <div>
+//                 <div class="editSubtaskCheckboxHoverEffect">
+//                     <label class="editContainer">
+//                         <div class="assigned-img-box">
+//                             <img id="checkbox${i}" src="./img/checkbox_uncheckt.png">
+//                         </div>
+//                     </label>
+//                 </div>
+//             </div>
+//         </div>
+//     `).join('');
+// }
 
-function generateSelectedContacts(contactDataArray) {
-    return contactDataArray.map((contactData) => `
-            <div class="userStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
-    `).join('');
-}
+// function generateSelectedContacts(contactDataArray) {
+//     return contactDataArray.map((contactData) => `
+//             <div class="userStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
+//     `).join('');
+// }
 
 function ticketTemplate(ticket, formattedContacts) {
     return `

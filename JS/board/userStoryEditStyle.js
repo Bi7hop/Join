@@ -96,28 +96,28 @@ function addLow() {
   setBgImg("low");
 }
 
-function editShowPersons() {
-  let rotate = document.getElementById("editRotate");
-  let dropDown = document.getElementById("editDropDownList");
+// function editShowPersons() {
+//   let rotate = document.getElementById("editRotate");
+//   let dropDown = document.getElementById("editDropDownList");
 
-  if (dropDown.classList.contains("editHide")) {
-    rotate.classList.add("editRotated");
-    dropDown.classList.remove("editHide");
-  } else {
-    rotate.classList.remove("editRotated");
-    dropDown.classList.add("editHide");
-  }
-}
+//   if (dropDown.classList.contains("editHide")) {
+//     rotate.classList.add("editRotated");
+//     dropDown.classList.remove("editHide");
+//   } else {
+//     rotate.classList.remove("editRotated");
+//     dropDown.classList.add("editHide");
+//   }
+// }
 
-function editCheckbox(checkboxId) {
-  let checkedBackgroundColor = document.getElementById('editContactContainer0');
-  let checkbox = document.getElementById(checkboxId);
-  checkbox.checked = !checkbox.checked;
-  if (checkbox.checked) {
-    checkedBackgroundColor.style.backgroundColor = "#2A3647";
-    checkedBackgroundColor.style.color = "#white";
-  }else {
-    checkedBackgroundColor.style.backgroundColor = "white";
-    checkedBackgroundColor.style.color = "#black";
-  }
-}
+// function editCheckbox(checkboxId) {
+//   let checkedBackgroundColor = document.getElementById('editContactContainer0');
+//   let checkbox = document.getElementById(checkboxId);
+//   checkbox.checked = !checkbox.checked;
+//   if (checkbox.checked) {
+//     checkedBackgroundColor.style.backgroundColor = "#2A3647";
+//     checkedBackgroundColor.style.color = "#white";
+//   }else {
+//     checkedBackgroundColor.style.backgroundColor = "white";
+//     checkedBackgroundColor.style.color = "#black";
+//   }
+// }
