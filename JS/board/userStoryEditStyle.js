@@ -1,3 +1,5 @@
+let assignedPersonsList = [];
+
 // Subtasks Listed Item Hover and show Edit/Delete Icon effect
 function subTasksHoverEffect() {
   for (let i = 0; i < 2; i++) {
@@ -96,28 +98,111 @@ function addLow() {
   setBgImg("low");
 }
 
-// function editShowPersons() {
-//   let rotate = document.getElementById("editRotate");
-//   let dropDown = document.getElementById("editDropDownList");
+function editShowPersons() {
+  let rotate = document.getElementById("editRotate");
+  let dropDown = document.getElementById("editDropDownList");
 
-//   if (dropDown.classList.contains("editHide")) {
-//     rotate.classList.add("editRotated");
-//     dropDown.classList.remove("editHide");
-//   } else {
-//     rotate.classList.remove("editRotated");
-//     dropDown.classList.add("editHide");
-//   }
-// }
+  if (dropDown.classList.contains("editHide")) {
+    rotate.classList.add("editRotated");
+    dropDown.classList.remove("editHide");
+  } else {
+    rotate.classList.remove("editRotated");
+    dropDown.classList.add("editHide");
+  }
+}
 
-// function editCheckbox(checkboxId) {
-//   let checkedBackgroundColor = document.getElementById('editContactContainer0');
-//   let checkbox = document.getElementById(checkboxId);
-//   checkbox.checked = !checkbox.checked;
-//   if (checkbox.checked) {
-//     checkedBackgroundColor.style.backgroundColor = "#2A3647";
-//     checkedBackgroundColor.style.color = "#white";
-//   }else {
-//     checkedBackgroundColor.style.backgroundColor = "white";
-//     checkedBackgroundColor.style.color = "#black";
-//   }
-// }
+function sortContacts() {
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function renderEmblem(name) {
+  const initials = name.split(' ').map(word => word[0]).join('');
+  return initials;
+}
+
+function renderDropdownList(foundPersons){
+  let dropDown = document.getElementById("editDropDownList");
+  if (foundPersons && foundPersons.length > 0) {
+    dropDown.innerHTML = personsFoundPost(foundPersons);
+  } else {
+    dropDown.innerHTML = dropDownListSample();
+  }
+}
+
+function addAssignedPerson(i){
+  personAdded(i);
+  checkIfCheckd(i);
+  postPersons();
+}
+
+function personAdded(i){
+  let container = document.getElementById(`persons-assignemend${i}`);
+  let checkbox = document.getElementById(`checkbox${i}`);
+  let assignedName = document.getElementById(`assigned-name${i}`);
+
+  if (!container.classList.contains('persons-assignemend-checkt')) {
+    container.classList.add('persons-assignemend-checkt');
+    checkbox.src = './img/checkbox_checkt.png';
+    assignedName.classList.add("assigned-color");
+  }else{
+    container.classList.remove('persons-assignemend-checkt');
+    checkbox.src = './img/checkbox_uncheckt.png';
+    assignedName.classList.remove("assigned-color");
+  }
+}
+
+function checkIfCheckd(i) {
+  let container = document.getElementById(`persons-assignemend${i}`);
+
+  if (container.classList.contains('persons-assignemend-checkt')) {
+    if (!assignedPersonsList.includes(contacts[i])) {
+      assignedPersonsList.push(contacts[i]);
+    }
+  } else {
+    let index = assignedPersonsList.indexOf(contacts[i]);
+    if (index > -1) {
+      assignedPersonsList.splice(index, 1);
+    }
+  }
+}
+
+function postPersons(){
+  let assignedPersonsResults = document.getElementById('assigned-persons');
+ 
+  assignedPersonsResults.innerHTML = '';
+  assignedPersonsResults.innerHTML += assignedResults();
+}
+
+function searchPerson(){
+  let input = document.getElementById('assigned-to').value.trim().toLowerCase();
+  let foundPersons = [];
+
+  if (input.length < 2) {
+    openList(input);
+  } else {
+    personsControl(input, foundPersons);
+    renderDropdownList(foundPersons); 
+  }
+}
+
+function personsControl(input, foundPersons){
+  for (let i = 0; i < contacts.length; i++) {
+    const person = contacts[i];
+    if (person.name.toLowerCase().includes(input)) {
+      foundPersons.push(person);
+    }
+  }
+}
+
+function openList(input) {
+  let rotate = document.getElementById("editRotate");
+  let dropDown = document.getElementById("editDropDownList");
+
+  if (input.length == 0) {
+    rotate.classList.remove("editRotated");
+    dropDown.classList.add("editHide");
+  } else {
+    rotate.classList.add("editRotated");
+    dropDown.classList.remove("editHide");
+  }
+}

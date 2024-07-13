@@ -407,8 +407,9 @@
 
 .editDropDownList {
     background-color: white;
-    width: 100%;
+    width: 462px;
     height: 248px;
+    position: absolute;
     overflow-y: scroll;
     box-shadow: 2px 1px 6px 1px rgba(0, 0, 0, 0.03);
 }
@@ -535,4 +536,56 @@
     font-size: 20px;
     color: black;
     margin-left: 16px;
+}
+
+.assigned-persons{
+    width: 440px;
+    height: 50px;
+    position: absolute;
+    top: 555px;
+    left: 75px;
+}
+
+.persons-assignemend{
+    padding: 7px 16px;
+    border-radius: 10px;
+    width: 92%;
+    height: 52px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 2px 0;
+}
+
+.persons-assignemend:hover{
+    background-color: rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+}
+
+.persons-assignemend-checkt{
+    background-color: #2A3647;
+}
+
+.persons-assignemend-checkt:hover{
+    background-color: #091931;
+}
+
+.assigned-color{
+    color: white;
+}
+
+.name-container{
+    width: 60%;
+    gap: 10px;
+    align-items: center;
+}
+
+.assigned-emblem{
+    border: 1px solid white;
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 5px 0 0;
 }

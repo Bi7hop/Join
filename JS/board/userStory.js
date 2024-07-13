@@ -30,6 +30,7 @@ function openUserStoryEdit() {
     if (firebaseData.length > 0) {
         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(firebaseData);
     }
+    renderDropdownList();
 }
 
 function closeUserStoryEdit() {

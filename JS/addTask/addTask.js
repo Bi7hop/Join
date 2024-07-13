@@ -8,7 +8,6 @@ function showPersons() {
   if (dropDown.classList.contains("hide")) {
     rotate.classList.add("rotated");
     dropDown.classList.remove("hide");
-    renderAssignedList();
   } else {
     rotate.classList.remove("rotated");
     dropDown.classList.add("hide");
