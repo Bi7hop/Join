@@ -251,7 +251,7 @@ function ticketTemplate(ticket, formattedContacts) {
 
 function dropDownListSample() {
     let list = '';
-    sortContacts();
+    sortContacts(contacts);
     for (let i = 0; i < contacts.length; i++) {
         let person = contacts[i];
         list += `
@@ -282,7 +282,7 @@ function assignedResults() {
 
 function personsFoundPost(foundPersons) {
     let list = '';
-    sortContacts();
+    sortContacts(contacts);
     for (let i = 0; i < foundPersons.length; i++) {
         let person = foundPersons[i];
         list += `
@@ -299,7 +299,6 @@ function personsFoundPost(foundPersons) {
     }
     return list;
 }
-
 function subtaskSample() {
     let list = '<ul class="subTaskList ulPadding">';
     for (let i = 0; i < subtasks.length; i++) {

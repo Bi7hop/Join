@@ -111,8 +111,16 @@ function editShowPersons() {
   }
 }
 
-function sortContacts() {
+/**
+ * Sorts an array of contact objects by their name property.
+ * Assumes each contact object has a 'name' property which is a string.
+ *
+ * @param {Array<Object>} contacts - The array of contact objects to be sorted.
+ * @returns {Array<Object>} - The sorted array of contact objects.
+ */
+function sortContacts(contacts) {
   contacts.sort((a, b) => a.name.localeCompare(b.name));
+  return contacts;
 }
 
 function renderEmblem(name) {
@@ -190,7 +198,7 @@ function personsControl(input, foundPersons){
     const person = contacts[i];
     if (person.name.toLowerCase().includes(input)) {
       foundPersons.push(person);
-    }
+    } 
   }
 }
 
@@ -198,7 +206,7 @@ function openList(input) {
   let rotate = document.getElementById("editRotate");
   let dropDown = document.getElementById("editDropDownList");
 
-  if (input.length == 0) {
+  if (input.length < 1) {
     rotate.classList.remove("editRotated");
     dropDown.classList.add("editHide");
   } else {
@@ -206,8 +214,6 @@ function openList(input) {
     dropDown.classList.remove("editHide");
   }
 }
-
-
 
 function addSubtask() {
   let plusIcon = document.getElementById("addSubtaskIcon");
