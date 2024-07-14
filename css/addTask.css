@@ -415,6 +415,7 @@ body {
 .listItem {
     justify-content: space-between;
     margin-bottom: 5px;
+    align-items: center;
 }
 
 .btn-required-text {

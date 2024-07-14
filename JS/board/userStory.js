@@ -31,6 +31,7 @@ function openUserStoryEdit() {
         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(firebaseData);
     }
     renderDropdownList();
+    subTasksHoverEffect();
 }
 
 function closeUserStoryEdit() {

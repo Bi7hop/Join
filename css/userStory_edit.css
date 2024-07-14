@@ -240,6 +240,11 @@
     font-family: Inter !important;
 }
 
+.userStoryAssignedToInputAndImageContainer:focus-within {
+    border: 0.5px solid #94D5F0;
+    border-radius: 10px;
+}
+
 .userStoryAssignedToDropdownMenuImageContainer {
     width: 34px;
     height: 30px;
@@ -408,7 +413,7 @@
 .editDropDownList {
     background-color: white;
     width: 462px;
-    height: 248px;
+    height: 275px;
     position: absolute;
     overflow-y: scroll;
     box-shadow: 2px 1px 6px 1px rgba(0, 0, 0, 0.03);
@@ -588,4 +593,69 @@
     justify-content: center;
     color: white;
     margin: 0 5px 0 0;
+}
+
+.subTaskList {
+    width: 98%;
+    height: 80px;
+    overflow-y: auto;
+}
+
+.ulPadding {
+    padding-inline-start: 0px;
+}
+
+.subtask-text {
+    color: black;
+}
+
+.subtaskInput {
+    background-color: white;
+}
+
+.subtaskDisplay {
+    width: 471px;
+    max-height: 80px;
+
+}
+
+.smallIconDiv {
+    
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallIconDiv:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.listItemSubTasks {
+    display:flex;
+    height: 24px;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    align-items: center;
+    padding-left: 16px;
+    border-radius: 8px;
+}
+
+.listItemSubTasks:hover {
+    background-color: #00000017;
+}
+
+.close-approve-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    margin-right: 10px;
+}
+
+.flex-row {
+    flex-direction: row;
 }
