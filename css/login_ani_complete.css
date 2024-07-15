@@ -21,10 +21,19 @@ body, html {
     padding: 30px 30px 0px 30px;
     top: 50%;
     left: 50%;
-    width: 200px; 
-    height: 200px; 
+    width: 200px;
+    height: 200px;
     transform: translate(-50%, -50%);
     animation: float 4s linear forwards;
+}
+
+.image.loaded {
+    animation: none;
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    width: 100px;
+    height: 120px;
 }
 
 .login-container {
@@ -97,23 +106,23 @@ body, html {
     0% {
         top: 50%;
         left: 50%;
-        width: 250px;
-        height: 250px;
         transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
     }
     40% {
         top: 50%;
         left: 50%;
-        width: 250px;
-        height: 250px;
         transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
     }
     100% {
         top: 0;
         left: 0;
+        transform: translate(0, 0);
         width: 100px;
         height: 120px;
-        transform: translate(0, 0);
     }
 }
 
