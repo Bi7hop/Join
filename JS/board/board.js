@@ -74,73 +74,69 @@ function formatContacts(contacts) {
 //     });
 // }
 
+// Diese funktion lädt die Titel von Firebase!
+// Angenommen, die Funktion loadUrl() lädt die Daten und füllt firebaseTasks.
+// function generateTaskTitlesHTML() {
+//     // Container im HTML, wo die Titel angezeigt werden sollen
+//     const container = document.getElementById('test');
 
+//     // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
+//     firebaseData.forEach(task => {
+//         // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
+
+//         // Iteriere durch alle Schlüssel in dataExtracted
+//         Object.keys(task.dataExtracted).forEach(key => {
+//             const taskTitleElement = document.createElement('div');
+//             taskTitleElement.textContent = task.dataExtracted[key].taskTitel;
+
+//             // Füge das erstellte <div> Element dem Container hinzu
+//             container.appendChild(taskTitleElement);
+//         });
+//     });
+// }
+
+// Angenommen, die Funktion loadUrl() lädt die Daten und füllt firebaseTasks.
 function renderTickets(columnId, status) {
-    const columnElement = document.getElementById(columnId);
+    // Container im HTML, wo die Titel angezeigt werden sollen
+    const container = document.getElementById(columnId);
 
-    if (!columnElement) {
+    // Überprüfen, ob der Container vorhanden ist
+    if (!container) {
         console.error(`Element with id ${columnId} not found.`);
         return;
     }
 
-    columnElement.innerHTML = '';
+    // Clear the container before adding new content
+    container.innerHTML = '';
 
+    // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
     firebaseData.forEach(task => {
-        if (!task.dataExtracted) {
-            console.error('dataExtracted property missing in task:', task);
-            return;
-        }
-
+        // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
-
+            const formattedContacts = ""; // Add logic to format contacts if needed
             if (taskData.taskStatus === status) {
-                const formattedContacts = formatContacts(taskData.taskContacts);
-                const ticketHTML = ticketTemplate(taskData, formattedContacts);
+                const taskHtml = ticketTemplate(taskData, formattedContacts);
 
-                const ticketElement = document.createElement('div');
-                ticketElement.innerHTML = ticketHTML;
+                // Create a container for each task
+                const taskContainer = document.createElement('div');
+                taskContainer.innerHTML = taskHtml;
 
-                // Ensure the ticketElement is appended to the columnElement
-                columnElement.appendChild(ticketElement.firstChild);
+                // Füge das erstellte <div> Element dem Container hinzu
+                container.appendChild(taskContainer.firstElementChild);
             }
         });
     });
 }
 
 
-// Angenommen, die Funktion loadUrl() lädt die Daten und füllt firebaseTasks.
 
-function generateTaskTitlesHTML() {
-    // Container im HTML, wo die Titel angezeigt werden sollen
-    const container = document.getElementById('test');
-
-    // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
-    firebaseData.forEach(task => {
-        // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
-
-        // Iteriere durch alle Schlüssel in dataExtracted
-        Object.keys(task.dataExtracted).forEach(key => {
-            const taskTitleElement = document.createElement('div');
-            taskTitleElement.textContent = task.dataExtracted[key].taskTitel;
-
-            // Füge das erstellte <div> Element dem Container hinzu
-            container.appendChild(taskTitleElement);
-        });
-    });
-}
 
 // Beispiel: Aufruf der Funktion nach dem Laden der Daten
 loadUrl().then(() => {
-    generateTaskTitlesHTML();
+    console.log("1. loadUrl() and loadTickets() loaded....");
     loadTickets();
 });
-
-
-
-
-
-
 
 
 function loadTickets() {
@@ -149,6 +145,11 @@ function loadTickets() {
     renderTickets('awaitFeedback', 'awaitFeedback');
     renderTickets('done', 'done');
 }
+
+
+
+
+
 
 // DRAG AND DROP
 function startDragging(id) {

@@ -268,7 +268,7 @@ function ticketTemplate(taskData, formattedContacts) {
                         ${formattedContacts}
                     </div>
                     <div>
-                        <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
+                        <img src="" alt="${taskData.taskPrioAlt}">
                     </div>
                 </div>
             </div>
