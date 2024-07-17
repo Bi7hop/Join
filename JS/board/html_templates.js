@@ -222,31 +222,61 @@ function userStoryEditHtmlTemplate() {
 }
 
 
-function ticketTemplate(ticket, formattedContacts) {
+// function ticketTemplate(ticket, formattedContacts) {
+//     return `
+//         <div id="${ticket.id}" draggable="true" ondragstart="startDragging(${ticket.id})" onclick="openUserStory()" ondragend="endDragging(${ticket.id});" class="taskColumn task">
+//             <div class="taskColumnContainer">
+//                 <div class="taskType">${ticket.taskType}</div>
+//                     <div class="taskTitel">${ticket.taskTitel}</div>
+//                     <div class="taskDescription">${ticket.taskDescription}</div>
+//                         <div class="taskSubtaskBarContainer">
+//                             <div class="taskSubtaskBar">
+//                                 <div style="width:${ticket.taskBar}%" class="taskSubtaskBarFilledBar"></div>
+//                             </div>
+//                                 <span>${ticket.taskSubtaskAmount}/2 Subtask</span>
+//                             </div>
+//                             <div class="taskContactsPrioContainer">
+//                                 <div class="taskContactsContainer">
+//                                 ${formattedContacts}
+//                             </div>
+//                             <div>
+//                                 <img src="${ticket.taskPrioImage}" alt="${ticket.taskPrioAlt}">
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//     `
+// }
+
+
+// TEST FÜR FIREBASE RENDER
+function ticketTemplate(taskData, formattedContacts) {
     return `
-        <div id="${ticket.id}" draggable="true" ondragstart="startDragging(${ticket.id})" onclick="openUserStory()" ondragend="endDragging(${ticket.id});" class="taskColumn task">
+        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
             <div class="taskColumnContainer">
-                <div class="taskType">${ticket.taskType}</div>
-                    <div class="taskTitel">${ticket.taskTitel}</div>
-                    <div class="taskDescription">${ticket.taskDescription}</div>
-                        <div class="taskSubtaskBarContainer">
-                            <div class="taskSubtaskBar">
-                                <div style="width:${ticket.taskBar}%" class="taskSubtaskBarFilledBar"></div>
-                            </div>
-                                <span>${ticket.taskSubtaskAmount}/2 Subtask</span>
-                            </div>
-                            <div class="taskContactsPrioContainer">
-                                <div class="taskContactsContainer">
-                                ${formattedContacts}
-                            </div>
-                            <div>
-                                <img src="${ticket.taskPrioImage}" alt="${ticket.taskPrioAlt}">
-                            </div>
-                        </div>
+                <div class="taskType">${taskData.taskType}</div>
+                <div class="taskTitle">${taskData.taskTitle}</div>
+                <div class="taskDescription">${taskData.taskDescription}</div>
+                <div class="taskSubtaskBarContainer">
+                    <div class="taskSubtaskBar">
+                        <div style="width:${taskData.taskBar}%" class="taskSubtaskBarFilledBar"></div>
+                    </div>
+                    <span>${taskData.taskSubtaskAmount}/2 Subtask</span>
+                </div>
+                <div class="taskContactsPrioContainer">
+                    <div class="taskContactsContainer">
+                        ${formattedContacts}
+                    </div>
+                    <div>
+                        <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
                     </div>
                 </div>
-    `
+            </div>
+        </div>
+    `;
 }
+
+
 
 
 function dropDownListSample() {

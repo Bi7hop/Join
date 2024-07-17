@@ -62,16 +62,81 @@ function formatContacts(contacts) {
     }).join('');
 }
 
+// Original renderTickets funktion
+// function renderTickets(columnId, status) {
+//     let columnElement = document.getElementById(columnId);
+//     columnElement.innerHTML = ``;
+//     tickets.forEach(ticket => {
+//         if (ticket.taskStatus === status) {
+//             const formattedContacts = formatContacts(ticket.taskContacts);
+//             columnElement.innerHTML += ticketTemplate(ticket, formattedContacts);
+//         }
+//     });
+// }
+
+
 function renderTickets(columnId, status) {
     let columnElement = document.getElementById(columnId);
-    columnElement.innerHTML = ``;
-    tickets.forEach(ticket => {
-        if (ticket.taskStatus === status) {
-            const formattedContacts = formatContacts(ticket.taskContacts);
-            columnElement.innerHTML += ticketTemplate(ticket, formattedContacts);
+
+    if (!columnElement) {
+        console.error(`Element with id ${columnId} not found.`);
+        return;
+    }
+
+    columnElement.innerHTML = '';
+
+    firebaseData.forEach(task => {
+        if (!task.dataExtracted) {
+            console.error('dataExtracted property missing in task:', task);
+            return;
         }
+
+        Object.keys(task.dataExtracted).forEach(key => {
+            const taskData = task.dataExtracted[key];
+
+            if (taskData.taskStatus === status) {
+                const formattedContacts = formatContacts(taskData.taskContacts);
+                const ticketHTML = ticketTemplate(taskData, formattedContacts);
+
+                columnElement.innerHTML += ticketHTML;
+            }
+        });
     });
 }
+
+
+// Angenommen, die Funktion loadUrl() lädt die Daten und füllt firebaseTasks.
+
+function generateTaskTitlesHTML() {
+    // Container im HTML, wo die Titel angezeigt werden sollen
+    const container = document.getElementById('test');
+
+    // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
+    firebaseData.forEach(task => {
+        // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
+
+        // Iteriere durch alle Schlüssel in dataExtracted
+        Object.keys(task.dataExtracted).forEach(key => {
+            const taskTitleElement = document.createElement('div');
+            taskTitleElement.textContent = task.dataExtracted[key].taskTitel;
+
+            // Füge das erstellte <div> Element dem Container hinzu
+            container.appendChild(taskTitleElement);
+        });
+    });
+}
+
+// Beispiel: Aufruf der Funktion nach dem Laden der Daten
+loadUrl().then(() => {
+    generateTaskTitlesHTML();
+});
+
+
+
+
+
+
+
 
 function loadTickets() {
     renderTickets('toDo', 'toDo');
@@ -103,9 +168,9 @@ function endDragging(id) {
     currentDraggedElement = id;
     document.getElementById(id).classList.remove('dragging');
     for (let i = 0; i < 4; i++) {
-        
-    document.getElementById(`dragPosition${i}`).classList.remove('dragPosition');
-}
+
+        document.getElementById(`dragPosition${i}`).classList.remove('dragPosition');
+    }
 }
 
 function highlight(id) {
