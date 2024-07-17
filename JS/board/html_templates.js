@@ -103,7 +103,7 @@ function userStoryHtmlTemplate() {
                     </div>
                     <div class="userStoryCutLine"></div>
                     <div class="userStoryEditTextContainer userStoryBackgroundImageEdit">
-                        <div onclick="openUserStoryEdit(), subTasksHoverEffect()" class="userStoryEditTextTextContainer">Edit</div>
+                        <div onclick="openUserStoryEdit()" class="userStoryEditTextTextContainer">Edit</div>
                     </div>
                 </div>
             </div>
@@ -194,29 +194,22 @@ function userStoryEditHtmlTemplate() {
                 <div class="userStorySubtaskHeadlineContainer mTop16">
                     <label class="userStorySubtaskHeadline" for="subtasks">Subtasks</label>
                 </div>
-                <div class="userStorySubtasksInputContainer mTop8">
-                    <input type="text" placeholder="Add new subtask">
-                    <div class="userStorySubtasksDropdownImageContainer">
-                        <img src="./img/userStoryEdit/add-plus-icon.png" alt="dropdownmenu">
-                    </div>
-                </div>
+                
                 <div class="userStorySubtasksContainer mTop8">
-                    <table>
-                        <div class="userStorySubtaskListedItemContainer subtaskListedItem0">
-                            <li>Implement Recipe Recommendation</li>
-                            <div class="userStorySubtaskListedItemImageContainer subtaskListedImage0">
-                                <img class="mRight8" src="./img/userStoryEdit/edit-dark.png" alt="edit">
-                                <img class="mRight16" src="./img/userStoryEdit/delete.png" alt="delete">
-                            </div>
+                    
+                        <div class="userStoryAssignedToInputAndImageContainer">
+                        <input id="subtask" type="text" class="subtask-input medium-font subtaskInput" id="subtask" placeholder="Add new subtask">
+                        <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">
+                            <img class="smaller-icon" src="./img/add-plus-icon.png">
                         </div>
-                        <div class="userStorySubtaskListedItemContainer subtaskListedItem1">
-                            <li class="userStorySubtaskListedItem">Start Page Layout</li>
-                            <div class="userStorySubtaskListedItemImageContainer subtaskListedImage1">
-                                <img class="mRight8" src="./img/userStoryEdit/edit-dark.png" alt="edit">
-                                <img class="mRight16" src="./img/userStoryEdit/delete.png" alt="delete">
-                            </div>
+                        <div class="close-approve-container hide" id="addRemoveContainer">
+                            <div class="small-icon-div" onclick="closeSubtask()"><img class="small-icon" src="./img/Close.png"></div>
+                            <span class="small-input-vertical-vector"></span>
+                            <div class="small-icon-div" onclick="aproveSubtask()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
                         </div>
-                    </table>
+                    </div>
+                    <div id="subtaskDisplay" class="subtaskDisplay flex-column"></div>
+                    
                 </div>
                 <div class="userStoryEditOkButtonContainer">
                     <button class="userStoryEditOkButton" type="button" onclick="closeUserStoryEdit()">Ok <img src="./img/userStoryEdit/ok.png" alt="Add"></button>
@@ -228,36 +221,6 @@ function userStoryEditHtmlTemplate() {
     `;
 }
 
-/**
- * Generates the contact list HTML.
- * @param {Array} contactDataArray - Array of contact data.
- * @returns {string} - HTML string for contact list.
- */
-// function generateContactList(contactDataArray) {
-//     return contactDataArray.map((contactData, index) => `
-//         <div id="editContactContainer${index}" onclick="editCheckbox('editCheckbox${index}')" class="editDropDownListContactsMenuContainer">
-//             <div class="editDropDownSmallNameAndFullNameContainer">
-//                 <div class="editUserStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
-//                 <div class="editUserStoryContactFullNameContainer">${contactData.dataExtracted.name}</div>
-//             </div>
-//             <div>
-//                 <div class="editSubtaskCheckboxHoverEffect">
-//                     <label class="editContainer">
-//                         <div class="assigned-img-box">
-//                             <img id="checkbox${i}" src="./img/checkbox_uncheckt.png">
-//                         </div>
-//                     </label>
-//                 </div>
-//             </div>
-//         </div>
-//     `).join('');
-// }
-
-// function generateSelectedContacts(contactDataArray) {
-//     return contactDataArray.map((contactData) => `
-//             <div class="userStoryContacts">${contactData.dataExtracted.name.substring(0, 2).toLowerCase()}</div>
-//     `).join('');
-// }
 
 function ticketTemplate(ticket, formattedContacts) {
     return `
@@ -285,12 +248,13 @@ function ticketTemplate(ticket, formattedContacts) {
     `
 }
 
-function dropDownListSample(){
+
+function dropDownListSample() {
     let list = '';
-    sortContacts();
+    sortContacts(contacts);
     for (let i = 0; i < contacts.length; i++) {
-      let person = contacts[i];
-      list += `
+        let person = contacts[i];
+        list += `
       <div onclick="addAssignedPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
         <div class="flex-row name-container">
           <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
@@ -303,9 +267,9 @@ function dropDownListSample(){
       `
     }
     return list;
-  }
-  
-  function assignedResults(){
+}
+
+function assignedResults() {
     let list = '';
     for (let i = 0; i < assignedPersonsList.length; i++) {
       let person = assignedPersonsList[i];
@@ -333,5 +297,32 @@ function dropDownListSample(){
       </div>
       `
     }
+    return list;
+}
+function subtaskSample() {
+    let list = '<ul class="subTaskList ulPadding">';
+    for (let i = 0; i < subtasks.length; i++) {
+      const subtask = subtasks[i];
+      list += `<li class="listItemSubTasks flex-row" id="subtaskNr${i}">
+        <span class="subtask-text">${subtask}</span>
+        <div style="display: none" id="subTaskHoverEffect${i}">
+            <div class="close-approve-container" id="editContainer">
+                <div class="smallIconDiv" onclick="editSubtask(this)">
+                <img class="smaller-icon" src="/img/edit-dark.png">
+                </div>
+                <span class="small-input-vertical-vector"></span>
+                <div class="smallIconDiv" onclick="deleteSubtask(this)">
+                <img class="smaller-icon" src="/img/delete.png">
+                </div>
+            </div>
+            <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
+                <div class="smallIconDiv" onclick="approveEdit(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
+                <span class="small-input-vertical-vector"></span>
+                <div class="smallIconDiv" ><img onclick="cancelEdit(this)" class="small-icon" src="/img/Close.png"></div>
+            </div>
+        </div>
+        </li>`;
+    }
+    list += "</ul>";
     return list;
   }

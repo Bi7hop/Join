@@ -3,17 +3,17 @@ let foundPersonsList = [];
 
 // Subtasks Listed Item Hover and show Edit/Delete Icon effect
 function subTasksHoverEffect() {
-  for (let i = 0; i < 2; i++) {
-    const hoverListedItem = document.querySelector(`.subtaskListedItem${i}`)
-    const hoverListedItemImage = document.querySelector(`.subtaskListedImage${i}`)
-    hoverListedItemImage.style.display = "none";
+  for (let i = 0; i < subtasks.length; i++) {
+    const hoverListedItem = document.getElementById(`subtaskNr${i}`)
+    const hoverListedItemImage = document.getElementById(`subTaskHoverEffect${i}`);
+
     hoverListedItem.addEventListener("mouseenter", function () {
-      hoverListedItem.style.backgroundColor = "#2c2c2c17"; // gray
-      hoverListedItemImage.style.display = "block";
+      hoverListedItemImage.style.display = "flex"
+      
     });
     hoverListedItem.addEventListener("mouseleave", function () {
-      hoverListedItem.style.backgroundColor = "#FFFFFF"; // Change back to original color
-      hoverListedItemImage.style.display = "none";
+      hoverListedItemImage.style.display = "none"
+      
     })
   };
 };
@@ -121,8 +121,16 @@ function renderDropdownList(){
   }
 }
 
-function sortContacts() {
+/**
+ * Sorts an array of contact objects by their name property.
+ * Assumes each contact object has a 'name' property which is a string.
+ *
+ * @param {Array<Object>} contacts - The array of contact objects to be sorted.
+ * @returns {Array<Object>} - The sorted array of contact objects.
+ */
+function sortContacts(contacts) {
   contacts.sort((a, b) => a.name.localeCompare(b.name));
+  return contacts;
 }
 
 function renderEmblem(name) {
@@ -235,12 +243,96 @@ function openList(input) {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");
 
-  if (input.length == 0) {
-    rotate.classList.remove("rotated");
-    dropDown.classList.add("hide");
+  if (input.length < 1) {
+    rotate.classList.remove("editRotated");
+    dropDown.classList.add("editHide");
   } else {
     rotate.classList.add("rotated");
     dropDown.classList.remove("hide");
     renderDropdownList();
   }
+}
+
+function addSubtask() {
+  let plusIcon = document.getElementById("addSubtaskIcon");
+  let hidenContainer = document.getElementById("addRemoveContainer");
+
+  plusIcon.classList.add("hide");
+  hidenContainer.classList.remove("hide");
+}
+
+function closeSubtask() {
+  let plusIcon = document.getElementById("addSubtaskIcon");
+  let hidenContainer = document.getElementById("addRemoveContainer");
+  let subtask = document.getElementById("subtask");
+
+  plusIcon.classList.remove("hide");
+  hidenContainer.classList.add("hide");
+  subtask.value = "";
+}
+
+function aproveSubtask() {
+  let subtask = document.getElementById("subtask");
+  if (!subtask.value.trim()) {
+    alert("Please fill in your Subtask");
+  } else {
+    subtasks.push(subtask.value);
+    subtask.value = "";
+    postSubtask();
+  }
+  subTasksHoverEffect();
+}
+
+function approveEdit(element) {
+  let listItem = element.closest(".listItemSubTasks");
+  let inputElement = listItem.querySelector("input");
+  let newSubtaskText = inputElement.value.trim();
+
+  let oldSubtaskText = subtasks.find(
+    (subtask) => subtask === inputElement.defaultValue
+  );
+  let index = subtasks.indexOf(oldSubtaskText);
+  if (index !== -1) {
+    subtasks[index] = newSubtaskText;
+  }
+  inputElement.outerHTML = `<span class="subtask-text">${newSubtaskText}</span>`;
+  swapToNormal(listItem);
+}
+
+function postSubtask() {
+  let subtaskDisplay = document.getElementById("subtaskDisplay");
+
+  subtaskDisplay.innerHTML = "";
+  subtaskDisplay.innerHTML += subtaskSample();
+}
+
+function editSubtask(element) {
+  let listItem = element.closest(".listItemSubTasks");
+  let subtaskSpan = listItem.querySelector(".subtask-text");
+  let subtaskText = subtaskSpan.textContent.trim();
+  subtaskSpan.outerHTML = `<input id="subtask-edit-edit-input" value="${subtaskText}">`;
+
+  swapToEdit(listItem);
+}
+
+function cancelEdit(element) {
+  let listItem = element.closest(".listItemSubTasks");
+  let inputElement = listItem.querySelector("input");
+  let subtaskText = inputElement ? inputElement.value.trim() : "";
+  if (inputElement) {
+    inputElement.outerHTML = `<span class="subtask-text">${subtaskText}</span>`;
+  }
+  swapToNormal(listItem);
+}
+
+function deleteSubtask(element) {
+  let listItem = element.closest(".listItemSubTasks");
+  let subtaskSpan = listItem.querySelector(".subtask-text");
+  let subtaskText = subtaskSpan.textContent.trim();
+  let index = subtasks.indexOf(subtaskText);
+  if (index !== -1) {
+    subtasks.splice(index, 1);
+  }
+
+  listItem.remove();
 }
