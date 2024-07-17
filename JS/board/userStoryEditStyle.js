@@ -1,5 +1,6 @@
 let assignedPersonsList = [];
 let foundPersonsList = [];
+let subtasks = [];
 
 // Subtasks Listed Item Hover and show Edit/Delete Icon effect
 function subTasksHoverEffect() {
@@ -247,8 +248,8 @@ function openList(input) {
     rotate.classList.remove("editRotated");
     dropDown.classList.add("editHide");
   } else {
-    rotate.classList.add("rotated");
-    dropDown.classList.remove("hide");
+    rotate.classList.add("editRotated");
+    dropDown.classList.remove("editHide");
     renderDropdownList();
   }
 }
@@ -335,4 +336,18 @@ function deleteSubtask(element) {
   }
 
   listItem.remove();
+}
+
+function swapToEdit(listItem) {
+  let edit = listItem.querySelector("[id^=editContainer]");
+  let editing = listItem.querySelector("[id^=addRemoveContainerEdit]");
+  edit.classList.add("hide");
+  editing.classList.remove("hide");
+}
+
+function swapToNormal(listItem) {
+  let edit = listItem.querySelector("[id^=editContainer]");
+  let editing = listItem.querySelector("[id^=addRemoveContainerEdit]");
+  edit.classList.remove("hide");
+  editing.classList.add("hide");
 }

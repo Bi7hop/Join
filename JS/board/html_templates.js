@@ -282,7 +282,7 @@ function assignedResults() {
   
   function personsFoundPost(){
     let list = '';
-    sortContacts();
+    sortContacts(contacts);
     for (let i = 0; i < foundPersonsList.length; i++) {
       let person = foundPersonsList[i];
       list += `
