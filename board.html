@@ -51,26 +51,23 @@
             <div class="progressbarColumnHeadline">
                 To do <div class="backgroundImage"></div>
             </div>
-            <!-- Column1 -->
-            <div class="columnContainer" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
-            <div id="dragPosition0" ondrop="moveTo('toDo')" ondragover="allowDrop(event); highlight('dragPosition0')" ondragleave="removeHighlight('dragPosition0')"></div>
+            <div class="columnContainer" id="toDo" ondrop="moveTo('toDo', 'toDo')" ondragover="allowDrop(event)"></div>
+            <div id="dragPosition0" ondrop="moveTo('toDo', 'toDo')" ondragover="allowDrop(event); highlight('dragPosition0')" ondragleave="removeHighlight('dragPosition0')"></div>
         </div>
 
         <div class="column1Container marginRight">
             <div class="progressbarColumnHeadline">
                 In progress <div class="backgroundImage"></div>
             </div>
-            <!-- Column2 -->
-            <div class="columnContainer" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
+            <div class="columnContainer" id="inProgress" ondrop="moveTo('inProgress', 'inProgress')" ondragover="allowDrop(event)">
             </div>
-            <div id="dragPosition1" ondrop="moveTo('inProgress')" ondragover="allowDrop(event); highlight('dragPosition1')" ondragleave="removeHighlight('dragPosition1')"></div>
+            <div id="dragPosition1" ondrop="moveTo('inProgress', 'inProgress')" ondragover="allowDrop(event); highlight('dragPosition1')" ondragleave="removeHighlight('dragPosition1')"></div>
 
         </div>
         <div class="column1Container marginRight">
             <div class="progressbarColumnHeadline">
                 Await feedback <div class="backgroundImage"></div>
             </div>
-            <!-- Column3 -->
             <div class="columnContainer" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
                 ondragover="allowDrop(event)">
             </div>
@@ -81,11 +78,19 @@
             <div class="progressbarColumnHeadline">
                 Done
             </div>
-            <!-- Column4 -->
             <div class="columnContainer" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
             </div>
             <div id="dragPosition3" ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('dragPosition3')" ondragleave="removeHighlight('dragPosition3')"></div>
         </div>
+
+
+
+
+
+
+
+
+        
 
         <div class="userStoryWindow" id="userStoryWindow"></div>
         <div id="overlay"></div>

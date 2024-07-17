@@ -84,27 +84,37 @@ async function moveTo(taskStatus) {
                     if (taskData.taskStatus != null) {
                         // Aktualisiere den taskStatus auf den neuen Wert
                         taskData.taskStatus = taskStatus;
+                        console.log("Aktueller Task Status:");
+                        console.log(taskStatus);
+                        console.log("Aktuell verwenderter Key:");
+                        console.log(key);
+                        
+                        
+                            
 
-                        // Schicke den aktualisierten taskStatus an die Serverseite
-                        await postData(`/tasks/${key}`, { taskStatus: taskStatus });
+                            // Schicke den aktualisierten taskStatus an die Serverseite
+                            await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                        
                     }
                 }
             }
         }
     }
+
     loadTickets();
 }
 
-async function postData(path = "", data) {
+
+async function patchData(path = "", data) {
     let response = await fetch(BASE_URL + path + ".json", {
-      method: "PATCH",
-      header: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+        method: "PATCH",
+        header: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
     });
     return await response.json();
-  }
+}
 
 function endDragging(id) {
     currentDraggedElement = id;
