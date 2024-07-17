@@ -215,6 +215,7 @@ body {
     left: 75px;
     padding: 10px 0;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .assigned-persons{
@@ -223,6 +224,7 @@ body {
     position: absolute;
     top: 555px;
     left: 75px;
+    flex-wrap: wrap;
 }
 
 .persons-assignemend{

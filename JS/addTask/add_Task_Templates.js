@@ -1,4 +1,4 @@
-let contacts = [
+let contactsAt = [
   { name: 'Anton Meyer', email: 'anton@gmail.com', phone: '123456789', color: '#ff5733', emblem: 'AM' },
   { name: 'Bernd Bauer', email: 'bernd@gmail.com', phone: '987654321', color: '#33ff57', emblem: 'BB' },
   { name: 'Clara Schmidt', email: 'clara@gmail.com', phone: '456789123', color: '#3357ff', emblem: 'CS' },
@@ -23,25 +23,25 @@ let contacts = [
   { name: 'Vera Frank', email: 'vera@gmail.com', phone: '123456987', color: '#ff7f57', emblem: 'VF' },
 ];
 
-function subtaskSample() {
+function subtaskSampleAt() {
   let list = '<ul class="add-task-list">';
   for (let i = 0; i < subtasks.length; i++) {
     const subtask = subtasks[i];
     list += `<li class="listItem flex-row" id="subtaskNr${i}">
         <span class="subtask-text">${subtask}</span>
         <div class="close-approve-container" id="editContainer${i}">
-          <div class="small-icon-div" onclick="editSubtask(this)">
+          <div class="small-icon-div" onclick="editSubtaskAt(this)">
             <img class="smaller-icon" src="/img/edit-dark.png">
           </div>
           <span class="small-input-vertical-vector"></span>
-          <div class="small-icon-div" onclick="deleteSubtask(this)">
+          <div class="small-icon-div" onclick="deleteSubtaskAt(this)">
             <img class="smaller-icon" src="/img/delete.png">
           </div>
         </div>
         <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
-          <div class="small-icon-div" onclick="approveEdit(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
+          <div class="small-icon-div" onclick="approveEditAt(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
           <span class="small-input-vertical-vector"></span>
-          <div class="small-icon-div" onclick="cancelEdit(this)"><img class="small-icon" src="/img/Close.png"></div>
+          <div class="small-icon-div" onclick="cancelEditAt(this)"><img class="small-icon" src="/img/Close.png"></div>
         </div>
       </li>`;
   }
@@ -49,15 +49,15 @@ function subtaskSample() {
   return list;
 }
 
-function dropDownListSample(){
+function dropDownListSampleAt(){
   let list = '';
-  sortContacts();
-  for (let i = 0; i < contacts.length; i++) {
-    let person = contacts[i];
+  sortContactsAt();
+  for (let i = 0; i < contactsAt.length; i++) {
+    let person = contactsAt[i];
     list += `
-    <div onclick="addAssignedPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
+    <div onclick="addAssignedPersonAt(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
       <div class="flex-row name-container">
-        <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
+        <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
         <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
       </div>
       <div class="assigned-img-box">
@@ -69,26 +69,26 @@ function dropDownListSample(){
   return list;
 }
 
-function assignedResults(){
+function assignedResultsAt(){
   let list = '';
   for (let i = 0; i < assignedPersons.length; i++) {
     let person = assignedPersons[i];
     list += `
-    <span class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
+    <span id="emblem${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
     `
   }
   return list;
 }
 
-function personsFoundPost(foundPersons){
+function personsFoundPostAt(){
   let list = '';
-  sortContacts();
+  sortContactsAt();
   for (let i = 0; i < foundPersons.length; i++) {
     let person = foundPersons[i];
     list += `
-    <div onclick="addAssignedPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
+    <div onclick="addFoundPersonAt(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
       <div class="flex-row name-container">
-        <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
+        <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
         <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
       </div>
       <div class="assigned-img-box">

@@ -180,7 +180,7 @@ function userStoryEditHtmlTemplate() {
                     <label class="userStory_assignedToHeadline" for="assignedTo">Assigned to</label>
                 </div>
                 <div class="userStoryAssignedToInputAndImageContainer mTop8">
-                    <input oninput="searchPerson()" id="assigned-to"type="text" placeholder="Select contacts to assign">
+                    <input oninput="searchPerson()" onclick="editShowPersons()" autocomplete="off" id="assigned-to"type="text" placeholder="Select contacts to assign">
                     <div id="editRotate" onclick="editShowPersons()" class="userStoryAssignedToDropdownMenuImageContainer">
                         <img src="./img/userStoryEdit/drop-down-arrow.png" alt="dropdownmenu">
                     </div>
@@ -310,19 +310,19 @@ function dropDownListSample(){
     for (let i = 0; i < assignedPersonsList.length; i++) {
       let person = assignedPersonsList[i];
       list += `
-      <span class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
+      <span id="emblem${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
       `
     }
     return list;
   }
   
-  function personsFoundPost(foundPersons){
+  function personsFoundPost(){
     let list = '';
     sortContacts();
-    for (let i = 0; i < foundPersons.length; i++) {
-      let person = foundPersons[i];
+    for (let i = 0; i < foundPersonsList.length; i++) {
+      let person = foundPersonsList[i];
       list += `
-      <div onclick="addAssignedPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
+      <div onclick="addFoundPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
         <div class="flex-row name-container">
           <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
           <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
@@ -335,4 +335,3 @@ function dropDownListSample(){
     }
     return list;
   }
-

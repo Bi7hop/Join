@@ -1,4 +1,5 @@
 let assignedPersonsList = [];
+let foundPersonsList = [];
 
 // Subtasks Listed Item Hover and show Edit/Delete Icon effect
 function subTasksHoverEffect() {
@@ -111,6 +112,15 @@ function editShowPersons() {
   }
 }
 
+function renderDropdownList(){
+  let dropDown = document.getElementById("editDropDownList");
+  if (foundPersonsList && foundPersonsList.length > 0) {
+    dropDown.innerHTML = personsFoundPost(foundPersonsList);
+  } else {
+    dropDown.innerHTML = dropDownListSample();
+  }
+}
+
 function sortContacts() {
   contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -120,38 +130,37 @@ function renderEmblem(name) {
   return initials;
 }
 
-function renderDropdownList(foundPersons){
-  let dropDown = document.getElementById("editDropDownList");
-  if (foundPersons && foundPersons.length > 0) {
-    dropDown.innerHTML = personsFoundPost(foundPersons);
-  } else {
-    dropDown.innerHTML = dropDownListSample();
-  }
-}
-
-function addAssignedPerson(i){
-  personAdded(i);
-  checkIfCheckd(i);
+function addAssignedPerson(i) {
+  checkboxSwap(i);
+  checkIfExist(i);
   postPersons();
 }
 
-function personAdded(i){
+function checkboxSwap(i) {
   let container = document.getElementById(`persons-assignemend${i}`);
   let checkbox = document.getElementById(`checkbox${i}`);
   let assignedName = document.getElementById(`assigned-name${i}`);
 
   if (!container.classList.contains('persons-assignemend-checkt')) {
-    container.classList.add('persons-assignemend-checkt');
-    checkbox.src = './img/checkbox_checkt.png';
-    assignedName.classList.add("assigned-color");
-  }else{
-    container.classList.remove('persons-assignemend-checkt');
-    checkbox.src = './img/checkbox_uncheckt.png';
-    assignedName.classList.remove("assigned-color");
+    addCheckbox(container, checkbox, assignedName);
+  } else {
+    removeCheckbox(container, checkbox, assignedName);
   }
 }
 
-function checkIfCheckd(i) {
+function addCheckbox(container, checkbox, assignedName) {
+  container.classList.add('persons-assignemend-checkt');
+  checkbox.src = './img/checkbox_checkt.png';
+  assignedName.classList.add("assigned-color");
+}
+
+function removeCheckbox(container, checkbox, assignedName) {
+  container.classList.remove('persons-assignemend-checkt');
+  checkbox.src = './img/checkbox_uncheckt.png';
+  assignedName.classList.remove("assigned-color");
+}
+
+function checkIfExist(i) {
   let container = document.getElementById(`persons-assignemend${i}`);
 
   if (container.classList.contains('persons-assignemend-checkt')) {
@@ -166,43 +175,72 @@ function checkIfCheckd(i) {
   }
 }
 
-function postPersons(){
+function postPersons() {
   let assignedPersonsResults = document.getElementById('assigned-persons');
  
   assignedPersonsResults.innerHTML = '';
   assignedPersonsResults.innerHTML += assignedResults();
 }
 
-function searchPerson(){
+function searchPerson() {
   let input = document.getElementById('assigned-to').value.trim().toLowerCase();
-  let foundPersons = [];
 
-  if (input.length < 2) {
+  if (input.length > 2) {
     openList(input);
+    personsControl(input);
+    personsFoundPost(foundPersonsList);
   } else {
-    personsControl(input, foundPersons);
-    renderDropdownList(foundPersons); 
+    foundPersonsList = '';
+    renderDropdownList();
   }
 }
 
-function personsControl(input, foundPersons){
+function personsControl(input) {
+  foundPersonsList = []; // Reset foundPersonsList array
+  let addedNames = new Set(); // Track added names to avoid duplicates
+
   for (let i = 0; i < contacts.length; i++) {
-    const person = contacts[i];
+    let person = contacts[i];
     if (person.name.toLowerCase().includes(input)) {
-      foundPersons.push(person);
+      if (!addedNames.has(person.name)) {
+        foundPersonsList.push(person);
+        addedNames.add(person.name); // Add name to the set
+      }
     }
   }
 }
 
+function checkIfFoundExist(i) {
+  let container = document.getElementById(`persons-assignemend${i}`);
+
+  if (container.classList.contains('persons-assignemend-checkt')) {
+    if (!assignedPersonsList.includes(foundPersonsList[i])) {
+      assignedPersonsList.push(foundPersonsList[i]);
+    }
+  } else {
+    let index = assignedPersonsList.indexOf(foundPersonsList[i]);
+    if (index > -1) {
+      assignedPersonsList.splice(index, 1);
+    }
+  }
+}
+
+function addFoundPerson(i) {
+  checkboxSwap(i);
+  checkIfFoundExist(i);
+  postPersons(); 
+}
+
 function openList(input) {
-  let rotate = document.getElementById("editRotate");
-  let dropDown = document.getElementById("editDropDownList");
+  let rotate = document.getElementById("rotate");
+  let dropDown = document.getElementById("dropdown-list");
 
   if (input.length == 0) {
-    rotate.classList.remove("editRotated");
-    dropDown.classList.add("editHide");
+    rotate.classList.remove("rotated");
+    dropDown.classList.add("hide");
   } else {
-    rotate.classList.add("editRotated");
-    dropDown.classList.remove("editHide");
+    rotate.classList.add("rotated");
+    dropDown.classList.remove("hide");
+    renderDropdownList();
   }
 }

@@ -42,7 +42,7 @@
         position: initial;
         width: 396px;
         gap: 8px;
-        margin-bottom: 50px;
+        margin-bottom: 170px;
     }
 
     .input-title-container {
@@ -164,7 +164,7 @@
     .dropdown-list{
         width: 398px;
         top: 531px;
-        height: 100px;
+        height: 160px;
         left: 16px;
     }
 
@@ -337,5 +337,10 @@
         width: 256px;
         top: 510px;
         left: 20px;
+    }
+    
+    .assigned-emblem{
+        width: 32px;
+        height: 32px;
     }
 }
