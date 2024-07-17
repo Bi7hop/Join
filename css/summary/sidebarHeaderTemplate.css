@@ -187,3 +187,7 @@ nav {
     background-color: #516786;
     border-radius: 12px;
 }
+
+.hidden {
+    display: none;
+}

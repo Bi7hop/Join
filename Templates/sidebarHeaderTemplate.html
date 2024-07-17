@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="icon" type="image/x-icon" href="/img/Join_Logo.png">
-    <link rel="stylesheet" href="./css/fonts.css">
-    <link rel="stylesheet" href="./css/summary/sidebarHeaderTemplate.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/summary/sidebarHeaderTemplate.css">
+    <script src="../JS/headerOverlay.js"></script>
 </head>
 
 <body>
@@ -16,11 +17,11 @@
             <p class="headerHeadline">Kanban Project Management Tool</p>
         </div>
         <div class="headerHelpAndLogoContainer">
-            <a href="../help.html">
-                <img src="./img/help.png" alt="Help">
+            <a href="./help.html">
+                <img src="../img/help.png" alt="Help">
             </a>
-            <p>SM</p>
-            <div class="overlay-menu show-menu">
+            <p id="toggleDropDown">SM</p>
+            <div id="overlayHeader" class="overlay-menu show-menu hidden">
                 <a class="a-link" href="legalNotice.html">
                     <div class="a-menu">Legal Notice</div>
                 </a>
@@ -34,12 +35,12 @@
         </div>
     </header>
     <section class="sidebar-container">
-        <img class="sidebar-logo" src="./img/Join_Logo.png" alt="Join Logo">
+        <img class="sidebar-logo" src="../img/Join_Logo.png" alt="Join Logo">
         <nav>
-            <a href="/summary.html"><img src="./img/Summary.png" alt="Summary"></a>
-            <a href="/addtask.html"><img src="./img/Add Task.png" alt="Add Task"></a>
-            <a href="/board.html"><img src="./img/Board.png" alt="Board"></a>
-            <a href="/contacts.html"><img src="./img/Contacts.png" alt="Contact"></a>
+            <a href="/summary.html"><img src="/img/Summary.png" alt="Summary"></a>
+            <a href="/addtask.html"><img src="/img/Add Task.png" alt="Add Task"></a>
+            <a href="/board.html"><img src="/img/Board.png" alt="Board"></a>
+            <a href="/contacts.html"><img src="/img/Contacts.png" alt="Contact"></a>
         </nav>
         <div class="nav-bottom">
             <a href="/privacyPolicy.html">Privacy Policy</a>
