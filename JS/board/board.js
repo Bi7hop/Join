@@ -1,60 +1,3 @@
-let tickets = [
-    // 0
-    {
-        "id": 0,
-        "taskType": 'toDo0',
-        "taskTitel": 'Kochwelt Page & Recipe Recommender',
-        "taskDescription": 'Build start page with recipe recommendation Build start page with recipe recommendation',
-        "taskBar": 50,
-        "taskSubtaskAmount": 1,
-        "taskContacts": ["Emmanuel Mauer", "Marcel Bauer", "Anton Mayer"],
-        "taskPrioImage": './img/board/prio_high.png',
-        "taskPrioAlt": 'High',
-        "taskStatus": 'toDo',
-    },
-    //1
-    {
-        "id": 1,
-        "taskType": 'InProgress1',
-        "taskTitel": 'HTML Base Template Creation',
-        "taskDescription": '',
-        "taskBar": 100,
-        "taskSubtaskAmount": 2,
-        "taskContacts": ["Anja Schulz", "David Eisenberg", "Eva Fischer"],
-        "taskPrioImage": './img/board/prio_medium.png',
-        "taskPrioAlt": 'Medium',
-        "taskStatus": 'inProgress'
-    },
-    //2
-    {
-        "id": 2,
-        "taskType": 'awaitFeedback2',
-        "taskTitel": 'HTML Base Template Creation',
-        "taskDescription": '',
-        "taskBar": 100,
-        "taskSubtaskAmount": 2,
-        "taskContacts": ["Anja Schulz", "David Eisenberg", "Eva Fischer"],
-        "taskPrioImage": './img/board/prio_medium.png',
-        "taskPrioAlt": 'Medium',
-        "taskStatus": 'awaitFeedback'
-    },
-    //3
-    {
-        "id": 3,
-        "taskType": 'done3',
-        "taskTitel": 'HTML Base Template Creation',
-        "taskDescription": '',
-        "taskBar": 100,
-        "taskSubtaskAmount": 2,
-        "taskContacts": ["Anja Schulz", "David Eisenberg", "Eva Fischer"],
-        "taskPrioImage": './img/board/prio_medium.png',
-        "taskPrioAlt": 'Medium',
-        "taskStatus": 'done'
-    },
-];
-
-let currentDraggedElement;
-
 // Updated renderTickets function
 function renderTickets(columnId, status) {
     // Container im HTML, wo die Titel angezeigt werden sollen
@@ -89,6 +32,7 @@ function renderTickets(columnId, status) {
     });
 }
 
+
 // Updated formatContacts function
 function formatContacts(contacts) {
     return contacts.map(contact => {
@@ -99,7 +43,6 @@ function formatContacts(contacts) {
 
 // Beispiel: Aufruf der Funktion nach dem Laden der Daten
 loadUrl().then(() => {
-    console.log("1. loadUrl() and loadTickets() loaded....");
     loadTickets();
 });
 
@@ -111,12 +54,9 @@ function loadTickets() {
     renderTickets('done', 'done');
 }
 
-
-
-
-
-
 // DRAG AND DROP
+let currentDraggedElement;
+
 function startDragging(id) {
     currentDraggedElement = id;
     document.getElementById(id).classList.add('dragging');
@@ -130,10 +70,41 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(taskStatus) {
-    tickets[currentDraggedElement]['taskStatus'] = taskStatus;
+async function moveTo(taskStatus) {
+    // Iteriere durch das firebaseData Array
+    for (const task of firebaseData) {
+        // Überprüfe, ob task.dataExtracted existiert und ein Objekt ist
+        if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+            // Iteriere über jeden Schlüssel in task.dataExtracted
+            for (const key in task.dataExtracted) {
+                if (task.dataExtracted.hasOwnProperty(key)) {
+                    const taskData = task.dataExtracted[key];
+
+                    // Überprüfe, ob taskData.taskStatus vorhanden ist und nicht null oder undefined ist
+                    if (taskData.taskStatus != null) {
+                        // Aktualisiere den taskStatus auf den neuen Wert
+                        taskData.taskStatus = taskStatus;
+
+                        // Schicke den aktualisierten taskStatus an die Serverseite
+                        await postData(`/tasks/${key}`, { taskStatus: taskStatus });
+                    }
+                }
+            }
+        }
+    }
     loadTickets();
 }
+
+async function postData(path = "", data) {
+    let response = await fetch(BASE_URL + path + ".json", {
+      method: "PATCH",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  }
 
 function endDragging(id) {
     currentDraggedElement = id;
