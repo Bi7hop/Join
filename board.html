@@ -22,7 +22,7 @@
     <script src="/JS/board/board.js"></script>
 </head>
 
-<body id="boardBodyContainer" class="boardBodyContainer" onload="includeHTML(), loadTickets()">
+<body id="boardBodyContainer" class="boardBodyContainer" onload="includeHTML()">
     <div class="sidebar-header" w3-include-html="./templates/sidebarHeaderTemplate.html"></div>
     <div class="mobile-header" w3-include-html="./templates/mobileHeader.html"></div>
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
@@ -56,7 +56,7 @@
             <div id="dragPosition0" ondrop="moveTo('toDo')" ondragover="allowDrop(event); highlight('dragPosition0')" ondragleave="removeHighlight('dragPosition0')"></div>
 
             <div id="test"></div>
-            
+
         </div>
         <div class="column1Container marginRight">
             <div class="progressbarColumnHeadline">

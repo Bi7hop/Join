@@ -76,7 +76,7 @@ function formatContacts(contacts) {
 
 
 function renderTickets(columnId, status) {
-    let columnElement = document.getElementById(columnId);
+    const columnElement = document.getElementById(columnId);
 
     if (!columnElement) {
         console.error(`Element with id ${columnId} not found.`);
@@ -98,7 +98,11 @@ function renderTickets(columnId, status) {
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const ticketHTML = ticketTemplate(taskData, formattedContacts);
 
-                columnElement.innerHTML += ticketHTML;
+                const ticketElement = document.createElement('div');
+                ticketElement.innerHTML = ticketHTML;
+
+                // Ensure the ticketElement is appended to the columnElement
+                columnElement.appendChild(ticketElement.firstChild);
             }
         });
     });
@@ -129,6 +133,7 @@ function generateTaskTitlesHTML() {
 // Beispiel: Aufruf der Funktion nach dem Laden der Daten
 loadUrl().then(() => {
     generateTaskTitlesHTML();
+    loadTickets();
 });
 
 
