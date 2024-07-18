@@ -365,3 +365,28 @@ input[type=text]:focus {
     margin-top: 16px;
     color: #2A3647;
 }
+
+.no-task-message {
+    font-size: 12px;
+    color: rgb(248, 53, 53);
+    display: none; 
+    background-color: lightgray; 
+    border: 1px dashed rgb(134, 134, 134); 
+    border-radius: 12px;
+    padding: 10px; 
+    margin-top: 10px; 
+    width: 252px; 
+    text-align: center; 
+    display: flex;             
+    justify-content: center;   
+    align-items: center;       
+}
+
+.no-task-message-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+
