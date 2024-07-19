@@ -81,26 +81,20 @@ async function moveTo(taskStatus) {
                     const taskData = task.dataExtracted[key];
 
                     // Überprüfe, ob taskData.taskStatus vorhanden ist und nicht null oder undefined ist
-                    if (taskData.taskStatus != null) {
+                    // UND ob der aktuelle Task der gezogene Task ist
+                    if (taskData.taskStatus && taskData.id === currentDraggedElement) {
                         // Aktualisiere den taskStatus auf den neuen Wert
                         taskData.taskStatus = taskStatus;
-                        console.log("Aktueller Task Status:");
-                        console.log(taskStatus);
-                        console.log("Aktuell verwenderter Key:");
-                        console.log(key);
-                        
-                            // Schicke den aktualisierten taskStatus an die Serverseite
-                            await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                        
+                        // Schicke den aktualisierten taskStatus an die Serverseite
+                        await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                        currentDraggedElement = '';
                     }
                 }
             }
         }
     }
-
     loadTickets();
 }
-
 
 async function patchData(path = "", data) {
     let response = await fetch(BASE_URL + path + ".json", {
