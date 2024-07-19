@@ -89,9 +89,6 @@ async function moveTo(taskStatus) {
                         console.log("Aktuell verwenderter Key:");
                         console.log(key);
                         
-                        
-                            
-
                             // Schicke den aktualisierten taskStatus an die Serverseite
                             await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
                         
