@@ -221,6 +221,38 @@ function userStoryEditHtmlTemplate() {
     `;
 }
 
+
+// Originale ticketTemplate Funktion von Sascha
+// function ticketTemplate(taskData, formattedContacts) {
+//     return `
+//         <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
+//             <div class="taskColumnContainer">
+//                 <div class="taskType">${taskData.taskType}</div>
+//                 <div class="taskTitle">${taskData.taskTitle}</div>
+//                 <div class="taskDescription">${taskData.taskDescription}</div>
+//                 <div class="taskSubtaskBarContainer">
+//                     <div class="taskSubtaskBar">
+//                         <div style="width:${taskData.taskBar}%" class="taskSubtaskBarFilledBar"></div>
+//                     </div>
+//                     <span>${taskData.taskSubtaskAmount} Subtask</span>
+//                 </div>
+//                 <div class="taskContactsPrioContainer">
+//                     <div class="taskContactsContainer">
+//                         ${formattedContacts}
+//                     </div>
+//                     <div>
+//                         <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     `;
+// }
+
+
+
+
+// Test Funktion für die AddTask geschichte
 function ticketTemplate(taskData, formattedContacts) {
     return `
         <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
@@ -232,7 +264,7 @@ function ticketTemplate(taskData, formattedContacts) {
                     <div class="taskSubtaskBar">
                         <div style="width:${taskData.taskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
-                    <span>${taskData.taskSubtaskAmount}/2 Subtask</span>
+                    <span>${taskData.taskSubtasksDone}/${taskData.taskSubtaskAmount} Subtask</span>
                 </div>
                 <div class="taskContactsPrioContainer">
                     <div class="taskContactsContainer">
@@ -246,6 +278,21 @@ function ticketTemplate(taskData, formattedContacts) {
         </div>
     `;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
