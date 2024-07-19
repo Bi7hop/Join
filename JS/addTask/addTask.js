@@ -1,4 +1,4 @@
-let subtasks = [];
+let subtasksAt = [];
 let assignedPersons = [];
 let foundPersons = [];
 
@@ -255,7 +255,7 @@ function aproveSubtaskAt() {
   if (!subtask.value.trim()) {
     alert("Please fill in your Subtask");
   } else {
-    subtasks.push(subtask.value);
+    subtasksAt.push(subtask.value);
     subtask.value = "";
     postSubtaskAt();
   }
@@ -265,14 +265,14 @@ function postSubtaskAt() {
   let subtaskDisplay = document.getElementById("subtaskDisplay");
 
   subtaskDisplay.innerHTML = "";
-  subtaskDisplay.innerHTML += subtaskSampleAt();
+  subtaskDisplay.innerHTML += subtasksAtampleAt();
 }
 
 function editSubtaskAt(element) {
   let listItem = element.closest(".listItem");
-  let subtaskSpan = listItem.querySelector(".subtask-text");
-  let subtaskText = subtaskSpan.textContent.trim();
-  subtaskSpan.outerHTML = `<input value="${subtaskText}">`;
+  let subtasksAtpan = listItem.querySelector(".subtask-text");
+  let subtaskText = subtasksAtpan.textContent.trim();
+  subtasksAtpan.outerHTML = `<input value="${subtaskText}">`;
 
   swapToEditAt(listItem);
 }
@@ -289,11 +289,11 @@ function cancelEditAt(element) {
 
 function deleteSubtaskAt(element) {
   let listItem = element.closest(".listItem");
-  let subtaskSpan = listItem.querySelector(".subtask-text");
-  let subtaskText = subtaskSpan.textContent.trim();
-  let index = subtasks.indexOf(subtaskText);
+  let subtasksAtpan = listItem.querySelector(".subtask-text");
+  let subtaskText = subtasksAtpan.textContent.trim();
+  let index = subtasksAt.indexOf(subtaskText);
   if (index !== -1) {
-    subtasks.splice(index, 1);
+    subtasksAt.splice(index, 1);
   }
 
   listItem.remove();
@@ -318,12 +318,12 @@ function approveEditAt(element) {
   let inputElement = listItem.querySelector("input");
   let newSubtaskText = inputElement.value.trim();
 
-  let oldSubtaskText = subtasks.find(
+  let oldSubtaskText = subtasksAt.find(
     (subtask) => subtask === inputElement.defaultValue
   );
-  let index = subtasks.indexOf(oldSubtaskText);
+  let index = subtasksAt.indexOf(oldSubtaskText);
   if (index !== -1) {
-    subtasks[index] = newSubtaskText;
+    subtasksAt[index] = newSubtaskText;
   }
 
   inputElement.outerHTML = `<span class="subtask-text">${newSubtaskText}</span>`;
