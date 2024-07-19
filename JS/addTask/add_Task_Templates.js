@@ -25,11 +25,11 @@ let contactsAt = [
 
 function subtaskSampleAt() {
   let list = '<ul class="add-task-list">';
-  for (let i = 0; i < subtasks.length; i++) {
-    const subtask = subtasks[i];
+  for (let i = 0; i < subtasksAt.length; i++) {
+    const subtask = subtasksAt[i];
     list += `<li class="listItem flex-row" id="subtaskNr${i}">
         <span class="subtask-text">${subtask}</span>
-        <div class="close-approve-container" id="editContainer${i}">
+        <div class="close-approve-container" id="editContainerAt${i}">
           <div class="small-icon-div" onclick="editSubtaskAt(this)">
             <img class="smaller-icon" src="/img/edit-dark.png">
           </div>
@@ -38,7 +38,7 @@ function subtaskSampleAt() {
             <img class="smaller-icon" src="/img/delete.png">
           </div>
         </div>
-        <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
+        <div class="close-approve-container hide" id="addRemoveContainerEditAt${i}">
           <div class="small-icon-div" onclick="approveEditAt(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
           <span class="small-input-vertical-vector"></span>
           <div class="small-icon-div" onclick="cancelEditAt(this)"><img class="small-icon" src="/img/Close.png"></div>

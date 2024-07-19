@@ -232,17 +232,17 @@ function addLowAt() {
 }
 
 function addSubtaskAt() {
-  let plusIcon = document.getElementById("addSubtaskIcon");
-  let hidenContainer = document.getElementById("addRemoveContainer");
+  let plusIcon = document.getElementById("addSubtaskIconAt");
+  let hidenContainer = document.getElementById("addRemoveContainerAt");
 
   plusIcon.classList.add("hide");
   hidenContainer.classList.remove("hide");
 }
 
 function closeSubtaskAt() {
-  let plusIcon = document.getElementById("addSubtaskIcon");
-  let hidenContainer = document.getElementById("addRemoveContainer");
-  let subtask = document.getElementById("subtask");
+  let plusIcon = document.getElementById("addSubtaskIconAt");
+  let hidenContainer = document.getElementById("addRemoveContainerAt");
+  let subtask = document.getElementById("subtaskAt");
 
   plusIcon.classList.remove("hide");
   hidenContainer.classList.add("hide");
@@ -250,29 +250,29 @@ function closeSubtaskAt() {
 }
 
 function aproveSubtaskAt() {
-  let subtask = document.getElementById("subtask");
+  let subtaskAt = document.getElementById("subtaskAt");
 
-  if (!subtask.value.trim()) {
+  if (!subtaskAt.value.trim()) {
     alert("Please fill in your Subtask");
   } else {
-    subtasksAt.push(subtask.value);
-    subtask.value = "";
+    subtasksAt.push(subtaskAt.value);
+    subtaskAt.value = "";
     postSubtaskAt();
   }
 }
 
 function postSubtaskAt() {
-  let subtaskDisplay = document.getElementById("subtaskDisplay");
+  let subtaskDisplayAt = document.getElementById("subtaskDisplayAt");
 
-  subtaskDisplay.innerHTML = "";
-  subtaskDisplay.innerHTML += subtasksAtampleAt();
+  subtaskDisplayAt.innerHTML = "";
+  subtaskDisplayAt.innerHTML += subtaskSampleAt();
 }
 
 function editSubtaskAt(element) {
   let listItem = element.closest(".listItem");
-  let subtasksAtpan = listItem.querySelector(".subtask-text");
-  let subtaskText = subtasksAtpan.textContent.trim();
-  subtasksAtpan.outerHTML = `<input value="${subtaskText}">`;
+  let subtaskSpan = listItem.querySelector(".subtask-text");
+  let subtaskText = subtaskSpan.textContent.trim();
+  subtaskSpan.outerHTML = `<input value="${subtaskText}">`;
 
   swapToEditAt(listItem);
 }
@@ -289,8 +289,8 @@ function cancelEditAt(element) {
 
 function deleteSubtaskAt(element) {
   let listItem = element.closest(".listItem");
-  let subtasksAtpan = listItem.querySelector(".subtask-text");
-  let subtaskText = subtasksAtpan.textContent.trim();
+  let subtaskSpan = listItem.querySelector(".subtask-text");
+  let subtaskText = subtaskSpan.textContent.trim();
   let index = subtasksAt.indexOf(subtaskText);
   if (index !== -1) {
     subtasksAt.splice(index, 1);
@@ -300,15 +300,15 @@ function deleteSubtaskAt(element) {
 }
 
 function swapToEditAt(listItem) {
-  let edit = listItem.querySelector("[id^=editContainer]");
-  let editing = listItem.querySelector("[id^=addRemoveContainerEdit]");
+  let edit = listItem.querySelector("[id^=editContainerAt]");
+  let editing = listItem.querySelector("[id^=addRemoveContainerEditAt]");
   edit.classList.add("hide");
   editing.classList.remove("hide");
 }
 
 function swapToNormalAt(listItem) {
-  let edit = listItem.querySelector("[id^=editContainer]");
-  let editing = listItem.querySelector("[id^=addRemoveContainerEdit]");
+  let edit = listItem.querySelector("[id^=editContainerAt]");
+  let editing = listItem.querySelector("[id^=addRemoveContainerEditAt]");
   edit.classList.remove("hide");
   editing.classList.add("hide");
 }
