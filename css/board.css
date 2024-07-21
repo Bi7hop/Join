@@ -2,6 +2,14 @@
     margin: 0;
 }
 
+.d-flex {
+    display:flex;
+}
+
+.d-none {
+    display:none;
+}
+
 .marginRight {
     margin-right: 24px;
 }
@@ -246,11 +254,19 @@ input[type=text]:focus {
     margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.taskMoreContactsAndTaskPrioContainer {
+    display: flex;
+    align-items: center;
 }
 
 .taskContactsContainer {
     display: flex;
     align-items: center;
+    max-width: 150px;
+    
 }
 
 .taskContact {
@@ -269,6 +285,26 @@ input[type=text]:focus {
     margin-left: -8px;
     /*Border entfernen sobald die Farben von den Kontakten mit Javascript gerendert werden*/
     border: 1px solid black;
+}
+
+.taskContactsContainer .taskContact:nth-child(n+7) {
+    display: none;
+}
+
+.taskMoreContacts {
+    height: 32px;
+    width: 32px;
+    margin-right: 8px;
+    /* Color changed by Contact Type */
+    /* background-color: #F6F7F8; */
+    border-radius: 50%;
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .add-task-popup{

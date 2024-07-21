@@ -270,7 +270,11 @@ function ticketTemplate(taskData, formattedContacts) {
                     <div class="taskContactsContainer">
                         ${formattedContacts}
                     </div>
-                    <div>
+                    
+                    <div class="taskMoreContactsAndTaskPrioContainer">
+                        
+                            <div class="taskMoreContacts">${taskData.taskContactsMore}</div>
+                        
                         <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
                     </div>
                 </div>
@@ -320,20 +324,20 @@ function dropDownListSample() {
 function assignedResults() {
     let list = '';
     for (let i = 0; i < assignedPersonsList.length; i++) {
-      let person = assignedPersonsList[i];
-      list += `
+        let person = assignedPersonsList[i];
+        list += `
       <span id="emblem${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
       `
     }
     return list;
-  }
-  
-  function personsFoundPost(){
+}
+
+function personsFoundPost() {
     let list = '';
     sortContacts(contacts);
     for (let i = 0; i < foundPersonsList.length; i++) {
-      let person = foundPersonsList[i];
-      list += `
+        let person = foundPersonsList[i];
+        list += `
       <div onclick="addFoundPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
         <div class="flex-row name-container">
           <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
@@ -350,8 +354,8 @@ function assignedResults() {
 function subtaskSample() {
     let list = '<ul class="subTaskList ulPadding">';
     for (let i = 0; i < subtasks.length; i++) {
-      const subtask = subtasks[i];
-      list += `<li class="listItemSubTasks flex-row" id="subtaskNr${i}">
+        const subtask = subtasks[i];
+        list += `<li class="listItemSubTasks flex-row" id="subtaskNr${i}">
         <span class="subtask-text">${subtask}</span>
         <div style="display: none" id="subTaskHoverEffect${i}">
             <div class="close-approve-container" id="editContainer">
@@ -373,4 +377,4 @@ function subtaskSample() {
     }
     list += "</ul>";
     return list;
-  }
+}

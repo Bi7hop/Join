@@ -37,6 +37,13 @@
 function renderTickets(columnId, status) {
     // Container im HTML, wo die Titel angezeigt werden sollen
     const container = document.getElementById(columnId);
+
+
+    
+    
+
+
+
     // Überprüfen, ob der Container vorhanden ist
     if (!container) {
         console.error(`Element mit id ${columnId} not found.`);
@@ -50,6 +57,11 @@ function renderTickets(columnId, status) {
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
             if (taskData.taskStatus === status) {
+
+
+        
+
+
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const taskHtml = ticketTemplate(taskData, formattedContacts);
                 // Create a container for each task
