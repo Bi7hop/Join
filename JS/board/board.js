@@ -1,49 +1,8 @@
-// Originale renderTickets Funktion von Sascha
-// Updated renderTickets function
-// function renderTickets(columnId, status) {
-//     // Container im HTML, wo die Titel angezeigt werden sollen
-//     const container = document.getElementById(columnId);
-//     // Überprüfen, ob der Container vorhanden ist
-//     if (!container) {
-//         console.error(`Element with id ${columnId} not found.`);
-//         return;
-//     }
-//     // Clear the container before adding new content
-//     container.innerHTML = '';
-//     // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
-//     firebaseData.forEach(task => {
-//         // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
-//         Object.keys(task.dataExtracted).forEach(key => {
-//             const taskData = task.dataExtracted[key];
-//             if (taskData.taskStatus === status) {
-//                 const formattedContacts = formatContacts(taskData.taskContacts || []);
-//                 const taskHtml = ticketTemplate(taskData, formattedContacts);
-//                 // Create a container for each task
-//                 const taskContainer = document.createElement('div');
-//                 taskContainer.innerHTML = taskHtml;
-//                 // Füge das erstellte <div> Element dem Container hinzu
-//                 container.appendChild(taskContainer.firstElementChild);
-//             }
-//         });
-//     });
-// }
-
-
-
-
-
 // RenderTickets Funktion für die AddTask funktion verändert
 // Updated renderTickets function
 function renderTickets(columnId, status) {
     // Container im HTML, wo die Titel angezeigt werden sollen
     const container = document.getElementById(columnId);
-
-
-    
-    
-
-
-
     // Überprüfen, ob der Container vorhanden ist
     if (!container) {
         console.error(`Element mit id ${columnId} not found.`);
@@ -57,11 +16,6 @@ function renderTickets(columnId, status) {
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
             if (taskData.taskStatus === status) {
-
-
-        
-
-
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const taskHtml = ticketTemplate(taskData, formattedContacts);
                 // Create a container for each task
@@ -86,30 +40,6 @@ function formatContacts(taskContacts) {
     }
     return formattedContacts;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Original version
-// Updated formatContacts function
-// function formatContacts(contacts) {
-//     return contacts.map(contact => {
-//         let [firstName, lastName] = contact.split(' ');
-//         return `<div class="taskContact">${firstName[0]}${lastName[0]}</div>`;
-//     }).join('');
-// }
 
 // Beispiel: Aufruf der Funktion nach dem Laden der Daten
 loadUrl().then(() => {
@@ -165,7 +95,6 @@ async function moveTo(taskStatus) {
         }
     }
     loadTickets();
-    
 }
 
 async function patchData(path = "", data) {
@@ -183,7 +112,6 @@ function endDragging(id) {
     currentDraggedElement = id;
     document.getElementById(id).classList.remove('dragging');
     for (let i = 0; i < 4; i++) {
-
         document.getElementById(`dragPosition${i}`).classList.remove('dragPosition');
     }
 }
