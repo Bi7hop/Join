@@ -23,6 +23,18 @@ function renderTickets(columnId, status) {
                 taskContainer.innerHTML = taskHtml;
                 // Füge das erstellte <div> Element dem Container hinzu
                 container.appendChild(taskContainer.firstElementChild);
+
+
+                // let taskTypeBackgroundColor = ;
+                // if (taskType === 'Technical Task') {
+                    
+                //     document.getElementById('taskType').style.backgroundColor = "#1FD7C1";
+                // } 
+                // if (taskType === 'User Story') {
+                //     document.getElementById('taskType').style.backgroundColor = "#0038FF";
+                // }
+
+                
             }
         });
     });
@@ -59,7 +71,7 @@ let currentDraggedElement;
 
 function startDragging(id) {
     currentDraggedElement = id;
-    console.log("Current Dragged Element ID=:::",currentDraggedElement);
+    console.log("Current Dragged Element ID=:::", currentDraggedElement);
     document.getElementById(id).classList.add('dragging');
     for (let i = 0; i < 4; i++) {
         document.getElementById(`dragPosition${i}`).classList.add('dragPosition');

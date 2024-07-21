@@ -10,6 +10,14 @@
     display:none;
 }
 
+.technicalTask {
+    background-color: #1FD7C1;
+}
+
+.userStory {
+    background-color: #0038FF;
+}
+
 .marginRight {
     margin-right: 24px;
 }
@@ -187,7 +195,7 @@ input[type=text]:focus {
     width: 113px;
     height: 27px;
     padding: 0 8px 0 8px;
-    background-color: #0038FF;
+    /* background-color: #0038FF; */
     border-radius: 8px;
     font-family: Inter;
     font-weight: 400;
