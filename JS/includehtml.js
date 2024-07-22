@@ -1,7 +1,7 @@
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
-        const element = includeElements[i];
+        let element = includeElements[i];
         let file = element.getAttribute("w3-include-html");
         let resp = await fetch(file);
         if (resp.ok) {
@@ -12,6 +12,7 @@ async function includeHTML() {
         element.removeAttribute('w3-include-html');
     }
     attachToggleEvent();
+    runAfterSidebarLoad(); 
 }
 
 function attachToggleEvent() {
@@ -32,5 +33,17 @@ function attachToggleEvent() {
     }
 }
 
+function runAfterSidebarLoad() {
+    let links = document.querySelectorAll('nav a');
+    let currentURL = window.location.pathname.replace(/\/$/, '');
+
+    links.forEach(link => {
+        let linkURL = new URL(link.href).pathname.replace(/\/$/, '');
+        
+        if (linkURL === currentURL) {
+            link.classList.add('active');
+        }
+    });
+}
 
 includeHTML();

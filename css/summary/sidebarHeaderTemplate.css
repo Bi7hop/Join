@@ -191,3 +191,8 @@ nav {
 .hidden {
     display: none;
 }
+
+nav a.active {
+    background-color: rgb(9,25,49); 
+    color: white;
+}
