@@ -77,6 +77,12 @@ h1 {
     gap: 35px;
     border-radius: 16px;
     cursor: pointer;
+    margin: 4px;
+    
+}
+
+.contact-card:hover {
+    background-color: #e8e8ea;
 }
 
 .contact-icon {
@@ -102,9 +108,18 @@ h1 {
 }
 
 .register-letter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-self: center;
+    width: 90%;
+    height: 58px;
     font-size: 20px;
-    padding-top: 8px;
-    padding: 17px 36px 17px 36px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+    padding: 0px 0px 0px 36px;
+    border-bottom: 2px solid #d1d1d1;
 }
 
 .name {
