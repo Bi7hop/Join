@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="./css/signup.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./JS/firebase.js"></script>
+    <script src="./JS/log_in/signUp.js"></script>
     <!-- <script type="module" src="firebase.js"></script> -->
 </head>
 
-<body>
+<body id="body" onload="loadUrl()">
     <header>
         <div class="logo-image">
             <a href="login.html">
@@ -35,7 +36,7 @@
             <div class="underline-login">
                 <img src="./img/underline_login.png" alt="">
             </div>
-            <form id="regestrationForm" onsubmit="addNewUser()">
+            <form id="regestrationForm">
                 <div class="input-login-field">
                     <input id="signUpName" type="text" required class="name" placeholder="Name">
                     <div class="input-login-field">
@@ -49,7 +50,8 @@
                             <img src="./img/lock.png" alt="">
                         </div>
                         <div class="input-field-password">
-                            <input id="signUpPasswordCheck" class="password-field" type="password" required placeholder="Confirm Password">
+                            <input id="signUpPasswordCheck" class="password-field" type="password" required
+                                placeholder="Confirm Password">
                             <img src="./img/lock.png" alt="">
                         </div>
                     </div>
@@ -59,7 +61,7 @@
                     </div>
                     <div class="sign-up-container">
                         <div class="sign-up">
-                            <button id="signUpButton" class="btn">Sign up</button>
+                            <button id="signUpButton" onclick="addNewUser(event)" class="btn">Sign up</button>
                         </div>
                     </div>
                 </div>
@@ -69,6 +71,14 @@
     <div class="footer-login">
         <a href="privacyPolicy.html">Privacy Policy</a>
         <a href="legalNotice.html">Legal notice</a>
+    </div>
+
+    <div id="overlay" class="overlay hide"></div>
+
+    <div id="signUpPopup" class="signUpPopup hide">
+        <div id="signUpAproval" class="signUpAproval">
+            <h2>You Signed Up successfully</h2>
+        </div>
     </div>
 
 </body>

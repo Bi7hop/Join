@@ -22,7 +22,7 @@
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
 
     <div id="add-task-position" class="add-task-main-position"> <!--Change to add-task-main-position-->
-        <form onsubmit="postTask()" id="add-task-card" class="add-task-card">
+        <form  id="add-task-card" class="add-task-card">
             <div class="title-positioning">
                 <h1 class="h1">Add Task</h1>
             </div>
@@ -103,7 +103,7 @@
                 <div class="two-buttons-position flex-row">
                     <button onclick="closeAddTask()" class="cancel-btn flex-row gap-four btn-styling medium-font">Cancel<img
                             src="./img/Close.png"></button>
-                    <button onsubmit="return postTask()" class="create-btn flex-row gap-four btn-styling medium-font">Create Task<img
+                    <button onclick="postTask()" class="create-btn flex-row gap-four btn-styling medium-font">Create Task<img
                             src="./img/check.png"></button>
                 </div>
             </div>

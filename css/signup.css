@@ -19,6 +19,14 @@ h1 {
     line-height: 73px;
 }
 
+h2 {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: white;
+}
+
 p {
     margin: 0;
     font-size: 16px;
@@ -226,3 +234,82 @@ input[type="email"] {
 p {
     padding-left: 12px;
 }
+
+.signUpPopup{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fly-in 0.8s forwards; /* Animation anwenden */
+}
+
+.signUpAproval{
+    width: 262px;
+    height: 74px;
+    border-radius: 20px;
+    padding: 0 25px;
+    background-color: #2a3647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: fade-in 0.25s forwards;
+    z-index: 99;
+}
+
+.hide{
+    display: none;
+}
+
+.hide-overflow{
+    overflow: hidden;
+}
+
+@keyframes fly-in {
+    from {
+        top: 2000px;
+    }
+    to {
+        top: 0; 
+
+    }
+}
+@keyframes fly-out {
+    from {
+        top: 0px;
+
+    }
+    to {
+        top: 2000px;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+@keyframes fade-out {
+    from {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+

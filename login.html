@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/login.css">
     <script src="./JS/firebase.js"></script>
+    <script src="./JS/log_in/login.js"></script>
 </head>
-<body>
+<body onload="loadUrl()">
     <header>
         <div class="logo-image">
             <img id="logo" src="./img/logo_dark.png" alt="Join Logo">
@@ -45,7 +46,7 @@
                         </div>
                         <div class="login-buttons">
                             <button class="btn-login">Log in</button>
-                            <button class="btn-guest-login">Guest Log in</button>
+                            <button onclick="loginGuest()" class="btn-guest-login">Guest Log in</button>
                         </div>
                 </form>
             </div>
