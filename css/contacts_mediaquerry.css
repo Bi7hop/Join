@@ -42,6 +42,23 @@
     .more-vert-button {
         display: flex; 
     }
+
+    .btn-add-new {
+        display: flex;
+        position: fixed;
+        right: 20px;
+        bottom: 130px;
+        cursor: pointer;
+    }
+
+    .new-contact {
+        display: none;
+    }
+
+    .contact-list-items {
+        padding-top: 48px;
+        padding-bottom: 100px;
+    }
 }
 
 @media(max-width: 1200px) {

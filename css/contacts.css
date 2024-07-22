@@ -397,3 +397,17 @@ h1 {
     gap: 8px;
     cursor: pointer;
 }
+
+.btn-add-new {
+    display: none;
+    position: fixed;
+    bottom: 140px;
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    border-radius: 46px;
+    border: #2A3647 1px;
+    background-color: #2A3647;
+    text-indent: -9999px;
+    user-select: none;
+}
