@@ -63,7 +63,7 @@ h3 {
 
 .how-to {
     margin-top: 20px;
-    align-items: center;
+   /* align-items: center; */
     display: flex;
 }
 
