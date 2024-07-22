@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let getGreeting = () => {
         let hour = new Date().getHours();
-        return hour < 12 ? "Good morning" : hour < 18 ? "Good evening" : "Good afternoon";
+        return hour < 12 ? "Good morning ," : hour < 18 ? "Good evening ," : "Good afternoon ,";
     };
 
     let greetText = document.getElementById('greetText');

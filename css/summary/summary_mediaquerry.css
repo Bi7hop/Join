@@ -110,6 +110,7 @@
     }
 
     .summary-title-container {
+        align-items: normal;
         flex-direction: column;
         gap: 5px;
     }
@@ -117,7 +118,7 @@
     .headline-summary {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start !important;
     }
 }
 
