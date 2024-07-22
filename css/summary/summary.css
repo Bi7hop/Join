@@ -218,13 +218,14 @@ h1 {
 .greeting-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: start;
     transition: opacity 1.5s ease-in-out;
+    padding-top: 128px;
 }
 
 .greet-text {
-    font-size: 32px;
+    font-size: 47px;
     font-weight: 500;
 }
 
