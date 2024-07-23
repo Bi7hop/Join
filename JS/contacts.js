@@ -56,7 +56,7 @@ function renderListContact() {
             }
         });
     });
-
+    
     // Add event listeners for contact cards
     document.querySelectorAll('.contact-card').forEach(card => {
         card.addEventListener('click', function () {
