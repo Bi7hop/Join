@@ -40,10 +40,16 @@
     border-radius: 16px;
 }
 
-.nav-mobile-a:hover {
+/* .nav-mobile-a:hover {
     cursor: pointer;
     color: #ffffff;
     background-color: rgb(9, 25, 49);
+} */
+
+.no-hover:hover {
+    cursor: pointer; 
+    color: #cdcdcd; 
+    background-color: transparent;
 }
 
 .icon-mobile {
