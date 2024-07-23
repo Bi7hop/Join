@@ -61,3 +61,11 @@ h3 {
     margin-top: 16px;
 }
 
+b {
+    color: #29abe2;
+    font-weight: 500;
+}
+
+.no-underline {
+    text-decoration: none;
+}
