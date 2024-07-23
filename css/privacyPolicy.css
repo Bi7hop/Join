@@ -58,3 +58,8 @@ body {
     scale: 1.1;
     cursor: pointer;
 }
+
+b {
+    color: #29abe2;
+    font-weight: 500;
+}
