@@ -23,14 +23,29 @@ let contacts = [
     { name: 'Vera Frank', email: 'vera@gmail.com', phone: '123456987', color: '#ff7f57', emblem: 'VF' },
 ];
 
-function userStoryHtmlTemplate() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function userStoryHtmlTemplate(taskData, formattedContacts) {
     return `
-    <div id="userStoryOutsideContainer" class="userStoryOutsideContainer flying-element">
+    <div id="${taskData.id}" class="userStoryOutsideContainer flying-element">
         <div class="userStoryContainer">
             <div class="userStoryContainerInside">
                 <div class="userStoryHeadlineAndCloseButtonContainer">
                     <div class="taskType">
-                        User Story
+                        ${taskData.taskType}
                     </div>
                     <div onclick="closeUserStory()" class="userStoryCloseButtonContainer">
                         <img src="./img/userStory/close.png" alt="Close">
@@ -38,7 +53,7 @@ function userStoryHtmlTemplate() {
                 </div>
                 <div>
                     <h1 class="userStoryHeadline">
-                        Kochwelt Page & Recipe Recommender
+                        ${taskData.Title}
                     </h1>
                 </div>
                 <div class="openUserStoryTaskDescription">
@@ -63,18 +78,7 @@ function userStoryHtmlTemplate() {
                     Assigned To:
                 </div>
                 <div class="userStoryContactContainer">
-                    <div class="userStoryContact">
-                        <div class="userStoryContactLogo">em</div>
-                        <div class="userStoryContactFullName">Emmanuel Mauer</div>
-                    </div>
-                    <div class="userStoryContact">
-                        <div class="userStoryContactLogo">mb</div>
-                        <div class="userStoryContactFullName">Marcel Bauer</div>
-                    </div>
-                    <div class="userStoryContact">
-                        <div class="userStoryContactLogo">am</div>
-                        <div class="userStoryContactFullName">Anton Mayer</div>
-                    </div>
+                    ${formattedContacts}
                 </div>
                 <div class="userStorySubtaskContainer">
                     Subtasks
@@ -111,6 +115,29 @@ function userStoryHtmlTemplate() {
     </div>
     `
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Generates the HTML template for user story editing.
@@ -222,36 +249,6 @@ function userStoryEditHtmlTemplate() {
 }
 
 
-// Originale ticketTemplate Funktion von Sascha
-// function ticketTemplate(taskData, formattedContacts) {
-//     return `
-//         <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
-//             <div class="taskColumnContainer">
-//                 <div class="taskType">${taskData.taskType}</div>
-//                 <div class="taskTitle">${taskData.taskTitle}</div>
-//                 <div class="taskDescription">${taskData.taskDescription}</div>
-//                 <div class="taskSubtaskBarContainer">
-//                     <div class="taskSubtaskBar">
-//                         <div style="width:${taskData.taskBar}%" class="taskSubtaskBarFilledBar"></div>
-//                     </div>
-//                     <span>${taskData.taskSubtaskAmount} Subtask</span>
-//                 </div>
-//                 <div class="taskContactsPrioContainer">
-//                     <div class="taskContactsContainer">
-//                         ${formattedContacts}
-//                     </div>
-//                     <div>
-//                         <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     `;
-// }
-
-
-
-
 // Test Funktion für die AddTask geschichte
 function ticketTemplate(taskData, formattedContacts) {
     return `
@@ -282,23 +279,6 @@ function ticketTemplate(taskData, formattedContacts) {
         </div>
     `;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function dropDownListSample() {

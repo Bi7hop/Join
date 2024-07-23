@@ -23,18 +23,6 @@ function renderTickets(columnId, status) {
                 taskContainer.innerHTML = taskHtml;
                 // Füge das erstellte <div> Element dem Container hinzu
                 container.appendChild(taskContainer.firstElementChild);
-
-
-                // let taskTypeBackgroundColor = ;
-                // if (taskType === 'Technical Task') {
-                    
-                //     document.getElementById('taskType').style.backgroundColor = "#1FD7C1";
-                // } 
-                // if (taskType === 'User Story') {
-                //     document.getElementById('taskType').style.backgroundColor = "#0038FF";
-                // }
-
-                
             }
         });
     });
