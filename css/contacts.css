@@ -144,13 +144,20 @@ h1 {
 
 .contactsSepperator {
     width: 85%;
-    background-color: #DDDDDD;
+    background-color: #c5c5c5;
     height: 1px;
 }
 
 .name {
     font-weight: 400;
     font-size: 20px;
+}
+
+.contactEmailContainer {
+    color: #1084EF;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .display-flex {

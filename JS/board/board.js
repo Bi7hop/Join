@@ -28,6 +28,7 @@ function renderTickets(columnId, status) {
     });
 }
 
+
 // Format contacts for a specific task
 function formatContacts(taskContacts) {
     let formattedContacts = '';
@@ -40,6 +41,7 @@ function formatContacts(taskContacts) {
     }
     return formattedContacts;
 }
+
 
 // Beispiel: Aufruf der Funktion nach dem Laden der Daten
 loadUrl().then(() => {

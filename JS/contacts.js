@@ -11,72 +11,46 @@ function renderEmblem(name) {
     return initials;
 }
 
-
-// function renderListContact() {
-//     // Get the container element and clear its content
-//     let container = document.getElementById('contactContainer');
-    
-//     container.innerHTML = '';
-
-//     // Assuming firebaseData has the structure like [{ id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }]
-//     firebaseData.forEach(contacts => {
-//         Object.keys(contacts.dataExtracted).forEach(key => {
-            
-//             const contact = contacts.dataExtracted[key];
-//             contact.sort((a, b) => a.name.localeCompare(b.name));
-//             if (contact.phone) {
-//                 // Create the contact HTML using contactsListContainerTemplate
-//                 const contactHtml = contactsListContainerTemplate(contact);
-
-//                 // Create a temporary container to hold the contact HTML
-//                 const contactContainer = document.createElement('div');
-//                 container.innerHTML += contactsRegisterTemplate(contact);
-//                 contactContainer.innerHTML += contactHtml;
-                
-//                 // Append the contact to the main container
-//                 container.appendChild(contactContainer.firstElementChild);
-//             }
-//         });
-//     });
-
-//     // Add event listeners for contact cards
-//     document.querySelectorAll('.contact-card').forEach(card => {
-//         card.addEventListener('click', function () {
-//             showDetailContact(this.dataset.email);
-//         });
-//     });
-// }
-
-
 function renderListContact() {
     // Get the container element and clear its content
     let container = document.getElementById('contactContainer');
     container.innerHTML = '';
 
+    // A set to keep track of already displayed starting letters
+    const displayedLetters = new Set();
+
     // Assuming firebaseData has the structure like [{ id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }]
     firebaseData.forEach(contacts => {
         // Convert the contacts.dataExtracted object into an array
         let contactArray = Object.keys(contacts.dataExtracted).map(key => contacts.dataExtracted[key]);
-        
+
         // Sort the contactArray by name, ensuring that name exists and is a string
         contactArray.sort((a, b) => {
             const nameA = a.name ? a.name : ''; // Default to empty string if name is undefined
             const nameB = b.name ? b.name : ''; // Default to empty string if name is undefined
             return nameA.localeCompare(nameB);
         });
-        
+
         contactArray.forEach(contact => {
             if (contact.phone) {
+                // Check if the starting letter has already been displayed
+                const firstLetter = contact.name.charAt(0).toUpperCase();
+                if (!displayedLetters.has(firstLetter)) {
+                    // Add the starting letter to the set of displayed letters
+                    displayedLetters.add(firstLetter);
+
+                    // Create and append the starting letter HTML
+                    const registerHtml = contactsRegisterTemplate({ name: firstLetter });
+                    container.innerHTML += registerHtml;
+                }
+
                 // Create the contact HTML using contactsListContainerTemplate
                 const contactHtml = contactsListContainerTemplate(contact);
 
                 // Create a temporary container to hold the contact HTML
                 const contactContainer = document.createElement('div');
-                contactContainer.innerHTML += contactHtml;
+                contactContainer.innerHTML = contactHtml;
 
-
-                container.innerHTML += contactsRegisterTemplate(contact);
-                
                 // Append the contact to the main container
                 container.appendChild(contactContainer.firstElementChild);
             }
@@ -92,9 +66,6 @@ function renderListContact() {
 }
 
 
-
-
-
 function contactsListContainerTemplate(contact) {
     return `
         <div class="contact-card-container">
@@ -106,7 +77,7 @@ function contactsListContainerTemplate(contact) {
                 </div>
                 <div class="contact">
                     <span class="name">${contact.name}</span>
-                    <a href="mailto:${contact.email}">${contact.email}</a>
+                    <div class="contactEmailContainer">${contact.email}</div>
                 </div>
             </div>
         </div>
