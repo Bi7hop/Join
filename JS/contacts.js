@@ -12,40 +12,40 @@ function renderEmblem(name) {
 }
 
 
-function renderListContact() {
-    // Get the container element and clear its content
-    let container = document.getElementById('contactContainer');
+// function renderListContact() {
+//     // Get the container element and clear its content
+//     let container = document.getElementById('contactContainer');
     
-    container.innerHTML = '';
+//     container.innerHTML = '';
 
-    // Assuming firebaseData has the structure like [{ id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }]
-    firebaseData.forEach(contacts => {
-        Object.keys(contacts.dataExtracted).forEach(key => {
+//     // Assuming firebaseData has the structure like [{ id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }]
+//     firebaseData.forEach(contacts => {
+//         Object.keys(contacts.dataExtracted).forEach(key => {
             
-            const contact = contacts.dataExtracted[key];
-            contact.sort((a, b) => a.name.localeCompare(b.name));
-            if (contact.phone) {
-                // Create the contact HTML using contactsListContainerTemplate
-                const contactHtml = contactsListContainerTemplate(contact);
+//             const contact = contacts.dataExtracted[key];
+//             contact.sort((a, b) => a.name.localeCompare(b.name));
+//             if (contact.phone) {
+//                 // Create the contact HTML using contactsListContainerTemplate
+//                 const contactHtml = contactsListContainerTemplate(contact);
 
-                // Create a temporary container to hold the contact HTML
-                const contactContainer = document.createElement('div');
-                container.innerHTML += contactsRegisterTemplate(contact);
-                contactContainer.innerHTML += contactHtml;
+//                 // Create a temporary container to hold the contact HTML
+//                 const contactContainer = document.createElement('div');
+//                 container.innerHTML += contactsRegisterTemplate(contact);
+//                 contactContainer.innerHTML += contactHtml;
                 
-                // Append the contact to the main container
-                container.appendChild(contactContainer.firstElementChild);
-            }
-        });
-    });
+//                 // Append the contact to the main container
+//                 container.appendChild(contactContainer.firstElementChild);
+//             }
+//         });
+//     });
 
-    // Add event listeners for contact cards
-    document.querySelectorAll('.contact-card').forEach(card => {
-        card.addEventListener('click', function () {
-            showDetailContact(this.dataset.email);
-        });
-    });
-}
+//     // Add event listeners for contact cards
+//     document.querySelectorAll('.contact-card').forEach(card => {
+//         card.addEventListener('click', function () {
+//             showDetailContact(this.dataset.email);
+//         });
+//     });
+// }
 
 
 function renderListContact() {
@@ -74,7 +74,7 @@ function renderListContact() {
                 const contactContainer = document.createElement('div');
                 contactContainer.innerHTML += contactHtml;
 
-                
+
                 container.innerHTML += contactsRegisterTemplate(contact);
                 
                 // Append the contact to the main container
