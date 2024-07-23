@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+  let dateInput = document.getElementById('date');
+  let today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+});
+
 let subtasksAt = [];
 let assignedPersons = [];
 let foundPersons = [];
