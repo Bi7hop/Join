@@ -1,9 +1,3 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-  let dateInput = document.getElementById('date');
-  let today = new Date().toISOString().split('T')[0];
-  dateInput.setAttribute('min', today);
-});
-
 let subtasksAt = [];
 let assignedPersons = [];
 let foundPersons = [];
@@ -389,4 +383,16 @@ function closeAddTaskPopup() {
 function showOverflow() {
   let boardBodyContainer = document.querySelector(".boardBodyContainer");
   boardBodyContainer.style.overflow = "";
+}
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   let dateInput = document.getElementById('date');
+//   let today = new Date().toISOString().split('T')[0];
+//   dateInput.setAttribute('min', today);
+// });
+
+function minDate() {
+  let dateInput = document.getElementById('date');
+  let today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
 }
