@@ -385,11 +385,6 @@ function showOverflow() {
   boardBodyContainer.style.overflow = "";
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   let dateInput = document.getElementById('date');
-//   let today = new Date().toISOString().split('T')[0];
-//   dateInput.setAttribute('min', today);
-// });
 
 function minDate() {
   let dateInput = document.getElementById('date');
