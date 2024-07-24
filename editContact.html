@@ -35,26 +35,23 @@
             </div>
 
             <div class="contact-input-field">
-                <div class="contact-input ">
-                    <input type="text" class="input font-fourhundrdred-twentyfour" placeholder="Name" required></input>
+                <div class="contact-input">
+                    <input type="text" id="editContactName" class="input font-fourhundrdred-twentyfour" placeholder="Name" required></input>
                     <img class="input-img" src="/img/addContact-profile-gray.png">
                 </div>
                 <div class="contact-input">
-                    <input type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email"
-                        required></input>
+                    <input type="email" id="editContactEmail" class="input font-fourhundrdred-twentyfour" placeholder="Email" required></input>
                     <img class="input-img" src="/img/addContact-email.png">
                 </div>
                 <div class="contact-input">
-                    <input type="number" class="input font-fourhundrdred-twentyfour" placeholder="Phone"
-                        required></input>
+                    <input type="number" id="editContactPhone" class="input font-fourhundrdred-twentyfour" placeholder="Phone" required></input>
                     <img class="input-img" src="/img/addContact-phone.png">
                 </div>
+                <input type="hidden" id="originalContactEmail" value="">
             </div>
             <div class="buttons-area">
-                <button onclick="closeEditContact()" class="cancel-edit-btn font-fourhundrdred-twentyfour flex-center">Delete <span
-                        class="cross-icon">&#10006;</span></button>
-                <button class="create-edit-contact-btn flex-center">Save <span class="check"><img class="check-img"
-                            src="/img/check.png"></span></button>
+                <button type="button" onclick="closeEditContact()" class="cancel-edit-btn font-fourhundrdred-twentyfour flex-center">Delete <span class="cross-icon">&#10006;</span></button>
+                <button type="button" onclick="saveEditContact()" class="create-edit-contact-btn flex-center">Save <span class="check"><img class="check-img" src="/img/check.png"></span></button>
             </div>
         </form>
     </div>

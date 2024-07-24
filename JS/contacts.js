@@ -7,8 +7,9 @@ function sortContacts() {
 }
 
 function renderEmblem(name) {
+    if (!name) return ''; 
     const initials = name.split(' ').map(word => word[0]).join('');
-    return initials;
+    return initials.toUpperCase(); 
 }
 
 function renderListContact() {
@@ -301,3 +302,163 @@ function closeAddContact() {
         document.getElementById("contactsBody").style.overflow = '';
     }, 200);
 }
+
+
+
+
+
+// Edit Contact 
+
+
+function getContactIdByEmail(email) {
+    for (let i = 0; i < firebaseContacts.length; i++) {
+        let contactGroup = firebaseContacts[i].dataExtracted;
+        for (let key in contactGroup) {
+            if (contactGroup[key].email === email) {
+                return key; 
+            }
+        }
+    }
+    return null; 
+}
+
+async function saveEditContact() {
+    let nameElement = document.getElementById('editContactName');
+    let emailElement = document.getElementById('editContactEmail');
+    let phoneElement = document.getElementById('editContactPhone');
+    let originalEmailElement = document.getElementById('originalContactEmail');
+
+    if (!nameElement || !emailElement || !phoneElement || !originalEmailElement) {
+        console.error("One or more input elements are missing.");
+        return;
+    }
+
+    let name = nameElement.value;
+    let email = emailElement.value;
+    let phone = phoneElement.value;
+    let originalEmail = originalEmailElement.value;
+
+    let contactId = getContactIdByEmail(originalEmail);
+
+    if (contactId) {
+        let updatedContact = {
+            name: name,
+            email: email,
+            phone: phone
+        };
+
+        try {
+            await patchData(`/contacts/${contactId}`, updatedContact);
+            updateLocalContactData(contactId, updatedContact);
+            closeEditContact(); 
+            renderListContact(); 
+            showDetailContact(email);
+        } catch (error) {
+            console.error("Error updating contact:", error);
+        }
+    } else {
+        console.error("Contact not found.");
+    }
+}
+
+function updateLocalContactData(contactId, updatedContact) {
+    for (let i = 0; i < firebaseContacts.length; i++) {
+        let contactGroup = firebaseContacts[i].dataExtracted;
+        if (contactGroup[contactId]) {
+            contactGroup[contactId] = {
+                ...contactGroup[contactId], 
+                ...updatedContact 
+            };
+            break;
+        }
+    }
+    for (let i = 0; i < firebaseData.length; i++) {
+        let contactsGroup = firebaseData[i].dataExtracted;
+        if (contactsGroup[contactId]) {
+            contactsGroup[contactId] = {
+                ...contactsGroup[contactId], 
+                ...updatedContact 
+            };
+            break;
+        }
+    }
+}
+
+function closeEditContact() {
+    let card = document.querySelector(".edit-contact-popup");
+    let overlay = document.getElementById("overlay");
+
+    if (card) {
+        card.style.display = "none";
+    }
+    if (overlay) {
+        overlay.classList.remove("overlay");
+    }
+
+    document.getElementById("contactsBody").style.overflow = '';
+}
+
+function openEditContact(email) {
+    let card = document.querySelector(".edit-contact-popup");
+    let overlay = document.getElementById("overlay");
+    
+    let contact = firebaseContacts.flatMap(contactsGroup => 
+        Object.values(contactsGroup.dataExtracted)
+    ).find(contact => contact.email === email);
+
+    if (contact) {
+        const { name, email, phone, color } = contact;
+        document.querySelector(".edit-contact-popup input[placeholder='Name']").value = name;
+        document.querySelector(".edit-contact-popup input[placeholder='Email']").value = email;
+        document.querySelector(".edit-contact-popup input[placeholder='Phone']").value = phone;
+        
+        
+        document.getElementById("originalContactEmail").value = email;
+
+        const emblemElement = document.querySelector(".edit-contact-popup .profile-img");
+        emblemElement.style.backgroundColor = color;
+        emblemElement.innerHTML = `<span class="emblem-text">${renderEmblem(name)}</span>`;
+
+        document.getElementById("contactsBody").style.overflow = "hidden";
+        card.style.display = "block";
+        overlay.classList.add("overlay");
+    } else {
+        console.error("Contact not found.");
+    }
+}
+
+function showDetailContact(contactEmail) {
+    firebaseData.forEach(contacts => {
+        Object.keys(contacts.dataExtracted).forEach(key => {
+            const contact = contacts.dataExtracted[key];
+            if (contact.email === contactEmail && contact.phone) {
+                const contactDetailContainer = document.querySelector('.contact-detail-container');
+                const rightContent = document.querySelector('.right-content');
+                const contactContainer = document.getElementById('contactContainer');
+                const contactDetail = document.getElementById('contactDetail');
+
+                contactDetail.innerHTML = '';
+                contactDetail.style.transition = 'none';
+                contactDetail.style.transform = 'translateX(100%)';
+
+                const contactHtml = detailContactHtmlTemplate(contact);
+                const createdDiv = document.createElement('div');
+                createdDiv.innerHTML = contactHtml;
+                contactDetail.appendChild(createdDiv.firstElementChild);
+
+                requestAnimationFrame(() => {
+                    contactDetail.style.transition = 'transform 0.5s ease';
+                    contactDetail.style.transform = 'translateX(0)';
+                });
+
+                if (window.innerWidth <= 1050) {
+                    contactContainer.classList.add('show-right-content');
+                    rightContent.classList.add('show');
+                    contactDetailContainer.style.overflow = 'visible';
+                }
+            }
+        });
+    });
+}
+
+
