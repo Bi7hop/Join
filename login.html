@@ -10,7 +10,7 @@
     <script src="./JS/firebase.js"></script>
     <script src="./JS/log_in/login.js"></script>
 </head>
-<body onload="loadUrl()">
+<body onload="loadData()">
     <header>
         <div class="logo-image">
             <img id="logo" src="./img/logo_dark.png" alt="Join Logo">
@@ -45,7 +45,7 @@
                             <p>Remeber me</p>
                         </div>
                         <div class="login-buttons">
-                            <button class="btn-login">Log in</button>
+                            <button class="btn-login" onclick="logIn()">Log in</button>
                             <button onclick="loginGuest()" class="btn-guest-login">Guest Log in</button>
                         </div>
                 </form>
