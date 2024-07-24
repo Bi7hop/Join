@@ -235,23 +235,33 @@ window.addEventListener('resize', () => {
 //     renderListContact();
 // });
 
-function openEditContact(index) {
-    let card = document.querySelector(".edit-contact-popup");
-    let overlay = document.getElementById("overlay");
-    let contact = contacts[index];
+function openEditContact(email) {
+    const card = document.querySelector(".edit-contact-popup");
+    const overlay = document.getElementById("overlay");
+    
+    const contact = firebaseContacts.flatMap(contactsGroup => 
+        Object.values(contactsGroup.dataExtracted)
+    ).find(contact => contact.email === email);
 
-    document.querySelector(".edit-contact-popup input[placeholder='Name']").value = contact.name;
-    document.querySelector(".edit-contact-popup input[placeholder='Email']").value = contact.email;
-    document.querySelector(".edit-contact-popup input[placeholder='Phone']").value = contact.phone;
+    if (contact) {
+        const { name, email, phone, color } = contact;
+        document.querySelector(".edit-contact-popup input[placeholder='Name']").value = name;
+        document.querySelector(".edit-contact-popup input[placeholder='Email']").value = email;
+        document.querySelector(".edit-contact-popup input[placeholder='Phone']").value = phone;
 
-    let emblemElement = document.querySelector(".edit-contact-popup .profile-img");
-    emblemElement.style.backgroundColor = contact.color;
-    emblemElement.innerHTML = `<span class="emblem-text">${renderEmblem(contact.name)}</span>`;
+        const emblemElement = document.querySelector(".edit-contact-popup .profile-img");
+        emblemElement.style.backgroundColor = color;
+        emblemElement.innerHTML = `<span class="emblem-text">${renderEmblem(name)}</span>`;
 
-    document.getElementById("contactsBody").style.overflow = "hidden";
-    card.style.display = "block";
-    overlay.classList.add("overlay");
+        document.getElementById("contactsBody").style.overflow = "hidden";
+        card.style.display = "block";
+        overlay.classList.add("overlay");
+    } else {
+        console.error("Contact not found.");
+    }
 }
+
+
 
 function closeEditContact() {
     let card = document.querySelector(".edit-contact-popup");
