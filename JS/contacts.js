@@ -547,8 +547,7 @@ async function deleteContact(contactEmail) {
         if (confirmation) {
             try {
                 await deleteData(`/contacts/${contactId}`);
-                console.log("Kontakt erfolgreich gelöscht.");
-                
+               
                 removeLocalContactData(contactId);
                 renderListContact();
                 
