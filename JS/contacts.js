@@ -615,4 +615,50 @@ function getContactIdByEmail(email) {
 }
 
 
+// Contact Highlight
+
+function renderListContact() {
+    let container = document.getElementById('contactContainer');
+    container.innerHTML = '';
+    const displayedLetters = new Set();
+
+    firebaseData.forEach(contacts => {
+        let contactArray = Object.keys(contacts.dataExtracted).map(key => contacts.dataExtracted[key]);
+        contactArray.sort((a, b) => {
+            const nameA = a.name ? a.name : '';
+            const nameB = b.name ? b.name : '';
+            return nameA.localeCompare(nameB);
+        });
+
+        contactArray.forEach(contact => {
+            if (contact.phone) {
+                const firstLetter = contact.name.charAt(0).toUpperCase();
+                if (!displayedLetters.has(firstLetter)) {
+                    displayedLetters.add(firstLetter);
+                    const registerHtml = contactsRegisterTemplate({ name: firstLetter });
+                    container.innerHTML += registerHtml;
+                }
+
+                const contactHtml = contactsListContainerTemplate(contact);
+                const contactContainer = document.createElement('div');
+                contactContainer.innerHTML = contactHtml;
+                container.appendChild(contactContainer.firstElementChild);
+            }
+        });
+    });
+
+    document.querySelectorAll('.contact-card').forEach(card => {
+        card.addEventListener('click', function () {
+            highlightSelectedContact(this);
+            showDetailContact(this.dataset.email);
+        });
+    });
+}
+
+function highlightSelectedContact(selectedCard) {
+    document.querySelectorAll('.contact-card').forEach(card => {
+        card.classList.remove('selected-contact');
+    });
+    selectedCard.classList.add('selected-contact');
+}
 

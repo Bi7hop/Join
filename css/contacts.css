@@ -444,3 +444,13 @@ h1 {
     text-indent: -9999px;
     user-select: none;
 }
+
+.selected-contact {
+    background-color: #2A3647;
+    color: #FFFFFF; 
+}
+
+.contact-card.selected-contact:hover {
+    background-color: #2A3647; 
+    cursor: pointer; 
+}
