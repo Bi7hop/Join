@@ -537,6 +537,61 @@ async function addNewContact() {
 
 
 
+// Delete Contact
+
+async function deleteContact(contactEmail) {
+    let contactId = getContactIdByEmail(contactEmail);
+
+    if (contactId) {
+        let confirmation = confirm("Möchten Sie diesen Kontakt wirklich löschen?");
+        if (confirmation) {
+            try {
+                await deleteData(`/contacts/${contactId}`);
+                console.log("Kontakt erfolgreich gelöscht.");
+                
+                removeLocalContactData(contactId);
+                renderListContact();
+                
+                document.getElementById('contactDetail').innerHTML = '';
+            } catch (error) {
+                console.error("Fehler beim Löschen des Kontakts:", error);
+            }
+        }
+    } else {
+        console.error("Kontakt nicht gefunden.");
+    }
+}
+
+async function deleteData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return await response.json();
+}
+
+function removeLocalContactData(contactId) {
+    firebaseContacts = firebaseContacts.map(contactGroup => {
+        delete contactGroup.dataExtracted[contactId];
+        return contactGroup;
+    });
+
+    firebaseData = firebaseData.map(contactGroup => {
+        delete contactGroup.dataExtracted[contactId];
+        return contactGroup;
+    });
+}
+
+function getContactIdByEmail(email) {
+    for (let i = 0; i < firebaseContacts.length; i++) {
+        let contactGroup = firebaseContacts[i].dataExtracted;
+        for (let key in contactGroup) {
+            if (contactGroup[key].email === email) {
+                return key; 
+            }
+        }
+    }
+    return null; 
+}
 
 
 
