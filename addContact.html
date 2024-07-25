@@ -15,7 +15,7 @@
 
 <body>
     <div class="contact-card-placement flex-center">
-        <form id="newContactForm" class="new-contact-card">
+        <form id="newContactForm" class="new-contact-card" onsubmit="return addNewContact(event)">
             <section class="text-logo-area flex-center">
                 <div class="logo-div">
                     <img class="logo" src="/img/Join_Logo.png">
@@ -44,7 +44,8 @@
                 </div>
                 <div class="contact-input">
                     <input id="contactNewMail" type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email" required
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address.">
+                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address.">
+
                     <img class="input-img" src="/img/addContact-email.png">
                     <span id="emailError" class="error-message" style="display:none;">Diese E-Mail-Adresse ist bereits registriert.</span>
                 </div>                
@@ -55,9 +56,9 @@
                 </div>
             </div>
             <div class="buttons-area">
-                <button onclick="closeAddContact()" class="cancel-btn font-fourhundrdred-twentyfour flex-center">Cancel <span
+                <button type="button" class="cancel-btn font-fourhundrdred-twentyfour flex-center" onclick="closeAddContact()">Cancel <span
                         class="cross-icon">&#10006;</span></button>
-                        <button class="create-contact-btn flex-center" type="button" onclick="addNewContact()">Create contact <span class="check"><img class="check-img" src="/img/check.png"></span></button>
+                <button class="create-contact-btn flex-center" type="submit">Create contact <span class="check"><img class="check-img" src="/img/check.png"></span></button>
             </div>
         </form>
     </div>
