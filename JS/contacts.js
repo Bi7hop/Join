@@ -489,14 +489,16 @@ function isEmailUnique(email) {
         let contactGroup = firebaseContacts[i].dataExtracted;
         for (let key in contactGroup) {
             if (contactGroup[key].email === email) {
-                return false;
+                return false; // E-Mail existiert bereits
             }
         }
     }
-    return true; 
+    return true; // E-Mail ist einzigartig
 }
 
-async function addNewContact() {
+async function addNewContact(event) {
+    event.preventDefault(); // Verhindert das automatische Absenden des Formulars
+
     let emailError = document.getElementById("emailError");
     emailError.style.display = "none"; 
 
@@ -504,9 +506,10 @@ async function addNewContact() {
     let email = getValue("contactNewMail");
     let phone = getValue("contactNewPhone");
 
+    // Überprüfe, ob die E-Mail einzigartig ist
     if (!isEmailUnique(email)) {
         emailError.style.display = "block";
-        return; 
+        return false; 
     }
 
     let color = getRandomColor();
@@ -525,13 +528,31 @@ async function addNewContact() {
         console.log("Kontakt erfolgreich hinzugefügt:", response);
 
         document.getElementById("newContactForm").reset();
-
         closeAddContact();
-
-        window.location.reload(); 
+        
+        setTimeout(() => {
+            window.location.reload(); 
+        }, 500); 
     } catch (error) {
         console.error("Fehler beim Hinzufügen des Kontakts:", error);
+        return false;
     }
+    return true; 
+}
+
+function closeAddContact() {
+    let card = document.querySelector(".add-contact-popup");
+    let overlay = document.getElementById("overlay");
+
+    card.style.animation = "fly-out 0.1s forwards";
+    overlay.style.animation = "fade-out 0.2s forwards";
+    setTimeout(() => {
+        card.style.animation = '';
+        overlay.style.animation = '';
+        overlay.classList.remove("overlay");
+        card.style.display = "none";
+        document.getElementById("contactsBody").style.overflow = '';
+    }, 200);
 }
 
 
@@ -547,7 +568,8 @@ async function deleteContact(contactEmail) {
         if (confirmation) {
             try {
                 await deleteData(`/contacts/${contactId}`);
-               
+                console.log("Kontakt erfolgreich gelöscht.");
+                
                 removeLocalContactData(contactId);
                 renderListContact();
                 
