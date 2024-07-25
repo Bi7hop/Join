@@ -462,3 +462,81 @@ function showDetailContact(contactEmail) {
 }
 
 
+// ADD Contact
+
+
+
+// Funktion zum Generieren einer zufälligen Farbe in Hexadezimalformat
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Funktion zum Generieren des Emblems basierend auf dem Namen
+function generateEmblem(name) {
+    if (!name) return ''; 
+    const initials = name.split(' ').map(word => word[0]).join('');
+    return initials.toUpperCase(); 
+}
+
+// Funktion zum Überprüfen, ob eine E-Mail-Adresse bereits existiert
+function isEmailUnique(email) {
+    for (let i = 0; i < firebaseContacts.length; i++) {
+        let contactGroup = firebaseContacts[i].dataExtracted;
+        for (let key in contactGroup) {
+            if (contactGroup[key].email === email) {
+                return false;
+            }
+        }
+    }
+    return true; 
+}
+
+async function addNewContact() {
+    let emailError = document.getElementById("emailError");
+    emailError.style.display = "none"; 
+
+    let name = getValue("contactNewName");
+    let email = getValue("contactNewMail");
+    let phone = getValue("contactNewPhone");
+
+    if (!isEmailUnique(email)) {
+        emailError.style.display = "block";
+        return; 
+    }
+
+    let color = getRandomColor();
+    let emblem = generateEmblem(name);
+
+    let extractedData = {
+        name: name,
+        email: email,
+        phone: phone,
+        color: color,
+        emblem: emblem
+    };
+
+    try {
+        const response = await postData("contacts", extractedData);
+        console.log("Kontakt erfolgreich hinzugefügt:", response);
+
+        document.getElementById("newContactForm").reset();
+
+        closeAddContact();
+
+        window.location.reload(); 
+    } catch (error) {
+        console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    }
+}
+
+
+
+
+
+
+

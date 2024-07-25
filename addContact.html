@@ -15,7 +15,7 @@
 
 <body>
     <div class="contact-card-placement flex-center">
-        <form onsubmit="addNewContact()" class="new-contact-card">
+        <form id="newContactForm" class="new-contact-card">
             <section class="text-logo-area flex-center">
                 <div class="logo-div">
                     <img class="logo" src="/img/Join_Logo.png">
@@ -37,26 +37,27 @@
             </div>
 
             <div class="contact-input-field">
-                <div class="contact-input ">
-                    <input id="contactNewName" type="text" class="input font-fourhundrdred-twentyfour" placeholder="Name" required></input>
+                <div class="contact-input">
+                    <input id="contactNewName" type="text" class="input font-fourhundrdred-twentyfour" placeholder="Name" required
+                        pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces.">
                     <img class="input-img" src="/img/addContact-profile-gray.png">
                 </div>
                 <div class="contact-input">
-                    <input id="contactNewMail" type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email"
-                        required></input>
+                    <input id="contactNewMail" type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address.">
                     <img class="input-img" src="/img/addContact-email.png">
-                </div>
+                    <span id="emailError" class="error-message" style="display:none;">Diese E-Mail-Adresse ist bereits registriert.</span>
+                </div>                
                 <div class="contact-input">
-                    <input id="contactNewPhone" type="number" class="input font-fourhundrdred-twentyfour" placeholder="Phone"
-                        required></input>
+                    <input id="contactNewPhone" type="tel" class="input font-fourhundrdred-twentyfour"  placeholder="Phone" required
+                        pattern="^\d{10,15}$" title="Phone number should be between 10 to 15 digits.">
                     <img class="input-img" src="/img/addContact-phone.png">
                 </div>
             </div>
             <div class="buttons-area">
                 <button onclick="closeAddContact()" class="cancel-btn font-fourhundrdred-twentyfour flex-center">Cancel <span
                         class="cross-icon">&#10006;</span></button>
-                <button class="create-contact-btn flex-center">Create contact <span class="check"><img class="check-img"
-                            src="/img/check.png"></span></button>
+                        <button class="create-contact-btn flex-center" type="button" onclick="addNewContact()">Create contact <span class="check"><img class="check-img" src="/img/check.png"></span></button>
             </div>
         </form>
     </div>
