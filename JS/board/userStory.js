@@ -2,8 +2,6 @@ function openUserStory() {
     let overlay = document.getElementById('overlay');
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
     boardBodyContainer.style.overflow = "hidden";
-
-    // userStoryContainer.innerHTML = userStoryHtmlTemplate();
     overlay.classList.add("overlay");
 
 
@@ -13,7 +11,7 @@ function openUserStory() {
     firebaseData.forEach(task => {
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
-
+            console.log(taskData.title);
             const formattedContacts = formatContacts(taskData.taskContacts);
             const taskHtml = userStoryHtmlTemplate(taskData, formattedContacts)
             const taskContainer = document.createElement('div');
