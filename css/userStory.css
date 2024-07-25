@@ -159,6 +159,32 @@
     margin-right: 16px;
 }
 
+.userStoryContactContainer {
+    display:flex;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.userStoryContactEmblemContainer {
+    color: white;
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 24px;
+}
+
+.userStoryContactFullName {
+    display:flex;
+    flex-direction: column;
+    gap: 19px;
+    margin-left: 16px;
+}
+
+.assignedContactsFullName {
+    color: black;
+}
+
 .userStoryContactFullName {
     font-family: "Open Sans";
     font-weight: 400;
@@ -251,8 +277,8 @@
 }
 
 .userStorySubtaskTitelContainer {
-    margin-left: 48px;
-    width: fit-content;
+    margin-left: 24px;
+    
     padding: 4px 8px 4px 0;
 }
 
@@ -349,3 +375,23 @@
     color:#000000;
 }
 
+.userStorySubtasksContainer {
+    display:flex;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 4px 8px 4px 8px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.userStorySubtasksContainer:hover {
+    background-color:#0000002a;
+}
+
+.userStorySubtaskTitle {
+    margin-left: 8px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}

@@ -1,55 +1,124 @@
-function openUserStory() {
+// function openUserStory() {
+//     let overlay = document.getElementById('overlay');
+//     let boardBodyContainer = document.querySelector('.boardBodyContainer');
+//     boardBodyContainer.style.overflow = "hidden";
+//     overlay.classList.add("overlay");
+
+//     const container = document.getElementById('userStoryWindow');
+
+//     firebaseData.forEach(task => {
+//         Object.keys(task.dataExtracted).forEach(key => {
+//             const taskData = task.dataExtracted[key];
+//             const formattedContacts = formatContacts(taskData.taskContacts);
+//             const taskHtml = userStoryHtmlTemplate(taskData)
+//             const taskContainer = document.createElement('div');
+//             taskContainer.innerHTML = taskHtml;
+//             container.appendChild(taskContainer.firstElementChild);
+//             console.log(taskData);
+//         })
+//     })
+// }
+
+
+
+function openUserStory(id) {
     let overlay = document.getElementById('overlay');
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
     boardBodyContainer.style.overflow = "hidden";
     overlay.classList.add("overlay");
 
-
     const container = document.getElementById('userStoryWindow');
 
-
-    firebaseData.forEach(task => {
+    firebaseTasks.forEach(task => {
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
-            console.log(taskData.title);
-            const formattedContacts = formatContacts(taskData.taskContacts);
-            const taskHtml = userStoryHtmlTemplate(taskData, formattedContacts)
-            const taskContainer = document.createElement('div');
-            taskContainer.innerHTML = taskHtml;
-            container.appendChild(taskContainer.firstElementChild);
+            if (id === taskData.id) {
+                const formattedSubtasks = formatSubtasks(taskData.taskSubtasks)
+                const formattedContactsFullName = formatContactsFullName(taskData.taskContacts);
+                const formattedContacts = formatContacts(taskData.taskContacts);
+                const taskHtml = userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks);
+                const taskContainer = document.createElement('div');
+                taskContainer.innerHTML = taskHtml;
+                container.appendChild(taskContainer.firstElementChild);
+            }
         })
     })
 }
 
-// // RenderTickets Funktion für die AddTask funktion verändert
-// // Updated renderTickets function
-// function renderTickets(columnId, status) {
-//     // Container im HTML, wo die Titel angezeigt werden sollen
-//     const container = document.getElementById(columnId);
-//     // Überprüfen, ob der Container vorhanden ist
-//     if (!container) {
-//         console.error(`Element mit id ${columnId} not found.`);
-//         return;
-//     }
-//     // Clear the container before adding new content
-//     container.innerHTML = '';
-//     // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
-//     firebaseData.forEach(task => {
-//         // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
-//         Object.keys(task.dataExtracted).forEach(key => {
-//             const taskData = task.dataExtracted[key];
-//             if (taskData.taskStatus === status) {
-//                 const formattedContacts = formatContacts(taskData.taskContacts);
-//                 const taskHtml = ticketTemplate(taskData, formattedContacts);
-//                 // Create a container for each task
-//                 const taskContainer = document.createElement('div');
-//                 taskContainer.innerHTML = taskHtml;
-//                 // Füge das erstellte <div> Element dem Container hinzu
-//                 container.appendChild(taskContainer.firstElementChild);
+
+// Format contacts for a specific task
+function formatContactsFullName(taskContacts) {
+    let formattedContactsFullName = '';
+    if (Array.isArray(taskContacts)) {
+        taskContacts.forEach(contact => {
+            if (contact.name) {
+                formattedContactsFullName += `<div class="assignedContactsFullName">${contact.name}</div>`;
+            }
+        });
+    }
+    return formattedContactsFullName;
+}
+
+// Format Subtasks
+// function formatSubtasks(taskSubtasks) {
+//     let formattedSubtasks = '';
+//     if (Array.isArray(taskSubtasks)) {
+//         taskSubtasks.forEach(subtask => {
+//             if (subtask) {
+
+//                     formattedSubtasks += `
+//                 <div class="userStorySubtasksContainer">
+//                     <img onclick="toggleCheckbox()" id="subtask" src="./img/checkbox_uncheckt.png">
+//                     <div class="userStorySubtaskTitle">${subtask}</div>
+//                 </div>`;
+                
 //             }
 //         });
-//     });
+//     }
+//     return formattedSubtasks;
 // }
+
+
+// Funktion zum Formatieren und Zurückgeben des HTML für Subtasks
+function formatSubtasks(taskSubtasks) {
+    if (!Array.isArray(taskSubtasks)) {
+        return '';
+    }
+    return taskSubtasks.map(subtask => {
+        if (!subtask) return ''; // Leere Subtasks überspringen
+        return `
+        <div class="userStorySubtasksContainer">
+            <img id="${subtask.replace(/\s+/g, '_')}" class="subtask-checkbox" src="./img/checkbox_uncheckt.png" alt="Checkbox">
+            <div class="userStorySubtaskTitle">${subtask}</div>
+        </div>`;
+    }).join('');
+}
+
+// Funktion zur Initialisierung der Checkbox-Funktionalität
+function initializeSubTaskCheckboxes() {
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.classList.contains('subtask-checkbox')) {
+            toggleCheckbox(event.target.id);
+        }
+    });
+}
+
+// Funktion zum Umschalten des Checkbox-Zustands
+function toggleCheckbox(subtaskId) {
+    const checkbox = document.getElementById(subtaskId);
+    if (checkbox) {
+        // Verwende getAttribute, um konsistent den src-Wert zu erhalten
+        const src = checkbox.getAttribute('src');
+        if (src.includes('checkbox_uncheckt.png')) {
+            checkbox.setAttribute('src', './img/checkbox_checkt_dark.png');
+        } else {
+            checkbox.setAttribute('src', './img/checkbox_uncheckt.png');
+        }
+    }
+}
+
+initializeSubTaskCheckboxes();
+
 
 
 

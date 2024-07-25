@@ -407,7 +407,14 @@ input[type=text]:focus {
 
 .taskTitle {
     margin-top: 16px;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 16px;
     color: #2A3647;
+    line-height: 19.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 38.4px;
 }
 
 .no-task-message {

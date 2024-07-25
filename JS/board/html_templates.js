@@ -24,21 +24,7 @@ let contacts = [
 ];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function userStoryHtmlTemplate(taskData, formattedContacts) {
+function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks) {
     return `
     <div id="${taskData.id}" class="userStoryOutsideContainer flying-element">
         <div class="userStoryContainer">
@@ -53,54 +39,51 @@ function userStoryHtmlTemplate(taskData, formattedContacts) {
                 </div>
                 <div>
                     <h1 class="userStoryHeadline">
-                        ${taskData.Title}
+                        ${taskData.taskTitle}
                     </h1>
                 </div>
                 <div class="openUserStoryTaskDescription">
-                    Build start page with recipe recommendation.
+                    ${taskData.taskDescription}
                 </div>
                 <div class="dueDateDateContainer">
                     <div class="dueDate">
                         Due date:
                     </div>
                     <div class="userStoryDateContainer">
-                        18/06/2024
+                        ${taskData.taskDate}
                     </div>
                 </div>
                 <div class="priorityContainer">
                     <div class="priority">
                         Priority:
                     </div>
-                    <div class="priorityImageContainer">Medium <img src="./img/userStory/prio_medium.png"
-                            alt="Medium Priority"></div>
+                    <div class="priorityImageContainer">${taskData.taskPrioAlt} <img src="${taskData.taskPrioImage}"
+                            alt="${taskData.taskPrioAlt}"></div>
                 </div>
                 <div class="assignedToContainer">
                     Assigned To:
                 </div>
+
                 <div class="userStoryContactContainer">
-                    ${formattedContacts}
+                    <div class="userStoryContactEmblemContainer">
+                        ${formattedContacts} 
+                    </div>
+                    <div class="userStoryContactFullName"> 
+                        ${formattedContactsFullName}
+                    </div>
                 </div>
                 <div class="userStorySubtaskContainer">
                     Subtasks
                 </div>
-                <div class="subtaskCheckboxHoverEffect">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
+                
+                
+
                     <div class="userStorySubtaskTitelContainer">
-                        <p>Implement Recipe Recommendation</p>
+                        <p>${formattedSubtasks}</p>
                     </div>
-                </div>
-                <div class="subtaskCheckboxHoverEffect">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="userStorySubtaskTitelContainer">
-                        <p>Start page layout</p>
-                    </div>
-                </div>
+                
+
+
                 <div class="userStoryDeleteAndEditContainer">
                     <div class="userStoryDeleteContainer userStoryBackgroundImageDelete">
                         <div class="userStoryDeleteTextContainer">Delete</div>
@@ -113,12 +96,8 @@ function userStoryHtmlTemplate(taskData, formattedContacts) {
             </div>
         </div>
     </div>
-    `
+    `;
 }
-
-
-
-
 
 
 
@@ -249,10 +228,9 @@ function userStoryEditHtmlTemplate() {
 }
 
 
-// Test Funktion für die AddTask geschichte
 function ticketTemplate(taskData, formattedContacts) {
     return `
-        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
+        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id})" ondragend="endDragging(${taskData.id})" class="taskColumn task">
             <div class="taskColumnContainer">
                 <div id="taskType" class="taskType">${taskData.taskType}</div>
                 <div class="taskTitle">${taskData.taskTitle}</div>
@@ -279,7 +257,6 @@ function ticketTemplate(taskData, formattedContacts) {
         </div>
     `;
 }
-
 
 function dropDownListSample() {
     let list = '';
@@ -331,6 +308,7 @@ function personsFoundPost() {
     }
     return list;
 }
+
 function subtaskSample() {
     let list = '<ul class="subTaskList ulPadding">';
     for (let i = 0; i < subtasks.length; i++) {
