@@ -237,3 +237,14 @@ h2 {
     background-color: #29abe2;
 }
 
+.error-message {
+    color: red;
+    font-size: 12px; 
+    position: absolute; 
+    top: 130px; 
+    left: 0;
+    margin-top: 12px; 
+    display: none; 
+    white-space: nowrap; 
+}
+

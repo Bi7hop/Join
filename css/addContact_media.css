@@ -93,6 +93,12 @@
         width: 202px;
         padding: 18px 10px;
     }
+
+    .error-message {
+        top: 86px;
+        font-size: 10px;
+
+    }
 }
 
 @media (max-width: 416px) {
