@@ -1,25 +1,4 @@
-// function openUserStory() {
-//     let overlay = document.getElementById('overlay');
-//     let boardBodyContainer = document.querySelector('.boardBodyContainer');
-//     boardBodyContainer.style.overflow = "hidden";
-//     overlay.classList.add("overlay");
-
-//     const container = document.getElementById('userStoryWindow');
-
-//     firebaseData.forEach(task => {
-//         Object.keys(task.dataExtracted).forEach(key => {
-//             const taskData = task.dataExtracted[key];
-//             const formattedContacts = formatContacts(taskData.taskContacts);
-//             const taskHtml = userStoryHtmlTemplate(taskData)
-//             const taskContainer = document.createElement('div');
-//             taskContainer.innerHTML = taskHtml;
-//             container.appendChild(taskContainer.firstElementChild);
-//             console.log(taskData);
-//         })
-//     })
-// }
-
-
+let selectedOptions = {};
 
 function openUserStory(id) {
     let overlay = document.getElementById('overlay');
@@ -28,22 +7,155 @@ function openUserStory(id) {
     overlay.classList.add("overlay");
 
     const container = document.getElementById('userStoryWindow');
+    container.innerHTML = ''; // Clear previous content
 
-    firebaseTasks.forEach(task => {
-        Object.keys(task.dataExtracted).forEach(key => {
-            const taskData = task.dataExtracted[key];
+    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
+        const tasksData = firebaseTasks[0].dataExtracted;
+        Object.keys(tasksData).forEach(key => {
+            const taskData = tasksData[key];
             if (id === taskData.id) {
-                const formattedSubtasks = formatSubtasks(taskData.taskSubtasks)
+                const formattedSubtasks = formatSubtasks(taskData.taskSubtasks, taskData.id, key);
+                console.log("open Ticket Key:::", key);
                 const formattedContactsFullName = formatContactsFullName(taskData.taskContacts);
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const taskHtml = userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks);
                 const taskContainer = document.createElement('div');
                 taskContainer.innerHTML = taskHtml;
                 container.appendChild(taskContainer.firstElementChild);
+
+                // Initialize selected options for the task
+                selectedOptions[taskData.id] = taskData.taskSubtasksSelected || [];
             }
-        })
-    })
+        });
+    } else {
+        console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
+    }
+
+    initializeSubTaskCheckboxes();
 }
+
+function formatSubtasks(taskSubtasks) {
+    if (!Array.isArray(taskSubtasks)) {
+        return '';
+    }
+    return taskSubtasks.map(subtask => {
+        if (!subtask) return ''; // Leere Subtasks überspringen
+        return `
+        <div class="userStorySubtasksContainer">
+            <img id="${subtask.replace(/\s+/g, '_')}" onclick="toggleCheckbox('${subtask.replace(/\s+/g, '_')}');" class="subtask-checkbox" data-checked="false" src="./img/checkbox_uncheckt.png" alt="Checkbox">
+            <div class="userStorySubtaskTitle">${subtask}</div>
+        </div>`;
+    }).join('');
+}
+
+function initializeSubTaskCheckboxes() {
+    document.addEventListener('click', function (event) {
+        if (event.target && event.target.classList.contains('subtask-checkbox')) {
+            console.log(event.target.id);
+        }
+    });
+}
+
+async function toggleCheckbox(subtaskId) {
+    const checkbox = document.getElementById(subtaskId);
+    if (checkbox) {
+        const isChecked = checkbox.dataset.checked === 'true';
+        checkbox.dataset.checked = !isChecked;
+
+        const src = isChecked ? './img/checkbox_uncheckt.png' : './img/checkbox_checkt_dark.png';
+        checkbox.setAttribute('src', src);
+
+        const taskId = getTaskIdFromSubtaskId(subtaskId);
+        const taskKey = getTaskKeyFromSubtaskId(subtaskId);
+
+        if (taskId !== null && taskKey !== null) {
+            if (!isChecked) {
+                selectedOptions[taskId].push(subtaskId);
+            } else {
+                selectedOptions[taskId] = selectedOptions[taskId].filter(id => id !== subtaskId);
+            }
+
+            // Finde den entsprechenden Task in firebaseTasks und aktualisiere ihn
+            try {
+                await patchSubtaskSelected(taskKey, { taskSubtasksSelected: selectedOptions[taskId] });
+                console.log("Daten für Task", taskId, "aktualisiert");
+            } catch (error) {
+                console.error("Fehler beim Aktualisieren der Daten:", error);
+            }
+        } else {
+            console.error("TaskId oder TaskKey für SubtaskId", subtaskId, "nicht gefunden.");
+        }
+    }
+}
+
+function getTaskIdFromSubtaskId(subtaskId) {
+    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
+        const tasksData = firebaseTasks[0].dataExtracted;
+        for (const key in tasksData) {
+            const taskData = tasksData[key];
+            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => subtask.replace(/\s+/g, '_') === subtaskId)) {
+                return taskData.id;
+            }
+        }
+    }
+    return null;
+}
+
+function getTaskKeyFromSubtaskId(subtaskId) {
+    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
+        const tasksData = firebaseTasks[0].dataExtracted;
+        for (const key in tasksData) {
+            const taskData = tasksData[key];
+            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => subtask.replace(/\s+/g, '_') === subtaskId)) {
+                return key;
+            }
+        }
+    }
+    return null;
+}
+
+async function patchSubtaskSelected(taskKey, updatedData) {
+    const path = `tasks/${taskKey}`;
+    try {
+        let response = await fetch(`${BASE_URL}/${path}.json`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+        });
+        return await response.json();
+    } catch (error) {
+        console.error("Fehler beim Aktualisieren der Daten:", error);
+    }
+}
+
+function findTaskById(taskId) {
+    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
+        const tasksData = firebaseTasks[0].dataExtracted;
+        for (const key in tasksData) {
+            if (tasksData[key].id === taskId) {
+                return tasksData[key];
+            }
+        }
+    }
+    return null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Format contacts for a specific task
@@ -58,91 +170,6 @@ function formatContactsFullName(taskContacts) {
     }
     return formattedContactsFullName;
 }
-
-// Format Subtasks
-// function formatSubtasks(taskSubtasks) {
-//     let formattedSubtasks = '';
-//     if (Array.isArray(taskSubtasks)) {
-//         taskSubtasks.forEach(subtask => {
-//             if (subtask) {
-
-//                     formattedSubtasks += `
-//                 <div class="userStorySubtasksContainer">
-//                     <img onclick="toggleCheckbox()" id="subtask" src="./img/checkbox_uncheckt.png">
-//                     <div class="userStorySubtaskTitle">${subtask}</div>
-//                 </div>`;
-                
-//             }
-//         });
-//     }
-//     return formattedSubtasks;
-// }
-
-
-// Funktion zum Formatieren und Zurückgeben des HTML für Subtasks
-function formatSubtasks(taskSubtasks) {
-    if (!Array.isArray(taskSubtasks)) {
-        return '';
-    }
-    return taskSubtasks.map(subtask => {
-        if (!subtask) return ''; // Leere Subtasks überspringen
-        return `
-        <div class="userStorySubtasksContainer">
-            <img id="${subtask.replace(/\s+/g, '_')}" class="subtask-checkbox" src="./img/checkbox_uncheckt.png" alt="Checkbox">
-            <div class="userStorySubtaskTitle">${subtask}</div>
-        </div>`;
-    }).join('');
-}
-
-// Funktion zur Initialisierung der Checkbox-Funktionalität
-function initializeSubTaskCheckboxes() {
-    document.addEventListener('click', function(event) {
-        if (event.target && event.target.classList.contains('subtask-checkbox')) {
-            toggleCheckbox(event.target.id);
-        }
-    });
-}
-
-// Funktion zum Umschalten des Checkbox-Zustands
-function toggleCheckbox(subtaskId) {
-    const checkbox = document.getElementById(subtaskId);
-    if (checkbox) {
-        // Verwende getAttribute, um konsistent den src-Wert zu erhalten
-        const src = checkbox.getAttribute('src');
-        if (src.includes('checkbox_uncheckt.png')) {
-            checkbox.setAttribute('src', './img/checkbox_checkt_dark.png');
-        } else {
-            checkbox.setAttribute('src', './img/checkbox_uncheckt.png');
-        }
-    }
-}
-
-initializeSubTaskCheckboxes();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -395,3 +395,7 @@
     font-weight: 400;
     color: black;
 }
+
+.subtask-checkbox {
+    cursor:pointer;
+}
