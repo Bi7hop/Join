@@ -14,10 +14,18 @@ function renderTickets(columnId, status) {
     firebaseData.forEach(task => {
         // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
         Object.keys(task.dataExtracted).forEach(key => {
+
             const taskData = task.dataExtracted[key];
+
             if (taskData.taskStatus === status) {
+
+                const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected)
+
+
+                const formattedSubtaskBar = formatSubtaskBar(taskData);
+
                 const formattedContacts = formatContacts(taskData.taskContacts);
-                const taskHtml = ticketTemplate(taskData, formattedContacts);
+                const taskHtml = ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar);
                 // Create a container for each task
                 const taskContainer = document.createElement('div');
                 taskContainer.innerHTML = taskHtml;
@@ -26,6 +34,30 @@ function renderTickets(columnId, status) {
             }
         });
     });
+}
+
+
+function formatSubtaskBar(taskData) {
+    let subtaskBar = '';
+    if (taskData.taskSubtasksSelected && taskData.taskSubtaskAmount > 0) {
+        const completedPercentage = (taskData.taskSubtasksSelected.length * 100) / taskData.taskSubtaskAmount;
+        subtaskBar = `${completedPercentage}`;
+    } else {
+        subtaskBar = '0';
+    }
+    return subtaskBar;
+}
+
+
+
+function formatSubtasksSelected(taskSubtasksSelected) {
+    let subtasksSelected = '';
+
+    if (taskSubtasksSelected) {
+        subtasksSelected = taskSubtasksSelected.length;
+    }
+
+    return subtasksSelected;
 }
 
 

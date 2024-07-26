@@ -33,7 +33,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                     <div class="taskType">
                         ${taskData.taskType}
                     </div>
-                    <div onclick="closeUserStory()" class="userStoryCloseButtonContainer">
+                    <div onclick="closeUserStory(), location.reload()" class="userStoryCloseButtonContainer">
                         <img src="./img/userStory/close.png" alt="Close">
                     </div>
                 </div>
@@ -228,7 +228,7 @@ function userStoryEditHtmlTemplate() {
 }
 
 
-function ticketTemplate(taskData, formattedContacts) {
+function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar) {
     return `
         <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id})" ondragend="endDragging(${taskData.id})" class="taskColumn task">
             <div class="taskColumnContainer">
@@ -237,9 +237,9 @@ function ticketTemplate(taskData, formattedContacts) {
                 <div class="taskDescription">${taskData.taskDescription}</div>
                 <div class="taskSubtaskBarContainer">
                     <div class="taskSubtaskBar">
-                        <div style="width:${taskData.taskBar}%" class="taskSubtaskBarFilledBar"></div>
+                        <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
-                    <span>${taskData.taskSubtasksDone}/${taskData.taskSubtaskAmount} Subtask</span>
+                    <span>${formattedSubtasksSelected}/${taskData.taskSubtaskAmount} Subtask</span>
                 </div>
                 <div class="taskContactsPrioContainer">
                     <div class="taskContactsContainer">

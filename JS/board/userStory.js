@@ -1,5 +1,6 @@
 let selectedOptions = {};
 
+
 function openUserStory(id) {
     let overlay = document.getElementById('overlay');
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
@@ -14,7 +15,8 @@ function openUserStory(id) {
         Object.keys(tasksData).forEach(key => {
             const taskData = tasksData[key];
             if (id === taskData.id) {
-                const formattedSubtasks = formatSubtasks(taskData.taskSubtasks, taskData.id, key);
+                const formattedSubtasks = formatSubtasks(taskData.taskSubtasks, taskData.taskSubtasksSelected, taskData.id);
+
                 console.log("open Ticket Key:::", key);
                 const formattedContactsFullName = formatContactsFullName(taskData.taskContacts);
                 const formattedContacts = formatContacts(taskData.taskContacts);
@@ -30,19 +32,22 @@ function openUserStory(id) {
     } else {
         console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
     }
-
     initializeSubTaskCheckboxes();
 }
 
-function formatSubtasks(taskSubtasks) {
+
+function formatSubtasks(taskSubtasks, taskSubtasksSelected, taskId) {
     if (!Array.isArray(taskSubtasks)) {
         return '';
     }
     return taskSubtasks.map(subtask => {
         if (!subtask) return ''; // Leere Subtasks überspringen
+        const subtaskId = `${taskId}_${subtask.replace(/\s+/g, '_')}`;
+        const isChecked = taskSubtasksSelected && taskSubtasksSelected.includes(subtaskId);
+        const checkboxSrc = isChecked ? './img/checkbox_checkt_dark.png' : './img/checkbox_uncheckt.png';
         return `
         <div class="userStorySubtasksContainer">
-            <img id="${subtask.replace(/\s+/g, '_')}" onclick="toggleCheckbox('${subtask.replace(/\s+/g, '_')}');" class="subtask-checkbox" data-checked="false" src="./img/checkbox_uncheckt.png" alt="Checkbox">
+            <img id="${subtaskId}" onclick="toggleCheckbox('${subtaskId}');" class="subtask-checkbox" data-checked="${isChecked}" src="${checkboxSrc}" alt="Checkbox">
             <div class="userStorySubtaskTitle">${subtask}</div>
         </div>`;
     }).join('');
@@ -61,20 +66,18 @@ async function toggleCheckbox(subtaskId) {
     if (checkbox) {
         const isChecked = checkbox.dataset.checked === 'true';
         checkbox.dataset.checked = !isChecked;
-
         const src = isChecked ? './img/checkbox_uncheckt.png' : './img/checkbox_checkt_dark.png';
         checkbox.setAttribute('src', src);
-
         const taskId = getTaskIdFromSubtaskId(subtaskId);
         const taskKey = getTaskKeyFromSubtaskId(subtaskId);
-
         if (taskId !== null && taskKey !== null) {
             if (!isChecked) {
+                selectedOptions[taskId] = selectedOptions[taskId] || [];
                 selectedOptions[taskId].push(subtaskId);
             } else {
+                selectedOptions[taskId] = selectedOptions[taskId] || [];
                 selectedOptions[taskId] = selectedOptions[taskId].filter(id => id !== subtaskId);
             }
-
             // Finde den entsprechenden Task in firebaseTasks und aktualisiere ihn
             try {
                 await patchSubtaskSelected(taskKey, { taskSubtasksSelected: selectedOptions[taskId] });
@@ -93,7 +96,8 @@ function getTaskIdFromSubtaskId(subtaskId) {
         const tasksData = firebaseTasks[0].dataExtracted;
         for (const key in tasksData) {
             const taskData = tasksData[key];
-            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => subtask.replace(/\s+/g, '_') === subtaskId)) {
+            const taskSubtaskIdPrefix = `${taskData.id}_`;
+            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => `${taskSubtaskIdPrefix}${subtask.replace(/\s+/g, '_')}` === subtaskId)) {
                 return taskData.id;
             }
         }
@@ -106,13 +110,27 @@ function getTaskKeyFromSubtaskId(subtaskId) {
         const tasksData = firebaseTasks[0].dataExtracted;
         for (const key in tasksData) {
             const taskData = tasksData[key];
-            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => subtask.replace(/\s+/g, '_') === subtaskId)) {
+            const taskSubtaskIdPrefix = `${taskData.id}_`;
+            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => `${taskSubtaskIdPrefix}${subtask.replace(/\s+/g, '_')}` === subtaskId)) {
                 return key;
             }
         }
     }
     return null;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function patchSubtaskSelected(taskKey, updatedData) {
     const path = `tasks/${taskKey}`;
@@ -202,7 +220,6 @@ function closeUserStoryEdit() {
     let userStoryContainer = document.getElementById('userStoryWindow');
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
     let overlay = document.getElementById('overlay');
-
     userStoryContainer.style.animation = 'fly-out 0.1s forwards';
     overlay.style.animation = 'fade-out 0.2s forwards';
     setTimeout(() => {
