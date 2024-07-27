@@ -1,3 +1,161 @@
+// let subtasksAt = [];
+// let assignedPersons = [];
+// let foundPersons = [];
+
+// function showPersonsAt() {
+//   let rotate = document.getElementById("rotate");
+//   let dropDown = document.getElementById("dropdown-list");
+
+//   if (dropDown.classList.contains("hide")) {
+//     rotate.classList.add("rotated");
+//     dropDown.classList.remove("hide");
+//   } else {
+//     rotate.classList.remove("rotated");
+//     dropDown.classList.add("hide");
+//   }
+// }
+
+// function renderAssignedListAt() {
+//   let dropDownList = document.getElementById('dropdown-list');
+//   if (foundPersons && foundPersons.length > 0) {
+//     dropDownList.innerHTML = personsFoundPostAt();
+//   } else {
+//     dropDownList.innerHTML = dropDownListSampleAt();
+//   }
+// }
+
+// function sortContactsAt() {
+//   contactsAt.sort((a, b) => a.name.localeCompare(b.name));
+// }
+
+// function renderEmblemAt(name) {
+//   const initials = name.split(' ').map(word => word[0]).join('');
+//   return initials;
+// }
+
+// function addAssignedPersonAt(taskData) {
+//   checkboxSwapAt(taskData);
+//   checkIfExistAt(taskData);
+//   postPersonsAt(taskData);
+// }
+
+// function checkboxSwapAt(taskData) {
+//   let container = document.getElementById(`persons-assignemend${taskData.email}`);
+//   let checkbox = document.getElementById(`checkbox${taskData.email}`);
+//   let assignedName = document.getElementById(`assigned-name${taskData.email}`);
+
+//   if (!container.classList.contains('persons-assignemend-checkt')) {
+//     addCheckboxAt(container, checkbox, assignedName);
+//   } else {
+//     removeCheckboxAt(container, checkbox, assignedName);
+//   }
+// }
+
+// function addCheckboxAt(container, checkbox, assignedName) {
+//   container.classList.add('persons-assignemend-checkt');
+//   checkbox.src = './img/checkbox_checkt.png';
+//   assignedName.classList.add("assigned-color");
+// }
+
+// function removeCheckboxAt(container, checkbox, assignedName) {
+//   container.classList.remove('persons-assignemend-checkt');
+//   checkbox.src = './img/checkbox_uncheckt.png';
+//   assignedName.classList.remove("assigned-color");
+// }
+
+// function checkIfExistAt(taskData) {
+//   let container = document.getElementById(`persons-assignemend${taskData.email}`);
+
+//   if (container.classList.contains('persons-assignemend-checkt')) {
+//     if (!assignedPersons.includes(taskData)) {
+//       assignedPersons.push(taskData);
+//     }
+//   } else {
+//     let index = assignedPersons.indexOf(taskData);
+//     if (index > -1) {
+//       assignedPersons.splice(index, 1);
+//     }
+//   }
+// }
+
+// function postPersonsAt(taskData) {
+//   let assignedPersonsResults = document.getElementById('assigned-persons');
+
+//   assignedPersonsResults.innerHTML = '';
+//   assignedPersonsResults.innerHTML += assignedResultsAt(taskData);
+// }
+
+// function searchPersonAt() {
+//   let input = document.getElementById('assigned').value.trim().toLowerCase();
+
+//   if (input.length > 2) {
+//     openListAt(input);
+//     personsControlAt(input);
+//     personsFoundPostAt(foundPersons);
+//   } else {
+//     foundPersons = '';
+//     renderAssignedListAt();
+//   }
+// }
+
+// function personsControlAt(input) {
+//   foundPersons = []; // Reset foundPersons array
+//   let addedNames = new Set(); // Track added names to avoid duplicates
+
+//   // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
+//   firebaseData.forEach(task => {
+//     // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
+//     Object.keys(task.dataExtracted).forEach(key => {
+//       const taskData = task.dataExtracted[key];
+//       if (taskData.color) {
+//         if (taskData.name.toLowerCase().includes(input)) {
+//           if (!addedNames.has(taskData.name)) {
+//             foundPersons.push(taskData);
+//             addedNames.add(taskData.name); // Add name to the set
+//           }
+//         }
+//       }
+//     })
+//   })
+// }
+
+
+
+// function checkIfFoundExistAt(i) {
+//   let container = document.getElementById(`persons-assignemend${i}`);
+
+//   if (container.classList.contains('persons-assignemend-checkt')) {
+//     if (!assignedPersons.includes(foundPersons[i])) {
+//       assignedPersons.push(foundPersons[i]);
+//     }
+//   } else {
+//     let index = assignedPersons.indexOf(foundPersons[i]);
+//     if (index > -1) {
+//       assignedPersons.splice(index, 1);
+//     }
+//   }
+// }
+
+// function addFoundPersonAt(i) {
+//   checkboxSwapAt(i);
+//   checkIfFoundExistAt(i);
+//   postPersonsAt();
+// }
+
+// function openListAt(input) {
+//   let rotate = document.getElementById("rotate");
+//   let dropDown = document.getElementById("dropdown-list");
+
+//   if (input.length == 0) {
+//     rotate.classList.remove("rotated");
+//     dropDown.classList.add("hide");
+//   } else {
+//     rotate.classList.add("rotated");
+//     dropDown.classList.remove("hide");
+//     renderAssignedListAt();
+//   }
+// }
+
 let subtasksAt = [];
 let assignedPersons = [];
 let foundPersons = [];
@@ -13,19 +171,52 @@ function showPersonsAt() {
     rotate.classList.remove("rotated");
     dropDown.classList.add("hide");
   }
-} 
+}
 
-function renderAssignedListAt(){
+function renderAssignedListAt() {
   let dropDownList = document.getElementById('dropdown-list');
   if (foundPersons && foundPersons.length > 0) {
     dropDownList.innerHTML = personsFoundPostAt();
   } else {
     dropDownList.innerHTML = dropDownListSampleAt();
   }
+
+  // Apply state to checkboxes after rendering
+  foundPersons.forEach(person => {
+    let container = document.getElementById(`persons-assignemend${person.email}`);
+    if (container) {
+      let checkbox = document.getElementById(`checkbox${person.email}`);
+      let assignedName = document.getElementById(`assigned-name${person.email}`);
+      // Set checkbox state based on whether the person is in assignedPersons
+      if (assignedPersons.some(assignedPerson => assignedPerson.email === person.email)) {
+        addCheckboxAt(container, checkbox, assignedName);
+      } else {
+        removeCheckboxAt(container, checkbox, assignedName);
+      }
+    }
+  });
 }
 
 function sortContactsAt() {
-  contactsAt.sort((a, b) => a.name.localeCompare(b.name));
+  firebaseData.forEach(task => {
+    let taskDataArray = [];
+
+    // Collect all taskData objects
+    Object.keys(task.dataExtracted).forEach(key => {
+      const taskData = task.dataExtracted[key];
+      if (taskData.color) {
+        taskDataArray.push(taskData);
+      }
+    });
+
+    // Sort the collected taskData objects by name
+    taskDataArray.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Assign sorted taskData back
+    taskDataArray.forEach((taskData, index) => {
+      task.dataExtracted[Object.keys(task.dataExtracted)[index]] = taskData;
+    });
+  });
 }
 
 function renderEmblemAt(name) {
@@ -33,120 +224,196 @@ function renderEmblemAt(name) {
   return initials;
 }
 
-function addAssignedPersonAt(i){
-  checkboxSwapAt(i);
-  checkIfExistAt(i);
+function addAssignedPersonAt(taskData) {
+  checkboxSwapAt(taskData);
+  checkIfExistAt(taskData);
   postPersonsAt();
 }
 
-function checkboxSwapAt(i){
-  let container = document.getElementById(`persons-assignemend${i}`);
-  let checkbox = document.getElementById(`checkbox${i}`);
-  let assignedName = document.getElementById(`assigned-name${i}`);
+function checkboxSwapAt(taskData) {
+  let container = document.getElementById(`persons-assignemend${taskData.email}`);
+  let checkbox = document.getElementById(`checkbox${taskData.email}`);
+  let assignedName = document.getElementById(`assigned-name${taskData.email}`);
 
   if (!container.classList.contains('persons-assignemend-checkt')) {
     addCheckboxAt(container, checkbox, assignedName);
-  }else{
+  } else {
     removeCheckboxAt(container, checkbox, assignedName);
   }
+  updateAssignedPersons(taskData);
 }
 
-function addCheckboxAt(container, checkbox, assignedName){
+function addCheckboxAt(container, checkbox, assignedName) {
   container.classList.add('persons-assignemend-checkt');
   checkbox.src = './img/checkbox_checkt.png';
   assignedName.classList.add("assigned-color");
 }
 
-function removeCheckboxAt(container, checkbox, assignedName){
+function removeCheckboxAt(container, checkbox, assignedName) {
   container.classList.remove('persons-assignemend-checkt');
   checkbox.src = './img/checkbox_uncheckt.png';
   assignedName.classList.remove("assigned-color");
 }
 
-function checkIfExistAt(i) {
-  let container = document.getElementById(`persons-assignemend${i}`);
+function checkIfExistAt(taskData) {
+  let container = document.getElementById(`persons-assignemend${taskData.email}`);
+  let index = assignedPersons.findIndex(person => person.email === taskData.email);
 
   if (container.classList.contains('persons-assignemend-checkt')) {
-    if (!assignedPersons.includes(contactsAt[i])) {
-      assignedPersons.push(contactsAt[i]);
+    if (index === -1) {
+      assignedPersons.push(taskData);
     }
   } else {
-    let index = assignedPersons.indexOf(contactsAt[i]);
     if (index > -1) {
       assignedPersons.splice(index, 1);
     }
   }
 }
 
-function postPersonsAt(){
+function postPersonsAt() {
   let assignedPersonsResults = document.getElementById('assigned-persons');
- 
   assignedPersonsResults.innerHTML = '';
-  assignedPersonsResults.innerHTML += assignedResultsAt();
+  assignedPersons.forEach(taskData => {
+    assignedPersonsResults.innerHTML += assignedResultsAt(taskData);
+  });
 }
 
-function searchPersonAt(){
+function searchPersonAt() {
   let input = document.getElementById('assigned').value.trim().toLowerCase();
 
-  if (input.length > 2) {
+  if (input.length > 0) {
     openListAt(input);
-    personsControlAt(input);
-    personsFoundPostAt(foundPersons);
+    filterAndRenderPersons(input);
   } else {
-    foundPersons = '';
+    foundPersons = [];
     renderAssignedListAt();
   }
 }
 
-function personsControlAt(input){
+function filterAndRenderPersons(input) {
   foundPersons = []; // Reset foundPersons array
   let addedNames = new Set(); // Track added names to avoid duplicates
 
-  for (let i = 0; i < contactsAt.length; i++) {
-    let person = contactsAt[i];
-    if (person.name.toLowerCase().includes(input)) {
-      if (!addedNames.has(person.name)) {
-        foundPersons.push(person);
-        addedNames.add(person.name); // Add name to the set
+  firebaseData.forEach(task => {
+    Object.keys(task.dataExtracted).forEach(key => {
+      const taskData = task.dataExtracted[key];
+      if (taskData.color && taskData.name.toLowerCase().startsWith(input)) {
+        if (!addedNames.has(taskData.name)) {
+          foundPersons.push(taskData);
+          addedNames.add(taskData.name);
+        }
       }
-    }
-  }
+    });
+  });
+
+  // Render the list and maintain checkbox states
+  renderAssignedListAt();
 }
 
-function checkIfFoundExistAt(i) {
-  let container = document.getElementById(`persons-assignemend${i}`);
+function checkIfFoundExistAt(taskData) {
+  let container = document.getElementById(`persons-assignemend${taskData.email}`);
+  let index = assignedPersons.findIndex(person => person.email === taskData.email);
 
   if (container.classList.contains('persons-assignemend-checkt')) {
-    if (!assignedPersons.includes(foundPersons[i])) {
-      assignedPersons.push(foundPersons[i]);
+    if (index === -1) {
+      assignedPersons.push(taskData);
     }
   } else {
-    let index = assignedPersons.indexOf(foundPersons[i]);
     if (index > -1) {
       assignedPersons.splice(index, 1);
     }
   }
 }
 
-function addFoundPersonAt(i){
-  checkboxSwapAt(i);
-  checkIfFoundExistAt(i);
-  postPersonsAt(); 
+function addFoundPersonAt(taskData) {
+  checkboxSwapAt(taskData);
+  checkIfFoundExistAt(taskData);
+  postPersonsAt();
 }
 
-function openListAt(input){
+function openListAt(input) {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");
 
-  if (input.length == 0) {
+  if (input.length === 0) {
     rotate.classList.remove("rotated");
     dropDown.classList.add("hide");
   } else {
     rotate.classList.add("rotated");
     dropDown.classList.remove("hide");
-    renderAssignedListAt();
   }
 }
+
+function updateAssignedPersons(taskData) {
+  let index = assignedPersons.findIndex(person => person.email === taskData.email);
+  if (index === -1) {
+    assignedPersons.push(taskData);
+  } else {
+    assignedPersons.splice(index, 1);
+  }
+}
+
+// Dummy functions for placeholders
+function personsFoundPostAt() {
+  return foundPersons.map(person => `
+    <div id="persons-assignemend${person.email}">
+      <img id="checkbox${person.email}" src="./img/checkbox_uncheckt.png" />
+      <span id="assigned-name${person.email}">${renderEmblemAt(person.name)}</span>
+    </div>
+  `).join('');
+}
+
+function dropDownListSampleAt() {
+  return "<p>No persons found.</p>";
+}
+
+function assignedResultsAt(taskData) {
+  return `<div>${taskData.name}</div>`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function setPriorityAt(priority) {
   let priorities = {

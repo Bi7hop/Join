@@ -14,16 +14,10 @@ function renderTickets(columnId, status) {
     firebaseData.forEach(task => {
         // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
         Object.keys(task.dataExtracted).forEach(key => {
-
             const taskData = task.dataExtracted[key];
-
             if (taskData.taskStatus === status) {
-
                 const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected)
-
-
                 const formattedSubtaskBar = formatSubtaskBar(taskData);
-
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const taskHtml = ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar);
                 // Create a container for each task
@@ -52,11 +46,9 @@ function formatSubtaskBar(taskData) {
 
 function formatSubtasksSelected(taskSubtasksSelected) {
     let subtasksSelected = '';
-
     if (taskSubtasksSelected) {
         subtasksSelected = taskSubtasksSelected.length;
     }
-
     return subtasksSelected;
 }
 
