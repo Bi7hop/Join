@@ -120,18 +120,6 @@ function getTaskKeyFromSubtaskId(subtaskId) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 async function patchSubtaskSelected(taskKey, updatedData) {
     const path = `tasks/${taskKey}`;
     try {
@@ -161,21 +149,6 @@ function findTaskById(taskId) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Format contacts for a specific task
 function formatContactsFullName(taskContacts) {
     let formattedContactsFullName = '';
@@ -188,7 +161,6 @@ function formatContactsFullName(taskContacts) {
     }
     return formattedContactsFullName;
 }
-
 
 
 function closeUserStory() {
