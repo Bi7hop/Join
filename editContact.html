@@ -36,19 +36,21 @@
 
             <div class="contact-input-field">
                 <div class="contact-input">
-                    <input type="text" id="editContactName" class="input font-fourhundrdred-twentyfour" placeholder="Name" required></input>
+                    <input type="text" id="editContactName" class="input font-fourhundrdred-twentyfour" placeholder="Name" required pattern="[A-Za-z\s]{2,}">
                     <img class="input-img" src="/img/addContact-profile-gray.png">
                 </div>
                 <div class="contact-input">
-                    <input type="email" id="editContactEmail" class="input font-fourhundrdred-twentyfour" placeholder="Email" required></input>
+                    <input type="email" id="editContactEmail" class="input font-fourhundrdred-twentyfour" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     <img class="input-img" src="/img/addContact-email.png">
+                    <span id="eError" class="error-message-Edit" style="display:none;">Diese E-Mail-Adresse ist bereits registriert.</span>
                 </div>
                 <div class="contact-input">
-                    <input type="number" id="editContactPhone" class="input font-fourhundrdred-twentyfour" placeholder="Phone" required></input>
+                    <input type="tel" id="editContactPhone" class="input font-fourhundrdred-twentyfour" placeholder="Phone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                     <img class="input-img" src="/img/addContact-phone.png">
                 </div>
                 <input type="hidden" id="originalContactEmail" value="">
             </div>
+            
             <div class="buttons-area">
                 <button type="button" onclick="closeEditContact()" class="cancel-edit-btn font-fourhundrdred-twentyfour flex-center">Delete <span class="cross-icon">&#10006;</span></button>
                 <button type="button" onclick="saveEditContact()" class="create-edit-contact-btn flex-center">Save <span class="check"><img class="check-img" src="/img/check.png"></span></button>

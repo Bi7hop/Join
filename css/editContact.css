@@ -243,6 +243,17 @@ h2 {
     color: white;
 }
 
+.error-message-Edit {
+    color: red;
+    font-size: 12px; 
+    position: absolute; 
+    top: 130px; 
+    left: 0;
+    margin-top: 12px; 
+    display: none; 
+    white-space: nowrap; 
+}
+
 @media (max-width: 1339px) {
     .new-contact-card {
         width: 396px;
@@ -336,6 +347,12 @@ h2 {
         width: 202px;
         padding: 18px 10px;
     }
+
+    .error-message-Edit {
+        top: 86px;
+        font-size: 10px;
+
+    }
 }
 
 @media (max-width: 416px) {
@@ -423,3 +440,5 @@ h2 {
     }
 
 }
+
+

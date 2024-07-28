@@ -310,6 +310,18 @@ function closeAddContact() {
 // Edit Contact 
 
 
+function isEmailUnique(email) {
+    for (let i = 0; i < firebaseContacts.length; i++) {
+        let contactGroup = firebaseContacts[i].dataExtracted;
+        for (let key in contactGroup) {
+            if (contactGroup[key].email === email) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 function getContactIdByEmail(email) {
     for (let i = 0; i < firebaseContacts.length; i++) {
         let contactGroup = firebaseContacts[i].dataExtracted;
@@ -327,6 +339,7 @@ async function saveEditContact() {
     let emailElement = document.getElementById('editContactEmail');
     let phoneElement = document.getElementById('editContactPhone');
     let originalEmailElement = document.getElementById('originalContactEmail');
+    let emailErrorElement = document.getElementById('eError');
 
     if (!nameElement || !emailElement || !phoneElement || !originalEmailElement) {
         console.error("One or more input elements are missing.");
@@ -337,6 +350,14 @@ async function saveEditContact() {
     let email = emailElement.value;
     let phone = phoneElement.value;
     let originalEmail = originalEmailElement.value;
+
+    
+    emailErrorElement.style.display = 'none';
+
+    if (email !== originalEmail && !isEmailUnique(email)) {
+        emailErrorElement.style.display = 'inline'; 
+        return;
+    }
 
     let contactId = getContactIdByEmail(originalEmail);
 
@@ -360,6 +381,8 @@ async function saveEditContact() {
         console.error("Contact not found.");
     }
 }
+
+
 
 function updateLocalContactData(contactId, updatedContact) {
     for (let i = 0; i < firebaseContacts.length; i++) {
@@ -412,7 +435,6 @@ function openEditContact(email) {
         document.querySelector(".edit-contact-popup input[placeholder='Email']").value = email;
         document.querySelector(".edit-contact-popup input[placeholder='Phone']").value = phone;
         
-        
         document.getElementById("originalContactEmail").value = email;
 
         const emblemElement = document.querySelector(".edit-contact-popup .profile-img");
@@ -460,6 +482,7 @@ function showDetailContact(contactEmail) {
         });
     });
 }
+
 
 
 
