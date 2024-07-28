@@ -304,8 +304,6 @@ input[type=text]:focus {
     height: 32px;
     width: 32px;
     margin-right: 8px;
-    /* Color changed by Contact Type */
-    /* background-color: #F6F7F8; */
     border-radius: 50%;
     font-family: Inter;
     font-weight: 600;

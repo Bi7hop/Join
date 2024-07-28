@@ -118,7 +118,7 @@ function postPersonsAt() {
   let assignedPersonsResults = document.getElementById('assigned-persons');
   assignedPersonsResults.innerHTML = '';
   assignedPersons.forEach(taskData => {
-    assignedPersonsResults.innerHTML += assignedResultsAt(taskData);
+    assignedPersonsResults.innerHTML = assignedResultsAt(taskData);
   });
 }
 
@@ -448,7 +448,6 @@ function openAddTask() {
   let card = document.querySelector(".add-task-popup");
   let overlay = document.getElementById("overlay");
 
-  renderAssignedListAt();
   swapToPopup();
   hideOverflow();
   card.style.display = "block";
