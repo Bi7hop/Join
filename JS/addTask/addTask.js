@@ -3,6 +3,7 @@ let assignedPersons = [];
 let foundPersonsByInput = [];
 let checkboxStates = {}; // Declare checkboxStates globally
 
+
 function showPersonsAt() {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");
@@ -17,6 +18,19 @@ function showPersonsAt() {
     renderAssignedListAt();
   }
 }
+document.addEventListener("click", function(event) {
+  let rotate = document.getElementById("rotate");
+  let dropDown = document.getElementById("dropdown-list");
+  let inputField = document.getElementById("assigned"); // Reference to the input field
+
+  // Check if the clicked element is not the dropdown, the rotate button, or the input field
+  if (!rotate.contains(event.target) && !dropDown.contains(event.target) && !inputField.contains(event.target)) {
+    rotate.classList.remove("rotated");
+    dropDown.classList.add("hide");
+  }
+});
+
+
 
 function renderAssignedListAt() {
   let dropDownList = document.getElementById('dropdown-list');
@@ -449,3 +463,18 @@ function subTasksHoverEffect() {
     })
   };
 };
+
+
+function toggleDropdown(selectElement) {
+  const wrapper = selectElement.parentElement;
+  wrapper.classList.toggle('open');
+}
+// Close the dropdown if the user clicks outside of it
+document.addEventListener('click', function(event) {
+  const dropdowns = document.querySelectorAll('.select-wrapper');
+  dropdowns.forEach(function(wrapper) {
+    if (!wrapper.contains(event.target)) {
+      wrapper.classList.remove('open');
+    }
+  });
+});

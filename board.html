@@ -42,13 +42,13 @@
                     <img src="./img/board/search.png" alt="Search">
                 </div>
             </div>
-            <button class="btn" onclick="openAddTask()">Add task <img src="./img/board/add.png" alt="Add"></button>
+            <button class="btn" onclick="openAddTask(), addMediumAt()">Add task <img src="./img/board/add.png" alt="Add"></button>
         </div>
     </div>
     <div id="progressTitelColumn" class="progressBar">
         <div class="column1Container marginRight">
             <div class="progressbarColumnHeadline">
-                To do <div class="backgroundImage"></div>
+                To do <div onclick="openAddTask(), addMediumAt()" class="backgroundImage"></div>
             </div>
             <div class="columnContainer" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
             <div class="no-task-message-container">
@@ -59,7 +59,7 @@
         
         <div class="column1Container marginRight">
             <div class="progressbarColumnHeadline">
-                In progress <div class="backgroundImage"></div>
+                In progress <div onclick="openAddTask(), addMediumAt()" class="backgroundImage"></div>
             </div>
             <div class="columnContainer" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
             <div class="no-task-message-container">
@@ -69,7 +69,7 @@
         </div>
         <div class="column1Container marginRight">
             <div class="progressbarColumnHeadline">
-                Await feedback <div class="backgroundImage"></div>
+                Await feedback <div onclick="openAddTask(), addMediumAt()" class="backgroundImage"></div>
             </div>
             <div class="columnContainer" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
             <div class="no-task-message-container">
@@ -87,11 +87,6 @@
             </div>
             <div id="dragPosition3" ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('dragPosition3')" ondragleave="removeHighlight('dragPosition3')"></div>
         </div>
-
-
-        
-
-
         <div class="userStoryWindow" id="userStoryWindow"></div>
         <div id="overlay"></div>
     </div>
