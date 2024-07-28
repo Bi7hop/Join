@@ -60,7 +60,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                 
 
 
-                <div class="userStoryDeleteAndEditContainer">
+                <div class="userStoryDeleteAndEditContainer p-absolut">
                     <div class="userStoryDeleteContainer userStoryBackgroundImageDelete">
                         <div class="userStoryDeleteTextContainer">Delete</div>
                     </div>

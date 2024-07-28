@@ -33,6 +33,7 @@ function openUserStory(id) {
         console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
     }
     initializeSubTaskCheckboxes();
+    scrollToTop();
 }
 
 
@@ -203,3 +204,8 @@ function closeUserStoryEdit() {
     }, 200);
 }
 
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+    });
+}

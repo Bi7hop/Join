@@ -4,6 +4,7 @@
 
 .p-absolut {
     position:absolute;
+    width: 477px;
 }
 
 .userStoryOutsideContainer {
@@ -26,24 +27,27 @@
     border-radius: 30px;
     background-color: #ffffff;
     z-index: 99;
-    overflow: scroll;
+    overflow:auto;
 }
 
 .userStoryContainerInside {
-    width: 477px;
-    height: 867px;
+    width: 448px;
+    height: 100%;
 }
 
 .userStoryHeadlineAndCloseButtonContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
+    padding-top: 16px;
+    height: 64px;
+    width: 448px;
+    background-color: white;
 }
 
 .userStoryHeadline {
     color:#000000;
-    margin-top: 16px;
+    margin-top: 72px;
     font-size: 61px;
 }
 
@@ -299,8 +303,7 @@
 
 .userStorySubtaskTitelContainer {
     margin-left: 24px;
-    
-    padding: 4px 8px 4px 0;
+    padding: 4px 8px 56px 0;
 }
 
 .userStorySubtaskTitelContainer p {
@@ -326,7 +329,10 @@
     display: flex;
     align-items: center;
     justify-content: end;
-    margin-top: 24px;
+    background-color: #ffffff;
+    bottom: 41px;
+    width: 448px;
+    padding-bottom: 24px;
 }
 
 .userStoryDeleteContainer {
