@@ -3,7 +3,7 @@
 }
 
 .p-absolut {
-    position:absolute;
+    position:sticky;
     width: 477px;
 }
 
@@ -43,11 +43,12 @@
     height: 64px;
     width: 448px;
     background-color: white;
+    top: 0;
 }
 
 .userStoryHeadline {
     color:#000000;
-    margin-top: 72px;
+    margin-top: 8px;
     font-size: 61px;
 }
 
@@ -315,7 +316,7 @@
     align-items: center;
     justify-content: end;
     background-color: #ffffff;
-    bottom: 41px;
+    bottom: 0;
     width: 448px;
     padding-bottom: 24px;
 }
