@@ -301,6 +301,7 @@ function aproveSubtaskAt() {
     subtaskAt.value = "";
     postSubtaskAt();
   }
+  subTasksHoverEffect();
 }
 
 function postSubtaskAt() {
@@ -432,3 +433,19 @@ function minDate() {
   let today = new Date().toISOString().split('T')[0];
   dateInput.setAttribute('min', today);
 }
+
+function subTasksHoverEffect() {
+  for (let i = 0; i < subtasksAt.length; i++) {
+    const hoverListedItem = document.getElementById(`subtaskNr${i}`)
+    const hoverListedItemImage = document.getElementById(`subTaskHoverEffect${i}`);
+
+    hoverListedItem.addEventListener("mouseenter", function () {
+      hoverListedItemImage.style.display = "flex"
+      
+    });
+    hoverListedItem.addEventListener("mouseleave", function () {
+      hoverListedItemImage.style.display = "none"
+      
+    })
+  };
+};

@@ -1,3 +1,60 @@
+function subtaskSampleAt() {
+  let list = '<ul class="subTaskList ulPadding">';
+  for (let i = 0; i < subtasksAt.length; i++) {
+      const subtask = subtasksAt[i];
+      list += `<li class="listItemSubTasks listItem flex-row" id="subtaskNr${i}">
+      <span class="subtask-text">${subtask}</span>
+      <div style="display: none" id="subTaskHoverEffect${i}">
+          <div class="close-approve-container" id="editContainerAt${i}">
+              <div class="smallIconDiv" onclick="editSubtaskAt(this)">
+              <img class="smaller-icon" src="/img/edit-dark.png">
+              </div>
+              <span class="small-input-vertical-vector"></span>
+              <div class="smallIconDiv" onclick="deleteSubtaskAt(this)">
+              <img class="smaller-icon" src="/img/delete.png">
+              </div>
+          </div>
+          <div class="close-approve-container hide" id="addRemoveContainerEditAt${i}">
+              <div class="smallIconDiv" onclick="approveEditAt(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
+              <span class="small-input-vertical-vector"></span>
+              <div class="smallIconDiv" ><img onclick="cancelEditAt(this)" class="small-icon" src="/img/Close.png"></div>
+          </div>
+      </div>
+      </li>`;
+  }
+  list += "</ul>";
+  return list;
+}
+
+
+
+// function subtaskSampleAt() {
+//   let list = '<ul class="add-task-list">';
+//   for (let i = 0; i < subtasksAt.length; i++) {
+//     const subtask = subtasksAt[i];
+//     list += `<li class="listItem flex-row" id="subtaskNr${i}">
+//         <span class="subtask-text">${subtask}</span>
+//         <div class="close-approve-container" id="editContainerAt${i}">
+//           <div class="small-icon-div" onclick="editSubtaskAt(this)">
+//             <img class="smaller-icon" src="/img/edit-dark.png">
+//           </div>
+//           <span class="small-input-vertical-vector"></span>
+//           <div class="small-icon-div" onclick="deleteSubtaskAt(this)">
+//             <img class="smaller-icon" src="/img/delete.png">
+//           </div>
+//         </div>
+//         <div class="close-approve-container hide" id="addRemoveContainerEditAt${i}">
+//           <div class="small-icon-div" onclick="approveEditAt(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
+//           <span class="small-input-vertical-vector"></span>
+//           <div class="small-icon-div" onclick="cancelEditAt(this)"><img class="small-icon" src="/img/Close.png"></div>
+//         </div>
+//       </li>`;
+//   }
+//   list += "</ul>";
+//   return list;
+// }
+
+
 function dropDownListSampleAt() {
   let list = '';
   sortContactsAt();
@@ -29,32 +86,6 @@ function assignedResultsAt(taskData) {
   `;
 }
 
-
-function subtaskSampleAt() {
-  let list = '<ul class="add-task-list">';
-  for (let i = 0; i < subtasksAt.length; i++) {
-    const subtask = subtasksAt[i];
-    list += `<li class="listItem flex-row" id="subtaskNr${i}">
-        <span class="subtask-text">${subtask}</span>
-        <div class="close-approve-container" id="editContainerAt${i}">
-          <div class="small-icon-div" onclick="editSubtaskAt(this)">
-            <img class="smaller-icon" src="/img/edit-dark.png">
-          </div>
-          <span class="small-input-vertical-vector"></span>
-          <div class="small-icon-div" onclick="deleteSubtaskAt(this)">
-            <img class="smaller-icon" src="/img/delete.png">
-          </div>
-        </div>
-        <div class="close-approve-container hide" id="addRemoveContainerEditAt${i}">
-          <div class="small-icon-div" onclick="approveEditAt(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
-          <span class="small-input-vertical-vector"></span>
-          <div class="small-icon-div" onclick="cancelEditAt(this)"><img class="small-icon" src="/img/Close.png"></div>
-        </div>
-      </li>`;
-  }
-  list += "</ul>";
-  return list;
-}
 
 function personsFoundPostAt() {
   return foundPersonsByInput.map(person => `
