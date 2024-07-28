@@ -148,7 +148,6 @@ input[type=text]:focus {
     background-size: 24px 24px;
     width: 24px;
     height: 24px;
-    padding-right: 8px;
 }
 
 .backgroundImage:hover {

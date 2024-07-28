@@ -2,11 +2,6 @@
     margin: 0;
 }
 
-.p-absolut {
-    position:sticky;
-    width: 477px;
-}
-
 .userStoryOutsideContainer {
     width: 100%;
     height: 100vh;
@@ -44,6 +39,7 @@
     width: 448px;
     background-color: white;
     top: 0;
+    position:sticky;
 }
 
 .userStoryHeadline {
@@ -80,7 +76,7 @@
     font-weight: 400;
     font-size: 16px;
     color: white;
-    position:sticky;
+    
 }
 
 .userStoryHeadlineContainer h1 {
@@ -327,6 +323,7 @@
     bottom: 0;
     width: 448px;
     padding-bottom: 24px;
+    position: sticky;
 }
 
 .userStoryDeleteContainer {
@@ -399,7 +396,6 @@
 .userStorySubtasksContainer {
     display:flex;
     align-items: center;
-    background-color: aliceblue;
     padding: 4px 8px 4px 8px;
     border-radius: 8px;
     width: fit-content;

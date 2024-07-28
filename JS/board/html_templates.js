@@ -4,7 +4,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
         <div class="userStoryContainer">
             <div class="userStoryContainerInside">
                 
-                    <div class="userStoryHeadlineAndCloseButtonContainer p-absolut">
+                    <div class="userStoryHeadlineAndCloseButtonContainer">
                         <div class="userStoryTaskType">
                             ${taskData.taskType}
                         </div>
@@ -62,7 +62,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                 
 
 
-                <div class="userStoryDeleteAndEditContainer p-absolut">
+                <div class="userStoryDeleteAndEditContainer">
                     <div class="userStoryDeleteContainer userStoryBackgroundImageDelete">
                         <div class="userStoryDeleteTextContainer">Delete</div>
                     </div>

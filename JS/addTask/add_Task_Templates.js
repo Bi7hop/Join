@@ -1,3 +1,35 @@
+function dropDownListSampleAt() {
+  let list = '';
+  sortContactsAt();
+  firebaseData.forEach(task => {
+    Object.keys(task.dataExtracted).forEach(key => {
+      const taskData = task.dataExtracted[key];
+      if (taskData.color) {
+        list += `
+          <div onclick='addAssignedPersonAt(${JSON.stringify(taskData)})' class="flex-row persons-assignemend ${checkboxStates[taskData.email] ? 'persons-assignemend-checkt' : ''}" id="persons-assignemend${taskData.email}">
+            <div class="flex-row name-container">
+              <span id="persons${taskData.email}" class="assigned-emblem flex-row small-font" style="background-color: ${taskData.color}">${renderEmblemAt(taskData.name)}</span>
+              <h4 id="assigned-name${taskData.email}" class="medium-font ${checkboxStates[taskData.email] ? 'assigned-color' : ''}">${taskData.name}</h4>
+            </div>
+            <div class="assigned-img-box">
+              <img id="checkbox${taskData.email}" src="${checkboxStates[taskData.email] ? './img/checkbox_checkt.png' : './img/checkbox_uncheckt.png'}">
+            </div>
+          </div>
+        `;
+      } 
+    });
+  });
+  return list;
+}
+
+
+function assignedResultsAt(taskData) {
+  return `
+    <span id="emblem${taskData.email}" class="assigned-emblem flex-row small-font" style="background-color: ${taskData.color}">${taskData.emblem}</span>
+  `;
+}
+
+
 function subtaskSampleAt() {
   let list = '<ul class="add-task-list">';
   for (let i = 0; i < subtasksAt.length; i++) {
@@ -24,56 +56,16 @@ function subtaskSampleAt() {
   return list;
 }
 
-
-function dropDownListSampleAt() {
-  let list = '';
-  sortContactsAt();
-  firebaseData.forEach(task => {
-    Object.keys(task.dataExtracted).forEach(key => {
-      const taskData = task.dataExtracted[key];
-      if (taskData.color) {
-        
-        
-        list += `
-          <div onclick='addAssignedPersonAt(${JSON.stringify(taskData)})' class="flex-row persons-assignemend" id="persons-assignemend${taskData.email}">
-            <div class="flex-row name-container">
-              <span id="persons${taskData.color}" class="assigned-emblem flex-row small-font" style="background-color: ${taskData.color}">${taskData.emblem}</span>
-              <h4 id="assigned-name${taskData.email}" class="medium-font">${taskData.name}</h4>
-            </div>
-            <div class="assigned-img-box">
-              <img id="checkbox${taskData.email}" src="./img/checkbox_uncheckt.png">
-            </div>
-          </div>
-        `;
-      } 
-    });
-  });
-  return list;
-}
-
-
-function assignedResultsAt(taskData) {
-  return `
-    <span id="emblem${taskData.email}" class="assigned-emblem flex-row small-font" style="background-color: ${taskData.color}">${taskData.emblem}</span>
-  `;
-}
-
 function personsFoundPostAt() {
-  let list = '';
-  sortContactsAt();
-  for (let i = 0; i < foundPersons.length; i++) {
-    let person = foundPersons[i];
-    list += `
-    <div onclick="addFoundPersonAt(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
+  return foundPersonsByInput.map(person => `
+    <div id="persons-assignemend${person.email}" class="flex-row persons-assignemend ${checkboxStates[person.email] ? 'persons-assignemend-checkt' : ''}">
       <div class="flex-row name-container">
-        <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
-        <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
+        <span id="persons${person.email}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
+        <h4 id="assigned-name${person.email}" class="medium-font ${checkboxStates[person.email] ? 'assigned-color' : ''}">${person.name}</h4>
       </div>
       <div class="assigned-img-box">
-        <img id="checkbox${i}" src="./img/checkbox_uncheckt.png">
+        <img id="checkbox${person.email}" src="${checkboxStates[person.email] ? './img/checkbox_checkt.png' : './img/checkbox_uncheckt.png'}">
       </div>
     </div>
-    `
-  }
-  return list;
+  `).join('');
 }

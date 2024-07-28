@@ -1,51 +1,57 @@
 let subtasksAt = [];
 let assignedPersons = [];
-let foundPersons = [];
-
+let foundPersonsByInput = [];
+let checkboxStates = {}; // Declare checkboxStates globally
 
 function showPersonsAt() {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");
 
-  if (dropDown.classList.contains("hide")) {
-    rotate.classList.add("rotated");
-    dropDown.classList.remove("hide");
-  } else {
-    rotate.classList.remove("rotated");
-    dropDown.classList.add("hide");
+  rotate.classList.toggle("rotated");
+  dropDown.classList.toggle("hide");
+
+  console.log("Dropdown toggled. Is hidden:", dropDown.classList.contains("hide"));
+
+  // Reapply state when dropdown is shown
+  if (!dropDown.classList.contains("hide")) {
+    renderAssignedListAt();
   }
 }
 
 function renderAssignedListAt() {
   let dropDownList = document.getElementById('dropdown-list');
-  if (foundPersons && foundPersons.length > 0) {
+  if (foundPersonsByInput.length > 0) {
     dropDownList.innerHTML = personsFoundPostAt();
-  }
-  else {
+  } else {
     dropDownList.innerHTML = dropDownListSampleAt();
   }
 
-  // Apply state to checkboxes after rendering
-  foundPersons.forEach(person => {
+  console.log("Rendering list. Found persons by input:", foundPersonsByInput);
+
+  // Reapply state to checkboxes after rendering
+  foundPersonsByInput.forEach(person => {
     let container = document.getElementById(`persons-assignemend${person.email}`);
     if (container) {
       let checkbox = document.getElementById(`checkbox${person.email}`);
       let assignedName = document.getElementById(`assigned-name${person.email}`);
-      // Set checkbox state based on whether the person is in assignedPersons
-      if (assignedPersons.some(assignedPerson => assignedPerson.email === person.email)) {
+      if (checkboxStates[person.email]) {
         addCheckboxAt(container, checkbox, assignedName);
       } else {
         removeCheckboxAt(container, checkbox, assignedName);
       }
+
+      // Ensure click event is attached to each person
+      container.addEventListener('click', () => handleCheckboxChange(person));
     }
   });
+
+  console.log("Current checkbox states:", checkboxStates);
 }
 
 function sortContactsAt() {
   firebaseData.forEach(task => {
     let taskDataArray = [];
 
-    // Collect all taskData objects
     Object.keys(task.dataExtracted).forEach(key => {
       const taskData = task.dataExtracted[key];
       if (taskData.color) {
@@ -53,14 +59,14 @@ function sortContactsAt() {
       }
     });
 
-    // Sort the collected taskData objects by name
     taskDataArray.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Assign sorted taskData back
     taskDataArray.forEach((taskData, index) => {
       task.dataExtracted[Object.keys(task.dataExtracted)[index]] = taskData;
     });
   });
+
+  console.log("Contacts sorted in firebaseData.");
 }
 
 function renderEmblemAt(name) {
@@ -69,9 +75,18 @@ function renderEmblemAt(name) {
 }
 
 function addAssignedPersonAt(taskData) {
-  checkboxSwapAt(taskData);
-  checkIfExistAt(taskData);
+  handleCheckboxChange(taskData);
   postPersonsAt();
+}
+
+function addFoundPersonAt(taskData) {
+  handleCheckboxChange(taskData);
+  postPersonsAt();
+}
+
+function handleCheckboxChange(taskData) {
+  checkboxSwapAt(taskData);
+  updateAssignedPersons(taskData);
 }
 
 function checkboxSwapAt(taskData) {
@@ -84,7 +99,10 @@ function checkboxSwapAt(taskData) {
   } else {
     removeCheckboxAt(container, checkbox, assignedName);
   }
-  updateAssignedPersons(taskData);
+
+  // Update checkboxStates
+  checkboxStates[taskData.email] = container.classList.contains('persons-assignemend-checkt');
+  console.log("Checkbox swapped. Current checkboxStates:", checkboxStates);
 }
 
 function addCheckboxAt(container, checkbox, assignedName) {
@@ -99,11 +117,9 @@ function removeCheckboxAt(container, checkbox, assignedName) {
   assignedName.classList.remove("assigned-color");
 }
 
-function checkIfExistAt(taskData) {
-  let container = document.getElementById(`persons-assignemend${taskData.email}`);
+function updateAssignedPersons(taskData) {
   let index = assignedPersons.findIndex(person => person.email === taskData.email);
-
-  if (container.classList.contains('persons-assignemend-checkt')) {
+  if (checkboxStates[taskData.email]) {
     if (index === -1) {
       assignedPersons.push(taskData);
     }
@@ -112,151 +128,66 @@ function checkIfExistAt(taskData) {
       assignedPersons.splice(index, 1);
     }
   }
+  console.log("Assigned persons updated:", assignedPersons);
+
+  // Post the updated assigned persons
+  postPersonsAt();
 }
 
 function postPersonsAt() {
   let assignedPersonsResults = document.getElementById('assigned-persons');
-  assignedPersonsResults.innerHTML = '';
-  assignedPersons.forEach(taskData => {
-    assignedPersonsResults.innerHTML += assignedResultsAt(taskData);
-  });
+  assignedPersonsResults.innerHTML = assignedPersons.map(taskData => assignedResultsAt(taskData)).join('');
+  console.log("Assigned persons posted:", assignedPersons);
 }
 
 function searchPersonAt() {
   let input = document.getElementById('assigned').value.trim().toLowerCase();
+  console.log("Search input:", input);
 
   if (input.length > 0) {
-    openListAt(input);
     filterAndRenderPersons(input);
   } else {
-    foundPersons = [];
+    foundPersonsByInput = [];
     renderAssignedListAt();
+    openListAt(false); // Close the list if input is empty
   }
 }
 
 function filterAndRenderPersons(input) {
-  foundPersons = []; // Reset foundPersons array
+  foundPersonsByInput = []; // Reset foundPersonsByInput array
   let addedNames = new Set(); // Track added names to avoid duplicates
-
+  
   firebaseData.forEach(task => {
     Object.keys(task.dataExtracted).forEach(key => {
       const taskData = task.dataExtracted[key];
       if (taskData.color && taskData.name.toLowerCase().startsWith(input)) {
         if (!addedNames.has(taskData.name)) {
-          foundPersons.push(taskData);
+          foundPersonsByInput.push(taskData);
           addedNames.add(taskData.name);
         }
       }
     });
   });
 
-  // Render the list and maintain checkbox states
-  renderAssignedListAt();
-}
+  console.log("Filtered persons by input:", foundPersonsByInput);
 
-function checkIfFoundExistAt(taskData) {
-  let container = document.getElementById(`persons-assignemend${taskData.email}`);
-  let index = assignedPersons.findIndex(person => person.email === taskData.email);
-
-  if (container.classList.contains('persons-assignemend-checkt')) {
-    if (index === -1) {
-      assignedPersons.push(taskData);
-    }
+  if (foundPersonsByInput.length === 0) {
+    openListAt(false); // Close the list if no matches found
   } else {
-    if (index > -1) {
-      assignedPersons.splice(index, 1);
-    }
+    renderAssignedListAt();
+    openListAt(true); // Open the list if matches are found
   }
 }
 
-function addFoundPersonAt(taskData) {
-  checkboxSwapAt(taskData);
-  checkIfFoundExistAt(taskData);
-  postPersonsAt();
-}
-
-function openListAt(input) {
+function openListAt(show) {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");
 
-  if (input.length === 0) {
-    rotate.classList.remove("rotated");
-    dropDown.classList.add("hide");
-  } else {
-    rotate.classList.add("rotated");
-    dropDown.classList.remove("hide");
-  }
+  rotate.classList.toggle("rotated", show);
+  dropDown.classList.toggle("hide", !show);
+
+  console.log("List opened. Is rotated:", rotate.classList.contains("rotated"));
 }
-
-function updateAssignedPersons(taskData) {
-  let index = assignedPersons.findIndex(person => person.email === taskData.email);
-  if (index === -1) {
-    assignedPersons.push(taskData);
-  } else {
-    assignedPersons.splice(index, 1);
-  }
-}
-
-// Dummy functions for placeholders
-function personsFoundPostAt() {
-  return foundPersons.map(person => `
-    <div id="persons-assignemend${person.email}">
-      <img id="checkbox${person.email}" src="./img/checkbox_uncheckt.png" />
-      <span id="assigned-name${person.email}">${renderEmblemAt(person.name)}</span>
-    </div>
-  `).join('');
-}
-
-function dropDownListSampleAt() {
-  return "<p>No persons found.</p>";
-}
-
-function assignedResultsAt(taskData) {
-  return `<div>${taskData.name}</div>`;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function setPriorityAt(priority) {
