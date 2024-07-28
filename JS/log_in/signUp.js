@@ -1,5 +1,5 @@
 async function addNewUser(event) {
-  event.preventDefault(); // Prevent the default form submission behavior
+  event.preventDefault();
 
   let extractedData = {
     username: getValue("signUpName"),
@@ -20,7 +20,7 @@ async function addNewUser(event) {
     alert("Passwords do not match. User data will not be posted.");
     return;
   } else {
-    await signUpConfirmation(); // Wait for the confirmation animation to complete
+    await signUpConfirmation();
     await postData("/users", extractedData);
     window.location = "./login.html";
   }
