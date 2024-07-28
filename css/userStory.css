@@ -66,21 +66,6 @@
     cursor: pointer;
 }
 
-.taskType {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 113px;
-    background-color: #0038FF;
-    height: 28px;
-    padding: 0 8px 0 8px;
-    border-radius: 8px;
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 16px;
-    color: white;
-}
-
 .userStoryTaskType {
     display: flex;
     align-items: center;

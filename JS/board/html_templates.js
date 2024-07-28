@@ -208,7 +208,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
     return `
         <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id})" ondragend="endDragging(${taskData.id})" class="taskColumn task">
             <div class="taskColumnContainer">
-                <div id="taskType" class="taskType">${taskData.taskType}</div>
+                <div id="taskType" class="taskType ${taskData.taskType}">${taskData.taskType}</div>
                 <div class="taskTitle">${taskData.taskTitle}</div>
                 <div class="taskDescription">${taskData.taskDescription}</div>
                 <div class="taskSubtaskBarContainer">

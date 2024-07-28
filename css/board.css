@@ -188,6 +188,14 @@ input[type=text]:focus {
     width: 220px;
 }
 
+.Technical {
+    background-color:#1FD7C1;
+}
+
+.Story {
+    background-color: #0038FF;
+}
+
 .taskType {
     display: flex;
     align-items: center;
@@ -195,7 +203,6 @@ input[type=text]:focus {
     width: 113px;
     height: 27px;
     padding: 0 8px 0 8px;
-    /* background-color: #0038FF; */
     border-radius: 8px;
     font-family: Inter;
     font-weight: 400;
