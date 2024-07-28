@@ -195,6 +195,7 @@ input[type="email"] {
     margin: 0;
     padding: 0;
     background-color: none;
+    outline: none;
 }
 
 .input-field-mail {
@@ -243,4 +244,23 @@ input[type="checkbox"]:hover {
 
 p {
     padding-left: 12px;
+}
+
+.invalid-message-container{
+    width: 342px;
+    height: 14px;
+    text-align: start;
+    margin-left: 16px;
+}
+
+.error-text{
+    padding: 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15.6px;
+    color: #ff8190;
+}
+
+.hide{
+    display: none;
 }

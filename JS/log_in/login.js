@@ -1,18 +1,3 @@
-function loginGuest() {
-  for (let i = 0; i < firebaseUsers.length; i++) {
-    const userData = firebaseUsers[i];
-    const users = userData["dataExtracted"];
-    const user = Object.keys(users);
-    for (let j = 0; j < user.length; j++) {
-      allUsers.push({
-        id: user[i],
-        dataExtracted: users[user[i++]],
-      });
-    }
-    console.log(users);
-  }
-}
-
 async function loadData() {
   try {
     let response = await fetch(BASE_URL + "users" + ".json");
@@ -29,20 +14,77 @@ async function loadData() {
   }
 }
 
-function logIn() {
+function logIn(event) {
+  event.preventDefault();
+
   let email = document.getElementById("loginEmail").value;
   let pass = document.getElementById("loginPassword").value;
 
-  if (!email && !pass) {
-    alert("fill in your data");
-    return;
+  let user = allData.find((u) => u.email === email && u.password === pass);
+
+  if (user) {
+    let username = user.username;
+    let mail = user.email;
+    let password = user.password;
+    localStorage.setItem("currentUser", username);
+    rememberMe(mail, password);
+    window.location = "./summary.html";
   } else {
-    let user = allData.find((u) => u.email === email && u.password === pass);
-    if (user) {
-      console.log("User found", user);
-      window.location = "./board.html";
-    } else {
-      console.log("Invalid email or password");
-    }
+    falsePassword();
+  }
+}
+
+function rememberMe(mail, password){
+  let checkbox = document.getElementById("rememberMe");
+  if (checkbox.checked) {
+    localStorage.setItem("email", mail);
+    localStorage.setItem("password", password);
+  }
+}
+
+function rememberUser() {
+  let storedEmail = localStorage.getItem("email");
+  let storedPassword = localStorage.getItem("password");
+  if (storedEmail && storedPassword) {
+    window.location = "./summary.html";
+  }
+}
+
+function falsePassword(){
+  let passConainer = document.getElementById("error-container");
+  let passInput = document.getElementById("input-field-password");
+  passConainer.classList.remove('hide');
+  passInput.style.borderColor = 'red';
+}
+
+function locketIconSwap() {
+  let passImg = document.getElementById("passImg");
+  if (passImg.src.endsWith("lock.png")) {
+    passImg.src = "./img/pass_visibility_off.png";
+  } else {
+    return false;
+  }
+}
+
+function changePassVisibility(){
+  passImgSwap();
+  showPassword(); 
+}
+
+function showPassword(){
+  let passField = document.getElementById("loginPassword");
+  if (passField.type === "password") {
+    passField.type = "text";
+  } else {
+    passField.type = "password";
+  }
+}
+
+function passImgSwap(){
+  let passImg = document.getElementById("passImg");
+  if (passImg.src.endsWith("pass_visibility_off.png")) {
+    passImg.src = "./img/pass_visibility_on.png";
+  } else {
+    passImg.src = "./img/pass_visibility_off.png";
   }
 }
