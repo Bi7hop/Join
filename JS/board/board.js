@@ -59,7 +59,7 @@ function formatContacts(taskContacts) {
     if (Array.isArray(taskContacts)) {
         taskContacts.forEach(contact => {
             if (contact.emblem) {
-                formattedContacts += `<div class="taskContact">${contact.emblem}</div>`;
+                formattedContacts += `<div class="taskContact" style="background-color: ${contact.color};">${contact.emblem}</div>`;
             }
         });
     }

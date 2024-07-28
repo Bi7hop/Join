@@ -278,15 +278,13 @@ input[type=text]:focus {
 .taskContactsContainer {
     display: flex;
     align-items: center;
-    max-width: 150px;
+    max-width: 100%;
     
 }
 
 .taskContact {
     height: 32px;
     width: 32px;
-    /* Color changed by Contact Type */
-    background-color: green;
     border-radius: 50%;
     font-family: Inter;
     font-weight: 400;
@@ -295,9 +293,7 @@ input[type=text]:focus {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    margin-left: -8px;
-    /*Border entfernen sobald die Farben von den Kontakten mit Javascript gerendert werden*/
-    border: 1px solid black;
+    margin-left: -5px;
 }
 
 .taskContactsContainer .taskContact:nth-child(n+7) {
