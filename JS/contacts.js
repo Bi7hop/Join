@@ -434,7 +434,7 @@ function showDetailContact(contactEmail) {
             if (contact.email === contactEmail && contact.phone) {
                 const contactDetailContainer = document.querySelector('.contact-detail-container');
                 const rightContent = document.querySelector('.right-content');
-                const contactContainer = document.getElementById('contactContainer');
+                const contactContainer = document.getElementById('contact-container');
                 const contactDetail = document.getElementById('contactDetail');
 
                 contactDetail.innerHTML = '';
@@ -460,6 +460,7 @@ function showDetailContact(contactEmail) {
         });
     });
 }
+
 
 
 // ADD Contact
