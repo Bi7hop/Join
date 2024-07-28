@@ -2,6 +2,11 @@ let subtasksAt = [];
 let assignedPersons = [];
 let foundPersons = [];
 
+// Beispiel: Aufruf der Funktion nach dem Laden der Daten
+loadUrl().then(() => {
+  renderAssignedListAt();
+});
+
 function showPersonsAt() {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");

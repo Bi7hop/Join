@@ -4,7 +4,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
         <div class="userStoryContainer">
             <div class="userStoryContainerInside">
                 <div class="userStoryHeadlineAndCloseButtonContainer">
-                    <div class="taskType">
+                    <div class="userStoryTaskType">
                         ${taskData.taskType}
                     </div>
                     <div onclick="closeUserStory(), location.reload()" class="userStoryCloseButtonContainer">

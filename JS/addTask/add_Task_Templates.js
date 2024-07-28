@@ -45,9 +45,7 @@ function dropDownListSampleAt() {
             </div>
           </div>
         `;
-      } else {
-        list += `nothing found`
-      }
+      } 
     });
   });
   return list;
