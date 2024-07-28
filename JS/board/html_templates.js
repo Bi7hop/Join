@@ -41,12 +41,14 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                 </div>
 
                 <div class="userStoryContactContainer">
+                
                     <div class="userStoryContactEmblemContainer">
-                        ${formattedContacts} 
+                        ${formattedContacts}
                     </div>
                     <div class="userStoryContactFullName"> 
                         ${formattedContactsFullName}
                     </div>
+                
                 </div>
                 <div class="userStorySubtaskContainer">
                     Subtasks

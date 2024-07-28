@@ -170,6 +170,10 @@
     margin-right: 16px;
 }
 
+.userStoryContactEmblemAlign {
+    display:flex;
+}
+
 .userStoryContactContainer {
     display:flex;
     align-items: center;
@@ -181,19 +185,23 @@
     color: white;
     display:flex;
     flex-direction: column;
-    gap: 8px;
     margin-left: 24px;
+    gap: 8px;
 }
 
 .userStoryContactFullName {
     display:flex;
     flex-direction: column;
-    gap: 19px;
+    justify-content: center;
     margin-left: 16px;
+    gap: 8px;
 }
 
 .assignedContactsFullName {
     color: black;
+    height: 32px;
+    display:flex;
+    align-items: center;
 }
 
 .userStoryContactFullName {

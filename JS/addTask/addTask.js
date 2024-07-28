@@ -118,7 +118,7 @@ function postPersonsAt() {
   let assignedPersonsResults = document.getElementById('assigned-persons');
   assignedPersonsResults.innerHTML = '';
   assignedPersons.forEach(taskData => {
-    assignedPersonsResults.innerHTML = assignedResultsAt(taskData);
+    assignedPersonsResults.innerHTML += assignedResultsAt(taskData);
   });
 }
 
