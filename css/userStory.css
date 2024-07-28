@@ -2,6 +2,10 @@
     margin: 0;
 }
 
+.p-absolut {
+    position:absolute;
+}
+
 .userStoryOutsideContainer {
     width: 100%;
     height: 100vh;

@@ -3,12 +3,14 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
     <div id="${taskData.id}" class="userStoryOutsideContainer flying-element">
         <div class="userStoryContainer">
             <div class="userStoryContainerInside">
-                <div class="userStoryHeadlineAndCloseButtonContainer">
-                    <div class="userStoryTaskType">
-                        ${taskData.taskType}
-                    </div>
-                    <div onclick="closeUserStory(), location.reload()" class="userStoryCloseButtonContainer">
-                        <img src="./img/userStory/close.png" alt="Close">
+                <div class="p-absolut">
+                    <div class="userStoryHeadlineAndCloseButtonContainer">
+                        <div class="userStoryTaskType">
+                            ${taskData.taskType}
+                        </div>
+                        <div onclick="closeUserStory(), location.reload()" class="userStoryCloseButtonContainer">
+                            <img src="./img/userStory/close.png" alt="Close">
+                        </div>
                     </div>
                 </div>
                 <div>

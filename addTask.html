@@ -17,7 +17,7 @@
     <script src="./JS/addTask/add_Task_Templates.js"></script>
 </head>
 
-<body onload="includeHTML(); addMediumAt();">
+<body onload="includeHTML(); addMediumAt(); loadUrl();">
     <div class="sidebar-header show-on-top" w3-include-html="./templates/sidebarHeaderTemplate.html"></div>
     <div class="mobile-header  show-on-top" w3-include-html="./templates/mobileHeader.html"></div>
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
@@ -47,7 +47,7 @@
                     <span class="medium-font medium-font-color">Assigned to</span>
                     <div class="foul-input">
                         <input oninput="searchPersonAt()" onclick="showPersonsAt()" autocomplete="off" id="assigned" type="text" class="half-input medium-font" placeholder="Select contacts to assign">
-                        <div class="rotating" id="rotate" onclick="showPersonsAt()">
+                        <div class="rotating" id="rotate" onclick="showPersonsAt(), renderAssignedListAt()">
                             <img class="rotating-img " src="./img/drop-down-arrow.png">
                         </div>
                     </div>
