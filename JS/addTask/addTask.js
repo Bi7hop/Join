@@ -31,7 +31,6 @@ document.addEventListener("click", function(event) {
 });
 
 
-
 function renderAssignedListAt() {
   let dropDownList = document.getElementById('dropdown-list');
   if (foundPersonsByInput.length > 0) {
