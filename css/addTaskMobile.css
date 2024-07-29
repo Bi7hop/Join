@@ -1,4 +1,156 @@
-@media(max-width:1300px) {
+@media(max-width: 1300px) {
+    .three-input-prio-container {
+        width: 360px;
+    }
+
+    .three-input-container {
+        width: 360px;
+    }
+
+    .btn-required-text {
+        width: 1050px;
+    }
+
+    .vertical-vector {
+        left: 521.25px;
+    }
+
+    .assigned-persons {
+        left: 34px;
+    }
+
+    .dropdown-list {
+        left: 34px;
+    }
+
+    .title-positioning {
+        left: 38px;
+    }
+}
+
+@media(max-width: 1250px) {
+    .three-input-prio-container {
+        width: 195px;
+    }
+
+    .three-input-container {
+        width: 320px;
+    }
+
+    .btn-required-text {
+        width: 1000px;
+    }
+
+    .vertical-vector {
+        left: 470.25px;
+    }
+
+    .assigned-persons {
+        left: 15px;
+    }
+
+    .dropdown-list {
+        left: 15px;
+    }
+
+    .title-positioning {
+        left: 15px;
+    }
+    
+}
+
+@media(max-width: 1170px) {
+    .three-input-prio-container {
+        width: 150px;
+    }
+
+    .three-input-container {
+        width: 320px;
+    }
+
+    .btn-required-text {
+        width: 1000px;
+    }
+
+    .vertical-vector {
+        display: none
+    }
+
+    .btn-required-text {
+        width: 973px;
+    }
+}
+
+@media(max-width: 1150px) {
+    .simple-input {
+        width: 380px;
+    }
+
+    .textarea {
+        min-width: 380px;
+        max-width: 380px;
+    }
+
+    .foul-input {
+        width: 411px;
+    }
+
+    .prio-btn-position {
+        width: 410px;
+    }
+    .selection {
+        width: 410px;
+    }
+    .select-wrapper::after {
+        right: 46px;
+    }
+    .btn-required-text {
+        width: 938px;
+    }
+    .dropdown-list {
+        width: 409px;
+    }
+}
+
+@media(max-width: 1110px) {
+    .simple-input {
+        width: 330px;
+    }
+
+    .textarea {
+        min-width: 330px;
+        max-width: 330px;
+    }
+
+    .foul-input {
+        width: 361px;
+    }
+
+    .prio-btn-position {
+        width: 362px;
+    }
+    .selection {
+        width: 362px;
+    }
+    .select-wrapper::after {
+        right: 94px;
+    }
+    .btn-required-text {
+        width: 891px;
+    }
+    .dropdown-list {
+        width: 359px;
+    }
+    .assigned-persons {
+        width: 359px;
+    }
+    .subtask-display {
+        width: 370px;
+    }
+}
+
+
+@media(max-width:1050px) {
     .add-task-main-position {
         position: absolute;
         width: 428px;
@@ -10,7 +162,7 @@
 
     .add-task-card {
         width: 428px;
-        height: 1250px;
+        height: 1125px;
         border-radius: 0;
         display: flex;
         flex-direction: column;
@@ -20,7 +172,7 @@
 
     .title-positioning {
         width: 396px;
-        padding: 16px;
+        
         height: 112px;
         position: initial;
         display: flex;
@@ -128,6 +280,7 @@
         height: 56px;
         padding: 16px;
         background-color: #F6F7F8;
+        margin-bottom: 120px;
     }
 
     .bottom-required {
@@ -153,36 +306,39 @@
         display: none
     }
 
-    .subtask-display{
+    .subtask-display {
         padding: 10px 0;
     }
 
-    .add-task-list{
+    .add-task-list {
         padding: 0 0 0 10px;
     }
 
-    .dropdown-list{
+    .dropdown-list {
         width: 398px;
-        top: 531px;
+        top: 387px;
         height: 160px;
         left: 16px;
     }
 
-    .assigned-persons{
+    .assigned-persons {
         width: 398px;
         height: 50px;
-        top: 541px;
+        top: 400px;
         left: 16px;
+    }
+    .select-wrapper::after {
+        right: 16px;
     }
 }
 
-@media(max-width:1050px){
-    .btn-required-text{
+@media(max-width:1050px) {
+    .btn-required-text {
         position: inherit;
     }
 }
 
-@media(max-width:850px){
+@media(max-width:850px) {
     .add-task-main-position {
         left: 0;
     }
@@ -195,7 +351,7 @@
 }
 
 @media(max-width:500px) {
-    body{
+    body {
         overflow-x: hidden;
     }
 
@@ -302,7 +458,7 @@
         width: 300px;
     }
 
-    .subtask-input{
+    .subtask-input {
         width: 150px;
     }
 
@@ -326,20 +482,20 @@
         height: 56px;
     }
 
-    .dropdown-list{
+    .dropdown-list {
         width: 256px;
         top: 500px;
         height: 100px;
         left: 20px;
     }
 
-    .assigned-persons{
+    .assigned-persons {
         width: 256px;
         top: 510px;
         left: 20px;
     }
-    
-    .assigned-emblem{
+
+    .assigned-emblem {
         width: 32px;
         height: 32px;
     }
