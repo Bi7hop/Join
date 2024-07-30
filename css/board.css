@@ -438,4 +438,10 @@ input[type=text]:focus {
     text-align: center;
 }
 
+.boardAddTaskMediumImage {
+    cursor:pointer;
+    display:none;
+    width: 45px;
+    height: 45px;
+}
 
