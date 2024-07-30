@@ -1,34 +1,41 @@
 // RenderTickets Funktion für die AddTask funktion verändert
 // Updated renderTickets function
 function renderTickets(columnId, status) {
-    // Container im HTML, wo die Titel angezeigt werden sollen
     const container = document.getElementById(columnId);
-    // Überprüfen, ob der Container vorhanden ist
+    const noTasksMessageEmpty = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
+    const noTasksMessageSearch = document.getElementById(`noTasksSearch${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
+
     if (!container) {
         console.error(`Element mit id ${columnId} not found.`);
         return;
     }
-    // Clear the container before adding new content
+
     container.innerHTML = '';
-    // Iteriere durch das firebaseData Array und generiere HTML für jeden Task-Titel
+    let tasksFound = false;
+
     firebaseData.forEach(task => {
-        // Annahme: firebaseData hat die Struktur wie { id: 'key', dataExtracted: { key1: { title: 'Task Title 1' }, key2: { title: 'Task Title 2' }, ... } }
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
             if (taskData.taskStatus === status) {
-                const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected)
+                tasksFound = true;
+                const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected);
                 const formattedSubtaskBar = formatSubtaskBar(taskData);
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const taskHtml = ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar);
-                // Create a container for each task
                 const taskContainer = document.createElement('div');
                 taskContainer.innerHTML = taskHtml;
-                // Füge das erstellte <div> Element dem Container hinzu
                 container.appendChild(taskContainer.firstElementChild);
             }
         });
     });
+
+    if (!tasksFound) {
+        noTasksMessageEmpty.style.display = 'flex'; 
+    } else {
+        noTasksMessageEmpty.style.display = 'none';
+    }   
 }
+
 
 
 function formatSubtaskBar(taskData) {
@@ -149,3 +156,33 @@ function highlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('dragAreaHighlight');
 }
+
+function searchTasks() {
+    let searchInput = document.getElementById('searchInput').value.toLowerCase();
+    let columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
+    
+    columns.forEach(columnId => {
+        let columnContainer = document.getElementById(columnId);
+        let tasks = columnContainer.getElementsByClassName('task');
+        let noTasksMessageEmpty = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
+
+        if (searchInput === '') {
+            Array.from(tasks).forEach(task => {
+                task.style.display = 'flex';
+            });
+            if (noTasksMessageEmpty) {
+                noTasksMessageEmpty.style.display = 'none';
+            }
+        } else {
+            Array.from(tasks).forEach(task => {
+                let taskTitle = task.querySelector('.taskTitle').innerText.toLowerCase();
+                if (taskTitle.includes(searchInput)) {
+                    task.style.display = 'flex';
+                } else {
+                    task.style.display = 'none';
+                }
+            });
+        }
+    });
+}
+

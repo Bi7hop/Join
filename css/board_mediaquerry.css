@@ -1,0 +1,147 @@
+@media(max-width: 1400px) {
+    .taskColumn {
+        width: 233px;
+    } 
+    .progressbarColumnHeadline {
+        width: 190px;
+    }
+}
+
+@media(max-width: 1310px) {
+    .progressBar {
+        flex-direction: column;
+    }
+    .column1Container {
+        min-height: 252px;
+    }
+    .progressbarColumnHeadline {
+        width: 100%;
+    }
+    
+    .columnResponsive {
+        display:flex;
+        align-items: center;
+    }
+    .columnContainer {
+        display:flex;
+        gap: 16px;
+        width: 100%;
+        height: 212px;
+        overflow-y: hidden;
+    }
+    .dragPosition {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+    .taskColumnContainer {
+        height: 185px;
+        width: 236px;
+    }
+    .taskColumn {
+        width: 252px;
+        margin-bottom: 8px;
+    }
+    .taskContactsContainer {
+        margin-left: 8px;
+    }
+    .taskMoreContactsAndTaskPrioContainer {
+        margin-right: 8px;
+    }
+    .taskType {
+        margin-left: 8px;
+    }
+    .taskSubtaskBarContainer span {
+        margin-right: 8px;
+    }
+    .taskSubtaskBarFilledBar {
+        margin-left: 8px;
+    }
+    .taskSubtaskBar {
+        margin-left: 8px;
+    }
+    .taskTitle {
+        margin-left: 8px;
+    }
+    .taskDescription {
+        margin-left: 8px;
+    }
+}
+
+@media(max-width: 1200px) {
+    
+    .progressbarColumnHeadline {
+        width: 100%;
+    }
+    .column1Container {
+        align-items: flex-start;
+    }
+    .btn {
+        display: none;
+    }
+    .boardAddTaskMediumImage {
+        display: block;
+    }
+}
+
+@media(max-width: 1180px) {
+    
+    .progressbarColumnHeadline {
+        width: 100%;
+    }
+    .column1Container {
+        align-items: flex-start;
+    }
+    .headlineInputButtonContainer h1 {
+        font-size: 47px;
+    }
+}
+
+@media(max-width: 1050px) {
+    .inputContainer {
+        position: absolute;
+        top: 250px;
+        left: 24px;
+    }
+    .progressBar {
+        margin-left: 25px;
+    }
+    .headlineInputButtonContainer h1{
+        margin-left: 25px;
+        margin-bottom: 48px;
+    }
+    .headlineInputButtonContainer {
+        align-items: flex-start;
+        width: 97%;
+        
+    }
+    .column1Container {
+        margin-right: 33px;
+    }
+    .columnDoneResponsive {
+        margin-bottom: 111px;
+    }
+}
+
+@media(max-width: 550px) {
+    .column1Container {
+        margin-right: 8px;
+    }
+    .progressBar {
+        margin-left: 8px;
+    }
+    .inputContainer {
+        left: 8px;
+    }
+    .headlineInputButtonContainer h1 {
+        margin-left: 8px;
+    }
+    .headlineInputButtonContainer {
+        width: 99%;
+    }
+}
+@media(max-width: 400px) {
+    .inputBoard {
+        width: 180px;
+    }
+}
