@@ -88,3 +88,8 @@ function passImgSwap(){
     passImg.src = "./img/pass_visibility_off.png";
   }
 }
+
+function loginGuest(){
+  localStorage.setItem("currentUser", 'Guest');
+  window.location = "./summary.html"
+}

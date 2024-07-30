@@ -5,7 +5,7 @@
 
 body {
     font-family: Inter;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .hide {
@@ -35,6 +35,7 @@ body {
     height: 870px;
     border-radius: 30px;
     position: relative;
+    top: 0;
 }
 
 .title-positioning {
@@ -477,6 +478,37 @@ body {
     font-weight: 400;
     font-size: 16px;
     line-height: 19.2px;
+}
+
+.confirmation-overlay{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    animation: fly-up 0.1s forwards;
+}
+
+@keyframes fly-up {
+    from {
+        top: 2000px; /* Startposition außerhalb des Bildschirms */
+    }
+    to {
+        top: 0; /* Endposition innerhalb des Bildschirms */
+    }
+}
+
+@keyframes fly-down {
+    from {
+        top: 0px; /* Startposition innerhalb des Bildschirms */
+    }
+    to {
+        top: 2000px; /* Endposition außerhalb des Bildschirms */
+    }
 }
 
 .added-confirmation {

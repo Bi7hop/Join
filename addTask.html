@@ -15,6 +15,7 @@
     <script src="./JS/log_in/logOut.js"></script>
     <script src="./JS/addTask/addTask.js"></script>
     <script src="./JS/addTask/add_Task_Templates.js"></script>
+    <script src="./JS/addTask/addTaskPopups.js"></script>
 </head>
 
 <body onload="includeHTML(); addMediumAt(); loadUrl();">
@@ -23,30 +24,35 @@
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
 
     <div id="add-task-position" class="add-task-main-position"> <!--Change to add-task-main-position-->
-        <form  id="add-task-card" class="add-task-card">
+        <form id="add-task-card" class="add-task-card">
             <div class="title-positioning">
                 <h1 class="h1">Add Task</h1>
             </div>
-            <div id="close-popup" onclick="closeAddTask()" class="close-btn small-icon-div hide"> <!--Must give the hide tag in full screen-->
+            <div id="close-popup" onclick="closeAddTask()" class="close-btn small-icon-div hide">
+                <!--Must give the hide tag in full screen-->
                 <img class="small-icon" src="./img/Close.png">
             </div>
             <div class="three-input-container flex-column">
                 <div class="input-title-container flex-column">
                     <span class="medium-font medium-font-color">Title<span class="asterisc-color">*</span></span>
                     <div class="flex-column gap-four">
-                        <input id="title" type="text" required class="simple-input medium-font" placeholder="Enter a title">
+                        <input id="title" type="text" required class="simple-input medium-font"
+                            placeholder="Enter a title">
                         <span class="small-font asterisc-color hide">This field is required</span>
                         <!--Must be changed with hide or show css class-->
                     </div>
                 </div>
                 <div class="description-container flex-column">
                     <span class="medium-font medium-font-color">Description</span>
-                    <textarea id="description" class="textarea medium-font" placeholder="Enter a Description"></textarea>
+                    <textarea id="description" class="textarea medium-font"
+                        placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="assigned-container flex-column">
                     <span class="medium-font medium-font-color">Assigned to</span>
                     <div class="foul-input">
-                        <input oninput="searchPersonAt()" onclick="showPersonsAt(), renderAssignedListAt()" autocomplete="off" id="assigned" type="text" class="half-input medium-font" placeholder="Select contacts to assign">
+                        <input oninput="searchPersonAt()" onclick="showPersonsAt(), renderAssignedListAt()"
+                            autocomplete="off" id="assigned" type="text" class="half-input medium-font"
+                            placeholder="Select contacts to assign">
                         <div class="rotating" id="rotate" onclick="showPersonsAt(), renderAssignedListAt()">
                             <img class="rotating-img " src="./img/drop-down-arrow.png">
                         </div>
@@ -67,10 +73,13 @@
                 </div>
                 <div class="prio-container flex-column">
                     <span class="medium-font medium-font-color">Prio</span>
-                    <div class="prio-btn-position"> 
-                        <div class="prio-btn medium-font urgent" id="urgent" onclick="addUrgentAt()">Urgent <img id="activeUrg" src="./img/urgent-prio-icon-inactive.png"></div>
-                        <div class="prio-btn medium-font medium" id="medium" onclick="addMediumAt()">Medium <img id="activeMed" src="./img/medium-prio-icon-inactive.png"></div>
-                        <div class="prio-btn medium-font low" id="low" onclick="addLowAt()">Low <img id="activeLow" src="./img/low-prio-icon-inactive.png"></div>
+                    <div class="prio-btn-position">
+                        <div class="prio-btn medium-font urgent" id="urgent" onclick="addUrgentAt()">Urgent <img
+                                id="activeUrg" src="./img/urgent-prio-icon-inactive.png"></div>
+                        <div class="prio-btn medium-font medium" id="medium" onclick="addMediumAt()">Medium <img
+                                id="activeMed" src="./img/medium-prio-icon-inactive.png"></div>
+                        <div class="prio-btn medium-font low" id="low" onclick="addLowAt()">Low <img id="activeLow"
+                                src="./img/low-prio-icon-inactive.png"></div>
                     </div>
                 </div>
                 <div class="assigned-container flex-column">
@@ -81,17 +90,20 @@
                         <option value="User Story">User Story</option>
                     </select>
                 </div>
-                <div class="assigned-container flex-column"> 
+                <div class="assigned-container flex-column">
                     <span class="medium-font medium-font-color">Subtasks</span>
                     <div class="foul-input">
-                        <input id="subtaskAt" onclick="addSubtaskAt()" type="text" class="subtask-input medium-font" id="subtask" placeholder="Add new subtask">
+                        <input id="subtaskAt" onclick="addSubtaskAt()" type="text" class="subtask-input medium-font"
+                            id="subtask" placeholder="Add new subtask">
                         <div class="add-new-subtask small-icon-div" id="addSubtaskIconAt" onclick="addSubtaskAt()">
                             <img class="smaller-icon" src="./img/add-plus-icon.png">
                         </div>
                         <div class="close-approve-container hide" id="addRemoveContainerAt">
-                            <div class="small-icon-div" onclick="closeSubtaskAt()"><img class="small-icon" src="./img/Close.png"></div>
+                            <div class="small-icon-div" onclick="closeSubtaskAt()"><img class="small-icon"
+                                    src="./img/Close.png"></div>
                             <span class="small-input-vertical-vector"></span>
-                            <div class="small-icon-div" onclick="aproveSubtaskAt()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
+                            <div class="small-icon-div" onclick="aproveSubtaskAt()"><img class="smaller-icon"
+                                    src="./img/check_dark_icon.svg"></div>
                         </div>
                     </div>
                     <div id="subtaskDisplayAt" class="subtask-display flex-column"></div>
@@ -102,16 +114,19 @@
                     <span class="required-text"><span class="asterisc-color">*</span>This field is required</span>
                 </div>
                 <div class="two-buttons-position flex-row">
-                    <button onclick="closeAddTask()" class="cancel-btn flex-row gap-four btn-styling medium-font">Cancel<img
+                    <button onclick="closeAddTask()"
+                        class="cancel-btn flex-row gap-four btn-styling medium-font">Cancel<img
                             src="./img/Close.png"></button>
-                    <button onclick="postTask()" class="create-btn flex-row gap-four btn-styling medium-font">Create Task<img
-                            src="./img/check.png"></button>
+                    <button onclick="postTask(event)" class="create-btn flex-row gap-four btn-styling medium-font">Create
+                        Task<img src="./img/check.png"></button>
                 </div>
             </div>
         </form>
-        <div class="added-confirmation hide"> <!--Popup that confirms the new addition remove hiden add flex-row-->
-            <span class="medium-font">Task added to board</span>
-            <img class="confirmation-img" src="./img/add-confiramtion-icon.png">
+        <div class="confirmation-overlay hide" id="confirmation-overlay">                                        <!--Popup that confirms the new addition remove hiden add flex-row-->
+            <div class="added-confirmation "> 
+                <span class="medium-font">Task added to board</span>
+                <img class="confirmation-img" src="./img/add-confiramtion-icon.png">
+            </div>
         </div>
     </div>
 </body>
