@@ -1,7 +1,8 @@
 @media(max-width: 1400px) {
     .taskColumn {
         width: 233px;
-    } 
+    }
+
     .progressbarColumnHeadline {
         width: 190px;
     }
@@ -11,65 +12,89 @@
     .progressBar {
         flex-direction: column;
     }
+
     .column1Container {
-        min-height: 400px;
+        height: 252px;
     }
+
     .progressbarColumnHeadline {
         width: 252px;
     }
+
     .taskColumn {
         width: 252px;
-    } 
+    }
+
+    .dragPosition {
+        width: 252px;
+    }
+    .testMediaQuerry1 {
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .columnContainer {
+        display:flex;
+        gap: 8px;
+    }
 }
 
 @media(max-width: 1200px) {
-    
+
     .progressbarColumnHeadline {
-        width: 100%;
+        width: 252px;
     }
-    .column1Container {
-        align-items: flex-start;
-    }
+
     .btn {
         display: none;
     }
+
     .boardAddTaskMediumImage {
         display: block;
     }
 }
 
 @media(max-width: 1180px) {
-    
+
     .progressbarColumnHeadline {
-        width: 100%;
+        width: 252px;
     }
-    .column1Container {
-        align-items: flex-start;
-    }
+
     .headlineInputButtonContainer h1 {
         font-size: 47px;
     }
 }
 
 @media(max-width: 1050px) {
-    .inputContainer {
-        position: absolute;
-        top: 250px;
-        left: 100px;
+
+    .progressbarColumnHeadline {
+        width: 252px;
     }
+
     .progressBar {
         margin-left: 25px;
     }
-    .headlineInputButtonContainer h1{
+
+    .headlineInputButtonContainer h1 {
         margin-left: 25px;
         margin-bottom: 48px;
     }
+
     .headlineInputButtonContainer {
         align-items: flex-start;
         width: 97%;
-        
+
     }
+
     .column1Container {
         margin-right: 33px;
+    }
+}
+
+@media(max-width: 800px) {
+    .inputContainer {
+        position: absolute;
+        top: 250px;
+        left: 24px;
     }
 }
