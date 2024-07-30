@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./css/userStory.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/userStory_edit.css">
-    <link rel="stylesheet" href="./css/board_mediaquerry.css">
     <link rel="stylesheet" href="./css/scrollbar.css">
 
     <script src="/JS/includehtml.js"></script>
@@ -44,6 +43,7 @@
                     <img src="./img/board/search.png" alt="Search">
                 </div>
             </div>
+            <button class="btn" onclick="openAddTask(), addMediumAt()">Add task <img src="./img/board/add.png" alt="Add"></button>
             <button class="btn" onclick="openAddTask(), addMediumAt()">Add task <img src="./img/board/add.png"
                     alt="Add"></button>
             <img class="boardAddTaskMediumImage" onclick="openAddTask(), addMediumAt()"
@@ -55,6 +55,9 @@
             <div class="progressbarColumnHeadline">
                 To do <div onclick="openAddTask(), addMediumAt()" class="backgroundImage"></div>
             </div>
+            <div class="columnContainer" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
+            <div class="no-task-message-container">
+                <div class="no-task-message-empty" id="noTasksToDo" style="display: none;">No tasks in To Do</div>
             <div class="testMediaQuerry1">
                 <div class="columnContainer" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
                 <div class="no-task-message-container">
@@ -71,13 +74,12 @@
             <div class="progressbarColumnHeadline">
                 In progress <div onclick="openAddTask(), addMediumAt()" class="backgroundImage"></div>
             </div>
-            <div class="columnContainer" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
-            </div>
+            <div class="columnContainer" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksInProgress" style="display: none;">No tasks match your search
+                <div class="no-task-message-empty" id="noTasksInProgress" style="display: none;">No tasks in In Progress
                 </div>
             </div>
-            <div id="dragPosition1" ondrop="moveTo('inProgress',)"
+            <div id="dragPosition1" ondrop="moveTo('inProgress')"
                 ondragover="allowDrop(event); highlight('dragPosition1')"
                 ondragleave="removeHighlight('dragPosition1')"></div>
         </div>
@@ -88,7 +90,7 @@
             <div class="columnContainer" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
                 ondragover="allowDrop(event)"></div>
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksAwaitFeedback" style="display: none;">No tasks match your search
+                <div class="no-task-message-empty" id="noTasksAwaitFeedback" style="display: none;">No tasks in Await Feedback
                 </div>
             </div>
             <div id="dragPosition2" ondrop="moveTo('awaitFeedback')"
@@ -101,7 +103,7 @@
             </div>
             <div class="columnContainer" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksDone" style="display: none;">No tasks match your search</div>
+                <div class="no-task-message-empty" id="noTasksDone" style="display: none;">No tasks in Done</div>
             </div>
             <div id="dragPosition3" ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('dragPosition3')"
                 ondragleave="removeHighlight('dragPosition3')"></div>
