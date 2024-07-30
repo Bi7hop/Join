@@ -11,6 +11,7 @@ async function includeHTML() {
         }
         element.removeAttribute('w3-include-html');
     }
+    /*checkIfLoged();*/
     attachToggleEvent();
     runAfterSidebarLoad(); 
 }
@@ -47,3 +48,20 @@ function runAfterSidebarLoad() {
 }
 
 includeHTML();
+
+
+function checkIfLoged() {
+    let user = localStorage.getItem("currentUser");
+  
+    if (!user) {
+      let side = document.getElementById("sideNav");
+      let top = document.getElementById("topNav");
+  
+      if (side && top) {
+      side.classList.add('hidden')
+      top.classList.add('hidden')
+      console.log(user , 'is online');
+      }
+      
+    }
+  }

@@ -189,7 +189,7 @@ nav {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 nav a.active {
