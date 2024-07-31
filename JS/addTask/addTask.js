@@ -393,7 +393,7 @@ function openAddTask() {
   let card = document.querySelector(".add-task-popup");
   let overlay = document.getElementById("overlay");
 
-  if (window.innerWidth < 1250) {
+  if (window.innerWidth < 1280) {
     window.location = "./addTask.html"
   }else{
     swapToPopup();
