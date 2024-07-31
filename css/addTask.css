@@ -3,7 +3,7 @@
 
 }
 
-body {
+.bodyContainer {
     font-family: Inter;
     overflow: hidden;
 }
