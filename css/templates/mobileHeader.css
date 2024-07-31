@@ -1,8 +1,114 @@
+.overlay-menu {
+    position: absolute;
+    width: 150px;
+    border-radius: 20px 0 20px 20px;
+    padding: 10px;
+    background-color: rgba(42, 54, 71, 1);
+    right: -160px;
+    top: 90px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0; 
+    transform: unset;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+.a-link {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(205, 205, 205, 1);
+    line-height: 19.2px;
+    text-decoration: none;
+}
+
+.a-menu {
+    width: 140px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 16px;
+    box-sizing: border-box;
+}
+
+.show-menu {
+    opacity: 1;
+    z-index: 1;
+    transform: translateX(0) !important;
+    display: flex;
+}
+
+.a-link:hover {
+    background-color: #516786;
+    border-radius: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+nav a.active {
+    background-color: rgb(9,25,49); 
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * {
     margin: 0px;
 }
 
 header {
+    z-index: 1;
     height: 96px;
    /* width: 1440px; */
     display: flex;
