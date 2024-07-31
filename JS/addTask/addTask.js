@@ -393,10 +393,14 @@ function openAddTask() {
   let card = document.querySelector(".add-task-popup");
   let overlay = document.getElementById("overlay");
 
-  swapToPopup();
-  hideOverflow();
-  card.style.display = "block";
-  overlay.classList.add("overlay");
+  if (window.innerWidth < 1250) {
+    window.location = "./addTask.html"
+  }else{
+    swapToPopup();
+    hideOverflow();
+    card.style.display = "block";
+    overlay.classList.add("overlay");
+  }
 }
 
 function swapToPopup() {

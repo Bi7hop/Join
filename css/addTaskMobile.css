@@ -87,7 +87,7 @@
     }
 
     .textarea {
-        min-width: 380px;
+        width: 380px;
         max-width: 380px;
     }
 
@@ -118,7 +118,7 @@
     }
 
     .textarea {
-        min-width: 330px;
+        width: 330px;
         max-width: 330px;
     }
 
@@ -151,6 +151,10 @@
 
 
 @media(max-width:1050px) {
+    .bodyContainer{
+        overflow-y:scroll;
+    }
+    
     .add-task-main-position {
         position: absolute;
         width: 428px;
@@ -214,7 +218,7 @@
     }
 
     .textarea {
-        max-width: 396px;
+        max-width: 354px;
         width: 354px;
         height: 52px;
         padding: 18px 21px;
@@ -280,7 +284,7 @@
         height: 56px;
         padding: 16px;
         background-color: #F6F7F8;
-        margin-bottom: 120px;
+        margin-bottom: 110px;
     }
 
     .bottom-required {
@@ -332,29 +336,13 @@
     }
 }
 
-@media(max-width:1050px) {
-    .btn-required-text {
-        position: inherit;
-    }
-}
-
 @media(max-width:850px) {
     .add-task-main-position {
         left: 0;
     }
-
-    .btn-required-text {
-        position: fixed;
-        bottom: 112px;
-        height: auto;
-    }
 }
 
 @media(max-width:500px) {
-    body {
-        overflow-x: hidden;
-    }
-
     .add-task-main-position {
         left: 0;
         width: 310px;
@@ -463,11 +451,9 @@
     }
 
     .btn-required-text {
-        position: fixed;
-        bottom: 112px;
         width: 290px;
-        height: auto;
         padding: 16px 0;
+        height: 100px;
         flex-direction: column;
     }
 

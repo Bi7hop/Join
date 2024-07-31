@@ -136,7 +136,7 @@
 }
 
 .textarea {
-    min-width: 408px;
+    width: 408px;
     max-width: 408px;
     resize: none;
     height: auto;
