@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let getUserName = () => ({ isLoggedIn: false, userName: "Guest" });
+    let getUserName = () => {
+        let user = localStorage.getItem("currentUser");
+        return user ? { isLoggedIn: true, userName: user } : { isLoggedIn: false, userName: "Guest" };
+    };
 
     let getGreeting = () => {
         let hour = new Date().getHours();
-        return hour < 12 ? "Good morning ," : hour < 18 ? "Good evening ," : "Good afternoon ,";
+        return hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
     };
 
     let greetText = document.getElementById('greetText');
@@ -16,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let greeting = getGreeting();
 
     let updateGreeting = (greetElem, userElem, greeting, user) => {
-        greetElem.textContent = user.isLoggedIn ? `${greeting}, ` : greeting;
-        userElem.textContent = user.isLoggedIn ? `${user.userName}!` : "";
+        greetElem.textContent = `${greeting}, `;
+        userElem.textContent = user.isLoggedIn ? `${user.userName}!` : "Guest!";
     };
 
     updateGreeting(greetText, greetUserName, greeting, user);

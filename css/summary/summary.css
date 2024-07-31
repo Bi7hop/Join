@@ -218,15 +218,23 @@ h1 {
 .greeting-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: start;
     transition: opacity 1.5s ease-in-out;
-    padding-top: 128px;
+    /* padding-top: 128px; */
+    margin-top: 350px;
 }
 
 .greet-text {
     font-size: 47px;
     font-weight: 500;
+}
+
+.greet-username {
+    margin-top: 12px;
+    font-size: 47px;
+    font-weight: 700;
+    color: #29ABE2;
 }
 
 #fullscreenGreeting {
@@ -249,6 +257,16 @@ h1 {
     z-index: 1000;
     opacity: 0;
     overflow: hidden; 
+}
+
+#fullscreenGreetText {
+    font-size: 48px;
+}
+
+#fullscreenGreetUserName {
+    font-size: 52px;
+    color: #29ABE2;
+    font-weight: 700;
 }
 
 @keyframes opacity {
