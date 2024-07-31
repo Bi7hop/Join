@@ -16,8 +16,6 @@ function openUserStory(id) {
             const taskData = tasksData[key];
             if (id === taskData.id) {
                 const formattedSubtasks = formatSubtasks(taskData.taskSubtasks, taskData.taskSubtasksSelected, taskData.id);
-
-                console.log("open Ticket Key:::", key);
                 const formattedContactsFullName = formatContactsFullName(taskData.taskContacts);
                 const formattedContacts = formatContacts(taskData.taskContacts);
                 const taskHtml = userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks);
@@ -29,11 +27,24 @@ function openUserStory(id) {
                 selectedOptions[taskData.id] = taskData.taskSubtasksSelected || [];
             }
         });
+
+        setTimeout(() => {
+            let outsideContainer = document.querySelector('.userStoryOutsideContainer');
+            if (outsideContainer) {
+                outsideContainer.addEventListener('click', handleOutsideClick);
+            }
+        }, 0);
+
     } else {
         console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
     }
-    initializeSubTaskCheckboxes();
-    scrollToTop();
+}
+
+function handleOutsideClick(event) {
+    let userStoryContainer = document.querySelector('.userStoryContainerInside');
+    if (userStoryContainer && !userStoryContainer.contains(event.target)) {
+        closeUserStory();
+    }
 }
 
 
@@ -177,6 +188,11 @@ function closeUserStory() {
         boardBodyContainer.style.overflow = "";
         overlay.style.animation = '';
         overlay.classList.remove("overlay");
+
+        let outsideContainer = document.querySelector('.userStoryOutsideContainer');
+        if (outsideContainer) {
+            outsideContainer.removeEventListener('click', handleOutsideClick);
+        }
     }, 200);
 }
 

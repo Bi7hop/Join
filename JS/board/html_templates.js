@@ -8,7 +8,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                         <div class="userStoryTaskType">
                             ${taskData.taskType}
                         </div>
-                        <div onclick="closeUserStory(), location.reload()" class="userStoryCloseButtonContainer">
+                        <div onclick="closeUserStory(), setTimeout(function() { location.reload(); }, 35);" class="userStoryCloseButtonContainer">
                             <img src="./img/userStory/close.png" alt="Close">
                         </div>
                     </div>
@@ -208,7 +208,7 @@ function userStoryEditHtmlTemplate() {
 
 function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar) {
     return `
-        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id})" ondragend="endDragging(${taskData.id})" class="taskColumn task">
+        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id}), scrollToTop()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
             <div class="taskColumnContainer">
                 <div id="taskType" class="taskType ${taskData.taskType}">${taskData.taskType}</div>
                 <div class="taskTitle">${taskData.taskTitle}</div>
