@@ -186,3 +186,49 @@ function searchTasks() {
     });
 }
 
+
+
+// Delete Task
+
+async function deleteTaskFromFirebase(taskId) {
+    try {
+        let taskKey = null;
+        for (const task of firebaseData) {
+            if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+                for (const key in task.dataExtracted) {
+                    if (task.dataExtracted[key].id === taskId) {
+                        taskKey = key;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (taskKey) {
+            await fetch(`${BASE_URL}/tasks/${taskKey}.json`, {
+                method: "DELETE"
+            });
+            console.log(`Task with ID ${taskId} deleted from Firebase.`);
+        } else {
+            console.error("Task key not found in Firebase data.");
+        }
+    } catch (error) {
+        console.error("Error deleting task from Firebase:", error);
+    }
+}
+
+function deleteTask(taskId) {
+    let taskElement = document.getElementById(taskId);
+    if (taskElement) {
+        taskElement.parentNode.removeChild(taskElement);
+    }
+
+
+    deleteTaskFromFirebase(taskId).then(() => {
+        closeUserStory(); 
+        loadTickets();
+        setTimeout(() => {
+            window.location.reload();  
+        }, 50); 
+    });
+}

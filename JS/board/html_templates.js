@@ -63,9 +63,9 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
 
 
                 <div class="userStoryDeleteAndEditContainer">
-                    <div class="userStoryDeleteContainer userStoryBackgroundImageDelete">
-                        <div class="userStoryDeleteTextContainer">Delete</div>
-                    </div>
+            <div class="userStoryDeleteContainer userStoryBackgroundImageDelete" onclick="deleteTask(${taskData.id})">
+                <div class="userStoryDeleteTextContainer">Delete</div>
+            </div>
                     <div class="userStoryCutLine"></div>
                     <div class="userStoryEditTextContainer userStoryBackgroundImageEdit">
                         <div onclick="openUserStoryEdit()" class="userStoryEditTextTextContainer">Edit</div>
