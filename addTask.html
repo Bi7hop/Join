@@ -37,7 +37,7 @@
                     <span class="medium-font medium-font-color">Title<span class="asterisc-color">*</span></span>
                     <div class="flex-column gap-four">
                         <input id="title" type="text" required class="simple-input medium-font" placeholder="Enter a title">
-                        <span class="small-font asterisc-color hide">This field is required</span>
+                        <span id="titleError" class="small-font asterisc-color hide">This field is required</span>
                         <!--Must be changed with hide or show css class-->
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <span class="medium-font medium-font-color">Due date<span class="asterisc-color">*</span></span>
                     <div class="flex-column  gap-four">
                         <input id="date" type="date" class="simple-input medium-font" min="" onclick="minDate()">
-                        <span class="small-font asterisc-color hide">This field is required</span>
+                        <span id="dateError" class="small-font asterisc-color hide">This field is required</span>
                         <!--Must be changed with hide or show css class-->
                     </div>
                 </div>
