@@ -216,19 +216,22 @@ input[type="email"] {
 .footer-login {
     display: flex;
     justify-content: center;
-    padding-top: 40px;
+    margin-top: 32px;
     gap: 40px;
 }
 
 .footer-login a {
-    color: #d1d1d1;
+    color: #A8A8A8;
     text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: Inter;
 }
 
 .footer-login a:hover {
+    scale: 1.05;
     cursor: pointer;
     color: rgb(64, 171, 226);
-    font-weight: bolder;
 }
 
 p {
