@@ -25,7 +25,7 @@
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
 
     <div id="add-task-position" class="add-task-main-position"> <!--Change to add-task-main-position-->
-        <form id="add-task-card" class="add-task-card">
+        <form onsubmit="postTask(event)" id="add-task-card" class="add-task-card">
             <div class="title-positioning">
                 <h1 class="h1">Add Task</h1>
             </div>
@@ -37,7 +37,7 @@
                 <div class="input-title-container flex-column">
                     <span class="medium-font medium-font-color">Title<span class="asterisc-color">*</span></span>
                     <div class="flex-column gap-four">
-                        <input id="title" type="text" required class="simple-input medium-font" placeholder="Enter a title">
+                        <input id="title" type="text" class="simple-input medium-font" placeholder="Enter a title">
                         <span id="titleError" class="small-font asterisc-color hide">This field is required</span>
                         <!--Must be changed with hide or show css class-->
                     </div>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="two-buttons-position flex-row">
                     <button onclick="closeAddTask()" class="cancel-btn flex-row gap-four btn-styling medium-font">Cancel<img src="./img/Close.png"></button>
-                    <button onclick="postTask(event)" class="create-btn flex-row gap-four btn-styling medium-font">Create Task<img src="./img/check.png"></button>
+                    <button class="create-btn flex-row gap-four btn-styling medium-font">Create Task<img src="./img/check.png"></button>
                 </div>
             </div>
         </form>
