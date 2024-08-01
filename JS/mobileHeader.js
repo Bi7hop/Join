@@ -5,7 +5,6 @@ function toggleMenu() {
     if (overlayHeader.classList.contains('hidden-responsive')) {
         setTimeout(() => {
             document.addEventListener('click', closeMenu)
-            console.log(closeMenu);
         }, 10);
     } else {
         document.removeEventListener('click', closeMenu)
