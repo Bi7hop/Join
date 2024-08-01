@@ -1,20 +1,23 @@
-.overlay-menu {
+.overlay-menu-responsive {
     position: absolute;
     width: 150px;
     border-radius: 20px 0 20px 20px;
-    padding: 10px;
+    padding: 5px;
     background-color: rgba(42, 54, 71, 1);
-    right: -160px;
+    right: -150px;
     top: 90px;
-    display: none;
     flex-direction: column;
     gap: 8px;
-    opacity: 0; 
-    transform: unset;
+    /* transform: translateX(100%); */
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+}
+
+.hidden-responsive {
+    right: 6px;
+    /* transform: translateX(0); */
 }
 
 .a-link {
@@ -26,82 +29,27 @@
     text-decoration: none;
 }
 
-.a-menu {
+.a-menu-responsive {
     width: 140px;
     height: 46px;
     display: flex;
     align-items: center;
-    padding: 0 0 0 16px;
+    padding-left: 16px;
+    padding-right: 16px;
     box-sizing: border-box;
+    cursor: pointer;
+    
 }
 
-.show-menu {
-    opacity: 1;
-    z-index: 1;
-    transform: translateX(0) !important;
-    display: flex;
-}
-
-.a-link:hover {
-    background-color: #516786;
+.a-menu-responsive:hover {
+    background-color: #2A3D59;
     border-radius: 12px;
-}
-
-.hidden {
-    display: none;
 }
 
 nav a.active {
     background-color: rgb(9,25,49); 
     color: white;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 * {
     margin: 0px;
@@ -110,7 +58,6 @@ nav a.active {
 header {
     z-index: 1;
     height: 96px;
-   /* width: 1440px; */
     display: flex;
     align-items: center;
     justify-content: space-between;

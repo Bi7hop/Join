@@ -17,25 +17,23 @@
         </div>
 
         <div onclick="toggleMenu()" class="headerHelpAndLogoContainer">
-            <a href="../help.html">
-                <img src="./img/help.png" alt="Help">
-            </a>
             <p>SM</p>
-
-            <div id="mobileOverlayHeader" class="overlay-menu show-menu hidden">
+            <div id="mobileOverlayHeader" class="overlay-menu-responsive">
+                <a class="a-link" href="../help.html">
+                    <div class="a-menu-responsive">Help</div>
+                </a>
                 <a class="a-link" href="legalNotice.html">
-                    <div class="a-menu">Legal Notice</div>
+                    <div class="a-menu-responsive">Legal Notice</div>
                 </a>
                 <a class="a-link" href="privacyPolicy.html">
-                    <div class="a-menu">Privacy Policy</div>
+                    <div class="a-menu-responsive">Privacy Policy</div>
                 </a>
-                <div class="a-menu" onclick="logOut()">
-                    <span class="a-link">Log Out</span>
+                <div class="a-link" onclick="logOut()">
+                    <div class="a-menu-responsive">Log Out</div>
                 </div>
             </div>
-
         </div>
-
+        </div>
     </header>
 </body>
 
