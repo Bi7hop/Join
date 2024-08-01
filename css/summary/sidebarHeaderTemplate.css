@@ -172,6 +172,7 @@ nav {
     height: 46px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     padding: 0 0 0 16px;
     box-sizing: border-box;
 }
@@ -186,6 +187,7 @@ nav {
 .a-link:hover {
     background-color: #516786;
     border-radius: 12px;
+    cursor: pointer;
 }
 
 .hidden {
