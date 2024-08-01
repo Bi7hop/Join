@@ -86,6 +86,12 @@ function assignedResultsAt(taskData) {
   `;
 }
 
+function assignedResultsPlusSixAt(extraCount){
+  return `
+    <span class="assigned-emblem flex-row small-font extra-emblem">+${extraCount}</span>
+  `;
+}
+
 
 function personsFoundPostAt() {
   return foundPersonsByInput.map(person => `

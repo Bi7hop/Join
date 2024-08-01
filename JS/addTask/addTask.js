@@ -149,8 +149,14 @@ function updateAssignedPersons(taskData) {
 
 function postPersonsAt() {
   let assignedPersonsResults = document.getElementById('assigned-persons');
-  assignedPersonsResults.innerHTML = assignedPersons.map(taskData => assignedResultsAt(taskData)).join('');
-  console.log("Assigned persons posted:", assignedPersons);
+  if (assignedPersons.length <= 6) {
+    assignedPersonsResults.innerHTML = assignedPersons.map(taskData => assignedResultsAt(taskData)).join('');
+  } else {
+    // Render the first six emblems
+    assignedPersonsResults.innerHTML = assignedPersons.slice(0, 5).map(taskData => assignedResultsAt(taskData)).join('');
+    // Add an additional emblem showing the remaining count
+    assignedPersonsResults.innerHTML += assignedResultsPlusSixAt(assignedPersons.length - 5);
+  }
 }
 
 function searchPersonAt() {

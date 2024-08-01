@@ -8,11 +8,11 @@
     }
 
     .assigned-persons {
-        left: 34px;
+        left: 38px;
     }
 
     .dropdown-list {
-        left: 34px;
+        left: 38px;
     }
 
     .title-positioning {
@@ -38,10 +38,12 @@
     }
 
     .assigned-persons {
+        top: 555px;
         left: 15px;
     }
 
     .dropdown-list {
+        top: 545px;
         left: 15px;
     }
 
@@ -51,6 +53,7 @@
 
     .three-input-container {
         left: 15px;
+        margin-bottom: 40px;
     }
 
     .three-input-prio-container {
@@ -111,11 +114,27 @@
     .bottom-required{
         margin: 0;
     }
+
+    .assigned-persons {
+        top: 475px;
+        left: 2px;
+    }
+
+    .dropdown-list {
+        top: 465px;
+        left: 2px;
+    }
 }
 
 @media(max-width:1050px) {
     .add-task-main-position {
         left: 0;
+    }
+
+    .btn-required-text{
+        position: absolute;
+        bottom: 110px;
+        top: initial;
     }
 }
 
@@ -134,7 +153,6 @@
     .bottom-required{
         display: block;
     }
-
 
     .add-task-main-position {
         position: absolute;
@@ -178,7 +196,6 @@
         position: initial;
         width: 396px;
         gap: 8px;
-        margin-bottom: 170px;
     }
 
     .input-title-container {
@@ -296,7 +313,7 @@
 
     .dropdown-list {
         width: 398px;
-        top: 387px;
+        top: 500px;
         height: 160px;
         left: 16px;
     }
@@ -304,7 +321,7 @@
     .assigned-persons {
         width: 398px;
         height: 50px;
-        top: 400px;
+        top: 510px;
         left: 16px;
     }
 
@@ -313,7 +330,7 @@
     }
 }
 
-@media(max-width:500px) {
+@media(max-width:435px) {
     .add-task-main-position {
         left: 0;
         width: 310px;
@@ -455,5 +472,13 @@
 
     .subtask-display {
         width: 256px;
+    }
+
+    .persons-assignemend{
+        width: initial;
+    }
+
+    .name-container{
+        width: initial;
     }
 }

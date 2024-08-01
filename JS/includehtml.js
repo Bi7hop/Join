@@ -11,7 +11,7 @@ async function includeHTML() {
         }
         element.removeAttribute('w3-include-html');
     }
-    /*checkIfLoged();*/
+    // checkIfLoged();
     attachToggleEvent();
     runAfterSidebarLoad(); 
 }

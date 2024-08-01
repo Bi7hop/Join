@@ -280,6 +280,10 @@
     margin: 0 5px 0 0;
 }
 
+.extra-emblem{
+    background-color: #9694f0;
+}
+
 .vertical-vector {
     display: block;
     width: 0;
