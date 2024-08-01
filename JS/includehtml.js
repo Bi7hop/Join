@@ -11,7 +11,7 @@ async function includeHTML() {
     }
     element.removeAttribute("w3-include-html");
   }
-//   checkTargetSites();
+  //   checkTargetSites();
   displayCurentUser();
   attachToggleEvent();
   runAfterSidebarLoad();
@@ -55,29 +55,35 @@ function runAfterSidebarLoad() {
 includeHTML();
 
 function displayCurentUser() {
-    let text = document.getElementById("toggleDropDown");
-    let currentUser = localStorage.getItem("currentUser");
-    let name =  currentUser.split(' ').map(word => word[0]).join('');
+  let text = document.getElementById("toggleDropDown");
+  let mobileText = document.getElementById("mobileEmblem");
+  let currentUser = localStorage.getItem("currentUser");
+  let name = currentUser.split(" ").map((word) => word[0]).join("");
 
-    if (text && currentUser) {
-        text.innerText = name.toUpperCase();
-    }
+  if (text && currentUser && mobileText) {
+    text.innerText = name.toUpperCase();
+    mobileText.innerHTML = name.toUpperCase();
+  }
 }
 
 function checkTargetSites() {
-    const currentUrl = window.location.pathname;
-    const protectedSites = ["/summary.html", "/addtask.html", "/board.html", "/contacts.html"];
-  
-    if (protectedSites.includes(currentUrl)) {
-      checkIfLogged();
-    }
+  const currentUrl = window.location.pathname;
+  const protectedSites = [
+    "/summary.html",
+    "/addtask.html",
+    "/board.html",
+    "/contacts.html",
+  ];
+
+  if (protectedSites.includes(currentUrl)) {
+    checkIfLogged();
   }
-  
-  function checkIfLogged() {
-    let user = localStorage.getItem("currentUser");
-  
-    if (!user) {
-      window.location.href = "./login.html";
-    }
+}
+
+function checkIfLogged() {
+  let user = localStorage.getItem("currentUser");
+
+  if (!user) {
+    window.location.href = "./login.html";
   }
-  
+}
