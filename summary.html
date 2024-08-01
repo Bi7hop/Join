@@ -9,14 +9,15 @@
     <link rel="icon" type="image/x-icon" href="/img/Join_Logo.png">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/summary/summary.css">
-    <!-- <link rel="stylesheet" href="./css/marcel_test_header_mobile.css"> -->
-    <!-- <link rel="stylesheet" href="./css/marcel_test_mobile_Navbar.css"> -->
-    <!-- <link rel="stylesheet" href="./css/mobileNavbar.css"> -->
     <link rel="stylesheet" href="./css/summary/summary_mediaquerry.css">
-    
+
     <script src="./JS/firebase.js"></script>
     <script src="./JS/includehtml.js"></script>
     <script src="./JS/summary/greeting.js"></script>
+
+    <script src="./JS/summary/summary.js"></script>
+    <script src="./JS/summary/summary_htmlTemplates.js"></script>
+
     <script src="./JS/log_in/logOut.js"></script>
     <script src="./JS/mobileHeader.js"></script>
 </head>
@@ -27,88 +28,12 @@
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
 
     <div class="main-container-summary">
-        <div class="card-container-summary">
-            <div class="headline-summary">
-                <div class="summary-title-container">
-                    <h1 class="title">Join 248</h1>
-                    <div class="seperator"><img src="./img/seperator.png" alt=""></div>
-                    <p>Key Metrics at a Glance</p>
-                    <div class="seperator-mobile"><img src="./img/mobile/separator_mobile.png" alt=""></div>
-                </div>
-            </div>
+        <div id="summaryBoard" class="card-container-summary">
             
-            <div class="card-top-container-summary">
-                <a href="board.html" class="summary-card">
-                    <div class="icon-container">
-                        <div class="icons-container-summary">
-                            <img class="summary-icons" src="./img/edit.png" alt="">
-                        </div>
-                        <div class="text-container">
-                            <span class="number-container">1</span>
-                            <span>To-do</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="board.html" class="summary-card">
-                    <div class="icon-container">
-                        <div class="icons-container-summary">
-                            <img class="summary-icons" src="./img/ok.png" alt="">
-                        </div>
-                        <div class="text-container">
-                            <span class="number-container">1</span>
-                            <span>Done</span>
-                        </div>
-                    </div>
-                </a>
+            <div class="greeting-container">
+                <span class="greet-text" id="greetText"></span>
+                <span class="greet-username" id="greetUserName"></span>
             </div>
-            <div class="card-middle-container-summary">
-                <a class="summary-card-middle" href="board.html">
-                    <div class="icon-container">
-                        <div class="card-icons-middle">
-                            <img class="summary-icons" src="./img/Prio alta.png" alt="">
-                        </div>
-                        <div class="text-container">
-                            <span class="number-container">3</span>
-                            <span>Urgent</span>
-                        </div>
-                    </div>
-                    <div class="seperator-middle-card"><img src="./img/seperator_light.png" alt=""></div>
-                    <div class="text-container-middle-card">
-                        <span class="date-text">July 10, 2024</span>
-                        <span class="deadline-text">Upcoming Deadline</span>
-                    </div>
-                </a>
-            </div>
-            <div class="card-bottom-container-summary">
-                <a class="summary-card-bottom" href="board.html">
-                    <div>
-                        <div class="text-container">
-                            <span class="number-container">2</span>
-                            <span>Tasks in<br>Board</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="summary-card-bottom" href="board.html">
-                    <div>
-                        <div class="text-container">
-                            <span class="number-container">1</span>
-                            <span>Tasks In<br>Progress</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="summary-card-bottom" href="board.html">
-                    <div>
-                        <div class="text-container">
-                            <span class="number-container">6</span>
-                            <span>Awaiting<br>Feedback</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="greeting-container">
-            <span class="greet-text" id="greetText"></span>
-            <span class="greet-username" id="greetUserName"></span>
         </div>
     </div>
     <div id="fullscreenGreeting" class="fullscreen-greeting">
