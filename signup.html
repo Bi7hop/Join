@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./JS/firebase.js"></script>
     <script src="./JS/log_in/signUp.js"></script>
-    <!-- <script type="module" src="firebase.js"></script> -->
 </head>
 
 <body id="body" onload="loadUrl()">
     <header>
         <div class="logo-image">
-                <img src="./img/logo_dark.png" alt="Logo Join">
+            <img src="./img/logo_dark.png" alt="Logo Join">
         </div>
     </header>
     <div class="main-login-container">
@@ -34,33 +33,35 @@
             <div class="underline-login">
                 <img src="./img/underline_login.png" alt="">
             </div>
-            <form id="regestrationForm">
+            <form id="registrationForm" onsubmit="return addNewUser(event)" novalidate>
                 <div class="input-login-field">
-                    <input id="signUpName" type="text" required class="name" placeholder="Name">
-                    <div class="input-login-field">
-                        <div class="input-field-mail">
-                            <input id="signUpEmail" type="email" required placeholder="Email">
-                            <img src="./img/mail.png" alt="">
-                        </div>
-                        <div class="input-field-password">
-                            <input id="signUpPassword" type="password" required placeholder="Password"
-                                class="password-field">
-                            <img src="./img/lock.png" alt="">
-                        </div>
-                        <div class="input-field-password">
-                            <input id="signUpPasswordCheck" class="password-field" type="password" required
-                                placeholder="Confirm Password">
-                            <img src="./img/lock.png" alt="">
-                        </div>
+                    <input id="signUpName" type="text" required class="name" placeholder="Name" pattern="^\w+\s\w+.*$" title="Please enter at least two words for the name.">
+                </div>
+                <div class="input-login-field">
+                    <div class="input-field-mail">
+                        <input id="signUpEmail" type="email" required placeholder="Email" title="Please enter a valid email address.">
+                        <img src="./img/mail.png" alt="">
                     </div>
-                    <div class="accept-privacy-policy">
-                        <input required type="checkbox">
-                        <p>I accept the <a href="privacyPolicy.html">Privacy policy</a></p>
+                </div>
+                <div class="input-login-field">
+                    <div class="input-field-password">
+                        <input id="signUpPassword" type="password" required placeholder="Password" class="password-field" minlength="8" title="Password must be at least 8 characters long.">
+                        <img src="./img/lock.png" alt="">
                     </div>
-                    <div class="sign-up-container">
-                        <div class="sign-up">
-                            <button id="signUpButton" onclick="addNewUser(event)" class="btn">Sign up</button>
-                        </div>
+                </div>
+                <div class="input-login-field">
+                    <div class="input-field-password">
+                        <input id="signUpPasswordCheck" class="password-field" type="password" required placeholder="Confirm Password" minlength="8" title="Please confirm your password.">
+                        <img src="./img/lock.png" alt="">
+                    </div>
+                </div>
+                <div class="accept-privacy-policy">
+                    <input id="privacyPolicy" type="checkbox" required>
+                    <p>I accept the <a href="privacyPolicy.html">Privacy policy</a></p>
+                </div>
+                <div class="sign-up-container">
+                    <div class="sign-up">
+                        <button type="submit" id="signUpButton" class="btn">Sign up</button>
                     </div>
                 </div>
             </form>

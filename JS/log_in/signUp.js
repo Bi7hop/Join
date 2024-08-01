@@ -1,6 +1,12 @@
 async function addNewUser(event) {
   event.preventDefault();
 
+  let form = event.target;
+  if (!form.checkValidity()) {
+    form.reportValidity(); 
+    return;
+  }
+
   let extractedData = {
     username: getValue("signUpName"),
     email: getValue("signUpEmail"),
@@ -8,31 +14,22 @@ async function addNewUser(event) {
     passwordCheck: getValue("signUpPasswordCheck"),
   };
 
-  for (let key in extractedData) {
-    if (!extractedData[key]) {
-      alert(`${key} cannot be empty.`);
-      return;
-    }
+  if (extractedData.password !== extractedData.passwordCheck) {
+    document.getElementById('signUpPasswordCheck').setCustomValidity("Passwords do not match.");
+    document.getElementById('signUpPasswordCheck').reportValidity();
+    return;
   }
 
-  const passwordsMatch = await passwordConfiramation();
-  if (!passwordsMatch) {
-    alert("Passwords do not match. User data will not be posted.");
-    return;
-  } else {
-    await signUpConfirmation();
-    await postData("/users", extractedData);
-    window.location = "./login.html";
-  }
+  
+  document.getElementById('signUpPasswordCheck').setCustomValidity("");
+
+  await signUpConfirmation();
+  await postData("/users", extractedData);
+  window.location = "./login.html";
 }
 
-async function passwordConfiramation() {
-  let password = getValue("signUpPassword");
-  let confirmation = getValue("signUpPasswordCheck");
-  if (password !== confirmation) {
-    return false;
-  }
-  return true;
+function getValue(id) {
+  return document.getElementById(id).value.trim();
 }
 
 function signUpConfirmation() {
