@@ -12,6 +12,7 @@ async function includeHTML() {
     element.removeAttribute("w3-include-html");
   }
 //   checkTargetSites();
+  displayCurentUser();
   attachToggleEvent();
   runAfterSidebarLoad();
 }
@@ -52,6 +53,16 @@ function runAfterSidebarLoad() {
 }
 
 includeHTML();
+
+function displayCurentUser() {
+    let text = document.getElementById("toggleDropDown");
+    let currentUser = localStorage.getItem("currentUser");
+    let name =  currentUser.split(' ').map(word => word[0]).join('');
+
+    if (text && currentUser) {
+        text.innerText = name.toUpperCase();
+    }
+}
 
 function checkTargetSites() {
     const currentUrl = window.location.pathname;
