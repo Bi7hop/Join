@@ -1,6 +1,6 @@
 function summaryBoardHtmlTemplate() {
     return `
-            <div>
+            
                 <div class="headline-summary">
                     <div class="summary-title-container">
                         <h1 class="title">Join 248</h1>
@@ -77,6 +77,6 @@ function summaryBoardHtmlTemplate() {
                         </div>
                     </a>
                 </div>
-            </div>
+            
     `
 }

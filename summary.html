@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="./css/summary/summary_mediaquerry.css">
 
     <script src="./JS/firebase.js"></script>
+    <script src="./JS/summary/summary.js"></script>
+    <script src="./JS/summary/summary_htmlTemplates.js"></script>
     <script src="./JS/includehtml.js"></script>
     <script src="./JS/summary/greeting.js"></script>
 
-    <script src="./JS/summary/summary.js"></script>
-    <script src="./JS/summary/summary_htmlTemplates.js"></script>
+    
 
     <script src="./JS/log_in/logOut.js"></script>
     <script src="./JS/mobileHeader.js"></script>
@@ -28,12 +29,15 @@
     <div class="mobile-nav" w3-include-html="./templates/mobileNavbar.html"></div>
 
     <div class="main-container-summary">
-        <div id="summaryBoard" class="card-container-summary">
-            
-            <div class="greeting-container">
-                <span class="greet-text" id="greetText"></span>
-                <span class="greet-username" id="greetUserName"></span>
+        <div  class="card-container-summary">
+            <div id="summaryBoard">
+
             </div>
+            
+        </div>
+        <div class="greeting-container">
+            <span class="greet-text" id="greetText"></span>
+            <span class="greet-username" id="greetUserName"></span>
         </div>
     </div>
     <div id="fullscreenGreeting" class="fullscreen-greeting">
