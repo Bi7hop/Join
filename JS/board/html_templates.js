@@ -1,18 +1,32 @@
+/**
+ * Generates HTML for a user story based on the provided data.
+ * 
+ * @param {Object} taskData - Data for the user story.
+ * @param {string} taskData.id - Unique identifier for the user story.
+ * @param {string} taskData.taskType - Type of the task.
+ * @param {string} taskData.taskTitle - Title of the task.
+ * @param {string} taskData.taskDescription - Description of the task.
+ * @param {string} taskData.taskDate - Due date of the task.
+ * @param {string} taskData.taskPrioAlt - Alt text for the priority image.
+ * @param {string} taskData.taskPrioImage - URL for the priority image.
+ * 
+ * @param {string} formattedContacts - HTML content representing the contacts associated with the task.
+ * @param {string} formattedContactsFullName - HTML content representing the full names of the contacts.
+ * @param {string} formattedSubtasks - HTML content representing the subtasks.
+ */
 function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks) {
     return `
     <div id="${taskData.id}" class="userStoryOutsideContainer flying-element">
         <div class="userStoryContainer">
             <div class="userStoryContainerInside">
-                
-                    <div class="userStoryHeadlineAndCloseButtonContainer">
-                        <div class="userStoryTaskType">
-                            ${taskData.taskType}
-                        </div>
-                        <div onclick="closeUserStory(), setTimeout(function() { location.reload(); }, 35);" class="userStoryCloseButtonContainer">
-                            <img src="./img/userStory/close.png" alt="Close">
-                        </div>
+                <div class="userStoryHeadlineAndCloseButtonContainer">
+                    <div class="userStoryTaskType">
+                        ${taskData.taskType}
                     </div>
-                
+                    <div onclick="closeUserStory(), setTimeout(function() { location.reload(); }, 35);" class="userStoryCloseButtonContainer">
+                        <img src="./img/userStory/close.png" alt="Close">
+                    </div>
+                </div>
                 <div>
                     <h1 class="userStoryHeadline">
                         ${taskData.taskTitle}
@@ -39,7 +53,6 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                 <div class="assignedToContainer">
                     Assigned To:
                 </div>
-
                 <div class="userStoryContactContainer">
                 
                     <div class="userStoryContactEmblemContainer">
@@ -48,29 +61,23 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                     <div class="userStoryContactFullName"> 
                         ${formattedContactsFullName}
                     </div>
-                
                 </div>
                 <div class="userStorySubtaskContainer">
                     Subtasks
                 </div>
                 
-                
-
-                    <div class="userStorySubtaskTitelContainer">
-                        <p>${formattedSubtasks}</p>
-                    </div>
-                
-
+                <div class="userStorySubtaskTitelContainer">
+                    <p>${formattedSubtasks}</p>
+                </div>
 
                 <div class="userStoryDeleteAndEditContainer">
-            <div class="userStoryDeleteContainer userStoryBackgroundImageDelete" onclick="deleteTask(${taskData.id})">
-                <div class="userStoryDeleteTextContainer">Delete</div>
-            </div>
+                    <div class="userStoryDeleteContainer userStoryBackgroundImageDelete" onclick="deleteTask(${taskData.id})">
+                        <div class="userStoryDeleteTextContainer">Delete</div>
+                    </div>
                     <div class="userStoryCutLine"></div>
                     <div class="userStoryEditTextContainer userStoryBackgroundImageEdit">
                         <div onclick="openUserStoryEdit(${taskData.id})" class="userStoryEditTextTextContainer">Edit</div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -151,17 +158,13 @@ function userStoryEditHtmlTemplate(taskData) {
                     </div>
                 </div>
                 <div id="editDropDownList" class="editDropDownList editHide">
-                    
                 </div>
                 <div id="assigned-persons" class="userStoryContactsContainer mTop8">
-                    
                 </div>
                 <div class="userStorySubtaskHeadlineContainer mTop16">
                     <label class="userStorySubtaskHeadline" for="subtasks">Subtasks</label>
                 </div>
-                
                 <div class="userStorySubtasksContainer mTop8">
-                    
                         <div class="userStoryAssignedToInputAndImageContainer">
                         <input id="subtask" type="text" class="subtask-input medium-font subtaskInput" id="subtask" placeholder="Add new subtask">
                         <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">
@@ -174,7 +177,6 @@ function userStoryEditHtmlTemplate(taskData) {
                         </div>
                     </div>
                     <div id="subtaskDisplay" class="subtaskDisplay flex-column"></div>
-                    
                 </div>
                 <div class="userStoryEditOkButtonContainer">
                     <button class="userStoryEditOkButton" type="button" onclick="saveTaskChanges(${taskData.id})">Save <img src="./img/userStoryEdit/ok.png" alt="Save"></button>
@@ -186,8 +188,24 @@ function userStoryEditHtmlTemplate(taskData) {
     `;
 }
 
-
-
+/**
+ * Generates HTML for a ticket or task based on the provided data.
+ * 
+ * @param {Object} taskData - Data for the task.
+ * @param {string} taskData.id - Unique identifier for the task.
+ * @param {string} taskData.taskType - Type of the task (e.g., "bug", "feature").
+ * @param {string} taskData.taskTitle - Title of the task.
+ * @param {string} taskData.taskDescription - Description of the task.
+ * @param {number} taskData.taskSubtaskAmount - Total number of subtasks for the task.
+ * @param {string} taskData.taskPrioImage - URL for the priority image.
+ * @param {string} taskData.taskPrioAlt - Alt text for the priority image.
+ * @param {string} taskData.taskContactsMore - Additional information about contacts.
+ * 
+ * @param {string} formattedContacts - HTML content representing the contacts associated with the task.
+ * 
+ * @param {number} formattedSubtasksSelected - Number of selected subtasks.
+ * @param {number} formattedSubtaskBar - Percentage width of the subtask bar representing completion.
+ */
 function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar) {
     return `
         <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id}), scrollToTop()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
@@ -199,7 +217,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                     <div class="taskSubtaskBar">
                         <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
-                    <span>${formattedSubtasksSelected}/${taskData.taskSubtaskAmount} Subtask</span>
+                    <span>${formattedSubtasksSelected}/${taskData.taskSubtaskAmount} Subtask${formattedSubtasksSelected !== 1 ? 's' : ''}</span>
                 </div>
                 <div class="taskContactsPrioContainer">
                     <div class="taskContactsContainer">
@@ -207,9 +225,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                     </div>
                     
                     <div class="taskMoreContactsAndTaskPrioContainer">
-                        
-                            <div class="taskMoreContacts">${taskData.taskContactsMore}</div>
-                        
+                        <div class="taskMoreContacts">${taskData.taskContactsMore}</div>
                         <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
                     </div>
                 </div>
@@ -218,6 +234,14 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
     `;
 }
 
+/**
+ * Generates HTML for a dropdown list of contacts, where each item includes an emblem and name.
+ * 
+ * This function sorts the contacts and creates an HTML string for each contact, which can be used to display a dropdown list.
+ * Each item in the list can be clicked to add the person to an assigned list.
+ * 
+ * @returns {string} The HTML string representing the dropdown list of contacts.
+ */
 function dropDownListSample() {
     let list = '';
     sortContacts(contacts);
@@ -238,10 +262,19 @@ function dropDownListSample() {
     return list;
 }
 
+/**
+ * Generates HTML for a list of assigned persons, each represented by an emblem.
+ * 
+ * This function iterates over the `assignedPersonsList` array and creates an HTML string for each assigned person.
+ * Each person is displayed with an emblem styled according to their assigned color.
+ * 
+ * @returns {string} The HTML string representing the list of assigned persons with their emblems.
+ */
 function assignedResults() {
     let list = '';
     for (let i = 0; i < assignedPersonsList.length; i++) {
         let person = assignedPersonsList[i];
+        
         list += `
       <span id="emblem${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblemAt(person.name)}</span>
       `
@@ -249,9 +282,17 @@ function assignedResults() {
     return list;
 }
 
+/**
+ * Generates HTML for a list of found persons, each represented with an emblem and name.
+ * 
+ * This function sorts the `contacts` array and then generates an HTML string for each person in the `foundPersonsList`.
+ * Each person is displayed with an emblem and a name. Clicking on an item will trigger the `addFoundPerson` function.
+ * 
+ * @returns {string} The HTML string representing the list of found persons, including their emblems and names.
+ */
 function personsFoundPost() {
     let list = '';
-    sortContacts(contacts);
+    sortContacts(contacts);  
     for (let i = 0; i < foundPersonsList.length; i++) {
         let person = foundPersonsList[i];
         list += `
@@ -269,28 +310,41 @@ function personsFoundPost() {
     return list;
 }
 
+/**
+ * Generates HTML for a list of subtasks.
+ * 
+ * This function creates an HTML string representing a list of subtasks. Each subtask is displayed as a list item with options for editing and deleting.
+ * The edit and delete options are initially hidden and can be triggered through interactions.
+ * 
+ * @returns {string} The HTML string representing the list of subtasks with interactive elements for editing and deleting.
+ */
 function subtaskSample() {
     let list = '<ul class="subTaskList ulPadding">';
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        list += `<li class="listItemSubTasks flex-row" id="subtaskNr${i}">
-        <span class="subtask-text">${subtask}</span>
-        <div style="display: none" id="subTaskHoverEffect${i}">
-            <div class="close-approve-container" id="editContainer">
-                <div class="smallIconDiv" onclick="editSubtask(this)">
-                <img class="smaller-icon" src="/img/edit-dark.png">
+        list += `
+        <li class="listItemSubTasks flex-row" id="subtaskNr${i}">
+            <span class="subtask-text">${subtask}</span>
+            <div style="display: none" id="subTaskHoverEffect${i}">
+                <div class="close-approve-container" id="editContainer">
+                    <div class="smallIconDiv" onclick="editSubtask(this)">
+                        <img class="smaller-icon" src="/img/edit-dark.png" alt="Edit">
+                    </div>
+                    <span class="small-input-vertical-vector"></span>
+                    <div class="smallIconDiv" onclick="deleteSubtask(this)">
+                        <img class="smaller-icon" src="/img/delete.png" alt="Delete">
+                    </div>
                 </div>
-                <span class="small-input-vertical-vector"></span>
-                <div class="smallIconDiv" onclick="deleteSubtask(this)">
-                <img class="smaller-icon" src="/img/delete.png">
+                <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
+                    <div class="smallIconDiv" onclick="approveEdit(this)">
+                        <img class="smaller-icon" src="/img/check_dark_icon.svg" alt="Approve Edit">
+                    </div>
+                    <span class="small-input-vertical-vector"></span>
+                    <div class="smallIconDiv">
+                        <img onclick="cancelEdit(this)" class="small-icon" src="/img/Close.png" alt="Cancel Edit">
+                    </div>
                 </div>
             </div>
-            <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
-                <div class="smallIconDiv" onclick="approveEdit(this)"><img class="smaller-icon" src="/img/check_dark_icon.svg"></div>
-                <span class="small-input-vertical-vector"></span>
-                <div class="smallIconDiv" ><img onclick="cancelEdit(this)" class="small-icon" src="/img/Close.png"></div>
-            </div>
-        </div>
         </li>`;
     }
     list += "</ul>";

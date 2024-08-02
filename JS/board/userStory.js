@@ -6,10 +6,8 @@ function openUserStory(id) {
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
     boardBodyContainer.style.overflow = "hidden";
     overlay.classList.add("overlay");
-
     const container = document.getElementById('userStoryWindow');
     container.innerHTML = ''; // Clear previous content
-
     if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
         const tasksData = firebaseTasks[0].dataExtracted;
         Object.keys(tasksData).forEach(key => {
@@ -27,14 +25,12 @@ function openUserStory(id) {
                 selectedOptions[taskData.id] = taskData.taskSubtasksSelected || [];
             }
         });
-
         setTimeout(() => {
             let outsideContainer = document.querySelector('.userStoryOutsideContainer');
             if (outsideContainer) {
                 outsideContainer.addEventListener('click', handleOutsideClick);
             }
         }, 0);
-
     } else {
         console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
     }
