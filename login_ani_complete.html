@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="./css/login_ani_complete.css">
     <link rel="stylesheet" href="./css/login_ani_complete_mediaquerry.css">
     <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./JS/firebase.js"></script>
+    <script src="./JS/log_in/login.js"></script>
     
 </head>
-<body>
+<body onload="loadData(), rememberUser();">
     <div class="container">
         <img src="./img/logo_dark_big.png" alt="Join Logo" class="image">
     </div>
@@ -30,25 +32,28 @@
                     <div class="underline-login">
                         <img src="./img/underline_login.png" alt="">
                     </div>
-                    <form onsubmit="">
-                        <div class="input-login-field">
+                    <form onsubmit="logIn(event)">
+                        <div id="input-field-login" class="input-login-field">
                             <div class="input-field-mail">
                                 <input id="loginEmail" type="email" placeholder="Email" required>
                                 <img src="./img/mail.png" alt="">
                             </div>
-                            <div class="input-field-password">
-                                <input id="loginPassword" type="password" placeholder="Password" required>
-                                <img src="./img/lock.png" alt="">
+                            <div id="input-field-password" class="input-field-password">
+                                <input id="loginPassword" type="password" class="pass-field" placeholder="Password" required onclick="locketIconSwap()">
+                                <img id="passImg" src="./img/lock.png" alt="" onclick="changePassVisibility()">
                             </div>
                         </div>
-                        <div class="remember-me">
-                            <input type="checkbox">
-                            <p>Remember me</p>
+                        <div class="invalid-message-container hide" id="error-container">
+                            <p class="error-text">Wrong password Ups! Try again.</p>
                         </div>
-                        <div class="login-buttons">
-                            <button class="btn-login">Log in</button>
-                            <button class="btn-guest-login">Guest Log in</button>
-                        </div>
+                            <div class="remember-me">
+                                <input id="rememberMe" type="checkbox">
+                                <p>Remeber me</p>
+                            </div>
+                            <div class="login-buttons">
+                                <button class="btn-login" >Log in</button>
+                                <button onclick="loginGuest()" class="btn-guest-login">Guest Log in</button>
+                            </div>
                     </form>
                 </div>
             </div>

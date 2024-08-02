@@ -1,3 +1,11 @@
+/**
+ * Handles the user sign-up process.
+ * 
+ * @param {Event} event - The submit event from the sign-up form.
+ * 
+ * @description
+ * This function prevents the default form submission behavior, validates the form, and checks if the passwords match. If validation passes, it shows a confirmation popup, sends the user data to the server, and then redirects to the login page.
+ */
 async function addNewUser(event) {
   event.preventDefault();
 
@@ -28,10 +36,24 @@ async function addNewUser(event) {
   window.location = "./login.html";
 }
 
+/**
+ * Retrieves the value of an input field by its ID.
+ * 
+ * @param {string} id - The ID of the input field.
+ * @returns {string} The trimmed value of the input field.
+ */
 function getValue(id) {
   return document.getElementById(id).value.trim();
 }
 
+/**
+ * Displays a confirmation popup and overlay, then resolves the promise after a delay.
+ * 
+ * @returns {Promise<void>} A promise that resolves after a 900ms delay.
+ * 
+ * @description
+ * This function adds classes to the body and displays a confirmation popup and overlay. The promise resolves after a specified delay, allowing time for the popup animation or transition.
+ */
 function signUpConfirmation() {
   return new Promise((resolve) => {
     let container = document.getElementById("signUpPopup");
