@@ -7,5 +7,5 @@
 function logOut(){
     localStorage.clear("currentUser");
     sessionStorage.clear("currentUser");
-    window.location = "./login.html"
+    window.location = "./login_ani_complete.html";
   }

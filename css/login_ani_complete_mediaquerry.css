@@ -2,9 +2,43 @@
     display: none;
 }
 
-@media(max-width: 950px) {
+@media(max-width: 500px) {
+    .image{
+        width: 64px;
+        height: 78.03px;
+    }
+
     .sign-up {
         display: none;
+    }
+
+    .login-container{
+        width: 396px;
+    }
+
+    .content-container{
+        width: 396px;
+    }
+
+    .main-login-container{
+        width: 396px;
+    }
+
+    .main-login-content{
+        width: 332px;
+        padding: 32px 0;
+    }
+
+    .input-field-mail{
+        width: 300px;
+    }
+
+    .input-field-password{
+        width: 300px;
+    }
+
+    .remember-me{
+        margin-left: 26px;
     }
 
     .sign-up-bottom {
@@ -13,5 +47,92 @@
 
     .login-buttons {
         flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 123px;
+    }
+
+    .btn-login{
+        width: 180px;
+        height: 43px;
+        padding: 4px 0;
+        border-radius: 8px;
+    }
+
+    .btn-guest-login{
+        width: 180px;
+        height: 43px;
+        padding: 4px 0;
+        border-radius: 8px;
+    }
+
+    @keyframes float {
+        0% {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+        }
+        40% {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+        }
+        100% {
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            width: 64px;
+            height: 78.03px;    
+        }
+    }
+}
+
+@media(max-width: 355px) {
+    .login-container{
+        width: 315px;
+    }
+
+    .content-container{
+        width: 315px;
+    }
+
+    .main-login-container{
+        width: 315px;
+    }
+
+    .main-login-content{
+        width: 290px;
+        padding: 32px 0;
+    }
+
+    .input-field-mail{
+        width: 250px;
+    }
+
+    .input-field-password{
+        width: 250px;
+    }
+
+    .login-buttons {
+        margin: 0;
+        width: 290px;
+    }
+
+    .btn-login{
+        width: 180px;
+        height: 43px;
+        padding: 4px 0;
+        border-radius: 8px;
+    }
+
+    .btn-guest-login{
+        width: 180px;
+        height: 43px;
+        padding: 4px 0;
+        border-radius: 8px;
     }
 }
