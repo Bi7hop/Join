@@ -213,7 +213,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                 <div id="taskType" class="taskType ${taskData.taskType}">${taskData.taskType}</div>
                 <div class="taskTitle">${taskData.taskTitle}</div>
                 <div class="taskDescription">${taskData.taskDescription}</div>
-                <div class="taskSubtaskBarContainer">
+                <div id="taskSubtaskBarContainer" class="taskSubtaskBarContainer">
                     <div class="taskSubtaskBar">
                         <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>

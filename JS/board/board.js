@@ -27,12 +27,12 @@ function renderTickets(columnId, status) {
             }
         });
     });
-
+    
     if (!tasksFound) {
-        noTasksMessageEmpty.style.display = 'flex'; 
+        noTasksMessageEmpty.style.display = 'flex';
     } else {
         noTasksMessageEmpty.style.display = 'none';
-    }   
+    }
 }
 
 
@@ -157,7 +157,7 @@ function removeHighlight(id) {
 function searchTasks() {
     let searchInput = document.getElementById('searchInput').value.toLowerCase();
     let columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
-    
+
     columns.forEach(columnId => {
         let columnContainer = document.getElementById(columnId);
         let tasks = columnContainer.getElementsByClassName('task');
@@ -205,7 +205,7 @@ async function deleteTaskFromFirebase(taskId) {
             await fetch(`${BASE_URL}/tasks/${taskKey}.json`, {
                 method: "DELETE"
             });
-            
+
         } else {
             console.error("Task key not found in Firebase data.");
         }
@@ -222,10 +222,10 @@ function deleteTask(taskId) {
 
 
     deleteTaskFromFirebase(taskId).then(() => {
-        closeUserStory(); 
+        closeUserStory();
         loadTickets();
         setTimeout(() => {
-            window.location.reload();  
-        }, 50); 
+            window.location.reload();
+        }, 50);
     });
 }
