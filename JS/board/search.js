@@ -5,15 +5,24 @@ function searchTasks() {
     columns.forEach(columnId => {
         let columnContainer = document.getElementById(columnId);
         let tasks = columnContainer.getElementsByClassName('task');
-        
+        let noTasksMessage = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
+
         if (searchInput === '') {
+            let anyTaskVisible = false;
+
             Array.from(tasks).forEach(task => {
                 task.style.display = 'flex';
+                anyTaskVisible = true;
             });
-            document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`).style.display = 'none';
+
+            if (anyTaskVisible) {
+                noTasksMessage.style.display = 'none';
+            } else {
+                noTasksMessage.style.display = 'flex';
+            }
         } else {
             let tasksFound = false;
-            
+
             Array.from(tasks).forEach(task => {
                 let taskTitle = task.querySelector('.taskTitle').innerText.toLowerCase();
                 if (taskTitle.includes(searchInput)) {
@@ -23,8 +32,7 @@ function searchTasks() {
                     task.style.display = 'none';
                 }
             });
-            
-            let noTasksMessage = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
+
             if (tasksFound) {
                 noTasksMessage.style.display = 'none';
             } else {
