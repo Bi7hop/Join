@@ -226,17 +226,54 @@ function scrollToTop() {
     });
 }
 
+
+function checkTaskPrio(taskData) {
+    if (taskData.taskPrioImage === "./img/medium-prio-icon-inactive.png") {
+        addMedium();
+    }
+
+    if (taskData.taskPrioImage === "./img/urgent-prio-icon-inactive.png") {
+        addUrgent();
+    }
+
+    if (taskData.taskPrioImage === "./img/low-prio-icon-inactive.png") {
+        addLow();
+    }
+}
+
+
+function addMediumPrio() {
+    currentPriorityEdit = "./img/medium-prio-icon-inactive.png"
+    console.log("currentPriority:", currentPriorityEdit);
+}
+
+function addUrgentPrio() {
+    currentPriorityEdit = "./img/urgent-prio-icon-inactive.png"
+    console.log("currentPriority:", currentPriorityEdit);
+}
+
+function addLowPrio() {
+    currentPriorityEdit = "./img/low-prio-icon-inactive.png"
+    console.log("currentPriority:", currentPriorityEdit);
+}
+
 function openUserStoryEdit(taskId) {
     let userStoryContainer = document.getElementById('userStoryWindow');
     const taskData = findTaskById(taskId);
     if (taskData) {
+
         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(taskData);
-        renderDropdownList();
+
+        checkTaskPrio(taskData)
+
+        // renderDropdownList();
         subTasksHoverEffect();
     } else {
         console.error('Task-Daten nicht gefunden für Task-ID:', taskId);
     }
 }
+
+
 
 function findTaskById(taskId) {
     if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
@@ -250,19 +287,18 @@ function findTaskById(taskId) {
     return null;
 }
 
-
+let currentPriorityEdit = ''
 
 async function saveTaskChanges(taskId) {
     const title = document.getElementById('editTitle').value;
     const description = document.getElementById('editDescription').value;
     const dueDate = document.getElementById('editDueDate').value;
-    const priority = currentPriority;  
+    const priority = currentPriorityEdit;
     const updatedTask = {
         taskTitle: title,
         taskDescription: description,
         taskDate: dueDate,
-        taskPrioAlt: priority,
-        
+        taskPrioImage: priority,
     };
 
     const taskKey = findTaskKey(taskId);
@@ -277,6 +313,7 @@ async function saveTaskChanges(taskId) {
     } else {
         console.error("Task key nicht gefunden.");
     }
+    window.location.reload();
 }
 
 

@@ -78,25 +78,6 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
     `;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Generates the HTML template for user story editing.
  * @param {Array} contactDataArray - Array of contact data.
@@ -140,19 +121,19 @@ function userStoryEditHtmlTemplate(taskData) {
                         <label class="editPriorityHeadline" for="priority">Priority</label>
                     </div>
                     <div class="editPriorityAllButtonsContainer">
-                        <div onclick="addUrgent()" id="editUrgent" class="editPriorityButtonContainer ${taskData.taskPrioAlt === 'urgent' ? 'selected' : ''}">
+                        <div onclick="addUrgent(), addUrgentPrio()" id="editUrgent" class="editPriorityButtonContainer ${taskData.taskPrioAlt}">
                             <div>Urgent</div>
                             <div>
                                 <img id="editActiveUrg" src="./img/userStoryEdit/urgent-prio-icon-inactive.svg" alt="High priority">
                             </div>
                         </div>
-                        <div onclick="addMedium()" id="editMedium" class="editPriorityButtonContainer ${taskData.taskPrioAlt === 'medium' ? 'selected' : ''}">
+                        <div onclick="addMedium(), addMediumPrio()" id="editMedium" class="editPriorityButtonContainer ${taskData.taskPrioAlt}">
                             <div>Medium</div>
                             <div>
                                 <img id="editActiveMed" src="./img/userStoryEdit/prio_medium_inactive.svg" alt="Medium priority">
                             </div>
                         </div>
-                        <div onclick="addLow()" id="editLow" class="editPriorityButtonContainer ${taskData.taskPrioAlt === 'low' ? 'selected' : ''}">
+                        <div onclick="addLow(), addLowPrio()" id="editLow" class="editPriorityButtonContainer ${taskData.taskPrioAlt}">
                             <div>Low</div>
                             <div>
                                 <img id="editActiveLow" src="./img/userStoryEdit/low-prio-icon-inactive.png" alt="Low priority">
