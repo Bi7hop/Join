@@ -45,8 +45,8 @@
                     <img src="./img/board/search.png" alt="Search">
                 </div>
             </div>
-            <button class="btn" onclick="openAddTask(), addMediumAt(), scrollToTop()">Add task <img src="./img/board/add.png"
-                    alt="Add"></button>
+            <button class="btn" onclick="openAddTask(), addMediumAt(), scrollToTop()">Add task <img
+                    src="./img/board/add.png" alt="Add"></button>
             <img class="boardAddTaskMediumImage" onclick="openAddTask(), addMediumAt()"
                 src="./img/board/plus add task mobile.png" alt="AddTask">
         </div>
@@ -57,13 +57,14 @@
                 To do <div onclick="openAddTask(), addMediumAt(), scrollToTop()" class="backgroundImage"></div>
             </div>
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksToDo" style="display: none;">No tasks in To Do</div>
+                <div class="no-task-message" id="noTasksToDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"
+                    style="display: none;">No tasks in To Do</div>
             </div>
-            
+
             <div class="columnContainer" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)">
-                
+
             </div>
-            
+
             <div id="dragPosition0" ondrop="moveTo('toDo')" ondragover="allowDrop(event); highlight('dragPosition0')"
                 ondragleave="removeHighlight('dragPosition0')"></div>
 
@@ -74,11 +75,12 @@
                 In progress <div onclick="openAddTask(), addMediumAt(), scrollToTop()" class="backgroundImage"></div>
             </div>
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksInProgress" style="display: none;">No tasks in In Progress</div>
+                <div class="no-task-message" id="noTasksInProgress" ondrop="moveTo('inProgress')"
+                    ondragover="allowDrop(event)" style="display: none;">No tasks in In Progress</div>
             </div>
             <div class="columnContainer" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
             </div>
-            
+
             <div id="dragPosition1" ondrop="moveTo('inProgress')"
                 ondragover="allowDrop(event); highlight('dragPosition1')"
                 ondragleave="removeHighlight('dragPosition1')"></div>
@@ -89,13 +91,14 @@
             </div>
 
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksAwaitFeedback" style="display: none;">No tasks in Await Feedback
+                <div class="no-task-message" id="noTasksAwaitFeedback" ondrop="moveTo('awaitFeedback')"
+                    ondragover="allowDrop(event)" style="display: none;">No tasks in Await Feedback
                 </div>
             </div>
 
             <div class="columnContainer" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
                 ondragover="allowDrop(event)"></div>
-            
+
             <div id="dragPosition2" ondrop="moveTo('awaitFeedback')"
                 ondragover="allowDrop(event); highlight('dragPosition2')"
                 ondragleave="removeHighlight('dragPosition2')"></div>
@@ -106,11 +109,13 @@
             </div>
 
             <div class="no-task-message-container">
-                <div class="no-task-message" id="noTasksDone" style="display: none;">No tasks in Done</div>
+                <div class="no-task-message" id="noTasksDone" ondrop="moveTo('done')"
+                ondragover="allowDrop(event)" style="display: none;">No tasks in Done</div>
             </div>
 
-            <div class="columnContainer columnDoneResponsive" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
-            
+            <div class="columnContainer columnDoneResponsive" id="done" ondrop="moveTo('done')"
+                ondragover="allowDrop(event)"></div>
+
             <div id="dragPosition3" ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('dragPosition3')"
                 ondragleave="removeHighlight('dragPosition3')"></div>
         </div>

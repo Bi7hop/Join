@@ -6,7 +6,6 @@ function renderTickets(columnId, status) {
     const noTasksMessageSearch = document.getElementById(`noTasksSearch${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
 
     if (!container) {
-        console.error(`Element mit id ${columnId} not found.`);
         return;
     }
 
@@ -92,7 +91,6 @@ let currentDraggedElement;
 
 function startDragging(id) {
     currentDraggedElement = id;
-    console.log("Current Dragged Element ID=:::", currentDraggedElement);
     document.getElementById(id).classList.add('dragging');
     for (let i = 0; i < 4; i++) {
         document.getElementById(`dragPosition${i}`).classList.add('dragPosition');
@@ -121,7 +119,6 @@ async function moveTo(taskStatus) {
                         taskData.taskStatus = taskStatus;
                         // Schicke den aktualisierten taskStatus an die Serverseite
                         await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                        console.log("Aktuelle taskData.ID :::", taskData.id,);
                     }
                 }
             }
@@ -208,7 +205,7 @@ async function deleteTaskFromFirebase(taskId) {
             await fetch(`${BASE_URL}/tasks/${taskKey}.json`, {
                 method: "DELETE"
             });
-            console.log(`Task with ID ${taskId} deleted from Firebase.`);
+            
         } else {
             console.error("Task key not found in Firebase data.");
         }
