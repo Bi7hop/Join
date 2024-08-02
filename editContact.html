@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EditContact</title>
-    <link rel="icon" type="image/x-icon" href="/img/Join_Logo.png">
-    <link rel="stylesheet" href="/css/editContact.css">
-    <link rel="stylesheet" href="/css/fonts.css">
-    <script src="/JS/addTask.js"></script>
+    <link rel="icon" type="image/x-icon" href="./img/Join_Logo.png">
+    <link rel="stylesheet" href="./css/editContact.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./JS/addTask.js"></script>
     <script src="./JS/firebase.js"></script>
 </head>
 
@@ -17,43 +17,43 @@
         <form class="new-contact-card">
             <section class="text-logo-area flex-center">
                 <div class="logo-div">
-                    <img class="logo" src="/img/Join_Logo.png">
+                    <img class="logo" src="./img/Join_Logo.png">
                 </div>
                 <div class="slogan-area">
                     <h1>Edit contact</h1>
-                    <img class="vector" src="/img/addContact-line.png">
+                    <img class="vector" src="./img/addContact-line.png">
                 </div>
             </section>
 
             <div class="close-btn" tabindex="1" onclick="closeEditContact()">
-                <img class="close-btn-dark" src="/img/Close.png">
-                <img class="close-btn-light" src="/img/Close-white.png">
+                <img class="close-btn-dark" src="./img/Close.png">
+                <img class="close-btn-light" src="./img/Close-white.png">
             </div>
 
             <div class="profile-img flex-center">
-                <img class="white-profile" src="/img/addContact-profile-white.png">
+                <img class="white-profile" src="./img/addContact-profile-white.png">
             </div>
 
             <div class="contact-input-field">
                 <div class="contact-input">
                     <input type="text" id="editContactName" class="input font-fourhundrdred-twentyfour" placeholder="Name" required pattern="[A-Za-z\s]{2,}">
-                    <img class="input-img" src="/img/addContact-profile-gray.png">
+                    <img class="input-img" src="./img/addContact-profile-gray.png">
                 </div>
                 <div class="contact-input">
                     <input type="email" id="editContactEmail" class="input font-fourhundrdred-twentyfour" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                    <img class="input-img" src="/img/addContact-email.png">
+                    <img class="input-img" src="./img/addContact-email.png">
                     <span id="eError" class="error-message-Edit" style="display:none;">Diese E-Mail-Adresse ist bereits registriert.</span>
                 </div>
                 <div class="contact-input">
                     <input type="tel" id="editContactPhone" class="input font-fourhundrdred-twentyfour" placeholder="Phone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                    <img class="input-img" src="/img/addContact-phone.png">
+                    <img class="input-img" src="./img/addContact-phone.png">
                 </div>
                 <input type="hidden" id="originalContactEmail" value="">
             </div>
             
             <div class="buttons-area">
                 <button type="button" onclick="closeEditContact()" class="cancel-edit-btn font-fourhundrdred-twentyfour flex-center">Delete <span class="cross-icon">&#10006;</span></button>
-                <button type="button" onclick="saveEditContact()" class="create-edit-contact-btn flex-center">Save <span class="check"><img class="check-img" src="/img/check.png"></span></button>
+                <button type="button" onclick="saveEditContact()" class="create-edit-contact-btn flex-center">Save <span class="check"><img class="check-img" src="./img/check.png"></span></button>
             </div>
         </form>
     </div>
