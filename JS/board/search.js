@@ -1,43 +1,21 @@
+/**
+ * Searches and filters tasks based on user input.
+ * Displays tasks that match the search query and hides those that don't.
+ * If no tasks match the search query, shows a "no tasks" message.
+ */
 function searchTasks() {
     let searchInput = document.getElementById('searchInput').value.toLowerCase();
-    let columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
-    
-    columns.forEach(columnId => {
-        let columnContainer = document.getElementById(columnId);
-        let tasks = columnContainer.getElementsByClassName('task');
+    ['toDo', 'inProgress', 'awaitFeedback', 'done'].forEach(columnId => {
+        let tasks = Array.from(document.getElementById(columnId).getElementsByClassName('task'));
         let noTasksMessage = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
+        let tasksFound = false;
 
-        if (searchInput === '') {
-            let anyTaskVisible = false;
+        tasks.forEach(task => {
+            let match = task.querySelector('.taskTitle').innerText.toLowerCase().includes(searchInput);
+            task.style.display = searchInput === '' || match ? 'flex' : 'none';
+            if (match) tasksFound = true;
+        });
 
-            Array.from(tasks).forEach(task => {
-                task.style.display = 'flex';
-                anyTaskVisible = true;
-            });
-
-            if (anyTaskVisible) {
-                noTasksMessage.style.display = 'none';
-            } else {
-                noTasksMessage.style.display = 'flex';
-            }
-        } else {
-            let tasksFound = false;
-
-            Array.from(tasks).forEach(task => {
-                let taskTitle = task.querySelector('.taskTitle').innerText.toLowerCase();
-                if (taskTitle.includes(searchInput)) {
-                    task.style.display = 'flex';
-                    tasksFound = true;
-                } else {
-                    task.style.display = 'none';
-                }
-            });
-
-            if (tasksFound) {
-                noTasksMessage.style.display = 'none';
-            } else {
-                noTasksMessage.style.display = 'flex';
-            }
-        }
+        noTasksMessage.style.display = tasksFound || searchInput === '' && tasks.length > 0 ? 'none' : 'flex';
     });
 }
