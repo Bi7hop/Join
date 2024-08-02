@@ -131,7 +131,7 @@ nav {
 .nav-bottom a:hover {
     color: #d2d2d2;
     background-color: transparent;
-    font-weight: 700;
+    scale: 1.05;
 }
 
 * {
