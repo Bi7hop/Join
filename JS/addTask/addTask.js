@@ -11,13 +11,11 @@ function showPersonsAt() {
   rotate.classList.toggle("rotated");
   dropDown.classList.toggle("hide");
 
-  console.log("Dropdown toggled. Is hidden:", dropDown.classList.contains("hide"));
-
-  // Reapply state when dropdown is shown
   if (!dropDown.classList.contains("hide")) {
     renderAssignedListAt();
   }
 }
+
 document.addEventListener("click", function(event) {
   let rotate = document.getElementById("rotate");
   let dropDown = document.getElementById("dropdown-list");
@@ -38,9 +36,6 @@ function renderAssignedListAt() {
   } else {
     dropDownList.innerHTML = dropDownListSampleAt();
   }
-
-  console.log("Rendering list. Found persons by input:", foundPersonsByInput);
-
   // Reapply state to checkboxes after rendering
   foundPersonsByInput.forEach(person => {
     let container = document.getElementById(`persons-assignemend${person.email}`);
@@ -57,8 +52,6 @@ function renderAssignedListAt() {
       container.addEventListener('click', () => handleCheckboxChange(person));
     }
   });
-
-  console.log("Current checkbox states:", checkboxStates);
 }
 
 function sortContactsAt() {
@@ -141,9 +134,6 @@ function updateAssignedPersons(taskData) {
       assignedPersons.splice(index, 1);
     }
   }
-  console.log("Assigned persons updated:", assignedPersons);
-
-  // Post the updated assigned persons
   postPersonsAt();
 }
 
@@ -188,8 +178,6 @@ function filterAndRenderPersons(input) {
     });
   });
 
-  console.log("Filtered persons by input:", foundPersonsByInput);
-
   if (foundPersonsByInput.length === 0) {
     openListAt(false); // Close the list if no matches found
   } else {
@@ -204,8 +192,6 @@ function openListAt(show) {
 
   rotate.classList.toggle("rotated", show);
   dropDown.classList.toggle("hide", !show);
-
-  console.log("List opened. Is rotated:", rotate.classList.contains("rotated"));
 }
 
 
@@ -357,7 +343,6 @@ function deleteSubtaskAt(element) {
   if (index !== -1) {
     subtasksAt.splice(index, 1);
   }
-
   listItem.remove();
 }
 
@@ -389,7 +374,6 @@ function approveEditAt(element) {
   }
 
   inputElement.outerHTML = `<span class="subtask-text">${newSubtaskText}</span>`;
-
   swapToNormalAt(listItem);
 }
 
@@ -406,21 +390,18 @@ function subTasksHoverEffect() {
 
     hoverListedItem.addEventListener("mouseenter", function () {
       hoverListedItemImage.style.display = "flex"
-      
     });
     hoverListedItem.addEventListener("mouseleave", function () {
       hoverListedItemImage.style.display = "none"
-      
     })
   };
 };
-
 
 function toggleDropdown(selectElement) {
   const wrapper = selectElement.parentElement;
   wrapper.classList.toggle('open');
 }
-// Close the dropdown if the user clicks outside of it
+                                                             // Close the dropdown if the user clicks outside of it
 document.addEventListener('click', function(event) {
   const dropdowns = document.querySelectorAll('.select-wrapper');
   dropdowns.forEach(function(wrapper) {

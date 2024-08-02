@@ -11,7 +11,8 @@ async function includeHTML() {
     }
     element.removeAttribute("w3-include-html");
   }
-  //   checkTargetSites();
+  
+  // checkTargetSites();
   displayCurentUser();
   attachToggleEvent();
   runAfterSidebarLoad();
@@ -68,12 +69,7 @@ function displayCurentUser() {
 
 function checkTargetSites() {
   const currentUrl = window.location.pathname;
-  const protectedSites = [
-    "/summary.html",
-    "/addtask.html",
-    "/board.html",
-    "/contacts.html",
-  ];
+  const protectedSites = ["/summary.html", "/addTask.html", "/board.html", "/contacts.html","/addtask.html"];
 
   if (protectedSites.includes(currentUrl)) {
     checkIfLogged();

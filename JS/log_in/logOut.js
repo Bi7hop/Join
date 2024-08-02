@@ -1,5 +1,5 @@
 function logOut(){
-    localStorage.clear();
-    sessionStorage.clear();
+    localStorage.clear("currentUser");
+    sessionStorage.clear("currentUser");
     window.location = "./login.html"
   }
