@@ -32,7 +32,7 @@ function renderAssignedListAt() {
   dropDownList.innerHTML =
     foundPersonsByInput.length > 0 ? personsFoundPostAt() : dropDownListSampleAt();
 
-    reapplyCheckboxStates();
+  reapplyCheckboxStates();
 }
 
 /**
@@ -146,7 +146,6 @@ function checkboxSwapAt(taskData) {
   }
 
   checkboxStates[taskData.email] = container.classList.contains("persons-assignemend-checkt");
-  console.log("Checkbox swapped. Current checkboxStates:", checkboxStates);
 }
 
 /**
@@ -255,7 +254,7 @@ function filterPersons(input, addedNames) {
   firebaseData.forEach((task) => {
     Object.keys(task.dataExtracted).forEach((key) => {
       const taskData = task.dataExtracted[key];
-      if (taskData.color &&taskData.name.toLowerCase().startsWith(input) &&!addedNames.has(taskData.name)) {
+      if (taskData.color && taskData.name.toLowerCase().startsWith(input) && !addedNames.has(taskData.name)) {
         foundPersonsByInput.push(taskData);
         addedNames.add(taskData.name);
       }

@@ -240,29 +240,91 @@ function checkTaskPrio(taskData) {
 
 function addMediumPrio() {
     currentPriorityEdit = "./img/medium-prio-icon-inactive.png"
-    console.log("currentPriority:", currentPriorityEdit);
 }
 
 function addUrgentPrio() {
     currentPriorityEdit = "./img/urgent-prio-icon-inactive.png"
-    console.log("currentPriority:", currentPriorityEdit);
 }
 
 function addLowPrio() {
     currentPriorityEdit = "./img/low-prio-icon-inactive.png"
-    console.log("currentPriority:", currentPriorityEdit);
 }
+
+
+
+
+function renderAssignedListEdit() {
+    let dropDownList = document.getElementById("editDropDownList");
+    dropDownList.innerHTML =
+      foundPersonsByInput.length > 0 ? personsFoundPost() : dropDownListSample();
+    console.log("edit test");
+  
+    // reapplyCheckboxStates();
+  }
+
+  function pushTaskContactsToCheckboxStates(taskContacts) {
+    taskContacts.forEach(contact => {
+      checkboxStates[contact.email] = true; // oder false, je nachdem, was der Standardwert sein soll
+    });
+  }
+
+
+
+
+
+
+
+
+  function filterAndFormatContacts(taskData) {
+    let selectedContacts = [];
+
+        if (checkboxStates) {
+            let contact = taskData;
+            if (contact) {
+                selectedContacts.push(contact);
+                
+            }
+        }
+    
+        formatContactsEdit(selectedContacts)
+}
+
+
+function formatContactsEdit(selectedContacts) {
+    
+    let assignedContactList = document.getElementById("assigned-persons");
+    
+        for (let i = 0; i < selectedContacts.length; i++) {
+            const selectedContact = selectedContacts[i];
+            Object.keys(selectedContact).forEach(key => {
+            let selectedContactObject = selectedContact[key]
+            
+            if (selectedContactObject.emblem) {
+                assignedContactList.innerHTML += `<div class="taskContact" style="background-color: ${selectedContactObject.color}; color: white">${selectedContactObject.emblem}</div>`;
+            }
+        })
+        }
+    
+
+    
+}
+
 
 function openUserStoryEdit(taskId) {
     let userStoryContainer = document.getElementById('userStoryWindow');
     const taskData = findTaskById(taskId);
     if (taskData) {
 
+        pushTaskContactsToCheckboxStates(taskData.taskContacts);
+
+        
         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(taskData);
+        filterAndFormatContacts(taskData.taskContacts);
 
         checkTaskPrio(taskData)
 
-        // renderDropdownList();
+        
+
         subTasksHoverEffect();
     } else {
         console.error('Task-Daten nicht gefunden für Task-ID:', taskId);
@@ -313,3 +375,75 @@ async function saveTaskChanges(taskId) {
 }
 
 
+// function personsFoundPost() {
+//     let list = '';
+//     sortContacts(contacts);  
+//     for (let i = 0; i < foundPersonsList.length; i++) {
+//         let person = foundPersonsList[i];
+//         list += `
+//       <div onclick="addFoundPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
+//         <div class="flex-row name-container">
+//           <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
+//           <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
+//         </div>
+//         <div class="assigned-img-box">
+//           <img id="checkbox${i}" src="./img/checkbox_uncheckt.png">
+//         </div>
+//       </div>
+//       `
+//     }
+//     return list;
+// }
+
+// function renderDropdownList(){
+//     let dropDown = document.getElementById("editDropDownList");
+//     console.log("test");
+    
+//     if (foundPersonsList && foundPersonsList.length > 0) {
+//       dropDown.innerHTML = personsFoundPost(foundPersonsList);
+//     } else {
+//       dropDown.innerHTML = dropDownListSample();
+//     }
+//   }
+
+//   function searchPerson() {
+//     let input = document.getElementById('assigned-to').value.trim().toLowerCase();
+  
+//     if (input.length > 2) {
+//       openList(input);
+//       personsControl(input);
+//       personsFoundPost(foundPersonsList);
+//     } else {
+//       foundPersonsList = '';
+//       renderDropdownList();
+//     }
+//   }
+
+//   function openList(input) {
+//     let rotate = document.getElementById("rotate");
+//     let dropDown = document.getElementById("dropdown-list");
+  
+//     if (input.length < 1) {
+//       rotate.classList.remove("editRotated");
+//       dropDown.classList.add("editHide");
+//     } else {
+//       rotate.classList.add("editRotated");
+//       dropDown.classList.remove("editHide");
+//       renderDropdownList();
+//     }
+//   }
+
+//   function personsControl(input) {
+//     foundPersonsList = []; // Reset foundPersonsList array
+//     let addedNames = new Set(); // Track added names to avoid duplicates
+  
+//     for (let i = 0; i < contacts.length; i++) {
+//       let person = contacts[i];
+//       if (person.name.toLowerCase().includes(input)) {
+//         if (!addedNames.has(person.name)) {
+//           foundPersonsList.push(person);
+//           addedNames.add(person.name); // Add name to the set
+//         }
+//       }
+//     }
+//   }

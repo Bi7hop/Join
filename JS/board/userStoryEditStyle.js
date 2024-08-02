@@ -115,6 +115,7 @@ function editShowPersons() {
 
 function renderDropdownList(){
   let dropDown = document.getElementById("editDropDownList");
+  
   if (foundPersonsList && foundPersonsList.length > 0) {
     dropDown.innerHTML = personsFoundPost(foundPersonsList);
   } else {

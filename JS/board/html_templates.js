@@ -90,7 +90,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
  * @param {Array} contactDataArray - Array of contact data.
  * @returns {string} - HTML string.
  */
-function userStoryEditHtmlTemplate(taskData) {
+function userStoryEditHtmlTemplate(taskData, formattedContacts) {
     return `
     <div class="userStoryBodyContainer">
     <div class="userStoryEditContainer">
@@ -152,12 +152,12 @@ function userStoryEditHtmlTemplate(taskData) {
                     <label class="userStory_assignedToHeadline" for="assignedTo">Assigned to</label>
                 </div>
                 <div class="userStoryAssignedToInputAndImageContainer mTop8">
-                    <input oninput="searchPerson()" onclick="editShowPersons()" autocomplete="off" id="assigned-to"type="text" placeholder="Select contacts to assign">
-                    <div id="editRotate" onclick="editShowPersons()" class="userStoryAssignedToDropdownMenuImageContainer">
+                    <input oninput="searchPersonAt()" onclick="showPersonsAt(), renderAssignedListAt()" autocomplete="off" id="assigned-to"type="text" placeholder="Select contacts to assign">
+                    <div id="rotate" onclick="showPersonsAt(), renderAssignedListAt()" class="userStoryAssignedToDropdownMenuImageContainer">
                         <img src="./img/userStoryEdit/drop-down-arrow.png" alt="dropdownmenu">
                     </div>
                 </div>
-                <div id="editDropDownList" class="editDropDownList editHide">
+                <div id="dropdown-list" class="editDropDownList">
                 </div>
                 <div id="assigned-persons" class="userStoryContactsContainer mTop8">
                 </div>

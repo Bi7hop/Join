@@ -32,13 +32,6 @@ async function includeHTML() {
   runAfterSidebarLoad();
 }
 
-
-
-
-
-
-
-
 /**
  * Attaches the event listeners for toggling the overlay visibility.
  * It includes handling clicks on the toggle button to show/hide the overlay
