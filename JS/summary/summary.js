@@ -7,10 +7,8 @@ let toDoTasks = [];
 let inProgressTasks = [];
 let awaitFeedbackTasks = [];
 let doneTasks = [];
-
 let allTasks = [];
 let urgentTasks = [];
-
 let taskDates = [];
 
 function renderSummaryBoard() {
