@@ -1,42 +1,74 @@
-// RenderTickets Funktion für die AddTask funktion verändert
-// Updated renderTickets function
+/**
+ * Renders tasks with a specific status into the specified column.
+ * @param {string} columnId - The ID of the column where tasks will be rendered.
+ * @param {string} status - The status of the tasks to render.
+ */
 function renderTickets(columnId, status) {
     const container = document.getElementById(columnId);
     const noTasksMessageEmpty = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
     const noTasksMessageSearch = document.getElementById(`noTasksSearch${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
-
     if (!container) {
         return;
     }
-
     container.innerHTML = '';
-    let tasksFound = false;
+    const tasks = getTasksByStatus(status);
+    tasks.forEach(taskData => renderTask(container, taskData));
+    updateNoTasksMessage(tasks.length, noTasksMessageEmpty);
+}
 
+/**
+ * Retrieves tasks from firebaseData that match the specified status.
+ * @param {string} status - The status of the tasks to retrieve.
+ * @returns {Array} - An array of task objects that match the specified status.
+ */
+function getTasksByStatus(status) {
+    let tasks = [];
     firebaseData.forEach(task => {
         Object.keys(task.dataExtracted).forEach(key => {
             const taskData = task.dataExtracted[key];
             if (taskData.taskStatus === status) {
-                tasksFound = true;
-                const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected);
-                const formattedSubtaskBar = formatSubtaskBar(taskData);
-                const formattedContacts = formatContacts(taskData.taskContacts);
-                const taskHtml = ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar);
-                const taskContainer = document.createElement('div');
-                taskContainer.innerHTML = taskHtml;
-                container.appendChild(taskContainer.firstElementChild);
+                tasks.push(taskData);
             }
         });
     });
-    
-    if (!tasksFound) {
-        noTasksMessageEmpty.style.display = 'flex';
+    return tasks;
+}
+
+/**
+ * Renders a single task into the specified container.
+ * @param {HTMLElement} container - The container where the task will be rendered.
+ * @param {Object} taskData - The data of the task to render.
+ */
+function renderTask(container, taskData) {
+    const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected);
+    const formattedSubtaskBar = formatSubtaskBar(taskData);
+    const formattedContacts = formatContacts(taskData.taskContacts);
+    const taskHtml = ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar);
+    const taskContainer = document.createElement('div');
+    taskContainer.innerHTML = taskHtml;
+    container.appendChild(taskContainer.firstElementChild);
+}
+
+/**
+ * Updates the display of the "no tasks" message based on the number of tasks.
+ * @param {number} taskCount - The number of tasks found.
+ * @param {HTMLElement} noTasksMessage - The "no tasks" message element.
+ */
+function updateNoTasksMessage(taskCount, noTasksMessage) {
+    if (taskCount === 0) {
+        noTasksMessage.style.display = 'flex';
     } else {
-        noTasksMessageEmpty.style.display = 'none';
+        noTasksMessage.style.display = 'none';
     }
 }
 
-
-
+/**
+ * Formats the subtask completion percentage for a task.
+ * @param {Object} taskData - The data of the task containing subtask information.
+ * @param {Array} taskData.taskSubtasksSelected - The array of selected subtasks.
+ * @param {number} taskData.taskSubtaskAmount - The total number of subtasks.
+ * @returns {string} - The completion percentage of the subtasks as a string.
+ */
 function formatSubtaskBar(taskData) {
     let subtaskBar = '';
     if (taskData.taskSubtasksSelected && taskData.taskSubtaskAmount > 0) {
@@ -48,8 +80,11 @@ function formatSubtaskBar(taskData) {
     return subtaskBar;
 }
 
-
-
+/**
+ * Formats the selected subtasks for a task.
+ * @param {Array} taskSubtasksSelected - The array of selected subtasks.
+ * @returns {number|string} - The number of selected subtasks, or an empty string if none.
+ */
 function formatSubtasksSelected(taskSubtasksSelected) {
     let subtasksSelected = '';
     if (taskSubtasksSelected) {
@@ -58,8 +93,11 @@ function formatSubtasksSelected(taskSubtasksSelected) {
     return subtasksSelected;
 }
 
-
-// Format contacts for a specific task
+/**
+ * Formats the contacts for a specific task.
+ * @param {Array} taskContacts - The array of contacts associated with the task.
+ * @returns {string} - A string of HTML representing the formatted contacts.
+ */
 function formatContacts(taskContacts) {
     let formattedContacts = '';
     if (Array.isArray(taskContacts)) {
@@ -72,13 +110,9 @@ function formatContacts(taskContacts) {
     return formattedContacts;
 }
 
-
-// Beispiel: Aufruf der Funktion nach dem Laden der Daten
-loadUrl().then(() => {
-    loadTickets();
-});
-
-
+/**
+ * Loads and renders tickets for all task statuses after data is loaded.
+ */
 function loadTickets() {
     renderTickets('toDo', 'toDo');
     renderTickets('inProgress', 'inProgress');
@@ -86,9 +120,22 @@ function loadTickets() {
     renderTickets('done', 'done');
 }
 
-// DRAG AND DROP
+/**
+ * Loads the firebaseData first and then the Tickets
+ */
+loadUrl().then(() => {
+    loadTickets();
+});
+
+/**
+ * ID from the currentDraggedElement
+ */
 let currentDraggedElement;
 
+/**
+ * Starts dragging the element with the specified ID.
+ * @param {string} id - The ID of the element to start dragging.
+ */
 function startDragging(id) {
     currentDraggedElement = id;
     document.getElementById(id).classList.add('dragging');
@@ -98,26 +145,27 @@ function startDragging(id) {
     }
 }
 
+/**
+ * Allows dropping of an element by preventing the default behavior.
+ * @param {Event} ev - The event object.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * Moves the dragged element to the specified task status.
+ * @param {string} taskStatus - The status to move the task to.
+ * @returns {Promise<void>} - A promise that resolves when the task has been moved.
+ */
 async function moveTo(taskStatus) {
-    // Iteriere durch das firebaseData Array
     for (const task of firebaseData) {
-        // Überprüfe, ob task.dataExtracted existiert und ein Objekt ist
         if (task.dataExtracted && typeof task.dataExtracted === 'object') {
-            // Iteriere über jeden Schlüssel in task.dataExtracted
             for (const key in task.dataExtracted) {
                 if (task.dataExtracted.hasOwnProperty(key)) {
                     const taskData = task.dataExtracted[key];
-
-                    // Überprüfe, ob taskData.taskStatus vorhanden ist und nicht null oder undefined ist
-                    // UND ob der aktuelle Task der gezogene Task ist
                     if (taskData.taskStatus && taskData.id === currentDraggedElement) {
-                        // Aktualisiere den taskStatus auf den neuen Wert
                         taskData.taskStatus = taskStatus;
-                        // Schicke den aktualisierten taskStatus an die Serverseite
                         await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
                     }
                 }
@@ -127,10 +175,16 @@ async function moveTo(taskStatus) {
     loadTickets();
 }
 
+/**
+ * Sends a PATCH request to update data on the server.
+ * @param {string} path - The API endpoint path.
+ * @param {Object} data - The data to update.
+ * @returns {Promise<Object>} - A promise that resolves to the response data.
+ */
 async function patchData(path = "", data) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "PATCH",
-        header: {
+        headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -138,6 +192,10 @@ async function patchData(path = "", data) {
     return await response.json();
 }
 
+/**
+ * Ends dragging the element with the specified ID.
+ * @param {string} id - The ID of the element to stop dragging.
+ */
 function endDragging(id) {
     currentDraggedElement = id;
     document.getElementById(id).classList.remove('dragging');
@@ -146,66 +204,114 @@ function endDragging(id) {
     }
 }
 
+/**
+ * Highlights the drag area with the specified ID.
+ * @param {string} id - The ID of the drag area to highlight.
+ */
 function highlight(id) {
     document.getElementById(id).classList.add('dragAreaHighlight');
 }
 
+/**
+ * Removes the highlight from the drag area with the specified ID.
+ * @param {string} id - The ID of the drag area to remove the highlight from.
+ */
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('dragAreaHighlight');
 }
 
+/**
+ * Retrieves the search input value in lowercase.
+ * @returns {string} - The search input value in lowercase.
+ */
+function getSearchInput() {
+    return document.getElementById('searchInput').value.toLowerCase();
+}
+
+/**
+ * Shows all tasks in a specified column.
+ * @param {HTMLElement} columnContainer - The container element of the column.
+ * @param {HTMLElement} noTasksMessageEmpty - The "no tasks" message element for the column.
+ */
+function showAllTasks(columnContainer, noTasksMessageEmpty) {
+    const tasks = columnContainer.getElementsByClassName('task');
+    Array.from(tasks).forEach(task => {
+        task.style.display = 'flex';
+    });
+    if (noTasksMessageEmpty) {
+        noTasksMessageEmpty.style.display = 'none';
+    }
+}
+
+/**
+ * Filters and displays tasks in a specified column based on the search input.
+ * @param {HTMLElement} columnContainer - The container element of the column.
+ * @param {string} searchInput - The search input value.
+ */
+function filterTasks(columnContainer, searchInput) {
+    const tasks = columnContainer.getElementsByClassName('task');
+    Array.from(tasks).forEach(task => {
+        const taskTitle = task.querySelector('.taskTitle').innerText.toLowerCase();
+        task.style.display = taskTitle.includes(searchInput) ? 'flex' : 'none';
+    });
+}
+
+/**
+ * Searches and filters tasks in all columns based on the search input.
+ */
 function searchTasks() {
-    let searchInput = document.getElementById('searchInput').value.toLowerCase();
-    let columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
-
+    const searchInput = getSearchInput();
+    const columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
     columns.forEach(columnId => {
-        let columnContainer = document.getElementById(columnId);
-        let tasks = columnContainer.getElementsByClassName('task');
-        let noTasksMessageEmpty = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
-
+        const columnContainer = document.getElementById(columnId);
+        const noTasksMessageEmpty = document.getElementById(`noTasks${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`);
         if (searchInput === '') {
-            Array.from(tasks).forEach(task => {
-                task.style.display = 'flex';
-            });
-            if (noTasksMessageEmpty) {
-                noTasksMessageEmpty.style.display = 'none';
-            }
+            showAllTasks(columnContainer, noTasksMessageEmpty);
         } else {
-            Array.from(tasks).forEach(task => {
-                let taskTitle = task.querySelector('.taskTitle').innerText.toLowerCase();
-                if (taskTitle.includes(searchInput)) {
-                    task.style.display = 'flex';
-                } else {
-                    task.style.display = 'none';
-                }
-            });
+            filterTasks(columnContainer, searchInput);
         }
     });
 }
 
-
-
-// Delete Task
-
-async function deleteTaskFromFirebase(taskId) {
-    try {
-        let taskKey = null;
-        for (const task of firebaseData) {
-            if (task.dataExtracted && typeof task.dataExtracted === 'object') {
-                for (const key in task.dataExtracted) {
-                    if (task.dataExtracted[key].id === taskId) {
-                        taskKey = key;
-                        break;
-                    }
+/**
+ * Finds the task key in firebaseData for a given taskId.
+ * @param {string} taskId - The ID of the task to find.
+ * @returns {string|null} - The key of the task if found, otherwise null.
+ */
+function findTaskKey(taskId) {
+    for (const task of firebaseData) {
+        if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+            for (const key in task.dataExtracted) {
+                if (task.dataExtracted[key].id === taskId) {
+                    return key;
                 }
             }
         }
+    }
+    return null;
+}
 
+/**
+ * Deletes a task from Firebase given its key.
+ * @param {string} taskKey - The key of the task to delete.
+ * @returns {Promise<void>} - A promise that resolves when the task is deleted.
+ */
+async function deleteTaskByKey(taskKey) {
+    await fetch(`${BASE_URL}/tasks/${taskKey}.json`, {
+        method: "DELETE"
+    });
+}
+
+/**
+ * Deletes a task from Firebase given its ID.
+ * @param {string} taskId - The ID of the task to delete.
+ * @returns {Promise<void>} - A promise that resolves when the task is deleted or an error occurs.
+ */
+async function deleteTaskFromFirebase(taskId) {
+    try {
+        const taskKey = findTaskKey(taskId);
         if (taskKey) {
-            await fetch(`${BASE_URL}/tasks/${taskKey}.json`, {
-                method: "DELETE"
-            });
-
+            await deleteTaskByKey(taskKey);
         } else {
             console.error("Task key not found in Firebase data.");
         }
@@ -214,13 +320,15 @@ async function deleteTaskFromFirebase(taskId) {
     }
 }
 
+/**
+ * Deletes a task from the DOM and Firebase, then refreshes the page.
+ * @param {string} taskId - The ID of the task to delete.
+ */
 function deleteTask(taskId) {
     let taskElement = document.getElementById(taskId);
     if (taskElement) {
         taskElement.parentNode.removeChild(taskElement);
     }
-
-
     deleteTaskFromFirebase(taskId).then(() => {
         closeUserStory();
         loadTickets();
