@@ -26,7 +26,7 @@ async function includeHTML() {
     element.removeAttribute("w3-include-html");
   }
   // Check if additional functions need to be called after including HTML
-  //checkTargetSites();
+  // checkTargetSites();
   displayCurentUser();
   attachToggleEvent();
   runAfterSidebarLoad();
@@ -176,6 +176,6 @@ function checkIfLogged() {
   let user = sessionStorage.getItem("currentUser");
 
   if (!user) {
-    window.location.href = "./login.html";
+    window.location.href = "./login_ani_complete.html";
   }
 }
