@@ -196,14 +196,14 @@ function closeUserStory() {
     }, 200);
 }
 
-function openUserStoryEdit() {
-    let userStoryContainer = document.getElementById('userStoryWindow');
-    if (firebaseData.length > 0) {
-        userStoryContainer.innerHTML = userStoryEditHtmlTemplate(firebaseData);
-    }
-    renderDropdownList();
-    subTasksHoverEffect();
-}
+// function openUserStoryEdit() {
+//     let userStoryContainer = document.getElementById('userStoryWindow');
+//     if (firebaseData.length > 0) {
+//         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(firebaseData);
+//     }
+//     renderDropdownList();
+//     subTasksHoverEffect();
+// }
 
 function closeUserStoryEdit() {
     let userStoryContainer = document.getElementById('userStoryWindow');
@@ -225,3 +225,58 @@ function scrollToTop() {
         top: 0,
     });
 }
+
+function openUserStoryEdit(taskId) {
+    let userStoryContainer = document.getElementById('userStoryWindow');
+    const taskData = findTaskById(taskId);
+    if (taskData) {
+        userStoryContainer.innerHTML = userStoryEditHtmlTemplate(taskData);
+        renderDropdownList();
+        subTasksHoverEffect();
+    } else {
+        console.error('Task-Daten nicht gefunden für Task-ID:', taskId);
+    }
+}
+
+function findTaskById(taskId) {
+    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
+        const tasksData = firebaseTasks[0].dataExtracted;
+        for (const key in tasksData) {
+            if (tasksData[key].id === taskId) {
+                return tasksData[key];
+            }
+        }
+    }
+    return null;
+}
+
+
+
+async function saveTaskChanges(taskId) {
+    const title = document.getElementById('editTitle').value;
+    const description = document.getElementById('editDescription').value;
+    const dueDate = document.getElementById('editDueDate').value;
+    const priority = currentPriority;  
+    const updatedTask = {
+        taskTitle: title,
+        taskDescription: description,
+        taskDate: dueDate,
+        taskPrioAlt: priority,
+        
+    };
+
+    const taskKey = findTaskKey(taskId);
+    if (taskKey) {
+        try {
+            await patchData(`/tasks/${taskKey}`, updatedTask);
+            closeUserStoryEdit();
+            loadTickets();
+        } catch (error) {
+            console.error("Fehler beim Speichern der Änderungen:", error);
+        }
+    } else {
+        console.error("Task key nicht gefunden.");
+    }
+}
+
+

@@ -68,8 +68,9 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
             </div>
                     <div class="userStoryCutLine"></div>
                     <div class="userStoryEditTextContainer userStoryBackgroundImageEdit">
-                        <div onclick="openUserStoryEdit()" class="userStoryEditTextTextContainer">Edit</div>
+                        <div onclick="openUserStoryEdit(${taskData.id})" class="userStoryEditTextTextContainer">Edit</div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -101,7 +102,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
  * @param {Array} contactDataArray - Array of contact data.
  * @returns {string} - HTML string.
  */
-function userStoryEditHtmlTemplate() {
+function userStoryEditHtmlTemplate(taskData) {
     return `
     <div class="userStoryBodyContainer">
     <div class="userStoryEditContainer">
@@ -109,13 +110,13 @@ function userStoryEditHtmlTemplate() {
             <div class="userStoryEditCloseButtonContainer">
                 <img onclick="closeUserStoryEdit()" src="./img/userStoryEdit/close.png" alt="Close">
             </div>
-            <form action="">
+            <form id="editTaskForm" action="">
                 <div>
                     <div class="mTop16">
                         <label class="editTitleHeadlineContainer" for="title">Title</label>
                     </div>
                     <div class="editTitleInputContainer">
-                        <input type="text" required value="Kochwelt Page & Recipe Recommender">
+                        <input type="text" id="editTitle" required value="${taskData.taskTitle}">
                     </div>
                 </div>
                 <div>
@@ -123,8 +124,7 @@ function userStoryEditHtmlTemplate() {
                         <label class="editDescriptionContainer" for="description">Description</label>
                     </div>
                     <div class="editDescriptionTextAreaContainer mTop8">
-                        <textarea name="description"
-                            id="description">Build start page with recipe recommendation</textarea>
+                        <textarea name="description" id="editDescription">${taskData.taskDescription}</textarea>
                     </div>
                 </div>
                 <div>
@@ -132,7 +132,7 @@ function userStoryEditHtmlTemplate() {
                         <label class="editDueDateContainer" for="Due date">Due date</label>
                     </div>
                     <div class="editDueDateInputContainer mTop8">
-                        <input type="date" required>
+                        <input type="date" id="editDueDate" required value="${taskData.taskDate}">
                     </div>
                 </div>
                 <div>
@@ -140,19 +140,19 @@ function userStoryEditHtmlTemplate() {
                         <label class="editPriorityHeadline" for="priority">Priority</label>
                     </div>
                     <div class="editPriorityAllButtonsContainer">
-                        <div onclick="addUrgent()" id="editUrgent" class="editPriorityButtonContainer">
+                        <div onclick="addUrgent()" id="editUrgent" class="editPriorityButtonContainer ${taskData.taskPrioAlt === 'urgent' ? 'selected' : ''}">
                             <div>Urgent</div>
                             <div>
                                 <img id="editActiveUrg" src="./img/userStoryEdit/urgent-prio-icon-inactive.svg" alt="High priority">
                             </div>
                         </div>
-                        <div onclick="addMedium()" id="editMedium" class="editPriorityButtonContainer">
+                        <div onclick="addMedium()" id="editMedium" class="editPriorityButtonContainer ${taskData.taskPrioAlt === 'medium' ? 'selected' : ''}">
                             <div>Medium</div>
                             <div>
                                 <img id="editActiveMed" src="./img/userStoryEdit/prio_medium_inactive.svg" alt="Medium priority">
                             </div>
                         </div>
-                        <div onclick="addLow()" id="editLow" class="editPriorityButtonContainer">
+                        <div onclick="addLow()" id="editLow" class="editPriorityButtonContainer ${taskData.taskPrioAlt === 'low' ? 'selected' : ''}">
                             <div>Low</div>
                             <div>
                                 <img id="editActiveLow" src="./img/userStoryEdit/low-prio-icon-inactive.png" alt="Low priority">
@@ -196,7 +196,7 @@ function userStoryEditHtmlTemplate() {
                     
                 </div>
                 <div class="userStoryEditOkButtonContainer">
-                    <button class="userStoryEditOkButton" type="button" onclick="closeUserStoryEdit()">Ok <img src="./img/userStoryEdit/ok.png" alt="Add"></button>
+                    <button class="userStoryEditOkButton" type="button" onclick="saveTaskChanges(${taskData.id})">Save <img src="./img/userStoryEdit/ok.png" alt="Save"></button>
                 </div>
             </form>
         </div>
@@ -204,6 +204,7 @@ function userStoryEditHtmlTemplate() {
     </div>
     `;
 }
+
 
 
 function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar) {
