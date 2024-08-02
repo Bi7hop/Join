@@ -26,26 +26,29 @@ function logIn(event) {
     let username = user.username;
     let mail = user.email;
     let password = user.password;
-    localStorage.setItem("currentUser", username);
-    rememberMe(mail, password);
+    sessionStorage.setItem("currentUser", username);
+    rememberMe(mail, password, username);
     window.location = "./summary.html";
   } else {
     falsePassword();
   }
 }
 
-function rememberMe(mail, password){
+function rememberMe(mail, password, username){
   let checkbox = document.getElementById("rememberMe");
   if (checkbox.checked) {
     localStorage.setItem("email", mail);
     localStorage.setItem("password", password);
+    localStorage.setItem("currentUser", username)
   }
 }
 
 function rememberUser() {
   let storedEmail = localStorage.getItem("email");
   let storedPassword = localStorage.getItem("password");
+  let storedUser = localStorage.getItem("currentUser");
   if (storedEmail && storedPassword) {
+    sessionStorage.setItem("currentUser", storedUser)
     window.location = "./summary.html";
   }
 }
@@ -90,6 +93,6 @@ function passImgSwap(){
 }
 
 function loginGuest(){
-  localStorage.setItem("currentUser", 'Guest');
+  sessionStorage.setItem("currentUser", 'Guest');
   window.location = "./summary.html"
 }

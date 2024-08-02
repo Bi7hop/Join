@@ -57,7 +57,7 @@ includeHTML();
 function displayCurentUser() {
   let text = document.getElementById("toggleDropDown");
   let mobileText = document.getElementById("mobileEmblem");
-  let currentUser = localStorage.getItem("currentUser");
+  let currentUser = sessionStorage.getItem("currentUser");
   let name = currentUser.split(" ").map((word) => word[0]).join("");
 
   if (text && currentUser && mobileText) {
@@ -81,7 +81,7 @@ function checkTargetSites() {
 }
 
 function checkIfLogged() {
-  let user = localStorage.getItem("currentUser");
+  let user = sessionStorage.getItem("currentUser");
 
   if (!user) {
     window.location.href = "./login.html";

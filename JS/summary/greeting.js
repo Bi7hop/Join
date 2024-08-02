@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     let getUserName = () => {
-        let user = localStorage.getItem("currentUser");
+        let user = sessionStorage.getItem("currentUser");
         return user ? { isLoggedIn: true, userName: user } : { isLoggedIn: false, userName: "Guest" };
     };
 
