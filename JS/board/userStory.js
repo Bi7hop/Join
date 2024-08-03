@@ -192,15 +192,6 @@ function closeUserStory() {
     }, 200);
 }
 
-// function openUserStoryEdit() {
-//     let userStoryContainer = document.getElementById('userStoryWindow');
-//     if (firebaseData.length > 0) {
-//         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(firebaseData);
-//     }
-//     renderDropdownList();
-//     subTasksHoverEffect();
-// }
-
 function closeUserStoryEdit() {
     let userStoryContainer = document.getElementById('userStoryWindow');
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
@@ -213,6 +204,7 @@ function closeUserStoryEdit() {
         boardBodyContainer.style.overflow = "";
         overlay.style.animation = '';
         overlay.classList.remove("overlay");
+        window.location.reload();
     }, 200);
 }
 
@@ -226,17 +218,17 @@ function scrollToTop() {
 function checkTaskPrio(taskData) {
     if (taskData.taskPrioImage === "./img/medium-prio-icon-inactive.png") {
         addMedium();
+        addMediumPrio();
     }
-
     if (taskData.taskPrioImage === "./img/urgent-prio-icon-inactive.png") {
         addUrgent();
+        addUrgentPrio();
     }
-
     if (taskData.taskPrioImage === "./img/low-prio-icon-inactive.png") {
         addLow();
+        addLowPrio();
     }
 }
-
 
 function addMediumPrio() {
     currentPriorityEdit = "./img/medium-prio-icon-inactive.png"
@@ -250,100 +242,45 @@ function addLowPrio() {
     currentPriorityEdit = "./img/low-prio-icon-inactive.png"
 }
 
-
-
-
 function renderAssignedListEdit() {
     let dropDownList = document.getElementById("editDropDownList");
     dropDownList.innerHTML =
-      foundPersonsByInput.length > 0 ? personsFoundPost() : dropDownListSample();
-    console.log("edit test");
-  
-    // reapplyCheckboxStates();
-  }
-
-  function pushTaskContactsToCheckboxStates(taskContacts) {
-    taskContacts.forEach(contact => {
-      checkboxStates[contact.email] = true; // oder false, je nachdem, was der Standardwert sein soll
-    });
-  }
-
-
-
-
-
-
-
-
-  function filterAndFormatContacts(taskData) {
-    let selectedContacts = [];
-
-        if (checkboxStates) {
-            let contact = taskData;
-            if (contact) {
-                selectedContacts.push(contact);
-                
-            }
-        }
-    
-        formatContactsEdit(selectedContacts)
+        foundPersonsByInput.length > 0 ? personsFoundPost() : dropDownListSample();
 }
 
-
-function formatContactsEdit(selectedContacts) {
-    
-    let assignedContactList = document.getElementById("assigned-persons");
-    
-        for (let i = 0; i < selectedContacts.length; i++) {
-            const selectedContact = selectedContacts[i];
-            Object.keys(selectedContact).forEach(key => {
-            let selectedContactObject = selectedContact[key]
-            
-            if (selectedContactObject.emblem) {
-                assignedContactList.innerHTML += `<div class="taskContact" style="background-color: ${selectedContactObject.color}; color: white">${selectedContactObject.emblem}</div>`;
-            }
-        })
-        }
-    
-
-    
+function pushTaskContactsToCheckboxStates(taskContacts) {
+    if (taskContacts) {
+        taskContacts.forEach(contact => {
+            checkboxStates[contact.email] = true;
+        });
+    }
 }
 
 
 function openUserStoryEdit(taskId) {
     let userStoryContainer = document.getElementById('userStoryWindow');
     const taskData = findTaskById(taskId);
+
     if (taskData) {
 
         pushTaskContactsToCheckboxStates(taskData.taskContacts);
-
-        
         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(taskData);
-        filterAndFormatContacts(taskData.taskContacts);
-
-        checkTaskPrio(taskData)
-
-        
-
+        checkTaskPrio(taskData);
+        updateAssignedPersonsEdit(taskData.taskContacts);
+        postPersonsAt();
         subTasksHoverEffect();
     } else {
         console.error('Task-Daten nicht gefunden für Task-ID:', taskId);
     }
 }
 
-
-
-function findTaskById(taskId) {
-    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
-        const tasksData = firebaseTasks[0].dataExtracted;
-        for (const key in tasksData) {
-            if (tasksData[key].id === taskId) {
-                return tasksData[key];
-            }
-        }
+function updateAssignedPersonsEdit(taskData) {
+    if (taskData) {
+        assignedPersons = taskData.filter(contact => checkboxStates[contact.email]);
     }
-    return null;
 }
+
+
 
 let currentPriorityEdit = ''
 
@@ -352,11 +289,20 @@ async function saveTaskChanges(taskId) {
     const description = document.getElementById('editDescription').value;
     const dueDate = document.getElementById('editDueDate').value;
     const priority = currentPriorityEdit;
+    console.log(currentPriorityEdit);
+
+    let taskMoreContacts = `+${assignedPersons.length - 6}`;
+    if (assignedPersons.length < 7) {
+        taskMoreContacts = '';
+    }
+
     const updatedTask = {
         taskTitle: title,
         taskDescription: description,
         taskDate: dueDate,
         taskPrioImage: priority,
+        taskContacts: assignedPersons,
+        taskContactsMore: `${taskMoreContacts}`,
     };
 
     const taskKey = findTaskKey(taskId);
@@ -372,78 +318,5 @@ async function saveTaskChanges(taskId) {
         console.error("Task key nicht gefunden.");
     }
     window.location.reload();
+    loadTickets();
 }
-
-
-// function personsFoundPost() {
-//     let list = '';
-//     sortContacts(contacts);  
-//     for (let i = 0; i < foundPersonsList.length; i++) {
-//         let person = foundPersonsList[i];
-//         list += `
-//       <div onclick="addFoundPerson(${i})" class="flex-row persons-assignemend" id="persons-assignemend${i}">
-//         <div class="flex-row name-container">
-//           <span id="persons${i}" class="assigned-emblem flex-row small-font" style="background-color: ${person.color}">${renderEmblem(person.name)}</span>
-//           <h4 id="assigned-name${i}" class="medium-font">${person.name}</h4>
-//         </div>
-//         <div class="assigned-img-box">
-//           <img id="checkbox${i}" src="./img/checkbox_uncheckt.png">
-//         </div>
-//       </div>
-//       `
-//     }
-//     return list;
-// }
-
-// function renderDropdownList(){
-//     let dropDown = document.getElementById("editDropDownList");
-//     console.log("test");
-    
-//     if (foundPersonsList && foundPersonsList.length > 0) {
-//       dropDown.innerHTML = personsFoundPost(foundPersonsList);
-//     } else {
-//       dropDown.innerHTML = dropDownListSample();
-//     }
-//   }
-
-//   function searchPerson() {
-//     let input = document.getElementById('assigned-to').value.trim().toLowerCase();
-  
-//     if (input.length > 2) {
-//       openList(input);
-//       personsControl(input);
-//       personsFoundPost(foundPersonsList);
-//     } else {
-//       foundPersonsList = '';
-//       renderDropdownList();
-//     }
-//   }
-
-//   function openList(input) {
-//     let rotate = document.getElementById("rotate");
-//     let dropDown = document.getElementById("dropdown-list");
-  
-//     if (input.length < 1) {
-//       rotate.classList.remove("editRotated");
-//       dropDown.classList.add("editHide");
-//     } else {
-//       rotate.classList.add("editRotated");
-//       dropDown.classList.remove("editHide");
-//       renderDropdownList();
-//     }
-//   }
-
-//   function personsControl(input) {
-//     foundPersonsList = []; // Reset foundPersonsList array
-//     let addedNames = new Set(); // Track added names to avoid duplicates
-  
-//     for (let i = 0; i < contacts.length; i++) {
-//       let person = contacts[i];
-//       if (person.name.toLowerCase().includes(input)) {
-//         if (!addedNames.has(person.name)) {
-//           foundPersonsList.push(person);
-//           addedNames.add(person.name); // Add name to the set
-//         }
-//       }
-//     }
-//   }

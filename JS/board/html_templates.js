@@ -152,7 +152,7 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
                     <label class="userStory_assignedToHeadline" for="assignedTo">Assigned to</label>
                 </div>
                 <div class="userStoryAssignedToInputAndImageContainer mTop8">
-                    <input oninput="searchPersonAt()" onclick="showPersonsAt(), renderAssignedListAt()" autocomplete="off" id="assigned-to"type="text" placeholder="Select contacts to assign">
+                    <input oninput="searchPersonAt()" onclick="showPersonsAt(), renderAssignedListAt()" autocomplete="off" id="assigned"type="text" placeholder="Select contacts to assign">
                     <div id="rotate" onclick="showPersonsAt(), renderAssignedListAt()" class="userStoryAssignedToDropdownMenuImageContainer">
                         <img src="./img/userStoryEdit/drop-down-arrow.png" alt="dropdownmenu">
                     </div>
