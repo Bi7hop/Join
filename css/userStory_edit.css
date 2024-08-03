@@ -342,6 +342,7 @@
     font-weight: 500;
     font-size: 14px;
     margin-top: 16px;
+    flex-direction: column;
 }
 
 .userStorySubtaskListedItemContainer {
