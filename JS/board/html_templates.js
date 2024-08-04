@@ -166,17 +166,17 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
                 </div>
                 <div class="userStorySubtasksContainer mTop8">
                         <div class="userStoryAssignedToInputAndImageContainer">
-                        <input id="subtaskAt" onclick="addSubtaskAt" type="text" class="subtask-input medium-font subtaskInput" id="subtask" placeholder="Add new subtask">
-                        <div class="add-new-subtask small-icon-div" id="addSubtaskIconAt" onclick="addSubtaskAt()">
+                        <input id="subtask" type="text" class="subtask-input medium-font subtaskInput" placeholder="Add new subtask">
+                        <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">
                             <img class="smaller-icon" src="./img/add-plus-icon.png">
                         </div>
                         <div class="close-approve-container hide" id="addRemoveContainerAt">
                             <div class="small-icon-div" onclick="closeSubtask()"><img class="small-icon" src="./img/Close.png"></div>
                             <span class="small-input-vertical-vector"></span>
-                            <div class="small-icon-div" onclick="aproveSubtaskAt()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
+                            <div class="small-icon-div" onclick="aproveSubtaskEdit()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
                         </div>
                     </div>
-                    <div id="subtaskDisplayAt" class="subtaskDisplay flex-column"></div>
+                    <div id="subtaskDisplayEdit" class="subtaskDisplay flex-column"> ${subtaskEditSample(taskData)}</div>
                 </div>
                 <div class="userStoryEditOkButtonContainer">
                     <button class="userStoryEditOkButton" type="button" onclick="saveTaskChanges(${taskData.id})">Save <img src="./img/userStoryEdit/ok.png" alt="Save"></button>
@@ -349,4 +349,43 @@ function subtaskSample() {
     }
     list += "</ul>";
     return list;
+}
+
+function subtaskEditSample(taskData) {
+    let list = '<ul class="subTaskList ulPadding">';
+    let taskArray = taskData.taskSubtasks
+    if (taskArray) {
+        for (let i = 0; i < taskArray.length; i++) {
+            const subtask = taskArray[i];
+            list += `
+            <li class="listItemSubTasks flex-row" id="subtaskEditNr${i}">
+                <span class="subtask-text">${subtask}</span>
+                <div style="display: flex" id="subTaskHoverEffectEdit${i}">
+                    <div class="close-approve-container" id="editContainer">
+                        <div class="smallIconDiv" onclick="editSubtask(this)">
+                            <img class="smaller-icon" src="/img/edit-dark.png" alt="Edit">
+                        </div>
+                        <span class="small-input-vertical-vector"></span>
+                        <div class="smallIconDiv" onclick="deleteSubtask(this)">
+                            <img class="smaller-icon" src="/img/delete.png" alt="Delete">
+                        </div>
+                    </div>
+                    <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
+                        <div class="smallIconDiv" onclick="approveEdit(this)">
+                            <img class="smaller-icon" src="/img/check_dark_icon.svg" alt="Approve Edit">
+                        </div>
+                        <span class="small-input-vertical-vector"></span>
+                        <div class="smallIconDiv">
+                            <img onclick="cancelEdit(this)" class="small-icon" src="/img/Close.png" alt="Cancel Edit">
+                        </div>
+                    </div>
+                </div>
+            </li>`;
+        }
+        list += "</ul>";
+        return list;
+    }else{
+        list = '';
+        return list
+    }
 }
