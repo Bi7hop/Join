@@ -170,7 +170,7 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
                         <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">
                             <img class="smaller-icon" src="./img/add-plus-icon.png">
                         </div>
-                        <div class="close-approve-container hide" id="addRemoveContainerAt">
+                        <div class="close-approve-container hide" id="addRemoveContainer">
                             <div class="small-icon-div" onclick="closeSubtask()"><img class="small-icon" src="./img/Close.png"></div>
                             <span class="small-input-vertical-vector"></span>
                             <div class="small-icon-div" onclick="aproveSubtaskEdit()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
