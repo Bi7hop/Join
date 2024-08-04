@@ -268,7 +268,8 @@ function openUserStoryEdit(taskId) {
         checkTaskPrio(taskData);
         updateAssignedPersonsEdit(taskData.taskContacts);
         postPersonsAt();
-        subTasksHoverEffect();
+        
+        
     } else {
         console.error('Task-Daten nicht gefunden für Task-ID:', taskId);
     }

@@ -166,17 +166,17 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
                 </div>
                 <div class="userStorySubtasksContainer mTop8">
                         <div class="userStoryAssignedToInputAndImageContainer">
-                        <input id="subtask" type="text" class="subtask-input medium-font subtaskInput" id="subtask" placeholder="Add new subtask">
-                        <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">
+                        <input id="subtaskAt" onclick="addSubtaskAt" type="text" class="subtask-input medium-font subtaskInput" id="subtask" placeholder="Add new subtask">
+                        <div class="add-new-subtask small-icon-div" id="addSubtaskIconAt" onclick="addSubtaskAt()">
                             <img class="smaller-icon" src="./img/add-plus-icon.png">
                         </div>
-                        <div class="close-approve-container hide" id="addRemoveContainer">
+                        <div class="close-approve-container hide" id="addRemoveContainerAt">
                             <div class="small-icon-div" onclick="closeSubtask()"><img class="small-icon" src="./img/Close.png"></div>
                             <span class="small-input-vertical-vector"></span>
-                            <div class="small-icon-div" onclick="aproveSubtask()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
+                            <div class="small-icon-div" onclick="aproveSubtaskAt()"><img class="smaller-icon" src="./img/check_dark_icon.svg"></div>
                         </div>
                     </div>
-                    <div id="subtaskDisplay" class="subtaskDisplay flex-column"></div>
+                    <div id="subtaskDisplayAt" class="subtaskDisplay flex-column"></div>
                 </div>
                 <div class="userStoryEditOkButtonContainer">
                     <button class="userStoryEditOkButton" type="button" onclick="saveTaskChanges(${taskData.id})">Save <img src="./img/userStoryEdit/ok.png" alt="Save"></button>

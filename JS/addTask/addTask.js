@@ -108,7 +108,6 @@ function renderEmblemAt(name) {
  * @param {Object} taskData - The data for the person to be assigned.
  */
 function addAssignedPersonAt(taskData) {
-  console.log("Kontakt wurde geklickt -> checkboxStates:::", checkboxStates);
   handleCheckboxChange(taskData);
   postPersonsAt();
 }
@@ -184,7 +183,7 @@ function removeCheckboxAt(container, checkbox, assignedName) {
  * @param {string} taskData.email - The email of the person to be updated.
  */
 function updateAssignedPersons(taskData) {
-  console.log("updateAssignedPersons wurde ausgeführt");
+  
   
   let index = assignedPersons.findIndex((person) => person.email === taskData.email);
   if (checkboxStates[taskData.email]) {
