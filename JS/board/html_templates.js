@@ -164,7 +164,7 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
                 <div class="userStorySubtaskHeadlineContainer mTop16">
                     <label class="userStorySubtaskHeadline" for="subtasks">Subtasks</label>
                 </div>
-                <div class="userStorySubtasksContainer mTop8">
+                <div class="userStorySubtasksContainerEdit mTop8">
                         <div class="userStoryAssignedToInputAndImageContainer">
                         <input id="subtask" type="text" class="subtask-input medium-font subtaskInput" placeholder="Add new subtask">
                         <div class="add-new-subtask small-icon-div" id="addSubtaskIcon" onclick="addSubtask()">

@@ -282,6 +282,8 @@ function aproveSubtask() {
     subtask.value = "";
     postSubtask();
   }
+  console.log(subtasks);
+  
   subTasksHoverEffect();
 }
 
