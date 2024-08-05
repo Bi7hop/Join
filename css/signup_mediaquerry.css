@@ -1,0 +1,31 @@
+@media (max-width: 530px) {
+    .main-login-content {
+        padding: 15px 30px;
+    }
+}
+
+@media (max-width: 450px) {
+    .main-login-content {
+        padding: 5px 15px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .underline-login img {
+        width: 78px;
+    }
+
+    input,
+    .input-field-mail,
+    .input-field-password {
+        width: 250px;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-login-container {
+        margin-top: 20px;
+    }
+}
