@@ -324,32 +324,32 @@ function subtaskSample() {
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         list += `
-        <li class="listItemSubTasks flex-row" id="subtaskNr${i}">
-            <span class="subtask-text">${subtask}</span>
-            <div style="display: none" id="subTaskHoverEffect${i}">
-                <div class="close-approve-container" id="editContainer">
-                    <div class="smallIconDiv" onclick="editSubtask(this)">
-                        <img class="smaller-icon" src="/img/edit-dark.png" alt="Edit">
+            <li class="listItemSubTasks flex-row" id="subtaskEditNr${i}">
+                <span class="subtask-text">${subtask}</span>
+                <div style="display: flex" id="subTaskHoverEffectEdit${i}">
+                    <div class="close-approve-container" id="editContainer">
+                        <div class="smallIconDiv" onclick="editSubtask(this)">
+                            <img class="smaller-icon" src="/img/edit-dark.png" alt="Edit">
+                        </div>
+                        <span class="small-input-vertical-vector"></span>
+                        <div class="smallIconDiv" onclick="deleteSubtask(this)">
+                            <img class="smaller-icon" src="/img/delete.png" alt="Delete">
+                        </div>
                     </div>
-                    <span class="small-input-vertical-vector"></span>
-                    <div class="smallIconDiv" onclick="deleteSubtask(this)">
-                        <img class="smaller-icon" src="/img/delete.png" alt="Delete">
+                    <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
+                        <div class="smallIconDiv" onclick="approveEdit(this)">
+                            <img class="smaller-icon" src="/img/check_dark_icon.svg" alt="Approve Edit">
+                        </div>
+                        <span class="small-input-vertical-vector"></span>
+                        <div class="smallIconDiv">
+                            <img onclick="cancelEdit(this)" class="small-icon" src="/img/Close.png" alt="Cancel Edit">
+                        </div>
                     </div>
                 </div>
-                <div class="close-approve-container hide" id="addRemoveContainerEdit${i}">
-                    <div class="smallIconDiv" onclick="approveEdit(this)">
-                        <img class="smaller-icon" src="/img/check_dark_icon.svg" alt="Approve Edit">
-                    </div>
-                    <span class="small-input-vertical-vector"></span>
-                    <div class="smallIconDiv">
-                        <img onclick="cancelEdit(this)" class="small-icon" src="/img/Close.png" alt="Cancel Edit">
-                    </div>
-                </div>
-            </div>
-        </li>`;
-    }
-    list += "</ul>";
-    return list;
+            </li>`;
+        }
+        list += "</ul>";
+        return list;
 }
 
 function subtaskEditSample(taskData) {
