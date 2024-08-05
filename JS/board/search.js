@@ -11,11 +11,13 @@ function searchTasks() {
         let tasksFound = false;
 
         tasks.forEach(task => {
-            let match = task.querySelector('.taskTitle').innerText.toLowerCase().includes(searchInput);
+            let taskTitle = task.querySelector('.taskTitle').innerText.toLowerCase();
+            let taskDescription = task.querySelector('.taskDescription').innerText.toLowerCase();
+            let match = taskTitle.includes(searchInput) || taskDescription.includes(searchInput);
             task.style.display = searchInput === '' || match ? 'flex' : 'none';
             if (match) tasksFound = true;
         });
 
-        noTasksMessage.style.display = tasksFound || searchInput === '' && tasks.length > 0 ? 'none' : 'flex';
+        noTasksMessage.style.display = tasksFound || (searchInput === '' && tasks.length > 0) ? 'none' : 'flex';
     });
 }
