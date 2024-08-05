@@ -258,7 +258,6 @@ function openList(input) {
 function addSubtask() {
   let plusIcon = document.getElementById("addSubtaskIcon");
   let hidenContainer = document.getElementById("addRemoveContainer");
-  console.log(subtasks);
   plusIcon.classList.add("hide");
   hidenContainer.classList.remove("hide");
 }

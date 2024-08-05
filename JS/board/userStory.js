@@ -64,7 +64,7 @@ function formatSubtasks(taskSubtasks, taskSubtasksSelected, taskId) {
 function initializeSubTaskCheckboxes() {
     document.addEventListener('click', function (event) {
         if (event.target && event.target.classList.contains('subtask-checkbox')) {
-            console.log(event.target.id);
+            
         }
     });
 }
@@ -89,7 +89,7 @@ async function toggleCheckbox(subtaskId) {
             // Finde den entsprechenden Task in firebaseTasks und aktualisiere ihn
             try {
                 await patchSubtaskSelected(taskKey, { taskSubtasksSelected: selectedOptions[taskId] });
-                console.log("Daten für Task", taskId, "aktualisiert");
+               
             } catch (error) {
                 console.error("Fehler beim Aktualisieren der Daten:", error);
             }
@@ -295,7 +295,7 @@ async function saveTaskChanges(taskId) {
     const description = document.getElementById('editDescription').value;
     const dueDate = document.getElementById('editDueDate').value;
     const priority = currentPriorityEdit;
-    console.log(currentPriorityEdit);
+    
 
     let taskMoreContacts = `+${assignedPersons.length - 6}`;
     if (assignedPersons.length < 7) {
