@@ -9,10 +9,10 @@
  * @param {string} taskData.taskDate - Due date of the task.
  * @param {string} taskData.taskPrioAlt - Alt text for the priority image.
  * @param {string} taskData.taskPrioImage - URL for the priority image.
- * 
  * @param {string} formattedContacts - HTML content representing the contacts associated with the task.
  * @param {string} formattedContactsFullName - HTML content representing the full names of the contacts.
  * @param {string} formattedSubtasks - HTML content representing the subtasks.
+ * @returns {string} The HTML string representing the user story.
  */
 function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks) {
     return `
@@ -87,8 +87,17 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
 
 /**
  * Generates the HTML template for user story editing.
- * @param {Array} contactDataArray - Array of contact data.
- * @returns {string} - HTML string.
+ * 
+ * @param {Object} taskData - Data for the user story.
+ * @param {string} taskData.id - Unique identifier for the user story.
+ * @param {string} taskData.taskType - Type of the task.
+ * @param {string} taskData.taskTitle - Title of the task.
+ * @param {string} taskData.taskDescription - Description of the task.
+ * @param {string} taskData.taskDate - Due date of the task.
+ * @param {string} taskData.taskPrioAlt - Alt text for the priority image.
+ * @param {string} taskData.taskPrioImage - URL for the priority image.
+ * @param {string} formattedContacts - HTML content representing the contacts associated with the task.
+ * @returns {string} The HTML string representing the user story edit template.
  */
 function userStoryEditHtmlTemplate(taskData, formattedContacts) {
     return `
@@ -200,11 +209,10 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
  * @param {string} taskData.taskPrioImage - URL for the priority image.
  * @param {string} taskData.taskPrioAlt - Alt text for the priority image.
  * @param {string} taskData.taskContactsMore - Additional information about contacts.
- * 
  * @param {string} formattedContacts - HTML content representing the contacts associated with the task.
- * 
  * @param {number} formattedSubtasksSelected - Number of selected subtasks.
  * @param {number} formattedSubtaskBar - Percentage width of the subtask bar representing completion.
+ * @returns {string} The HTML string representing the ticket or task.
  */
 function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar) {
     return `
@@ -351,9 +359,19 @@ function subtaskSample() {
         return list;
 }
 
+/**
+ * Generates HTML for a list of subtasks from the provided task data.
+ * 
+ * This function creates an HTML string representing a list of subtasks from the given task data. Each subtask is displayed as a list item with options for editing and deleting.
+ * The edit and delete options are initially hidden and can be triggered through interactions.
+ * 
+ * @param {Object} taskData - Data for the task.
+ * @param {string[]} taskData.taskSubtasks - Array of subtasks.
+ * @returns {string} The HTML string representing the list of subtasks with interactive elements for editing and deleting.
+ */
 function subtaskEditSample(taskData) {
     let list = '<ul class="subTaskList ulPadding">';
-    let taskArray = taskData.taskSubtasks
+    let taskArray = taskData.taskSubtasks;
     
     if (taskArray) {
         for (let i = 0; i < taskArray.length; i++) {
@@ -385,8 +403,8 @@ function subtaskEditSample(taskData) {
         }
         list += "</ul>";
         return list;
-    }else{
+    } else {
         list = '';
-        return list
+        return list;
     }
 }
