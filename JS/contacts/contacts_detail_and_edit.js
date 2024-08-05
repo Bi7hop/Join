@@ -380,21 +380,26 @@ function highlightSelectedContact(selectedCard) {
  * @returns {Promise<void>} A promise that resolves when the contact has been successfully deleted or rejects if an error occurs.
  */
 async function deleteContact(contactEmail) {
-    let contactId = getContactIdByEmail(contactEmail);
-    if (contactId) {
-        let confirmation = confirm("Möchten Sie diesen Kontakt wirklich löschen?");
-        if (confirmation) {
-            try {
-                await deleteData(`/contacts/${contactId}`);
-                removeLocalContactData(contactId);
-                renderListContact();
-                closeContactWindow(); 
-            } catch (error) {
-                console.error("Fehler beim Löschen des Kontakts:", error);
-            }
-        }
-    } else {
+    const contactId = getContactIdByEmail(contactEmail);
+    if (!contactId) {
         console.error("Kontakt nicht gefunden.");
+        return;
+    }
+
+    if (confirm("Möchten Sie diesen Kontakt wirklich löschen?")) {
+        try {
+            await deleteData(`/contacts/${contactId}`);
+            removeLocalContactData(contactId);
+            renderListContact();
+
+            if (window.innerWidth <= 1050) {
+                closeContactWindow();
+            } else {
+                document.getElementById('contactDetail').innerHTML = '';
+            }
+        } catch (error) {
+            console.error("Fehler beim Löschen des Kontakts:", error);
+        }
     }
 }
 
