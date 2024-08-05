@@ -355,7 +355,6 @@ function subtaskSample() {
 function subtaskEditSample(taskData) {
     let list = '<ul class="subTaskList ulPadding">';
     let taskArray = taskData.taskSubtasks
-    console.log("subtaskEditSample(taskData) loaded...");
     
     if (taskArray) {
         for (let i = 0; i < taskArray.length; i++) {
