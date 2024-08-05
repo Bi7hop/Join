@@ -320,6 +320,7 @@ function personsFoundPost() {
  */
 function subtaskSample() {
     let list = '<ul class="subTaskList ulPadding">';
+    console.log("subtaskSample loaded...");
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         list += `
@@ -354,6 +355,8 @@ function subtaskSample() {
 function subtaskEditSample(taskData) {
     let list = '<ul class="subTaskList ulPadding">';
     let taskArray = taskData.taskSubtasks
+    console.log("subtaskEditSample(taskData) loaded...");
+    
     if (taskArray) {
         for (let i = 0; i < taskArray.length; i++) {
             const subtask = taskArray[i];

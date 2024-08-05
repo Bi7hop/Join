@@ -258,7 +258,7 @@ function openList(input) {
 function addSubtask() {
   let plusIcon = document.getElementById("addSubtaskIcon");
   let hidenContainer = document.getElementById("addRemoveContainer");
-
+  console.log(subtasks);
   plusIcon.classList.add("hide");
   hidenContainer.classList.remove("hide");
 }
@@ -273,7 +273,7 @@ function closeSubtask() {
   subtask.value = "";
 }
 
-function aproveSubtask() {
+function aproveSubtaskEdit() {
   let subtask = document.getElementById("subtask");
   if (!subtask.value.trim()) {
     alert("Please fill in your Subtask");
@@ -282,7 +282,7 @@ function aproveSubtask() {
     subtask.value = "";
     postSubtask();
   }
-  console.log(subtasks);
+  
   
   subTasksHoverEffect();
 }
@@ -304,7 +304,7 @@ function approveEdit(element) {
 }
 
 function postSubtask() {
-  let subtaskDisplay = document.getElementById("subtaskDisplay");
+  let subtaskDisplay = document.getElementById("subtaskDisplayEdit");
 
   subtaskDisplay.innerHTML = "";
   subtaskDisplay.innerHTML += subtaskSample();

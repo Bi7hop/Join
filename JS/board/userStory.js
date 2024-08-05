@@ -1,5 +1,5 @@
 let selectedOptions = {};
-
+let uploadSubtasks = [];
 
 function openUserStory(id) {
     let overlay = document.getElementById('overlay');
@@ -268,8 +268,13 @@ function openUserStoryEdit(taskId) {
         checkTaskPrio(taskData);
         updateAssignedPersonsEdit(taskData.taskContacts);
         postPersonsAt();
-        
-        
+
+        if (Array.isArray(taskData.taskSubtasks)) {
+            subtasks.push(...taskData.taskSubtasks);
+        }
+    
+    
+
     } else {
         console.error('Task-Daten nicht gefunden für Task-ID:', taskId);
     }
@@ -297,6 +302,8 @@ async function saveTaskChanges(taskId) {
         taskMoreContacts = '';
     }
 
+    
+
     const updatedTask = {
         taskTitle: title,
         taskDescription: description,
@@ -304,6 +311,8 @@ async function saveTaskChanges(taskId) {
         taskPrioImage: priority,
         taskContacts: assignedPersons,
         taskContactsMore: `${taskMoreContacts}`,
+        taskSubtasks: subtasks,
+        taskSubtaskAmount: `${subtasks.length}`,
     };
 
     const taskKey = findTaskKey(taskId);
