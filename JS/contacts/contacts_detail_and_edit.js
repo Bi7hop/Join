@@ -388,7 +388,7 @@ async function deleteContact(contactEmail) {
                 await deleteData(`/contacts/${contactId}`);
                 removeLocalContactData(contactId);
                 renderListContact();
-                document.getElementById('contactDetail').innerHTML = '';
+                closeContactWindow(); 
             } catch (error) {
                 console.error("Fehler beim Löschen des Kontakts:", error);
             }
@@ -397,6 +397,7 @@ async function deleteContact(contactEmail) {
         console.error("Kontakt nicht gefunden.");
     }
 }
+
 
 /**
  * Closes the "add contact" popup and removes the overlay with animations.
