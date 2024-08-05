@@ -1,0 +1,82 @@
+Aufgabenverteilung:
+Sascha:
+	Board:
+		HTML+CSS:
+			Board Seite
+			Tickets
+			Ticket Detail Ansicht
+			Ticket Edit Ansicht
+			Responsive
+		JavaScript:
+			Drag and Drop System
+			Tickets mit Firebase gerendert.
+			Detail Ansicht mit Firebase gerendert.
+			Edit Ansicht mit Firebase gerendert und editierbar gemacht.
+			Subtask + Contacts Funktionen....
+	Contacts:
+		Javascript:
+			Kontakte in Firebase hochgeladen und mit dem html template gerendert.
+	AddTask:
+		Javascript:
+			Speichern in der Firebase Datenbank zum rendern vom Board.
+	Summary:
+		Javascript:
+			Die Seite mit den Daten von Firebase und dem HTML Template gerendert.
+	Legal Notice:
+		HTML+CSS:
+			Erstellt und responsive.
+		Javascript:
+			Wenn keiner eingeloggt ist wird das Menü ausgeblendet.
+	Privacy Policy:
+		HTML+CSS:
+			Erstellt und responsive.
+		Javascript:
+			Wenn keiner eingeloggt ist wird das Menü ausgeblendet.
+	Header:
+		HTML+CSS:
+			Erstellt.
+		Javascript:
+			Responsive Menü
+Marcel:	
+	Board: 
+		Javascript: Search	
+	Contacts:
+		HTML+CSS:
+			Erstellt und responsive
+		Javascript:
+			Styling
+			Kontakte hinzufügen.
+			Kontakte löschen.
+			Kontakte bearbeiten.
+	Summary:
+		HTML+CSS:
+			Erstellt.	
+	Help:
+		HTML+CSS:
+			Erstellt.
+	Header:
+		Javascript:
+			Menü erstellt.
+	Sidebar:
+		HTML+CSS:
+			Erstellt.
+	Navbar Responsive:
+		HTML+CSS:
+			Erstellt.
+	SignUp:
+		HTML+CSS:
+			Erstellt.
+	Login:
+		HTML+CSS:
+			Erstellt.
+		Javascript:
+			Logo Animation.
+Mario:		
+	AddTask:
+		HTML+CSS:
+			Erstellt und responsive.
+		Javascript:
+			Styling erstellt.
+	Firebase:
+		Javascript:
+			Firebase Arrays erstellt.
