@@ -320,7 +320,6 @@ function personsFoundPost() {
  */
 function subtaskSample() {
     let list = '<ul class="subTaskList ulPadding">';
-    console.log("subtaskSample loaded...");
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         list += `
@@ -368,7 +367,7 @@ function subtaskEditSample(taskData) {
                             <img class="smaller-icon" src="/img/edit-dark.png" alt="Edit">
                         </div>
                         <span class="small-input-vertical-vector"></span>
-                        <div class="smallIconDiv" onclick="deleteSubtask(this)">
+                        <div class="smallIconDiv" onclick="deleteSubtask(this), toggleCheckbox()">
                             <img class="smaller-icon" src="/img/delete.png" alt="Delete">
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 /**
- * Executes after the DOM has fully loaded and waits 100ms before running the functions.
+ * Executes after the DOM has fully loaded and waits 200ms before running the functions.
  */
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => {
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateNavBottom();
         hideMobileNav();
         hideMobileHeader();
-    }, 100);
+    }, 200);
 });
 
 /**
