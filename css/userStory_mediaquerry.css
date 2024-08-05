@@ -1,0 +1,131 @@
+@media (max-width: 580px) {
+    .userStoryContainer, .userStoryEditContainer {
+        width: 460px;
+    }
+
+    .userStoryContainerInside {
+        width: 400px;
+    }
+
+    .userStoryDeleteAndEditContainer {
+        width: 400px;
+    }
+
+    .userStoryCloseButtonContainer {
+        padding-right: 48px;
+    }
+
+    .userStoryEditContainerInside{
+        width: 400px;
+    }
+
+    .editTitleInputContainer input, 
+    .editDescriptionTextAreaContainer,
+    .editDueDateInputContainer input,
+    .userStoryAssignedToInputAndImageContainer  {
+        width: 400px;
+    }
+
+    .subtaskDisplay {
+        width: 400px !important;
+    }
+}
+
+@media (max-width: 470px) {
+    .userStoryContainer, .userStoryEditContainer {
+        width: 400px;
+        height: 800px;
+        overflow-x: hidden;
+    }
+
+    .userStoryHeadline {
+        font-size: 52px;
+    }
+
+    .userStoryContainerInside {
+        width: 324px;
+    }
+
+    .userStoryDeleteAndEditContainer {
+        width: 324px;
+    }
+
+    /* .userStoryCloseButtonContainer img {
+        margin: 45px;
+    } */
+
+    .userStoryHeadlineAndCloseButtonContainer {
+        width: 380px;
+    }
+
+    .userStoryEditContainerInside{
+        width: 324px;
+    }
+
+    .editTitleInputContainer input, 
+    .editDescriptionTextAreaContainer,
+    .editDueDateInputContainer input,
+    .userStoryAssignedToInputAndImageContainer   {
+        width: 324px;
+    }
+
+    .subtaskDisplay {
+        width: 324px !important;
+    }
+}
+
+@media (max-width: 415px) {
+    .userStoryContainer, .userStoryEditContainer {
+        width: 300px;
+        height: 600px;
+        overflow-x: hidden;
+    }
+
+    .userStoryHeadline {
+        font-size: 46px;
+    }
+
+    .userStoryContainerInside {
+        width: 250px;
+    }
+
+    .userStoryDeleteAndEditContainer {
+        width: 270px;
+    }
+
+     .userStoryCloseButtonContainer {
+        padding-right: 120px;
+    } 
+
+    .userStoryHeadlineAndCloseButtonContainer {
+        width: 380px;
+    }
+
+    .userStorySubtaskTitelContainer {
+        margin-left: 24px;
+        padding: 4px 8px 12px 0;
+    }
+
+    .userStoryEditContainerInside{
+        width: 270px;
+    }
+
+    .editTitleInputContainer input, 
+    .editDescriptionTextAreaContainer,
+    .editDueDateInputContainer input,
+    .userStoryAssignedToInputAndImageContainer   {
+        width: 260px;
+    }
+
+    .userStoryAssignedToInputAndImageContainer input {
+        font-size: 14px;
+    }
+
+    .subtaskDisplay {
+        width: 270px !important;
+    }
+
+    .editPriorityButtonContainer {
+        font-size: 12px;
+    }
+}
