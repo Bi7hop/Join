@@ -1,4 +1,9 @@
 /**
+ * ID from the currentDraggedElement
+ */
+let currentDraggedElement;
+
+/**
  * Renders tasks with a specific status into the specified column.
  * @param {string} columnId - The ID of the column where tasks will be rendered.
  * @param {string} status - The status of the tasks to render.
@@ -126,11 +131,6 @@ function loadTickets() {
 loadUrl().then(() => {
     loadTickets();
 });
-
-/**
- * ID from the currentDraggedElement
- */
-let currentDraggedElement;
 
 /**
  * Starts dragging the element with the specified ID.
@@ -338,6 +338,12 @@ function deleteTask(taskId) {
     });
 }
 
+/**
+ * Adds hover effects to move up and move down arrow images for a task ticket.
+ * Changes the image source when the mouse enters and leaves the image area.
+ *
+ * @param {string} taskDataId - The unique identifier for the task ticket. This ID is used to target specific images.
+ */
 function moveTicketHoverEffect(taskDataId) {
     let moveUpImage = document.getElementById(`moveTicketUpImg${taskDataId}`);
     let moveDownImage = document.getElementById(`moveTicketDownImg${taskDataId}`)
@@ -355,33 +361,18 @@ function moveTicketHoverEffect(taskDataId) {
     })
 }
 
-
-
-
+/**
+ * Moves a ticket up in the task status hierarchy.
+ * @param {string} taskDataId - The unique identifier for the task ticket.
+ */
 async function moveTicketUp(taskDataId) {
     for (const task of firebaseData) {
-        if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+        if (isValidTask(task)) {
             for (const key in task.dataExtracted) {
                 if (task.dataExtracted.hasOwnProperty(key)) {
                     const taskData = task.dataExtracted[key];
                     if (taskDataId === taskData.id) {
-                        if (taskData.taskStatus === "inProgress") {
-                            let taskStatus = "toDo"
-                            taskData.taskStatus = taskStatus;
-                            await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                        } else {
-                            if (taskData.taskStatus === "awaitFeedback") {
-                                let taskStatus = "inProgress"
-                                taskData.taskStatus = taskStatus;
-                                await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                            } else {
-                                if (taskData.taskStatus === "done") {
-                                    let taskStatus = "awaitFeedback"
-                                    taskData.taskStatus = taskStatus;
-                                    await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                                }
-                            }
-                        }
+                        await updateTaskStatusTicket(taskData, key);
                     }
                 }
             }
@@ -390,36 +381,79 @@ async function moveTicketUp(taskDataId) {
     loadTickets();
 }
 
+/**
+ * Checks if the task is valid and contains the dataExtracted object.
+ * @param {object} task - The task object to validate.
+ * @returns {boolean} - True if the task is valid, false otherwise.
+ */
+function isValidTask(task) {
+    return task.dataExtracted && typeof task.dataExtracted === 'object';
+}
+
+/**
+ * Updates the task status based on the current status and saves the changes to the server.
+ * @param {object} taskData - The data of the task to update.
+ * @param {string} key - The key corresponding to the task in the database.
+ */
+async function updateTaskStatusTicket(taskData, key) {
+    let taskStatus;
+    switch (taskData.taskStatus) {
+        case "inProgress":
+            taskStatus = "toDo";
+            break;
+        case "awaitFeedback":
+            taskStatus = "inProgress";
+            break;
+        case "done":
+            taskStatus = "awaitFeedback";
+            break;
+        default:
+            return; // If the status is not one of the above, do nothing.
+    }
+    taskData.taskStatus = taskStatus;
+    await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+}
+
+/**
+ * Moves a ticket down in the task status hierarchy.
+ * @param {string} taskDataId - The unique identifier for the task ticket.
+ */
 async function moveTicketDown(taskDataId) {
     for (const task of firebaseData) {
-        if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+        if (isValidTask(task)) {
             for (const key in task.dataExtracted) {
                 if (task.dataExtracted.hasOwnProperty(key)) {
                     const taskData = task.dataExtracted[key];
-
                     if (taskDataId === taskData.id) {
-
-                        if (taskData.taskStatus === "awaitFeedback") {
-                            let taskStatus = "done"
-                            taskData.taskStatus = taskStatus;
-                            await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                        } else {
-                            if (taskData.taskStatus === "inProgress") {
-                                let taskStatus = "awaitFeedback"
-                                taskData.taskStatus = taskStatus;
-                                await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                            } else {
-                                if (taskData.taskStatus === "toDo") {
-                                    let taskStatus = "inProgress"
-                                    taskData.taskStatus = taskStatus;
-                                    await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
-                                }
-                            }
-                        }
+                        await downgradeTaskStatus(taskData, key);
                     }
                 }
             }
         }
     }
     loadTickets();
+}
+
+/**
+ * Downgrades the task status based on the current status and saves the changes to the server.
+ * @param {object} taskData - The data of the task to update.
+ * @param {string} key - The key corresponding to the task in the database.
+ */
+async function downgradeTaskStatus(taskData, key) {
+    let taskStatus;
+    switch (taskData.taskStatus) {
+        case "awaitFeedback":
+            taskStatus = "done";
+            break;
+        case "inProgress":
+            taskStatus = "awaitFeedback";
+            break;
+        case "toDo":
+            taskStatus = "inProgress";
+            break;
+        default:
+            return; // If the status is not one of the above, do nothing.
+    }
+    taskData.taskStatus = taskStatus;
+    await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
 }
