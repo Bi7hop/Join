@@ -387,6 +387,7 @@ async function moveTicketUp(taskDataId) {
             }
         }
     }
+    loadTickets();
 }
 
 async function moveTicketDown(taskDataId) {
@@ -420,4 +421,5 @@ async function moveTicketDown(taskDataId) {
             }
         }
     }
+    loadTickets();
 }
