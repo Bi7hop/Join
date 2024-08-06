@@ -77,7 +77,7 @@ function updateNoTasksMessage(taskCount, noTasksMessage) {
 function formatSubtaskBar(taskData) {
     let subtaskBar = '';
     if (taskData.taskSubtasksSelected && taskData.taskSubtaskAmount > 0) {
-        const completedPercentage = (taskData.taskSubtasksSelected.length * 100) / taskData.taskSubtaskAmount;
+        const completedPercentage = ((taskData.taskSubtasksSelected.length -1) * 100) / taskData.taskSubtaskAmount;
         subtaskBar = `${completedPercentage}`;
     } else {
         subtaskBar = '0';
@@ -93,7 +93,7 @@ function formatSubtaskBar(taskData) {
 function formatSubtasksSelected(taskSubtasksSelected) {
     let subtasksSelected = '';
     if (taskSubtasksSelected) {
-        subtasksSelected = taskSubtasksSelected.length;
+        subtasksSelected = taskSubtasksSelected.length - 1;
     }
     return subtasksSelected;
 }

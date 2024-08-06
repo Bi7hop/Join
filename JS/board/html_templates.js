@@ -23,7 +23,7 @@ function userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFul
                     <div class="userStoryTaskType">
                         ${taskData.taskType}
                     </div>
-                    <div onclick="closeUserStory(), setTimeout(function() { location.reload(); }, 35);" class="userStoryCloseButtonContainer">
+                    <div onclick="closeUserStory(), setTimeout(function() { loadTickets(); }, 35);" class="userStoryCloseButtonContainer">
                         <img src="./img/userStory/close.png" alt="Close">
                     </div>
                 </div>
@@ -226,7 +226,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                     <div class="taskSubtaskBar">
                         <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
-                    <span>${formattedSubtasksSelected || 0}/${taskData.taskSubtaskAmount} Subtask${formattedSubtasksSelected !== 1 ? 's' : ''}</span>
+                    <span>${formattedSubtasksSelected || 0}/${taskData.taskSubtaskAmount} Subtasks</span>
                 </div>
                 <div class="taskContactsPrioContainer">
                     <div class="taskContactsContainer">

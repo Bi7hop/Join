@@ -1,6 +1,7 @@
 let selectedOptions = {};
 let uploadSubtasks = [];
-
+let currentPriorityEdit = '';
+let currentPriorityEditAlt = '';
 /**
  * Opens a user story by ID and populates the container with the corresponding data.
  * @param {string} id - The ID of the user story to open.
@@ -48,6 +49,7 @@ function handleOutsideClick(event) {
     let userStoryContainer = document.querySelector('.userStoryContainerInside');
     if (userStoryContainer && !userStoryContainer.contains(event.target)) {
         closeUserStory();
+        loadTickets();
     }
 }
 
@@ -87,29 +89,21 @@ function initializeSubTaskCheckboxes() {
 }
 
 /**
- * Toggles the checkbox state for a subtask.
- * @param {string} subtaskId - The ID of the subtask.
+ * Toggles the checkbox state for the given subtaskId.
+ * 
+ * @param {string} subtaskId - The ID of the subtask to toggle.
  */
 async function toggleCheckbox(subtaskId) {
     const checkbox = document.getElementById(subtaskId);
     if (checkbox) {
-        const isChecked = checkbox.dataset.checked === 'true';
-        checkbox.dataset.checked = !isChecked;
-        const src = isChecked ? './img/checkbox_uncheckt.png' : './img/checkbox_checkt_dark.png';
-        checkbox.setAttribute('src', src);
+        const isChecked = getCheckboxState(checkbox);
+        toggleCheckboxState(checkbox, isChecked);
         const taskId = getTaskIdFromSubtaskId(subtaskId);
         const taskKey = getTaskKeyFromSubtaskId(subtaskId);
         if (taskId !== null && taskKey !== null) {
-            if (!isChecked) {
-                selectedOptions[taskId] = selectedOptions[taskId] || [];
-                selectedOptions[taskId].push(subtaskId);
-            } else {
-                selectedOptions[taskId] = selectedOptions[taskId] || [];
-                selectedOptions[taskId] = selectedOptions[taskId].filter(id => id !== subtaskId);
-            }
-            // Find the corresponding task in firebaseTasks and update it
+            updateSelectedOptions(taskId, subtaskId, !isChecked);
             try {
-                await patchSubtaskSelected(taskKey, { taskSubtasksSelected: selectedOptions[taskId] });
+                await patchSubtaskData(taskKey, selectedOptions[taskId]);
             } catch (error) {
                 console.error("Error updating data:", error);
             }
@@ -117,6 +111,57 @@ async function toggleCheckbox(subtaskId) {
             console.error("TaskId or TaskKey for SubtaskId", subtaskId, "not found.");
         }
     }
+}
+
+/**
+ * Gets the current state of the checkbox.
+ * 
+ * @param {HTMLElement} checkbox - The checkbox element.
+ * @returns {boolean} - True if the checkbox is checked, false otherwise.
+ */
+function getCheckboxState(checkbox) {
+    return checkbox.dataset.checked === 'true';
+}
+
+/**
+ * Toggles the checkbox state and updates the image source.
+ * 
+ * @param {HTMLElement} checkbox - The checkbox element.
+ * @param {boolean} isChecked - The current state of the checkbox.
+ */
+function toggleCheckboxState(checkbox, isChecked) {
+    checkbox.dataset.checked = !isChecked;
+    const src = isChecked ? './img/checkbox_uncheckt.png' : './img/checkbox_checkt_dark.png';
+    checkbox.setAttribute('src', src);
+}
+
+/**
+ * Updates the selected options for a given task.
+ * 
+ * @param {string} taskId - The ID of the task.
+ * @param {string} subtaskId - The ID of the subtask.
+ * @param {boolean} isChecked - The new state of the checkbox.
+ */
+function updateSelectedOptions(taskId, subtaskId, isChecked) {
+    selectedOptions[taskId] = selectedOptions[taskId] || [];
+    if (isChecked) {
+        selectedOptions[taskId].push(subtaskId);
+    } else {
+        const index = selectedOptions[taskId].indexOf(subtaskId);
+        if (index > -1) {
+            selectedOptions[taskId].splice(index, 1);
+        }
+    }
+}
+
+/**
+ * Makes an async call to update the subtask data on the server.
+ * 
+ * @param {string} taskKey - The key of the task.
+ * @param {Array<string>} taskSubtasksSelected - The list of selected subtasks.
+ */
+async function patchSubtaskData(taskKey, taskSubtasksSelected) {
+    await patchSubtaskSelected(taskKey, { taskSubtasksSelected });
 }
 
 /**
@@ -289,6 +334,7 @@ function checkTaskPrio(taskData) {
  */
 function addMediumPrio() {
     currentPriorityEdit = "./img/medium-prio-icon-inactive.png"
+    currentPriorityEditAlt = "Medium"
 }
 
 /**
@@ -296,6 +342,7 @@ function addMediumPrio() {
  */
 function addUrgentPrio() {
     currentPriorityEdit = "./img/urgent-prio-icon-inactive.png"
+    currentPriorityEditAlt = "Urgent"
 }
 
 /**
@@ -303,6 +350,7 @@ function addUrgentPrio() {
  */
 function addLowPrio() {
     currentPriorityEdit = "./img/low-prio-icon-inactive.png"
+    currentPriorityEditAlt = "Low"
 }
 
 /**
@@ -361,7 +409,7 @@ function updateAssignedPersonsEdit(taskData) {
     }
 }
 
-let currentPriorityEdit = ''
+
 
 /**
  * Saves the changes made to a task.
@@ -382,6 +430,7 @@ async function saveTaskChanges(taskId) {
         taskTitle: title,
         taskDescription: description,
         taskDate: dueDate,
+        taskPrioAlt: currentPriorityEditAlt,
         taskPrioImage: priority,
         taskContacts: assignedPersons,
         taskContactsMore: `${taskMoreContacts}`,

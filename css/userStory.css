@@ -46,6 +46,7 @@
     color:#000000;
     margin-top: 8px;
     font-size: 61px;
+    overflow-wrap: break-word;
 }
 
 .userStoryCloseButtonContainer {
