@@ -53,20 +53,42 @@ function hideOverflow() {
 }
 
 /**
- * Closes the "add task" popup or reloads the page based on the popup's current state.
- * If the popup is in its visible state, it is closed. Otherwise, the page is reloaded.
+ * Resets the task form by clearing all input fields and resetting states.
+ */
+function resetForm() {
+  document.getElementById("title").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("assigned").value = "";
+  document.getElementById("date").value = "";
+  
+  addMediumAt();
+  
+  checkboxStates = {};
+  assignedPersons = [];
+  subtasksAt = [];
+  
+  document.getElementById("assigned-persons").innerHTML = "";
+  document.getElementById("subtaskDisplayAt").innerHTML = "";
+  
+  renderAssignedListAt();
+  renderSubtaskListAt();
+}
+
+/**
+ * Closes the add task interface. If it is in popup mode, it triggers the popup close sequence.
+ * Otherwise, it resets the form.
  */
 function closeAddTask() {
   let addTask = document.getElementById("add-task-position");
   if (addTask.classList.contains("add-task-popup-position")) {
     closeAddTaskPopup();
   } else {
-    location.reload();
+    resetForm(); 
   }
 }
 
 /**
- * Closes the "add task" popup with a fade-out animation and restores scrolling.
+ * Closes the add task popup with an animation and restores the overflow of the document.
  */
 function closeAddTaskPopup() {
   let card = document.querySelector(".add-task-popup");
