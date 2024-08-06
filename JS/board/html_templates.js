@@ -216,8 +216,9 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
  */
 function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar) {
     return `
-        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" onclick="openUserStory(${taskData.id}), scrollToTop()" ondragend="endDragging(${taskData.id})" class="taskColumn task">
-            <div class="taskColumnContainer">
+        <div id="${taskData.id}" draggable="true" ondragstart="startDragging(${taskData.id})" ondragend="endDragging(${taskData.id})" class="taskColumn task">
+            <div class="boardTicketMoveArrowUp"><img id="moveTicketUpImg${taskData.id}" onload="moveTicketHoverEffect(${taskData.id})" onclick="moveTicketUp(${taskData.id})" src="./img/board/up_arrow.svg" alt="MoveUp"></div>
+            <div onclick="openUserStory(${taskData.id}), scrollToTop()" class="taskColumnContainer">
                 <div id="taskType" class="taskType ${taskData.taskType}">${taskData.taskType}</div>
                 <div class="taskTitle">${taskData.taskTitle}</div>
                 <div class="taskDescription">${taskData.taskDescription}</div>
@@ -225,7 +226,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                     <div class="taskSubtaskBar">
                         <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
-                    <span>${formattedSubtasksSelected}/${taskData.taskSubtaskAmount} Subtask${formattedSubtasksSelected !== 1 ? 's' : ''}</span>
+                    <span>${formattedSubtasksSelected || 0}/${taskData.taskSubtaskAmount} Subtask${formattedSubtasksSelected !== 1 ? 's' : ''}</span>
                 </div>
                 <div class="taskContactsPrioContainer">
                     <div class="taskContactsContainer">
@@ -237,7 +238,9 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                         <img src="${taskData.taskPrioImage}" alt="${taskData.taskPrioAlt}">
                     </div>
                 </div>
+                
             </div>
+            <div class="boardTicketMoveArrowDown"><img id="moveTicketDownImg${taskData.id}" onclick="moveTicketDown(${taskData.id})" src="./img/board/down_arrow.svg" alt="MoveUp"></div>
         </div>
     `;
 }

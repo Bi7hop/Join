@@ -337,3 +337,87 @@ function deleteTask(taskId) {
         }, 50);
     });
 }
+
+function moveTicketHoverEffect(taskDataId) {
+    let moveUpImage = document.getElementById(`moveTicketUpImg${taskDataId}`);
+    let moveDownImage = document.getElementById(`moveTicketDownImg${taskDataId}`)
+    moveDownImage.addEventListener("mouseenter", function () {
+        moveDownImage.src = "./img/board/down_arrow_hover.svg"
+    })
+    moveDownImage.addEventListener("mouseleave", function () {
+        moveDownImage.src = "./img/board/down_arrow.svg"
+    })
+    moveUpImage.addEventListener("mouseenter", function () {
+        moveUpImage.src = "./img/board/up_arrow_hover.svg"
+    })
+    moveUpImage.addEventListener("mouseleave", function () {
+        moveUpImage.src = "./img/board/up_arrow.svg"
+    })
+}
+
+
+
+
+async function moveTicketUp(taskDataId) {
+    for (const task of firebaseData) {
+        if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+            for (const key in task.dataExtracted) {
+                if (task.dataExtracted.hasOwnProperty(key)) {
+                    const taskData = task.dataExtracted[key];
+                    if (taskDataId === taskData.id) {
+                        if (taskData.taskStatus === "inProgress") {
+                            let taskStatus = "toDo"
+                            taskData.taskStatus = taskStatus;
+                            await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                        } else {
+                            if (taskData.taskStatus === "awaitFeedback") {
+                                let taskStatus = "inProgress"
+                                taskData.taskStatus = taskStatus;
+                                await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                            } else {
+                                if (taskData.taskStatus === "done") {
+                                    let taskStatus = "awaitFeedback"
+                                    taskData.taskStatus = taskStatus;
+                                    await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+async function moveTicketDown(taskDataId) {
+    for (const task of firebaseData) {
+        if (task.dataExtracted && typeof task.dataExtracted === 'object') {
+            for (const key in task.dataExtracted) {
+                if (task.dataExtracted.hasOwnProperty(key)) {
+                    const taskData = task.dataExtracted[key];
+
+                    if (taskDataId === taskData.id) {
+
+                        if (taskData.taskStatus === "awaitFeedback") {
+                            let taskStatus = "done"
+                            taskData.taskStatus = taskStatus;
+                            await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                        } else {
+                            if (taskData.taskStatus === "inProgress") {
+                                let taskStatus = "awaitFeedback"
+                                taskData.taskStatus = taskStatus;
+                                await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                            } else {
+                                if (taskData.taskStatus === "toDo") {
+                                    let taskStatus = "inProgress"
+                                    taskData.taskStatus = taskStatus;
+                                    await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

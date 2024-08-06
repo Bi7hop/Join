@@ -462,3 +462,11 @@ input[type=text]:focus {
     justify-content: center;   
     align-items: center;       
 }
+
+.boardTicketMoveArrowUp img{
+    display: none;
+}
+
+.boardTicketMoveArrowDown img{
+    display: none;
+}
