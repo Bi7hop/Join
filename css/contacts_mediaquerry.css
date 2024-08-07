@@ -178,9 +178,9 @@
         width: 100%;
     }
 
-    .right-content.show {
+    /* .right-content.show {
         padding-bottom: 100px;
-    }
+    } */
 
     header {
         z-index: 20;
@@ -191,6 +191,25 @@
     .new-contact {
         width: 290px;
         margin: 22px 52px 21px 40px;
+    }
+}
+
+@media(max-width:380px) {
+    header {
+        z-index: 100 !important;
+    }
+
+    .contacts-headline {
+        margin: 0 16px 0 16px;
+    }
+
+    .headline-contact {
+        height: 66px;
+    }
+
+    .emblem-info {
+        width: 50px;
+        height: 50px;
     }
 }
 
