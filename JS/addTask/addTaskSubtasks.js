@@ -45,7 +45,7 @@ function addSubtaskAt() {
     let listItem = element.closest(".listItem");
     let subtaskSpan = listItem.querySelector(".subtask-text");
     let subtaskText = subtaskSpan.textContent.trim();
-    subtaskSpan.outerHTML = `<input value="${subtaskText}">`;
+    subtaskSpan.outerHTML = `<input class="edit-subtask-input" value="${subtaskText}">`;
   
     swapToEditAt(listItem);
   }

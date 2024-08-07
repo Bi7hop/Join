@@ -642,3 +642,7 @@ select {
 .flex-row {
     flex-direction: row;
 }
+
+.edit-subtask-input{
+    width: 300px
+}

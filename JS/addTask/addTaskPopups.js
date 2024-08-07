@@ -169,7 +169,7 @@ function aproveSubtaskAt() {
   let subtaskAt = document.getElementById("subtaskAt");
 
   if (!subtaskAt.value.trim()) {
-    alert("Please fill in your Subtask");
+   return;
   } else {
     subtasksAt.push(subtaskAt.value);
     subtaskAt.value = "";

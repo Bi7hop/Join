@@ -344,6 +344,10 @@
     .select-wrapper::after {
         right: 16px;
     }
+
+    .edit-subtask-input{
+        width: 140px;
+    }
 }
 
 @media(max-width:500px) {
@@ -356,6 +360,7 @@
     .add-task-card {
         width: 310px;
         gap: 8px;
+        left: 50px;
     }
 
     .title-positioning {
@@ -496,5 +501,17 @@
 
     .name-container{
         width: initial;
+    }
+}
+
+@media(max-width : 380px){
+    .add-task-card{
+        left: 15px;
+    }
+}
+
+@media(max-width : 350px){
+    .add-task-card{
+        left: 0;
     }
 }
