@@ -386,22 +386,21 @@ async function deleteContact(contactEmail) {
         return;
     }
 
-    if (confirm("Möchten Sie diesen Kontakt wirklich löschen?")) {
-        try {
-            await deleteData(`/contacts/${contactId}`);
-            removeLocalContactData(contactId);
-            renderListContact();
+    try {
+        await deleteData(`/contacts/${contactId}`);
+        removeLocalContactData(contactId);
+        renderListContact();
 
-            if (window.innerWidth <= 1050) {
-                closeContactWindow();
-            } else {
-                document.getElementById('contactDetail').innerHTML = '';
-            }
-        } catch (error) {
-            console.error("Fehler beim Löschen des Kontakts:", error);
+        if (window.innerWidth <= 1050) {
+            closeContactWindow();
+        } else {
+            document.getElementById('contactDetail').innerHTML = '';
         }
+    } catch (error) {
+        console.error("Fehler beim Löschen des Kontakts:", error);
     }
 }
+
 
 
 /**
