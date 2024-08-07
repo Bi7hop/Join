@@ -25,9 +25,16 @@ async function includeHTML() {
     }
     element.removeAttribute("w3-include-html");
   }
+
+  followUp();
+}
+
   // Check if additional functions need to be called after including HTML
-  // checkTargetSites();
+function followUp(){
+  checkTargetSites();
   displayCurentUser();
+  guardCheck();
+  guardCheckMobile();
   attachToggleEvent();
   runAfterSidebarLoad();
 }
@@ -177,5 +184,33 @@ function checkIfLogged() {
 
   if (!user) {
     window.location.href = "./login_ani_complete.html";
+  }
+}
+
+
+function guardCheck() {
+  let user = sessionStorage.getItem("currentUser");
+  let sideNav = document.getElementById("sideNav");
+  let topNav = document.getElementById("topNav");
+
+  if (!user) {
+    if (sideNav && topNav) {
+      sideNav.classList.add('hidden');
+      topNav.classList.add('hidden');
+    }
+  }
+}
+
+function guardCheckMobile(){
+  let user = sessionStorage.getItem("currentUser");
+  let sideNav = document.getElementById("mobNav");
+  let topNav = document.getElementById("headerLogoMobile");
+
+  if (!user) {
+    if (sideNav && topNav) {
+      sideNav.classList.add('hidden');
+      sideNav.classList.add('transparent')
+      topNav.classList.add('hidden');
+    }
   }
 }

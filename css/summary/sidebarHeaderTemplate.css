@@ -194,6 +194,10 @@ nav {
     display: none !important;
 }
 
+.transparent {
+    background-color: transparent !important;
+}
+
 nav a.active {
     background-color: rgb(9,25,49); 
     color: white;
