@@ -69,6 +69,7 @@ function resetForm() {
   
   document.getElementById("assigned-persons").innerHTML = "";
   document.getElementById("subtaskDisplayAt").innerHTML = "";
+  document.getElementById("category").value = ""; 
   
   renderAssignedListAt();
   renderSubtaskListAt();
