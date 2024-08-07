@@ -2,43 +2,114 @@ let selectedOptions = {};
 let uploadSubtasks = [];
 let currentPriorityEdit = '';
 let currentPriorityEditAlt = '';
+
 /**
- * Opens a user story by ID and populates the container with the corresponding data.
+ * Open a user story by ID.
+ * 
  * @param {string} id - The ID of the user story to open.
  */
 function openUserStory(id) {
+    setupOverlayAndContainer();
+    clearContainerContent();
+    if (isValidFirebaseTasks(firebaseTasks)) {
+        const tasksData = firebaseTasks[0].dataExtracted;
+        processTasksData(id, tasksData);
+        addOutsideClickListener();
+    } else {
+        console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
+    }
+}
+
+/**
+ * Setup the overlay and container for the user story.
+ */
+function setupOverlayAndContainer() {
     let overlay = document.getElementById('overlay');
     let boardBodyContainer = document.querySelector('.boardBodyContainer');
     boardBodyContainer.style.overflow = "hidden";
     overlay.classList.add("overlay");
+}
+
+/**
+ * Clear the content of the user story container.
+ */
+function clearContainerContent() {
     const container = document.getElementById('userStoryWindow');
     container.innerHTML = ''; // Clear previous content
-    if (firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted) {
-        const tasksData = firebaseTasks[0].dataExtracted;
-        Object.keys(tasksData).forEach(key => {
-            const taskData = tasksData[key];
-            if (id === taskData.id) {
-                const formattedSubtasks = formatSubtasks(taskData.taskSubtasks, taskData.taskSubtasksSelected, taskData.id);
-                const formattedContactsFullName = formatContactsFullName(taskData.taskContacts);
-                const formattedContacts = formatContacts(taskData.taskContacts);
-                const taskHtml = userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks);
-                const taskContainer = document.createElement('div');
-                taskContainer.innerHTML = taskHtml;
-                container.appendChild(taskContainer.firstElementChild);
+}
 
-                // Initialize selected options for the task
-                selectedOptions[taskData.id] = taskData.taskSubtasksSelected || [];
-            }
-        });
-        setTimeout(() => {
-            let outsideContainer = document.querySelector('.userStoryOutsideContainer');
-            if (outsideContainer) {
-                outsideContainer.addEventListener('click', handleOutsideClick);
-            }
-        }, 0);
-    } else {
-        console.error("firebaseTasks or firebaseTasks[0].dataExtracted is undefined or null.");
-    }
+/**
+ * Check if firebaseTasks is valid.
+ * 
+ * @param {Object} firebaseTasks - The firebase tasks object.
+ * @returns {boolean} True if firebaseTasks is valid, false otherwise.
+ */
+function isValidFirebaseTasks(firebaseTasks) {
+    return firebaseTasks && firebaseTasks[0] && firebaseTasks[0].dataExtracted;
+}
+
+/**
+ * Process the tasks data and append the relevant task HTML.
+ * 
+ * @param {string} id - The ID of the user story to open.
+ * @param {Object} tasksData - The tasks data object.
+ */
+function processTasksData(id, tasksData) {
+    const container = document.getElementById('userStoryWindow');
+    Object.keys(tasksData).forEach(key => {
+        const taskData = tasksData[key];
+        if (id === taskData.id) {
+            const taskHtml = createTaskHtml(taskData);
+            appendTaskHtml(container, taskHtml);
+            initializeSelectedOptions(taskData);
+        }
+    });
+}
+
+/**
+ * Create the task HTML from the task data.
+ * 
+ * @param {Object} taskData - The task data object.
+ * @returns {string} The formatted task HTML.
+ */
+function createTaskHtml(taskData) {
+    const formattedSubtasks = formatSubtasks(taskData.taskSubtasks, taskData.taskSubtasksSelected, taskData.id);
+    const formattedContactsFullName = formatContactsFullName(taskData.taskContacts);
+    const formattedContacts = formatContacts(taskData.taskContacts);
+    return userStoryHtmlTemplate(taskData, formattedContacts, formattedContactsFullName, formattedSubtasks);
+}
+
+/**
+ * Append the task HTML to the container.
+ * 
+ * @param {HTMLElement} container - The container element.
+ * @param {string} taskHtml - The task HTML.
+ */
+function appendTaskHtml(container, taskHtml) {
+    const taskContainer = document.createElement('div');
+    taskContainer.innerHTML = taskHtml;
+    container.appendChild(taskContainer.firstElementChild);
+}
+
+/**
+ * Initialize the selected options for the task.
+ * 
+ * @param {Object} taskData - The task data object.
+ */
+function initializeSelectedOptions(taskData) {
+    selectedOptions[taskData.id] = taskData.taskSubtasksSelected || [];
+}
+
+/**
+ * Add an outside click listener to close the user story.
+ */
+function addOutsideClickListener() {
+    setTimeout(() => {
+        let outsideContainer = document.querySelector('.userStoryOutsideContainer');
+        if (outsideContainer) {
+            outsideContainer.addEventListener('click', handleOutsideClick);
+        }
+    }, 0);
 }
 
 /**
@@ -381,19 +452,15 @@ function pushTaskContactsToCheckboxStates(taskContacts) {
 function openUserStoryEdit(taskId) {
     let userStoryContainer = document.getElementById('userStoryWindow');
     const taskData = findTaskById(taskId);
-
     if (taskData) {
-
         pushTaskContactsToCheckboxStates(taskData.taskContacts);
         userStoryContainer.innerHTML = userStoryEditHtmlTemplate(taskData);
         checkTaskPrio(taskData);
         updateAssignedPersonsEdit(taskData.taskContacts);
         postPersonsAt();
-
         if (Array.isArray(taskData.taskSubtasks)) {
             subtasks.push(...taskData.taskSubtasks);
         }
-
     } else {
         console.error('Task data not found for task ID:', taskId);
     }
@@ -409,24 +476,42 @@ function updateAssignedPersonsEdit(taskData) {
     }
 }
 
-
-
 /**
- * Saves the changes made to a task.
- * @param {string} taskId - The ID of the task.
+ * Save changes made to a task.
+ * 
+ * This function gathers the updated task details, finds the corresponding task key,
+ * updates the task on the server, and then reloads the page to reflect the changes.
+ * 
+ * @param {string} taskId - The ID of the task to be updated.
  */
 async function saveTaskChanges(taskId) {
+    const updatedTask = getUpdatedTask();
+    const taskKey = findTaskKey(taskId);
+
+    if (taskKey) {
+        await updateTask(taskKey, updatedTask);
+    } else {
+        console.error("Task key not found.");
+    }
+    window.location.reload();
+    loadTickets();
+}
+
+/**
+ * Gather the updated task details from the input fields and constructs the task object.
+ * 
+ * @returns {Object} The updated task object.
+ */
+function getUpdatedTask() {
     const title = document.getElementById('editTitle').value;
     const description = document.getElementById('editDescription').value;
     const dueDate = document.getElementById('editDueDate').value;
     const priority = currentPriorityEdit;
-
     let taskMoreContacts = `+${assignedPersons.length - 6}`;
     if (assignedPersons.length < 7) {
         taskMoreContacts = '';
     }
-
-    const updatedTask = {
+    return {
         taskTitle: title,
         taskDescription: description,
         taskDate: dueDate,
@@ -437,19 +522,20 @@ async function saveTaskChanges(taskId) {
         taskSubtasks: subtasks,
         taskSubtaskAmount: `${subtasks.length}`,
     };
+}
 
-    const taskKey = findTaskKey(taskId);
-    if (taskKey) {
-        try {
-            await patchData(`/tasks/${taskKey}`, updatedTask);
-            closeUserStoryEdit();
-            loadTickets();
-        } catch (error) {
-            console.error("Error saving changes:", error);
-        }
-    } else {
-        console.error("Task key not found.");
+/**
+ * Update the task on the server.
+ * 
+ * @param {string} taskKey - The key of the task to be updated.
+ * @param {Object} updatedTask - The updated task object.
+ */
+async function updateTask(taskKey, updatedTask) {
+    try {
+        await patchData(`/tasks/${taskKey}`, updatedTask);
+        closeUserStoryEdit();
+        loadTickets();
+    } catch (error) {
+        console.error("Error saving changes:", error);
     }
-    window.location.reload();
-    loadTickets();
 }
