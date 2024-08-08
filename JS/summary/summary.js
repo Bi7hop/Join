@@ -37,7 +37,7 @@ function categorizeTask(taskData) {
         allTasks.push(taskData.taskStatus);
     }
 
-    if (taskData.taskPrioAlt === "urgent") {
+    if (taskData.taskPrioAlt === "Urgent") {
         urgentTasks.push('taskData.taskPrioAlt');
     }
 
