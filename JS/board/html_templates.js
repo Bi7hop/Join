@@ -223,7 +223,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                 <div class="taskTitle">${taskData.taskTitle}</div>
                 <div class="taskDescription">${taskData.taskDescription}</div>
                 <div id="taskSubtaskBarContainer" class="taskSubtaskBarContainer">
-                    <div class="taskSubtaskBar">
+                    <div id="subtaskBar" class="taskSubtaskBar">
                         <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
                     <span>${formattedSubtasksSelected || 0}/${taskData.taskSubtaskAmount} Subtasks</span>

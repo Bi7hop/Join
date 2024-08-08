@@ -47,10 +47,12 @@ function getTasksByStatus(status) {
 function renderTask(container, taskData) {
     const formattedSubtasksSelected = formatSubtasksSelected(taskData.taskSubtasksSelected);
     const formattedSubtaskBar = formatSubtaskBar(taskData);
+    
     const formattedContacts = formatContacts(taskData.taskContacts);
     const taskHtml = ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, formattedSubtaskBar);
     const taskContainer = document.createElement('div');
     taskContainer.innerHTML = taskHtml;
+    
     container.appendChild(taskContainer.firstElementChild);
     removeArrows(taskData);
 }
