@@ -221,7 +221,7 @@
 
     .simple-input {
         width: 354px;
-        height: 20px;
+        height: 26px;
         padding: 10px 21px;
     }
 
@@ -352,15 +352,23 @@
 
 @media(max-width:500px) {
     .add-task-main-position {
+        left: 0px;
+        border-radius: 0;
+    }
+}
+
+@media(max-width:440px) {
+    .add-task-main-position {
         left: 15px;
-        width: 310px;
+        width: 290px;
         border-radius: 0;
     }
 
     .add-task-card {
-        width: 310px;
+        width: 290px;
         gap: 8px;
         left: 50px;
+        align-items: flex-start;
     }
 
     .title-positioning {
@@ -377,27 +385,28 @@
     .three-input-container {
         width: 300px;
         gap: 6px;
+        align-items: flex-start;
     }
 
     .input-title-container {
-        width: 270px;
+        width: 275px;
         height: 83px;
     }
 
     .simple-input {
-        width: 214px;
-        height: 20px;
+        width: 229px;
+        height: 26px;
         padding: 10px 20px;
     }
 
     .description-container {
-        width: 270px;
+        width: 290px;
         height: 131px;
     }
 
     .textarea {
-        max-width: 214px;
-        width: 228px;
+        max-width: 229px;
+        width: 229px;
         height: 52px;
         padding: 16px 20px;
     }
@@ -408,8 +417,12 @@
     }
 
     .foul-input {
-        width: 254px;
+        width: 269px;
         height: 48px;
+    }
+
+    .three-input-prio-container{
+        align-items: flex-start;
     }
 
     .half-input {
@@ -444,7 +457,7 @@
     }
 
     .selection {
-        width: 256px;
+        width: 271px;
     }
 
     .three-input-prio-container {
