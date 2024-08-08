@@ -52,6 +52,7 @@ function renderTask(container, taskData) {
     const taskContainer = document.createElement('div');
     taskContainer.innerHTML = taskHtml;
     container.appendChild(taskContainer.firstElementChild);
+    removeArrows(taskData);
 }
 
 /**
@@ -77,7 +78,7 @@ function updateNoTasksMessage(taskCount, noTasksMessage) {
 function formatSubtaskBar(taskData) {
     let subtaskBar = '';
     if (taskData.taskSubtasksSelected && taskData.taskSubtaskAmount > 0) {
-        const completedPercentage = ((taskData.taskSubtasksSelected.length -1) * 100) / taskData.taskSubtaskAmount;
+        const completedPercentage = ((taskData.taskSubtasksSelected.length - 1) * 100) / taskData.taskSubtaskAmount;
         subtaskBar = `${completedPercentage}`;
     } else {
         subtaskBar = '0';
@@ -457,3 +458,41 @@ async function downgradeTaskStatus(taskData, key) {
     taskData.taskStatus = taskStatus;
     await patchData(`/tasks/${key}`, { taskStatus: taskStatus });
 }
+
+/**
+ * Hides the up and down arrows if the window width is less than 1310 pixels
+ * and the task status is "toDo" or "done".
+ * 
+ * @param {Object} taskData - The task data object.
+ * @param {number} taskData.id - The ID of the task.
+ * @param {string} taskData.taskStatus - The status of the task ("toDo" or "done").
+ */
+function removeArrows(taskData) {
+    let moveUpArrow = document.getElementById(`moveTicketUpImg${taskData.id}`);
+    let moveDownArrow = document.getElementById(`moveTicketDownImg${taskData.id}`);
+    if (window.innerWidth < 1310) {
+        if (taskData.taskStatus === "toDo") {
+            moveUpArrow.style.display = "none";
+        }
+    }
+    if (window.innerWidth < 1310) {
+        if (taskData.taskStatus === "done") {
+            moveDownArrow.style.display = "none";
+        }
+    }
+}
+
+/**
+ * Checks the window width and loads the tickets if the width is less than 1310 pixels.
+ */
+function checkSize() {
+    if (window.innerWidth < 1310) {
+    loadTickets();
+        }
+}
+
+/**
+ * Attaches an event listener to the window that triggers the `checkSize` function
+ * whenever the window is resized.
+ */
+addEventListener("resize", checkSize);
