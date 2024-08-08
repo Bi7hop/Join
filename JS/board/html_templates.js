@@ -121,7 +121,7 @@ function userStoryEditHtmlTemplate(taskData, formattedContacts) {
                         <label class="editDescriptionContainer" for="description">Description</label>
                     </div>
                     <div class="editDescriptionTextAreaContainer mTop8">
-                        <textarea name="description" id="editDescription">${taskData.taskDescription}</textarea>
+                        <textarea name="description" id="editDescription" rows="5" cols="25">${taskData.taskDescription}</textarea>
                     </div>
                 </div>
                 <div>
