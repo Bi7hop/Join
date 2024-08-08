@@ -386,8 +386,9 @@ function closeSubtask() {
 function aproveSubtaskEdit() {
   let subtask = document.getElementById("subtask");
   if (!subtask.value.trim()) {
-    alert("Please fill in your Subtask");
+    subtask.placeholder = "Please fill in your Subtask";
   } else {
+    subtask.placeholder = "Add new Subtask";
     subtasks.push(subtask.value);
     subtask.value = "";
     postSubtask();
@@ -406,6 +407,10 @@ function approveEdit(element) {
   let inputElement = listItem.querySelector("input");
   let newSubtaskText = inputElement.value.trim();
 
+  if (inputElement.value === '') {
+    inputElement.placeholder = "Please fill in your Subtask";
+    return;
+  }
   let oldSubtaskText = subtasks.find(
     (subtask) => subtask === inputElement.defaultValue
   );
