@@ -72,7 +72,7 @@ function resetForm() {
   document.getElementById("category").value = ""; 
   
   renderAssignedListAt();
-  renderSubtaskListAt();
+  // renderSubtaskListAt();
 }
 
 /**
