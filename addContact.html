@@ -43,8 +43,10 @@
                     <img class="input-img" src="./img/addContact-profile-gray.png">
                 </div>
                 <div class="contact-input">
-                    <input id="contactNewMail" type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email" required
-                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address.">
+                    <input id="contactNewMail" type="email" class="input font-fourhundrdred-twentyfour" placeholder="Email" placeholder="Email" value=""
+                    pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+                    title="Please enter a valid email address (e.g., example@domain.com)" minlength="6"
+                    maxlength="50" required>
 
                     <img class="input-img" src="./img/addContact-email.png">
                     <span id="emailError" class="error-message" style="display:none;">Diese E-Mail-Adresse ist bereits registriert.</span>
