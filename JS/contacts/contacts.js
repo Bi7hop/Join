@@ -237,9 +237,9 @@ function getRandomColor() {
  * @returns {string} The uppercase initials of the name or an empty string if the name is falsy.
  */
 function generateEmblem(name) {
-    if (!name) return ''; 
-    const initials = name.split(' ').map(word => word[0]).join('');
-    return initials.toUpperCase(); 
+    if (!name) return '';
+    const initials = name.split(' ').map(word => word[0]).join('').toUpperCase();
+    return initials;
 }
 
 /**

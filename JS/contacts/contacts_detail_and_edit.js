@@ -248,8 +248,15 @@ async function saveEditContact() {
     }
     const contactId = getContactIdByEmail(originalEmail);
     if (contactId) {
-        const updatedContact = { name, email, phone };
+        const emblem = generateEmblem(name); // Funktion zum Generieren des Emblems basierend auf dem Namen
+        const updatedContact = { name, email, phone, emblem }; // Emblem hinzufügen
         await updateContactData(contactId, updatedContact);
+
+        // Re-render the contact detail
+        const contactDetailElement = document.getElementById('contact-detail'); // Assuming the contact detail container has this ID
+        if (contactDetailElement) {
+            contactDetailElement.innerHTML = detailContactHtmlTemplate(updatedContact);
+        }
     } else {
         console.error("Contact not found.");
     }
