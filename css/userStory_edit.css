@@ -262,9 +262,9 @@
     height: 4.6px;
 }
 
-.userStoryAssignedToDropdownMenuImageContainer:hover {
+/* .userStoryAssignedToDropdownMenuImageContainer:hover {
     background-color: #D1D1D1;
-}
+} */
 
 .userStoryContactsContainer {
     display: flex;

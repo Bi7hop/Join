@@ -32,6 +32,11 @@
     .subtaskDisplay {
         width: 400px !important;
     }
+
+    .userStoryAssignedToDropdownMenuImageContainer:hover {
+        background-color: inherit; 
+    }
+    
 }
 
 @media (max-width: 470px) {
@@ -65,27 +70,33 @@
     }
 
     .userStoryEditContainerInside{
-        width: 324px;
+        width: 355px;
     }
 
-    .editTitleInputContainer input, 
+    .editTitleInputContainer input {
+        width: 340px;
+    }
+    
     .editDescriptionTextAreaContainer,
-    .editDueDateInputContainer input,
     .userStoryAssignedToInputAndImageContainer   {
-        width: 324px;
+        width: 350px;
+    }
+
+    .editDueDateInputContainer input {
+        width: 330px;
     }
 
     .subtaskDisplay {
-        width: 324px !important;
+        width: 377px !important;
     }
 }
 
 @media (max-width: 415px) {
     .editDropDownList {
-        width: 260px;
+        width: 320px;
     }
     .userStoryContainer, .userStoryEditContainer {
-        width: 300px;
+        width: 360px;
         height: 600px;
         overflow-x: hidden;
     }
@@ -116,14 +127,25 @@
     }
 
     .userStoryEditContainerInside{
-        width: 270px;
+        width: 310px;
     }
 
-    .editTitleInputContainer input, 
-    .editDescriptionTextAreaContainer,
-    .editDueDateInputContainer input,
+
+    .editTitleInputContainer input {
+        width: 305px;
+    }
+    
+    .editDescriptionTextAreaContainer {
+        width: 315px;
+    }
+
+    .editDueDateInputContainer input {
+        width: 300px;
+    }
+    
+    
     .userStoryAssignedToInputAndImageContainer   {
-        width: 260px;
+        width: 315px;
     }
 
     .userStoryAssignedToInputAndImageContainer input {
@@ -131,7 +153,7 @@
     }
 
     .subtaskDisplay {
-        width: 270px !important;
+        width: 332px !important;
     }
 
     .editPriorityButtonContainer {
