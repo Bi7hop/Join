@@ -222,12 +222,14 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
                 <div id="taskType" class="taskType ${taskData.taskType}">${taskData.taskType}</div>
                 <div class="taskTitle">${taskData.taskTitle}</div>
                 <div class="taskDescription">${taskData.taskDescription}</div>
+                ${taskData.taskSubtaskAmount > 0 ? `
                 <div id="taskSubtaskBarContainer" class="taskSubtaskBarContainer">
                     <div id="subtaskBar" class="taskSubtaskBar">
                         <div style="width:${formattedSubtaskBar}%" class="taskSubtaskBarFilledBar"></div>
                     </div>
                     <span>${formattedSubtasksSelected || 0}/${taskData.taskSubtaskAmount} Subtasks</span>
                 </div>
+                ` : ''}
                 <div class="taskContactsPrioContainer">
                     <div class="taskContactsContainer">
                         ${formattedContacts}
@@ -244,6 +246,7 @@ function ticketTemplate(taskData, formattedContacts, formattedSubtasksSelected, 
         </div>
     `;
 }
+
 
 /**
  * Generates HTML for a dropdown list of contacts, where each item includes an emblem and name.
