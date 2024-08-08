@@ -407,7 +407,7 @@ function approveEdit(element) {
   let inputElement = listItem.querySelector("input");
   let newSubtaskText = inputElement.value.trim();
 
-  if (inputElement.value === '') {
+  if (inputElement.value.trim() === '') {
     inputElement.placeholder = "Please fill in your Subtask";
     return;
   }
@@ -459,6 +459,8 @@ function cancelEdit(element) {
     inputElement.outerHTML = `<span class="subtask-text">${subtaskText}</span>`;
   }
   swapToNormal(listItem);
+  postSubtask();
+  subTasksHoverEffect();
 }
 
 /**
