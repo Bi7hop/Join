@@ -41,7 +41,7 @@
 
 @media (max-width: 470px) {
     .editDropDownList {
-        width: 325px;
+        width: 360px;
     }
     .userStoryContainer, .userStoryEditContainer {
         width: 400px;
@@ -87,7 +87,7 @@
     }
 
     .subtaskDisplay {
-        width: 377px !important;
+        width: 383px !important;
     }
 }
 
@@ -153,7 +153,7 @@
     }
 
     .subtaskDisplay {
-        width: 332px !important;
+        width: 337px !important;
     }
 
     .editPriorityButtonContainer {
