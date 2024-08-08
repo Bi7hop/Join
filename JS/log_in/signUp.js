@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add event listeners to reset custom validity on input change
   document.getElementById('signUpPassword').addEventListener('input', resetPasswordValidity);
   document.getElementById('signUpPasswordCheck').addEventListener('input', resetPasswordValidity);
+
+  // Add event listeners to check if all fields are filled
+  const fields = document.querySelectorAll('#signUpName, #signUpEmail, #signUpPassword, #signUpPasswordCheck, #privacyPolicy');
+  fields.forEach(field => {
+    field.addEventListener('input', checkFormValidity);
+  });
 });
 
 /**
@@ -104,4 +110,14 @@ function signUpConfirmation() {
       resolve(); // Resolve the promise after the delay
     }, 900);
   });
+}
+
+/**
+ * Checks if all required form fields are filled and valid.
+ * Enables or disables the submit button accordingly.
+ */
+function checkFormValidity() {
+  const form = document.getElementById('registrationForm');
+  const submitButton = document.getElementById('signUpButton');
+  submitButton.disabled = !form.checkValidity();
 }

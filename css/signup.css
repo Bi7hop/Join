@@ -317,3 +317,7 @@ p {
     }
 }
 
+.btn:disabled {
+    background-color: #cccccc; 
+    cursor: not-allowed;
+}
