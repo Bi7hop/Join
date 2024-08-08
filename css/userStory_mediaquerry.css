@@ -1,4 +1,7 @@
 @media (max-width: 580px) {
+    .editDropDownList {
+        width: 402px;
+    }
     .userStoryContainer, .userStoryEditContainer {
         width: 460px;
     }
@@ -32,6 +35,9 @@
 }
 
 @media (max-width: 470px) {
+    .editDropDownList {
+        width: 325px;
+    }
     .userStoryContainer, .userStoryEditContainer {
         width: 400px;
         height: 800px;
@@ -75,6 +81,9 @@
 }
 
 @media (max-width: 415px) {
+    .editDropDownList {
+        width: 260px;
+    }
     .userStoryContainer, .userStoryEditContainer {
         width: 300px;
         height: 600px;
