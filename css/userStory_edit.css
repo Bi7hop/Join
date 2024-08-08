@@ -660,3 +660,31 @@
 .flex-row {
     flex-direction: row;
 }
+
+
+@media(max-width: 450px) {
+    .editDropDownList {
+        bottom: 142px;
+        width: 330px;
+    }
+
+    .userStoryEditOkButtonContainer {
+        width: 100%;
+        display: flex;
+        align-items: end;
+        justify-content: flex-end;
+        padding-top: 20px;
+        padding-bottom: 0;
+    }
+
+    .subtaskDisplay {
+        max-height: 126px !important;
+    }
+}
+
+@media(max-width: 380px) {
+    .editDropDownList {
+        bottom: 110px;
+        width: 265px;
+    }
+}
