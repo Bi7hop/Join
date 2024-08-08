@@ -37,13 +37,31 @@ function categorizeTask(taskData) {
         allTasks.push(taskData.taskStatus);
     }
 
-    if (taskData.taskPrioAlt === "Urgent") {
-        urgentTasks.push('taskData.taskPrioAlt');
+    if (taskData.taskPrioAlt === "Urgent" && taskData.taskDate) {
+        urgentTasks.push(taskData);
     }
 
     if (taskData.taskDate) {
         taskDates.push(taskData.taskDate);
     }
+}
+
+/**
+ * Retrieves the nearest urgent deadline from the list of urgent tasks.
+ *
+ * @returns {string|null} The nearest urgent task date in ISO format, or null if there are no urgent tasks.
+ */
+function getNearestUrgentDeadline() {
+    if (urgentTasks.length === 0) return null;
+
+    const today = new Date();
+    urgentTasks.sort((a, b) => {
+        const dateA = new Date(a.taskDate);
+        const dateB = new Date(b.taskDate);
+        return Math.abs(dateA - today) - Math.abs(dateB - today);
+    });
+
+    return urgentTasks[0].taskDate;
 }
 
 /**
@@ -80,11 +98,11 @@ function renderSummaryBoard() {
  */
 function formattTaskDate() {
     let nearestDateContainer = document.getElementById('nearestDate');
-    const today = new Date();
-    taskDates.sort((a, b) => {
-        const dateA = new Date(a);
-        const dateB = new Date(b);
-        return Math.abs(dateA - today) - Math.abs(dateB - today);
-    });
-    nearestDateContainer.innerText = taskDates[0];
+    const nearestUrgentDeadline = getNearestUrgentDeadline();
+
+    if (nearestUrgentDeadline) {
+        nearestDateContainer.innerText = nearestUrgentDeadline;
+    } else {
+        nearestDateContainer.innerText = "No urgent tasks";
+    }
 }
