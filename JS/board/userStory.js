@@ -333,24 +333,50 @@ function formatContactsFullName(taskContacts) {
  * Closes the user story container.
  */
 function closeUserStory() {
-    let userStoryContainer = document.getElementById('userStoryWindow');
-    let boardBodyContainer = document.querySelector('.boardBodyContainer');
-    let overlay = document.getElementById('overlay');
+    const userStoryContainer = document.getElementById('userStoryWindow');
+    const boardBodyContainer = document.querySelector('.boardBodyContainer');
+    const overlay = document.getElementById('overlay');
 
-    userStoryContainer.style.animation = 'fly-out 0.1s forwards';
-    overlay.style.animation = 'fade-out 0.2s forwards';
-    setTimeout(() => {
-        userStoryContainer.innerHTML = ``;
-        userStoryContainer.style.animation = ``;
-        boardBodyContainer.style.overflow = "";
-        overlay.style.animation = '';
-        overlay.classList.remove("overlay");
+    applyAnimation(userStoryContainer, 'fly-out 0.1s forwards');
+    applyAnimation(overlay, 'fade-out 0.2s forwards');
 
-        let outsideContainer = document.querySelector('.userStoryOutsideContainer');
-        if (outsideContainer) {
-            outsideContainer.removeEventListener('click', handleOutsideClick);
-        }
-    }, 200);
+    setTimeout(resetStylesAndContent, 200, userStoryContainer, boardBodyContainer, overlay);
+}
+
+/**
+ * Applies the specified animation to the given element.
+ *
+ * @param {HTMLElement} element - The element to which the animation will be applied.
+ * @param {string} animation - The animation to apply to the element.
+ */
+function applyAnimation(element, animation) {
+    element.style.animation = animation;
+}
+
+/**
+ * Resets the styles and content of the specified elements.
+ *
+ * @param {HTMLElement} userStoryContainer - The user story container element.
+ * @param {HTMLElement} boardBodyContainer - The board body container element.
+ * @param {HTMLElement} overlay - The overlay element.
+ */
+function resetStylesAndContent(userStoryContainer, boardBodyContainer, overlay) {
+    userStoryContainer.innerHTML = ``;
+    userStoryContainer.style.animation = ``;
+    boardBodyContainer.style.overflow = "";
+    overlay.style.animation = '';
+    overlay.classList.remove("overlay");
+    removeOutsideClickListener();
+}
+
+/**
+ * Removes the click event listener from the outside container, if it exists.
+ */
+function removeOutsideClickListener() {
+    const outsideContainer = document.querySelector('.userStoryOutsideContainer');
+    if (outsideContainer) {
+        outsideContainer.removeEventListener('click', handleOutsideClick);
+    }
 }
 
 /**
