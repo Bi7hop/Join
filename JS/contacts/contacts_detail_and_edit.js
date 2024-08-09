@@ -95,21 +95,6 @@ function closeEditContact() {
 }
 
 /**
- * Closes the edit contact popup and restores the page layout.
- */
-function closeEditContact() {
-    let card = document.querySelector(".edit-contact-popup");
-    let overlay = document.getElementById("overlay");
-    if (card) {
-        card.style.display = "none";
-    }
-    if (overlay) {
-        overlay.classList.remove("overlay");
-    }
-    document.getElementById("contactsBody").style.overflow = '';
-}
-
-/**
  * Opens the edit contact popup for a given email.
  * @param {string} email - The email of the contact to edit.
  */
