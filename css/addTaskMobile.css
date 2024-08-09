@@ -394,7 +394,7 @@
     }
 
     .simple-input {
-        width: 264px;
+        width: 260px;
         height: 26px;
         padding: 10px 20px;
     }
@@ -417,7 +417,7 @@
     }
 
     .foul-input {
-        width: 269px;
+        width: 300px;
         height: 48px;
     }
 
@@ -446,18 +446,18 @@
     }
 
     .prio-btn-position {
-        width: 270px;
+        width: 300px;
         height: 61px;
     }
 
     .prio-btn {
-        width: 80px;
+        width: 92px;
         height: 51px;
         flex-direction: column;
     }
 
     .selection {
-        width: 271px;
+        width: 300px;
     }
 
     .three-input-prio-container {
@@ -469,8 +469,8 @@
     }
 
     .btn-required-text {
-        width: 300px;
-        padding: 16px 0;
+        width: 0px;
+        padding: 20px 155px;
         height: 100px;
         flex-direction: column;
     }
@@ -487,10 +487,10 @@
     }
 
     .dropdown-list {
-        width: 256px;
+        width: 290px;
         top: 500px;
-        height: 100px;
-        left: 20px;
+        height: 140px;
+        left: 7px;
     }
 
     .assigned-persons {
@@ -515,11 +515,32 @@
     .name-container{
         width: initial;
     }
+
+    .select-wrapper::after {
+        right: -12px !important;
+    }
+
+    .subTaskList {
+        width: 300px !important;
+    }
 }
 
 @media(max-width : 380px){
     .add-task-card{
-        left: 15px;
+        left: 25px;
+    }
+
+    .subTaskList {
+        width: 300px !important;
+    }
+
+    .dropdown-list {
+        left: 0;
+        width: 300px;
+    }
+
+    .select-wrapper::after {
+        right: -12px !important;
     }
 }
 
