@@ -523,6 +523,10 @@
     .subTaskList {
         width: 300px !important;
     }
+
+    .rotating:hover {
+        background-color: transparent;
+    }
 }
 
 @media(max-width : 380px){
