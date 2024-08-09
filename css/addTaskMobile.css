@@ -553,3 +553,60 @@
         left: 0;
     }
 }
+
+@media(max-width:326px) {
+    .simple-input {
+        width: 240px;
+        height: 26px;
+        padding: 10px 20px;
+    }
+
+    .textarea {
+        max-width: 244px;
+        width: 240px;
+        height: 52px;
+        padding: 16px 20px;
+    }
+
+    .foul-input {
+        width: 280px;
+        height: 48px;
+    }
+
+    .selection {
+        width: 280px;
+    }
+
+    .prio-btn-position{
+        width: 280px;
+    }
+
+    .prio-btn{
+        width: 85px;
+    }
+
+    .dropdown-list {
+        width: 282px;
+        top: 500px;
+        height: 140px;
+        left: 0;
+    }
+
+    .assigned-persons {
+        width: 256px;
+        top: 510px;
+        left: 0px;
+    }
+
+    .select-wrapper::after {
+        right: 10px !important;
+    }
+
+    .subTaskList {
+        width: 368px !important;
+    }
+
+    .rotating:hover {
+        background-color: transparent;
+    }
+}
