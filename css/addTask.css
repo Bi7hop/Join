@@ -579,7 +579,7 @@ select {
 }
 
 .subTaskList {
-    width: 98%;
+    width: 473px;
     height: 124px;
     overflow-y: auto;
 }
