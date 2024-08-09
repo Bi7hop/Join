@@ -394,7 +394,7 @@
     }
 
     .simple-input {
-        width: 229px;
+        width: 264px;
         height: 26px;
         padding: 10px 20px;
     }
@@ -405,8 +405,8 @@
     }
 
     .textarea {
-        max-width: 229px;
-        width: 229px;
+        max-width: 264px;
+        width: 264px;
         height: 52px;
         padding: 16px 20px;
     }
@@ -469,7 +469,7 @@
     }
 
     .btn-required-text {
-        width: 290px;
+        width: 300px;
         padding: 16px 0;
         height: 100px;
         flex-direction: column;
