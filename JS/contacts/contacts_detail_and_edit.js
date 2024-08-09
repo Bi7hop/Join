@@ -219,33 +219,99 @@ function handleResponsiveDesign() {
 
 /**
  * Main function to save the edited contact.
+ * @async
  */
 async function saveEditContact() {
-    const { nameElement, emailElement, phoneElement, originalEmailElement, emailErrorElement } = getInputElements();
-    if (!nameElement || !emailElement || !phoneElement || !originalEmailElement) {
-        console.error("One or more input elements are missing.");
-        return;
-    }
-    const { name, email, phone, originalEmail } = getUpdatedContactInfo(nameElement, emailElement, phoneElement, originalEmailElement);
-    emailErrorElement.style.display = 'none';
-    if (!validateEmail(email, originalEmail, emailErrorElement)) {
-        return;
-    }
-    const contactId = getContactIdByEmail(originalEmail);
-    if (contactId) {
-        const emblem = generateEmblem(name); // Funktion zum Generieren des Emblems basierend auf dem Namen
-        const updatedContact = { name, email, phone, emblem }; // Emblem hinzufügen
-        await updateContactData(contactId, updatedContact);
+    const elements = getInputElements();
+    if (areElementsMissing(elements)) return;
 
-        // Re-render the contact detail
-        const contactDetailElement = document.getElementById('contact-detail'); // Assuming the contact detail container has this ID
-        if (contactDetailElement) {
-            contactDetailElement.innerHTML = detailContactHtmlTemplate(updatedContact);
-        }
+    const updatedContactInfo = getUpdatedContactInfo(elements.nameElement, elements.emailElement, elements.phoneElement, elements.originalEmailElement);
+    hideEmailError(elements.emailErrorElement);
+
+    if (!isEmailValid(updatedContactInfo.email, updatedContactInfo.originalEmail, elements.emailErrorElement)) return;
+
+    const contactId = getContactIdByEmail(updatedContactInfo.originalEmail);
+    if (contactId) {
+        await updateContact(contactId, updatedContactInfo);
+        updateContactDetailsUI(updatedContactInfo);
     } else {
-        console.error("Contact not found.");
+        logContactNotFound();
     }
 }
+
+/**
+ * Checks if any of the required input elements are missing.
+ * @param {Object} elements - The input elements object.
+ * @param {HTMLElement} elements.nameElement - The name input element.
+ * @param {HTMLElement} elements.emailElement - The email input element.
+ * @param {HTMLElement} elements.phoneElement - The phone input element.
+ * @param {HTMLElement} elements.originalEmailElement - The original email input element.
+ * @returns {boolean} True if any elements are missing, false otherwise.
+ */
+function areElementsMissing(elements) {
+    if (!elements.nameElement || !elements.emailElement || !elements.phoneElement || !elements.originalEmailElement) {
+        console.error("One or more input elements are missing.");
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Hides the email error element.
+ * @param {HTMLElement} emailErrorElement - The email error element.
+ */
+function hideEmailError(emailErrorElement) {
+    emailErrorElement.style.display = 'none';
+}
+
+/**
+ * Validates the email and displays an error if invalid.
+ * @param {string} email - The new email address.
+ * @param {string} originalEmail - The original email address.
+ * @param {HTMLElement} emailErrorElement - The email error element.
+ * @returns {boolean} True if the email is valid, false otherwise.
+ */
+function isEmailValid(email, originalEmail, emailErrorElement) {
+    return validateEmail(email, originalEmail, emailErrorElement);
+}
+
+/**
+ * Updates the contact data with the new information.
+ * @async
+ * @param {string} contactId - The ID of the contact to be updated.
+ * @param {Object} updatedContactInfo - The updated contact information.
+ * @param {string} updatedContactInfo.name - The updated name.
+ * @param {string} updatedContactInfo.email - The updated email.
+ * @param {string} updatedContactInfo.phone - The updated phone number.
+ */
+async function updateContact(contactId, updatedContactInfo) {
+    const emblem = generateEmblem(updatedContactInfo.name);
+    const updatedContact = { ...updatedContactInfo, emblem };
+    await updateContactData(contactId, updatedContact);
+}
+
+/**
+ * Updates the contact details in the UI.
+ * @param {Object} updatedContact - The updated contact information.
+ * @param {string} updatedContact.name - The updated name.
+ * @param {string} updatedContact.email - The updated email.
+ * @param {string} updatedContact.phone - The updated phone number.
+ * @param {string} updatedContact.emblem - The generated emblem.
+ */
+function updateContactDetailsUI(updatedContact) {
+    const contactDetailElement = document.getElementById('contact-detail');
+    if (contactDetailElement) {
+        contactDetailElement.innerHTML = detailContactHtmlTemplate(updatedContact);
+    }
+}
+
+/**
+ * Logs an error message indicating that the contact was not found.
+ */
+function logContactNotFound() {
+    console.error("Contact not found.");
+}
+
 
 /**
  * Retrieves and validates the presence of required input elements.
