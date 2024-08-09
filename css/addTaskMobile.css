@@ -469,10 +469,11 @@
     }
 
     .btn-required-text {
-        width: 0px;
+        width: 60px;
         padding: 20px 155px;
         height: 100px;
         flex-direction: column;
+        left: 0;
     }
 
     .two-buttons-position {
@@ -608,5 +609,13 @@
 
     .rotating:hover {
         background-color: transparent;
+    }
+
+    .btn-required-text {
+        width: 20px;
+        padding: 20px 155px;
+        height: 100px;
+        flex-direction: column;
+        left: 0;
     }
 }
