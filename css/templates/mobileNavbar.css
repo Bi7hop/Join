@@ -35,7 +35,7 @@
     font-weight: 400;
     font-size: 16px;
     gap: 8px;
-    width: 90px;
+    width: 80px;
     padding: 8px;
     border-radius: 16px;
 }
@@ -218,6 +218,7 @@
 
     .nav-mobile-a {
         font-size: 10px;
+        width: 70px;
     }
 }
 
