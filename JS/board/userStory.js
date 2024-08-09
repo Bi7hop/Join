@@ -135,9 +135,9 @@ function formatSubtasks(taskSubtasks, taskSubtasksSelected, taskId) {
     if (!Array.isArray(taskSubtasks)) {
         return '';
     }
-    return taskSubtasks.map(subtask => {
+    return taskSubtasks.map((subtask, index) => {
         if (!subtask) return ''; // Skip empty subtasks
-        const subtaskId = `${taskId}_${subtask.replace(/\s+/g, '_')}`;
+        const subtaskId = `${taskId}_${subtask.replace(/\s+/g, '_')}_${index}`;
         const isChecked = taskSubtasksSelected && taskSubtasksSelected.includes(subtaskId);
         const checkboxSrc = isChecked ? './img/checkbox_checkt_dark.png' : './img/checkbox_uncheckt.png';
         return `
@@ -147,6 +147,7 @@ function formatSubtasks(taskSubtasks, taskSubtasksSelected, taskId) {
         </div>`;
     }).join('');
 }
+
 
 /**
  * Initializes the event listeners for subtask checkboxes.
@@ -169,8 +170,11 @@ async function toggleCheckbox(subtaskId) {
     if (checkbox) {
         const isChecked = getCheckboxState(checkbox);
         toggleCheckboxState(checkbox, isChecked);
+
+        // Updated calls to getTaskIdFromSubtaskId and getTaskKeyFromSubtaskId
         const taskId = getTaskIdFromSubtaskId(subtaskId);
         const taskKey = getTaskKeyFromSubtaskId(subtaskId);
+
         if (taskId !== null && taskKey !== null) {
             updateSelectedOptions(taskId, subtaskId, !isChecked);
             try {
@@ -183,6 +187,7 @@ async function toggleCheckbox(subtaskId) {
         }
     }
 }
+
 
 /**
  * Gets the current state of the checkbox.
@@ -246,7 +251,10 @@ function getTaskIdFromSubtaskId(subtaskId) {
         for (const key in tasksData) {
             const taskData = tasksData[key];
             const taskSubtaskIdPrefix = `${taskData.id}_`;
-            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => `${taskSubtaskIdPrefix}${subtask.replace(/\s+/g, '_')}` === subtaskId)) {
+            if (taskData.taskSubtasks && taskData.taskSubtasks.some((subtask, index) => {
+                const generatedSubtaskId = `${taskSubtaskIdPrefix}${subtask.replace(/\s+/g, '_')}_${index}`;
+                return generatedSubtaskId === subtaskId;
+            })) {
                 return taskData.id;
             }
         }
@@ -265,13 +273,17 @@ function getTaskKeyFromSubtaskId(subtaskId) {
         for (const key in tasksData) {
             const taskData = tasksData[key];
             const taskSubtaskIdPrefix = `${taskData.id}_`;
-            if (taskData.taskSubtasks && taskData.taskSubtasks.some(subtask => `${taskSubtaskIdPrefix}${subtask.replace(/\s+/g, '_')}` === subtaskId)) {
+            if (taskData.taskSubtasks && taskData.taskSubtasks.some((subtask, index) => {
+                const generatedSubtaskId = `${taskSubtaskIdPrefix}${subtask.replace(/\s+/g, '_')}_${index}`;
+                return generatedSubtaskId === subtaskId;
+            })) {
                 return key;
             }
         }
     }
     return null;
 }
+
 
 /**
  * Updates the selected subtasks for a task.
