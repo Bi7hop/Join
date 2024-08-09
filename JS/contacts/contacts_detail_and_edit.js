@@ -429,36 +429,66 @@ function highlightSelectedContact(selectedCard) {
 
 /**
  * Deletes a contact based on the provided email address.
- * - Retrieves the contact ID associated with the email.
- * - Prompts the user for confirmation before proceeding with the deletion.
- * - If confirmed, deletes the contact from the server, removes the local contact data, and updates the contact list display.
- * - Clears the contact detail view.
  * 
  * @param {string} contactEmail - The email address of the contact to be deleted.
  * @returns {Promise<void>} A promise that resolves when the contact has been successfully deleted or rejects if an error occurs.
  */
 async function deleteContact(contactEmail) {
     const contactId = getContactIdByEmail(contactEmail);
-    if (!contactId) {
-        console.error("Kontakt nicht gefunden.");
-        return;
-    }
+    if (!isValidContact(contactId)) return;
 
     try {
         await deleteData(`/contacts/${contactId}`);
-        removeLocalContactData(contactId);
-        renderListContact();
-
-        if (window.innerWidth <= 1050) {
-            closeContactWindow();
-        } else {
-            document.getElementById('contactDetail').innerHTML = '';
-        }
+        handleSuccessfulDeletion(contactId);
     } catch (error) {
-        console.error("Fehler beim Löschen des Kontakts:", error);
+        handleDeletionError(error);
     }
 }
 
+/**
+ * Checks if the contact ID is valid.
+ * 
+ * @param {string} contactId - The ID of the contact to validate.
+ * @returns {boolean} True if the contact ID is valid, false otherwise.
+ */
+function isValidContact(contactId) {
+    if (!contactId) {
+        console.error("Kontakt nicht gefunden.");
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Handles the steps to be taken after successfully deleting a contact.
+ * 
+ * @param {string} contactId - The ID of the deleted contact.
+ */
+function handleSuccessfulDeletion(contactId) {
+    removeLocalContactData(contactId);
+    renderListContact();
+    clearContactDetailView();
+}
+
+/**
+ * Clears the contact detail view based on the window width.
+ */
+function clearContactDetailView() {
+    if (window.innerWidth <= 1050) {
+        closeContactWindow();
+    } else {
+        document.getElementById('contactDetail').innerHTML = '';
+    }
+}
+
+/**
+ * Handles errors that occur during the deletion of a contact.
+ * 
+ * @param {Error} error - The error object that occurred during deletion.
+ */
+function handleDeletionError(error) {
+    console.error("Fehler beim Löschen des Kontakts:", error);
+}
 
 
 /**
