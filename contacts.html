@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/contacts_mediaquerry.css">
     <link rel="stylesheet" href="./css/scrollbar.css">
+    <link rel="stylesheet" href="./css/summary/sidebarHeaderTemplate.css">
+    <link rel="stylesheet" href="./css/templates/mobileHeader.css">
+    <link rel="stylesheet" href="./css/templates/mobileNavbar.css">
+
+    <script src="./JS/renderHtml.js"></script>
     <script src="./JS/includehtml.js"></script>
     <script src="./JS/firebase.js"></script>
     <script src="./JS/contacts/contacts_htmlTemplates.js"></script>
@@ -19,15 +24,13 @@
     <script src="./JS/mobileHeader.js"></script>
 </head>
 <body onload="includeHTML()" id="contactsBody">
-    <div class="sidebar-header" w3-include-html="./Templates/sidebarHeaderTemplate.html"></div>
-    <div class="mobile-header" w3-include-html="./Templates/mobileHeader.html"></div>
-    <div class="mobile-nav" w3-include-html="./Templates/mobileNavbar.html"></div>
+    <div id="header"></div>
     <div class="display-flex">
         <div class="contact-container" id="contact-container">
             <div class="contact-list">
                 <button class="btn new-contact" onclick="addContact()">Add new contact<img src="./img/person_add.png"></button>
                 <div class="contact-list-items" id="contactContainer">
-                    <span class="register-letter">A</span>
+                    <!-- <span class="register-letter">A</span>
                     <div>
                         <img src="./img/contactlistseperator.png" alt="">
                     </div>
@@ -40,7 +43,7 @@
                             <span class="name">Anton Meyer</span>
                             <a href="">anton@gmail.com</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <button class="btn-add-new" onclick="addContact()">

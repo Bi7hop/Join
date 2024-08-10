@@ -13,9 +13,13 @@
     <link rel="stylesheet" href="./css/board_mediaquerry.css">
     <link rel="stylesheet" href="./css/boardScrollbar.css">
     <link rel="stylesheet" href="./css/userStory_mediaquerry.css">
+    <link rel="stylesheet" href="./css/summary/sidebarHeaderTemplate.css">
+    <link rel="stylesheet" href="./css/templates/mobileHeader.css">
+    <link rel="stylesheet" href="./css/templates/mobileNavbar.css">
 
+    <script src="./JS/renderHtml.js"></script>
     <script src="./JS/includehtml.js"></script>
-
+    
     <script src="./JS/firebase.js"></script>
     <script src="./JS/addTask/add_Task_Templates.js"></script>
     <script src="./JS/board/board.js"></script>
@@ -34,11 +38,12 @@
     <script src="./JS/addTask/addTaskPriorities.js"></script>
 </head>
 
-<body id="boardBodyContainer" class="boardBodyContainer" onload="includeHTML()">
-    <div class="sidebar-header" w3-include-html="./Templates/sidebarHeaderTemplate.html"></div>
+<body onload="includeHTML()" id="boardBodyContainer" class="boardBodyContainer" >
+    <!-- <div class="sidebar-header" w3-include-html="./Templates/sidebarHeaderTemplate.html"></div>
     <div class="mobile-header" w3-include-html="./Templates/mobileHeader.html"></div>
-    <div class="mobile-nav" w3-include-html="./Templates/mobileNavbar.html"></div>
+    <div class="mobile-nav" w3-include-html="./Templates/mobileNavbar.html"></div> -->
 
+    <div id="header"></div>
     <div class="headlineInputButtonContainer">
         <h1>Board</h1>
         <div class="inputButtonContainer">

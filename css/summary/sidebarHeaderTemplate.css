@@ -281,6 +281,16 @@ nav a.active {
     height: 39px;
     margin-left: 32px;
    }
+
+   .overlay-menu {
+    position: absolute;
+    right: -150px;
+    transition: all 0.2s ease-in-out;
+   }
+
+   .hidden-responsive {
+    right: 6px;
+}
 }
 
 @media(max-width:340px){

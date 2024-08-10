@@ -115,3 +115,21 @@ header {
     cursor: pointer;
     background-color: #E1E5EC;
 }
+
+@media(min-width: 1050px) {
+    #help-drop-down {
+        display: none;
+    }
+}
+
+@media(max-width: 1050px) {
+    #help {
+        display: none;
+    }
+
+    #help-drop-down {
+        display: flex;
+    }
+}
+
+

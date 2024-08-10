@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/help/help.css" />
     <link rel="stylesheet" href="./css/help/help_mediaquerry.css">
-
+    <link rel="stylesheet" href="./css/summary/sidebarHeaderTemplate.css">
+    <link rel="stylesheet" href="./css/templates/mobileHeader.css">
+    <link rel="stylesheet" href="./css/templates/mobileNavbar.css">
+    
+    <script src="./JS/renderHtml.js"></script>
+    
     <script src="./JS/includehtml.js"></script>
     <script src="./JS/goBack.js"></script>
     <script src="./JS/mobileHeader.js"></script>
@@ -16,11 +21,8 @@
 
   </head>
     <body onload="includeHTML()">
-        <div class="sidebar-header" w3-include-html="./Templates/sidebarHeaderTemplate.html"></div>
-        <div class="mobile-header" w3-include-html="./Templates/mobileHeader.html"></div>
-        <div class="mobile-nav" w3-include-html="./Templates/mobileNavbar.html"></div>
         
-
+        <div id="header"></div>
     <div class="help">
       <div class="help-header">
         <h1>Help</h1>

@@ -10,8 +10,15 @@
     <link rel="stylesheet" href="./css/addTaskMobile.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/addTaskScrollbar.css">
-    <script src="./JS/firebase.js"></script>
+    <link rel="stylesheet" href="./css/summary/sidebarHeaderTemplate.css">
+    <link rel="stylesheet" href="./css/templates/mobileHeader.css">
+    <link rel="stylesheet" href="./css/templates/mobileNavbar.css">
+
+    <script src="./JS/renderHtml.js"></script>
     <script src="./JS/includehtml.js"></script>
+    
+    <script src="./JS/firebase.js"></script>
+    
     <script src="./JS/log_in/logOut.js"></script>
     <script src="./JS/addTask/addTask.js"></script>
     <script src="./JS/addTask/add_Task_Templates.js"></script>
@@ -22,9 +29,7 @@
 </head>
 
 <body class="bodyContainer" onload="includeHTML(); addMediumAt(); loadUrl();">
-    <div class="sidebar-header show-on-top" w3-include-html="./Templates/sidebarHeaderTemplate.html"></div>
-    <div class="mobile-header show-on-top" w3-include-html="./Templates/mobileHeader.html"></div>
-    <div class="mobile-nav" w3-include-html="./Templates/mobileNavbar.html"></div>
+    <div id="header"></div>
 
     <div id="add-task-position" class="add-task-main-position"> <!--Change to add-task-main-position-->
         <form onsubmit="postTask(event)" id="add-task-card" class="add-task-card">

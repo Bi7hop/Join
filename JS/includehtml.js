@@ -96,7 +96,14 @@ function addDocumentClickListener(toggleButton, overlayHeader) {
  * @function
  */
 function toggleOverlayVisibility(overlayHeader) {
-  overlayHeader.classList.toggle("hidden");
+  if (window.innerWidth <= 1050) {
+  overlayHeader.classList.toggle("hidden-responsive");
+  overlayHeader.classList.remove("hidden");
+  } else {
+    overlayHeader.classList.toggle("hidden");
+    overlayHeader.classList.remove("hidden-responsive");
+  }
+  
 }
 
 /**
@@ -187,7 +194,10 @@ function checkIfLogged() {
   }
 }
 
-
+/**
+ * Checks if the user is authenticated by verifying the presence of "currentUser" in sessionStorage.
+ * If the user is not authenticated, it hides the side navigation and top navigation elements on the desktop version.
+ */
 function guardCheck() {
   let user = sessionStorage.getItem("currentUser");
   let sideNav = document.getElementById("sideNav");
@@ -201,6 +211,11 @@ function guardCheck() {
   }
 }
 
+/**
+ * Checks if the user is authenticated by verifying the presence of "currentUser" in sessionStorage.
+ * If the user is not authenticated, it hides the side navigation and top navigation elements on the mobile version.
+ * Additionally, it adds a 'transparent' class to the side navigation element.
+ */
 function guardCheckMobile(){
   let user = sessionStorage.getItem("currentUser");
   let sideNav = document.getElementById("mobNav");
@@ -214,3 +229,29 @@ function guardCheckMobile(){
     }
   }
 }
+
+/**
+ * Extracts the initials from the current user's username and displays them in the toggleDropDown element.
+ * 
+ * @description
+ * This function retrieves the username from session storage, generates the initials from the username, 
+ * and displays the initials in the p element with the ID 'toggleDropDown'.
+ */
+function displayUserInitials() {
+  // Retrieve the current user's username from session storage
+  let username = sessionStorage.getItem("currentUser");
+
+  // Check if username exists
+  if (username) {
+    // Generate initials by taking the first character of each word
+    let initials = username.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
+
+    // Find the p element by ID and set its text content to the initials
+    document.getElementById("toggleDropDown").textContent = initials;
+  }
+}
+
+// Ensure the DOM is fully loaded before running the function
+document.addEventListener('DOMContentLoaded', function() {
+    displayUserInitials();
+});
