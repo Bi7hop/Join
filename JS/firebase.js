@@ -2,7 +2,7 @@
  * Base URL for Firebase Database.
  * @constant {string}
  */
-const BASE_URL = "https://join-248-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-marcel-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let currentPriorityAlt = '';
 let currentPriority = "";
