@@ -196,6 +196,14 @@ input[type=text]:focus {
     background-color: #0038FF;
 }
 
+.Bug {
+    background-color: #FF4646;
+}
+
+.Documentation {
+    background-color: #9747FF;
+}
+
 .taskType {
     display: flex;
     align-items: center;
