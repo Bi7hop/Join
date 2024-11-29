@@ -311,3 +311,13 @@ h1 {
         display: none;
     }
 }
+
+@keyframes blink-urgent {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(255, 0, 0, 0.2); }
+    100% { background-color: transparent; }
+}
+
+.urgent-blink {
+    animation: blink-urgent 2s infinite;
+}

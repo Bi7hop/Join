@@ -65,11 +65,64 @@ function getNearestUrgentDeadline() {
 }
 
 /**
- * Updates the summary board's HTML content.
+ * Checks if a date is within the specified number of days from now
+ * 
+ * @param {string} dateStr - The date to check in ISO format
+ * @param {number} days - Number of days threshold
+ * @returns {boolean} True if the date is within the specified days
+ */
+function isWithinDays(dateStr, days) {
+    const taskDate = new Date(dateStr);
+    const now = new Date();
+    const diffTime = taskDate - now;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays >= 0 && diffDays <= days;
+}
+
+/**
+ * Updates the urgent task card styling based on deadline proximity
+ */
+function updateUrgentCardStyle() {
+    const nearestUrgentDeadline = getNearestUrgentDeadline();
+    if (nearestUrgentDeadline && isWithinDays(nearestUrgentDeadline, 3)) {
+        const urgentCard = document.querySelector('.summary-card-middle');
+        if (urgentCard) {
+            urgentCard.classList.add('urgent-blink');
+        }
+    }
+}
+
+/**
+ * Updates the summary board's HTML content and applies urgent styling
  */
 function updateSummaryBoard() {
     let summaryBoard = document.getElementById('summaryBoard');
     summaryBoard.innerHTML = summaryBoardHtmlTemplate();
+    updateUrgentCardStyle();
+}
+
+/**
+ * Formats and displays the nearest task date on the web page
+ */
+function formattTaskDate() {
+    let nearestDateContainer = document.getElementById('nearestDate');
+    const nearestUrgentDeadline = getNearestUrgentDeadline();
+
+    if (nearestUrgentDeadline) {
+        const date = new Date(nearestUrgentDeadline);
+        const formattedDate = date.toLocaleDateString('de-DE', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+        nearestDateContainer.innerText = formattedDate;
+        
+        if (isWithinDays(nearestUrgentDeadline, 3)) {
+            nearestDateContainer.style.color = '#FF3D00';
+        }
+    } else {
+        nearestDateContainer.innerText = "No urgent tasks";
+    }
 }
 
 /**
@@ -88,21 +141,4 @@ function renderSummaryBoard() {
 
     updateSummaryBoard();
     formattTaskDate();
-}
-
-/**
- * Formats and displays the nearest task date on the web page.
- * 
- * This function retrieves a list of task dates, determines the date closest to the current date,
- * and updates the inner text of the element with the ID 'nearestDate' to show this closest date.
- */
-function formattTaskDate() {
-    let nearestDateContainer = document.getElementById('nearestDate');
-    const nearestUrgentDeadline = getNearestUrgentDeadline();
-
-    if (nearestUrgentDeadline) {
-        nearestDateContainer.innerText = nearestUrgentDeadline;
-    } else {
-        nearestDateContainer.innerText = "No urgent tasks";
-    }
 }
